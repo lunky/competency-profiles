@@ -1,7 +1,30 @@
 body {
-  padding: 50px;
+  padding-top: 60px;
+  padding-bottom: 40px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 a {
   color: #00b7ff;
+}
+.sidebar-nav {
+  padding: 9px 0;
+}
+#supportingExample,
+#counterExample,
+#objectiveBox {
+  padding: 5px;
+  margin: 10px;
+  height: 120px;
+  margin-right: 0;
+  margin-left: 0;
+  background-color: #fff;
+  border-color: #ddd;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px 4px 4 4;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.notImplemented {
+  cursor: not-allowed;
 }
