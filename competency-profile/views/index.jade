@@ -1,0 +1,22 @@
+﻿extends layout
+
+block content
+  h1= title
+
+
+  div(ng-app="consulting")
+    div(ng-controller="CompetencyProfileController")
+      div(id="objectivesDescriptions")
+        {{curr["Reviewed Objective"]}}
+      input(type="checkbox", ng-model="curr.isMet")
+      div(id="supportingExample")
+        {{curr["Supporting Example"]}}
+      div(id="counterExample")
+        {{curr["Counter Example"]}}
+      br
+      button(ng-click="prev()") prev
+      button(ng-click="next()") next
+      br
+      {{currIndex+1}} / {{objectives.length}}
+      input(type=text, ng-model="currIndex")
+      textarea(cols=200, rows=30) {{objectives|json}}
