@@ -25,6 +25,18 @@ a {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+#supportingExample legend,
+#counterExample legend,
+#objectiveBox legend {
+  width: inherit;
+/* Or auto */
+  padding: 0 10px;
+/* To give a bit of padding on the left and right */
+  border-bottom: none;
+}
+.buttons {
+  text-align: center;
+}
 .notImplemented {
   cursor: not-allowed;
 }
