@@ -4,27 +4,27 @@ block content
 
 
 	div(ng-app="consulting")
-		div(ng-controller="CompetencyProfileController", class="container-fluid")
+		div(ng-controller="CompetencyProfileController as vm", class="container-fluid")
 			.row
 				.col-md-12
 					h1 Objectives
 			.row
 				.col-md-12
 					#objectiveBox
-						{{curr["Reviewed Objective"]}}
-						input(type="checkbox", ng-model="curr.isMet")
+						{{vm.curr["Reviewed Objective"]}}
+						input(type="checkbox", ng-model="vm.curr.isMet")
 			.row
 				.col-md-6 
 					#supportingExample.outline
-						{{curr["Supporting Example"]}}
+						{{vm.curr["Supporting Example"]}}
 				.col-md-6						
 					#counterExample.outline
-						{{curr["Counter Example"]}}
+						{{vm.curr["Counter Example"]}}
 			.row
 				.col-md-4.col-md-offset-3
-					button(ng-click="prev()") prev
-					button(ng-click="next()") next
+					button(ng-click="vm.prev()") prev
+					button(ng-click="vm.next()") next
 			.row
-					{{currIndex+1}} / {{objectives.length}}
-					input(type=text, ng-model="currIndex")
+					{{vm.currIndex+1}} / {{vm.objectives.length}}
+//					input(type=text, ng-model="vm.currIndex")
 //					textarea(cols=200, rows=30) {{objectives|json}}
