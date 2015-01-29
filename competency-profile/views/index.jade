@@ -2,7 +2,6 @@
 
 block content
 
-
 	div(ng-app="consulting")
 		div(ng-controller="CompetencyProfileController as vm", class="container-fluid")
 			.row
@@ -10,24 +9,26 @@ block content
 					h1 Objectives
 			.row
 				.col-md-12
-					fieldset#objectiveBox
+					fieldset#objectiveBox.text-primary
 						legend Objective
-						{{vm.curr["Reviewed Objective"]}}
-						input(type="checkbox", ng-model="vm.curr.isMet")
+						{{vm.curr.reviewedObjective}}
+						#holder
+							input(type="checkbox", ng-model="vm.curr.isMet") 
+							|Meet Objective
 			.row
 				.col-md-6 
-					fieldset#counterExample
+					fieldset#counterExample.text-primary
 						legend Supporting Example
-						{{vm.curr["Supporting Example"]}}
+						{{vm.curr.supportingExample}}
 				.col-md-6
-					fieldset#supportingExample
+					fieldset#supportingExample.text-primary
 						legend Counter Example
-						{{vm.curr["Counter Example"]}}
+						{{vm.curr.counterExample}}
 			.row
 				.col-md-offset-3.col-md-6
-					.buttons
-						button(ng-click="vm.prev()") prev
-						button(ng-click="vm.next()") next
+					.buttons.btn-toolbar
+						button(class="btn", ng-click="vm.prev()", ng-disabled="vm.currIndex <= 0") prev
+						button(class="btn", ng-click="vm.next()" ng-disabled="vm.currIndex >= vm.objectives.length-1"	) next
 			.row
 				.col-md-12
 					#progress
