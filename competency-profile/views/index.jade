@@ -5,33 +5,44 @@ block content
 	div(ng-app="consulting")
 		div(ng-controller="CompetencyProfileController as vm", class="container-fluid")
 			.row
-				.col-md-12
+				.col-md-8
 					h1 Objectives
+				.col-md-4
+					#status
+						h2 Objective Met: 
+							<img src="..\images\checkmark.png" height="35px" ng-show="vm.curr.isMet" alt="scored">
 			.row
 				.col-md-12
-					fieldset#objectiveBox.text-primary
-						legend Objective
-						{{vm.curr.reviewedObjective}}
-						#holder
-							input(type="checkbox", ng-model="vm.curr.isMet") 
-							|Meet Objective
-			.row
-				.col-md-6 
-					fieldset#counterExample.text-primary
-						legend Supporting Example
-						{{vm.curr.supportingExample}}
-				.col-md-6
-					fieldset#supportingExample.text-primary
-						legend Counter Example
-						{{vm.curr.counterExample}}
-			.row
+					#progress
+						{{vm.currIndex+1}} / {{vm.objectives.length}}
 				.col-md-offset-3.col-md-6
 					.buttons.btn-toolbar
 						button(class="btn", ng-click="vm.prev()", ng-disabled="vm.currIndex <= 0") prev
 						button(class="btn", ng-click="vm.next()" ng-disabled="vm.currIndex >= vm.objectives.length-1"	) next
 			.row
 				.col-md-12
-					#progress
-						{{vm.currIndex+1}} / {{vm.objectives.length}}
-//					input(type=text, ng-model="vm.currIndex")
-//					textarea(cols=200, rows=30) {{objectives|json}}
+					hr								
+			.row
+				.col-md-12
+					#objectiveBox(ng-click="vm.meetObjective()").objectiveBox.description
+						h2 Description
+						#instructionText
+						em click to score objective					
+						#descriptionText.p
+							{{vm.curr.reviewedObjective}}	
+			.row
+				.col-md-12
+					hr
+			.row
+				.col-md-6 
+					#supportingExample.objectiveBox.example
+						h2 Supporting Example
+						{{vm.curr.supportingExample}}
+					
+				.col-md-6
+					#counterExample.objectiveBox.example
+						h2 Counter Example
+						{{vm.curr.counterExample}}
+		
+			
+			
