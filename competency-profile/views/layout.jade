@@ -7,9 +7,12 @@ html
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    include header
-    block content
-    include footer
+
+    .container
+        include header
+        block content
+        include footer
+
     script(src='/bower_components/angularjs/angular.js')
     script(src='/javascripts/app.js')
     script(src='/javascripts/objectivesService.js')
