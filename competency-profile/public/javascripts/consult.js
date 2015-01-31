@@ -1,4 +1,4 @@
-﻿(function(angular) {
+﻿(function() {
     'use strict';
     console.log("consulting profile controller");
     var myApp = angular.module('consulting');
@@ -28,4 +28,4 @@
             vm.initialize();
         }
     ]);
-})(window.angular);
+})();
