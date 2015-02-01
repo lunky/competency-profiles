@@ -27,6 +27,7 @@
 	myApp.controller('CompetencyProfileController', [
 		'objectivesService', function (objectivesService) {
 			var vm = this;
+			vm.changed = false;
 			vm.objectives = [];
 			vm.currIndex = 0;
 			vm.next = function() {
@@ -35,7 +36,15 @@
 				}
 				vm.curr = vm.objectives[vm.currIndex];
 			};
-			vm.prev = function() {
+			vm.save = function () {
+				// TODO : filter objectives that have something changed?
+				var objectives = vm.objectives;
+				objectivesService.save(objectives).then(function (data) {
+					vm.consultantLevel = data.score;
+					vm.changed = false;
+				});
+			};
+			vm.prev = function () {
 				if (vm.currIndex > 0) {
 					vm.currIndex -= 1;
 				}
@@ -48,6 +57,7 @@
 				});
 			};
 			vm.meetObjective = function() {
+				vm.changed = true;
 				vm.curr.isMet = !vm.curr.isMet;
 			};
 			vm.initialize();

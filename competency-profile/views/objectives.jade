@@ -14,6 +14,8 @@
 			.buttons.btn-toolbar
 				button(class="btn", ng-click="vm.prev()", ng-disabled="vm.currIndex <= 0") prev
 				button(class="btn", ng-click="vm.next()" ng-disabled="vm.currIndex >= vm.objectives.length-1"	) next
+				button(class="btn", ng-click="vm.save()" ng-disabled="!vm.changed"	) save
+				div(ng-show="vm.consultantLevel").bg-success.consultantLevel {{vm.consultantLevel}}
 	.row
 		.col-md-12
 			hr								

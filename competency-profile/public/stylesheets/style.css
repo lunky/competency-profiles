@@ -36,3 +36,8 @@ a {
 .notImplemented {
   cursor: not-allowed;
 }
+.consultantLevel {
+	padding: 5px;
+	margin: 5px;
+	font-size: 125%;
+}
