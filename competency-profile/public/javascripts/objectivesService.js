@@ -1,7 +1,6 @@
-﻿(function (angular) {
-    'use strict';
-    console.log("consulting objectivesService");
-    var myApp = angular.module('consulting');
+﻿'use strict';
+ (function (angular) {
+    var myApp = angular.module('consultingServices');
     myApp.service('objectivesService', ['$q', function ($q) {
             this.getObjectives = function () {
                 var deferred = $q.defer();
