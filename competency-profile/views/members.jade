@@ -2,5 +2,6 @@
 	.row
 		.col-md-8
 			h1 Members
-			ul
+			ul(ng-repeat="member in vm.members")
 				li
+					{{member.userId}}

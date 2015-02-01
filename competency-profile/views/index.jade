@@ -1,16 +1,7 @@
 ﻿extends layout
 
 block content
-	div(ng-app="consulting")
-		div(ng-controller="MainCtrl as main" ngCloak)
-			pre
-				$location.path() = {{main.$location.path()}}
-			pre
-				$route.current.templateUrl = {{main.$route.current.templateUrl}}
-			pre
-				$route.current.params = {{main.$route.current.params}}
-			pre
-				$routeParams = {{main.$routeParams}}
+	div(ng-app="consulting" ngCloak)
 		div(ng-view)
 		
 			
