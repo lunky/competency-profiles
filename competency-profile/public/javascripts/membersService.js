@@ -17,10 +17,11 @@
 							"userId": "alevine"
 						},
 						{
-							"userId": "bmckay"
-						}
+							"userId": "phteven"
+						},
 					]
 				});
+				console.log("getting members");
 				return deferred.promise;
 			}
 		}]);
