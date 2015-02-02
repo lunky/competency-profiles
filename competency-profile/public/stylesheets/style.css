@@ -17,12 +17,12 @@ a {
   margin-right: 0;
   margin-left: 0;
 }
-.description:hover {
-  cursor: pointer;
-  text-decoration: none;
-  color: #333;
-  box-shadow: 1px 1px 1px #333;
-  border-color: #333;
+.objectiveBox legend {
+  width: inherit;
+/* Or auto */
+  padding: 0 10px;
+/* To give a bit of padding on the left and right */
+  border-bottom: none;
 }
 #status {
   height: 35px;
@@ -35,9 +35,4 @@ a {
 }
 .notImplemented {
   cursor: not-allowed;
-}
-.consultantLevel {
-	padding: 5px;
-	margin: 5px;
-	font-size: 125%;
 }

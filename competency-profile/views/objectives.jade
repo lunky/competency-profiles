@@ -1,42 +1,36 @@
 ﻿.container-fluid
 	.row
-		.col-md-8
-			h1 Objectives
-		.col-md-4
-			#status
-				h2 Objective Met: 
-					<img src="..\images\checkmark.png" height="35px" ng-show="vm.curr.isMet" alt="scored">
-	.row
 		.col-md-12
-			#progress
-				{{vm.currIndex+1}} / {{vm.objectives.length}}
-		.col-md-offset-3.col-md-6
-			.buttons.btn-toolbar
-				button(class="btn", ng-click="vm.prev()", ng-disabled="vm.currIndex <= 0") prev
-				button(class="btn", ng-click="vm.next()" ng-disabled="vm.currIndex >= vm.objectives.length-1"	) next
-				button(class="btn", ng-click="vm.save()" ng-disabled="!vm.changed"	) save
-				div(ng-show="vm.consultantLevel").bg-success.consultantLevel {{vm.consultantLevel}}
-	.row
-		.col-md-12
-			hr								
-	.row
-		.col-md-12
-			#objectiveBox(ng-click="vm.meetObjective()").objectiveBox.description
-				h2 Description
-				#instructionText
-				em click to score objective					
-				#descriptionText.p
-					{{vm.curr.reviewedObjective}}	
-	.row
-		.col-md-12
-			hr
-	.row
-		.col-md-6 
-			#supportingExample.objectiveBox.example
-				h2 Supporting Example
-				{{vm.curr.supportingExample}}
-					
-		.col-md-6
-			#counterExample.objectiveBox.example
-				h2 Counter Example
-				{{vm.curr.counterExample}}
+			#objectiveFrame
+			.row
+				.col-md-8
+					h1 Objectives
+				.col-md-4
+					h2 Met: <img src="..\images\checkmark.png" height="35px" ng-show="vm.curr.isMet" alt="scored">
+			.row
+				.col-md-12
+					#progress
+						{{vm.currIndex+1}} / {{vm.objectives.length}}
+			.row
+				.col-md-1.vcenter
+						button(class="btn glyphicon glyphicon-chevron-left", ng-click="vm.prev()", ng-disabled="vm.currIndex <= 0") 
+				.col-md-10
+					.row
+						.col-md-12
+							#objectiveBox(ng-click="vm.meetObjective()").objectiveBox.description
+								h2 Description
+								#instructionText
+								em click to score objective					
+								#descriptionText.p
+											{{vm.curr.reviewedObjective}}
+								.row
+									.col-md-6
+										#supportingExample.objectiveBox.example
+											h2 Supporting Example
+											{{vm.curr.supportingExample}}
+									.col-md-6
+										#counterExample.objectiveBox.example
+											h2 Counter Example
+											{{vm.curr.counterExample}}
+				.col-md-1.vcenter
+						button(class="btn glyphicon glyphicon-chevron-right", ng-click="vm.next()" ng-disabled="vm.currIndex >= vm.objectives.length-1") 
