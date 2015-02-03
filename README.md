@@ -1,16 +1,36 @@
-# competency-profiles
-======================
-install git, install node & npm
+# competency-profiles # 
 
-So I think to get this going 
+## Pre-requisites ##
+ 1. [Git](http://git-scm.com/downloads)
+ 2. [NodeJS](http://nodejs.org/download/)
+ 3. [npm](https://www.npmjs.com/) (comes with NodeJS)
 
-:git clone https://github.com/lunky/competency-profiles.git:
+## Getting started ##
 
-:cd competency-profiles/competency-profile:
+ 1. `git clone https://github.com/lunky/competency-profiles.git`
+ 2. `cd competency-profiles/competency-profile`
+ 3. `npm install` (Note: you may need to use `npm install --msvs_version=2013` 
+    if you get an error about MSBuild Tools not being found)
+ 4. `bower install`
+ 5. `node start`
+ 6. view @ http://localhost:3000/
 
-:npm install :
+## Running Tests with Karma ##
 
-:node bin\www:
+Currently we are setup to use the [Karma](http://karma-runner.github.io/) test runner with the 
+[Jasmine](http://jasmine.github.io/) test framework. Karma is a neat test runner that will watch
+your test files for changes and run them as you change them. Jasmine is the test framework it uses
+to run them. We may change over to the Mocha test framework in the future.
 
-:view @ http://localhost:3000/:
+To install a convenient karma command that makes it easier to run, run this command:
 
+        npm install -g karma-cli
+
+To run Karma run this command from competency-profiles/competency-profile:
+
+        karma start
+
+This will run the tests and then wait for any changes to the test files, updating the results as it goes.
+
+ 
+ 
