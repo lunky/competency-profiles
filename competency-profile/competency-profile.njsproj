@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="gulp.config.js" />
     <Compile Include="gulpfile.js" />
     <Compile Include="karma.conf.js" />
     <Compile Include="public\javascripts\app.js" />
@@ -46,6 +47,8 @@
     <Content Include="..\README.md">
       <Link>README.md</Link>
     </Content>
+    <Content Include=".jscsrc" />
+    <Content Include=".jshintrc" />
     <Content Include="bower.json" />
     <Content Include="package.json" />
     <Content Include="public\images\checkmark.png" />
