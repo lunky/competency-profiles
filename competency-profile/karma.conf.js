@@ -20,7 +20,7 @@ module.exports = function(config) {
             'bower_components/angular-route/angular-route.js',
             'bower_components/angular-animate/angular-animate.js',
             'public/javascripts/*.js',
-            'public/javascripts/test/*.js'
+            'test/**/*.js'
     ],
 
 
@@ -55,7 +55,7 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
 
 
     // start these browsers
@@ -66,5 +66,6 @@ module.exports = function(config) {
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false
+
   });
 };

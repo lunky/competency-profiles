@@ -24,6 +24,7 @@
   "devDependencies": {
     "chai": "^1.10.0",
     "chai-as-promised": "^4.1.1",
+    "jasmine": "^2.2.0",
     "karma": "^0.12.31",
     "karma-chai": "^0.1.0",
     "karma-chai-sinon": "^0.1.4",
