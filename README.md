@@ -12,7 +12,7 @@
  3. `npm install` (Note: you may need to use `npm install --msvs_version=2013` 
     if you get an error about MSBuild Tools not being found)
  4. `bower install`
- 5. `node start`
+ 5. `npm start`
  6. view @ http://localhost:3000/
 
 ## Running Tests with Karma ##
