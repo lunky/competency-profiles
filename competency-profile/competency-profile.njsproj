@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="gulpfile.js" />
     <Compile Include="karma.conf.js" />
     <Compile Include="public\javascripts\app.js" />
     <Compile Include="public\javascripts\consult.js" />
