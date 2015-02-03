@@ -10,12 +10,17 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha'],
+    frameworks: ['jasmine', 'sinon'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      'test/*.js'
+            'bower_components/angular/angular.js',
+            'bower_components/angular-mocks/angular-mocks.js',
+            'bower_components/angular-route/angular-route.js',
+            'bower_components/angular-animate/angular-animate.js',
+            'public/javascripts/*.js',
+            'public/javascripts/test/*.js'
     ],
 
 
@@ -55,11 +60,11 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true
+    singleRun: false
   });
 };
