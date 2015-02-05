@@ -6,5 +6,5 @@ branches:
   only:
     - build-automation
 script:
-	"npm install"
-	"npm test"
+  "npm install"
+  "npm test"
