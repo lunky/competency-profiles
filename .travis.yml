@@ -6,5 +6,5 @@ branches:
   only:
     - build-automation
 script:
-  - "cd competency-profiles && npm install"
+  - "cd competency-profile && npm install"
   - "npm test"
