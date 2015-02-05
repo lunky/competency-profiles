@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "bower install",  
     "start": "node ./bin/www",
-	"test": "karma start"
+	"test": "karma start --single-run --browsers PhantomJS"
   },
   "description": "ExpressApp1",
   "author": {
