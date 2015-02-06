@@ -1,4 +1,5 @@
 # competency-profiles # 
+[![Build Status](https://travis-ci.org/lunky/competency-profiles.svg?branch=master)](https://travis-ci.org/lunky/competency-profiles)
 
 ## Pre-requisites ##
  1. [Git](http://git-scm.com/downloads)
