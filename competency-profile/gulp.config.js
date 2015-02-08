@@ -14,6 +14,7 @@ module.exports = function () {
             './app.js'
         ],
         build: './build/',
+        images: client + 'images/**/*.*',
         stylus: client + 'stylesheets/style.styl',
         temp: temp
     };

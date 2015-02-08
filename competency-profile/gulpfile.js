@@ -7,7 +7,6 @@ var $ = require('gulp-load-plugins')({ lazy: true });
 gulp.task('help', $.taskListing);
 gulp.task('default', ['help']);
 
-
 gulp.task('vet', function () {
     log('Analyzing source with JSHint and JSCS');
     
@@ -47,6 +46,30 @@ gulp.task('clean-styles', function (done) {
     clean(files, done);
 });
 
+gulp.task('stylus-watcher', function () {
+    gulp.watch([config.stylus], ['styles']);
+});
+
+/**
+ * Compress images
+ * @return {Stream}
+ */
+gulp.task('images', ['clean-images'], function () {
+    log('Compressing and copying images');
+    
+    return gulp
+        .src(config.images)
+        .pipe($.imagemin({ optimizationLevel: 4 }))
+        .pipe(gulp.dest(config.build + 'images'));
+});
+
+/**
+ * Remove all images from the build folder
+ * @param  {Function} done - callback when complete
+ */
+gulp.task('clean-images', function (done) {
+    clean(config.build + 'images/**/*.*', done);
+});
 
 
 
