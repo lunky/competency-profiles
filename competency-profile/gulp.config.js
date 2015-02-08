@@ -1,4 +1,6 @@
 module.exports = function () {
+    var client = './public/';
+    var temp = './.tmp/';
 
     var config = {
         /**
@@ -10,7 +12,10 @@ module.exports = function () {
             './routes/**/*.js',
             './test/**/*.js',
             './app.js'
-        ]
+        ],
+        build: './build/',
+        stylus: client + 'stylesheets/style.styl',
+        temp: temp
     };
     return config;
 };
