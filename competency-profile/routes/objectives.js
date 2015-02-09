@@ -42,28 +42,36 @@ router.get('/list', function(req, res) {
 	var objectivesdoc;
 	// there are two documents, the objectives master and the list of objectivesMet which is a per user document
 	// we have to merge them but the methods are async so we use promises to collect them when we're done
-	met.find({'userid': req.user.login}, function(err, metDoc) {
-		metdoc = metDoc;
-		deferred.resolve(metDoc);
+	met.findOne({'userid': req.user.login}, function(err, doc) {
+		if (err) {
+			res.send(err);
+		}
+		metdoc = doc;
+		deferred.resolve(doc);
 	});
 
 	var deferred2 = Q.defer();
-	collection.find({}, function(err, objectivesDoc) {
-		objectivesdoc = objectivesDoc;
-		deferred2.resolve(objectivesDoc);
+	collection.find({}, function(err, doc) {
+		if (err) {
+			res.send(err);
+		}
+		objectivesdoc = doc;
+		deferred2.resolve(doc);
 	});
 
 	Q.all([deferred.promise, deferred2.promise])
 		.then(function() {
 			// merge
-			objectivesdoc.forEach(function(el) {
-					if (metdoc[0].objectivesMet.some(function(metObjective) {
-						return metObjective.objectiveId === el.objectiveId;
-					})) {
-						el.isMet = true;
+			if (metdoc) {
+				objectivesdoc.forEach(function(el) {
+						if (metdoc[0].objectivesMet.some(function(metObjective) {
+							return metObjective.objectiveId === el.objectiveId;
+						})) {
+							el.isMet = true;
+						}
 					}
-				}
-			);
+				);
+			}
 			res.send({'data': objectivesdoc});
 		}
 	);
