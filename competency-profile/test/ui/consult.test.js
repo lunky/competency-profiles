@@ -13,31 +13,33 @@
 
 			var deferred = $q.defer();
 			var promise = deferred.promise;
-			var svc = { getObjectives: sinon.stub().returns(promise) };
+			var svc = {getObjectives: sinon.stub().returns(promise)};
 			deferred.resolve({
 				data: []
 			});
 			//spec body
-			var ctrl = $controller('CompetencyProfileController', { objectivesService: svc });
+			var ctrl = $controller('CompetencyProfileController', {objectivesService: svc});
 			expect(ctrl).toBeDefined();
 		}));
 		it('calls service', inject(function($controller, $q) {
 
 			var deferred = $q.defer();
 			var promise = deferred.promise;
-			var svc = { getObjectives: sinon.stub().returns(promise) };
+			var svc = {getObjectives: sinon.stub().returns(promise)};
 			deferred.resolve({
 				data: []
 			});
 			//spec body
-			var ctrl = $controller('CompetencyProfileController', { objectivesService: svc });
+			var ctrl = $controller('CompetencyProfileController', {objectivesService: svc});
 			sinon.assert.called(svc.getObjectives);
 		}));
 		it('sets objectives with data from service', inject(function($controller, $q, $rootScope) {
 			var deferred = $q.defer();
 			var promise = deferred.promise;
-			var svc = { getObjectives: sinon.stub().returns(promise) };
-			var testObjective = { "reviewedObjective": "Organizes work and manage teams to achieve specific goals or outcomes" };
+			var svc = {getObjectives: sinon.stub().returns(promise)};
+			var testObjective = {
+				'reviewedObjective': 'Organizes work and manage teams to achieve specific goals or outcomes'
+			};
 			deferred.resolve({
 				data: [
 					testObjective
@@ -45,7 +47,7 @@
 			});
 			//spec body
 			var scope = $rootScope.$new();
-			var ctrl = $controller('CompetencyProfileController as vm', { $scope: scope, objectivesService: svc });
+			var ctrl = $controller('CompetencyProfileController as vm', {$scope: scope, objectivesService: svc});
 			$rootScope.$apply(); // trigger digest
 			expect(scope.vm.objectives.length).toBeDefined();
 			expect(scope.vm.objectives.length).toBe(1);
@@ -57,30 +59,30 @@
 		var scope;
 		var ctrl;
 		var promise;
-		var testUser = { "userId": "testuser" };
-		var svc;		
+		var testUser = {'userId': 'testuser'};
+		var svc;
 		beforeEach(module('consulting'));
 
 		beforeEach(inject(function($controller, $q, $rootScope) {
 			deferred = $q.defer();
 			promise = deferred.promise;
-			svc = { getMembers: sinon.stub().returns(promise) };
+			svc = {getMembers: sinon.stub().returns(promise)};
 			deferred.resolve({
 				data: [
 					testUser
 				]
 			});
 			scope = $rootScope.$new();
-			ctrl = $controller('MembersController as vm', { $scope: scope, membersService: svc });
+			ctrl = $controller('MembersController as vm', {$scope: scope, membersService: svc});
 		}));
 
 		it('is defined', function () {
 			expect(ctrl).toBeDefined();
 		});
-		it('calls service', inject(function ($controller, $q) {
+		it('calls service', inject(function($controller, $q) {
 			sinon.assert.called(svc.getMembers);
 		}));
-		
+
 		it('sets members with data from service', inject(function ($controller, $q, $rootScope) {
 			$rootScope.$apply(); // trigger digest
 			expect(scope.vm.members.length).toBeDefined();
@@ -89,5 +91,3 @@
 		}));
 	});
 })();
-
-

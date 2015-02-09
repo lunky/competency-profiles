@@ -1,6 +1,6 @@
 ﻿var express = require('express');
 var router = express.Router();
-var Q = require("Q");
+var Q = require('Q');
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -10,38 +10,39 @@ router.get('/', function (req, res) {
 router.post('/save', function(req, res) {
 	var userid = req.user;
 	var db = req.db;
-	var selfEval = { "userid": userid.login, "objectives_met": req.body.objectives };
-	var collection = db.get('objectives_met');
+	var selfEval = {'userid': userid.login, 'objectivesMet': req.body.objectives};
+	var collection = db.get('objectivesMet');
 
 	collection.findAndModify(
-	{
-		query:{
-		"userid": userid.login
-	}, 
-		update: selfEval
-	},
 		{
-			"upsert": true
+			query: {
+				'userid': userid.login
+			},
+			update: selfEval
+		},
+		{
+			'upsert': true
 		},
 		function(err, docs) {
-			if (err)
+			if (err) {
 				res.send(err);
-			console.log("docs: " + docs);
-			res.send({ "score": "half wit consultant" });
-		});
+			}
+			console.log('docs: ' + docs);
+			res.send({'score': 'half wit consultant'});
+		}
+	);
 });
 
 router.get('/list', function(req, res) {
 
 	var deferred = Q.defer();
 	var collection = req.db.get('objective');
-	var met = req.db.get('objectives_met');
+	var met = req.db.get('objectivesMet');
 	var metdoc;
 	var objectivesdoc;
-	
-	// there are two documents, the objectives master and the list of objectives_met which is a per user document
-	// we have to merge them but the methods are async so we use promises to collect them when we're done	
-	met.find({ "userid": req.user.login }, function(err, metDoc) {
+	// there are two documents, the objectives master and the list of objectivesMet which is a per user document
+	// we have to merge them but the methods are async so we use promises to collect them when we're done
+	met.find({'userid': req.user.login}, function(err, metDoc) {
 		metdoc = metDoc;
 		deferred.resolve(metDoc);
 	});
@@ -54,19 +55,18 @@ router.get('/list', function(req, res) {
 
 	Q.all([deferred.promise, deferred2.promise])
 		.then(function() {
-				objectivesdoc.forEach(function(el) {
-					if (metdoc[0].objectives_met.some(function(metObjective) {
-						return metObjective.objective_id == el.objective_id;
+			// merge
+			objectivesdoc.forEach(function(el) {
+					if (metdoc[0].objectivesMet.some(function(metObjective) {
+						return metObjective.objectiveId === el.objectiveId;
 					})) {
 						el.isMet = true;
 					}
-				});
-				res.send({ "data": objectivesdoc });
-			}
-		);
+				}
+			);
+			res.send({'data': objectivesdoc});
+		}
+	);
 });
-						
-
 
 module.exports = router;
-

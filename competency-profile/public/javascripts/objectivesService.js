@@ -18,31 +18,35 @@
 			!angular.isObject(response.data) ||
 				!response.data.message
 		) {
-			return ($q.reject("An unknown error occurred."));
+			return ($q.reject('An unknown error occurred.'));
 		}
 			// Otherwise, use expected error message.
 			return ($q.reject(response.data.message));
 		}
 
-		this.getObjectives = function () {
+		this.getObjectives = function() {
 			var request = $http({
-				method: "get",
-				url: "/objectives/list"
+				method: 'get',
+				url: '/objectives/list'
 			});
-			
 			return (request.then(handleSuccess, handleError));
-		}
-		this.save = function (objectives) {
-			var justTheKeys = objectives.filter(function(item) { return item.isMet; }).map(function(objective) { return { _id: objective._id, objective_id: objective.objective_id } });
-				var request = $http({
-					method: "post",
-				url: "/objectives/save",
+		};
+
+		this.save = function(objectives) {
+			var justTheKeys = objectives.filter(function(item) {
+				return item.isMet;
+			}).map(function(objective) {
+				return {_id: objective._id, 'objectiveId': objective.objectiveId};
+			});
+			var request = $http({
+				method: 'post',
+				url: '/objectives/save',
 				data: {
 					objectives: justTheKeys
 				}
 			});
-			
+
 			return (request.then(handleSuccess, handleError));
-		}
+		};
 	}]);
 })();
