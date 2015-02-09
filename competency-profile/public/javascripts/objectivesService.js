@@ -33,11 +33,12 @@
 			return (request.then(handleSuccess, handleError));
 		}
 		this.save = function (objectives) {
-			var request = $http({
+			var justTheKeys = objectives.filter(function(item) { return item.isMet; }).map(function(objective) { return { _id: objective._id, objective_id: objective.objective_id } });
+				var request = $http({
 					method: "post",
 				url: "/objectives/save",
 				data: {
-					objectives: objectives
+					objectives: justTheKeys
 				}
 			});
 			

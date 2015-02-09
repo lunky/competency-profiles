@@ -11,13 +11,13 @@
 				.col-md-12
 				.hidden-xs.hidden-sm
 					#progress
-						{{vm.currIndex+1}} / {{vm.objectives.length}}
+						|{{vm.currIndex+1}} / {{vm.objectives.length}}
 			.row
 				.col-xs-4.col-md-1.navleft
 					button(class="btn glyphicon glyphicon-chevron-left", ng-click="vm.prev()", ng-disabled="vm.currIndex <= 0") 
 				.col-xs-4.hidden-md.hidden-lg
 					#progress
-						{{vm.currIndex+1}} / {{vm.objectives.length}}
+						|{{vm.currIndex+1}} / {{vm.objectives.length}}
 				.col-xs-4.col-md-1.col-md-push-10.navright
 					button(class="btn glyphicon glyphicon-chevron-right", ng-click="vm.next()" ng-disabled="vm.currIndex >= vm.objectives.length-1") 
 				.col-xs-12.col-md-10.col-md-pull-1
@@ -28,13 +28,13 @@
 								#instructionText
 								em click to score objective					
 								#descriptionText.p
-											{{vm.curr.description}}
+											|{{vm.curr.description}}
 								.row
 									.col-md-6
 										#supportingExample
 											h2 Supporting Example
-											{{vm.curr.supporting_example}}
+											|{{vm.curr.supporting_example}}
 									.col-md-6
 										#counterExample
 											h2 Counter Example
-											{{vm.curr.counter_example}}
+											|{{vm.curr.counter_example}}

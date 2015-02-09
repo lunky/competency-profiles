@@ -33,6 +33,12 @@ app.use(function (req, res, next) {
 	req.db = db;
 	next();
 });
+var user = { login: "LOGINUSER" };
+// make our user accessible to our router
+app.use(function (req, res, next) {
+	req.user = user;
+	next();
+});
 
 app.use('/', routes);
 app.use('/objectives', objectives);

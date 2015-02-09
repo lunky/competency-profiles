@@ -59,6 +59,7 @@
 			vm.meetObjective = function() {
 				vm.changed = true;
 				vm.curr.isMet = !vm.curr.isMet;
+				vm.save();
 			};
 			vm.initialize();
 		}
