@@ -1,6 +1,6 @@
 # competency-profiles # 
 [![Build Status](https://travis-ci.org/lunky/competency-profiles.svg?branch=master)](https://travis-ci.org/lunky/competency-profiles)
-
+[![Code Climate](https://codeclimate.com/github/lunky/competency-profiles/badges/gpa.svg)](https://codeclimate.com/github/lunky/competency-profiles)
 ## Pre-requisites ##
  1. [Git](http://git-scm.com/downloads)
  2. [NodeJS](http://nodejs.org/download/)
