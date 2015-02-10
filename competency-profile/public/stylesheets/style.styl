@@ -35,10 +35,9 @@ a
 	margin:2em auto;
 	color:#fff;
 	background:#101010;
-	overflow:hidden;
-	
-.objectiveSelected:before
-	content:"";
+	overflow:hidden; 
+
+#earMarked
 	position:absolute;
 	top:0;
 	right:0;
@@ -51,6 +50,16 @@ a
 	-webkit-box-shadow:0 2px 2px rgba(255,255,255,0.3), -2px 2px 2px rgba(255,255,255,0.2);
 	-moz-box-shadow:0 2px 2px rgba(255,255,255,0.3), -2px 2px 2px rgba(255,255,255,0.2);
 	box-shadow:0 2px 2px rgba(255,255,255,0.3), -2px 2px 2px rgba(255,255,255,0.2);
+ 
+.earMarked-add
+.earMarked-remove.earMarked-remove-active
+	-webkit-transition: 0.25s linear all; /* Chrome */
+	transition: 0.25s linear all;
+	opacity: 0;
+ 
+.earMarked-add.earMarked-add-active
+.earMarked-remove
+	opacity: 1; 
 	
 .objective.blue {background:#53A3B4;}
 .objectiveSelected.blue {background:#53A3B4;}
