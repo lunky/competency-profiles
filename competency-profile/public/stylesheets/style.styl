@@ -26,7 +26,7 @@ a
 	padding:1em 1.5em;
 	margin:2em auto;
 	color:#fff;
-	background:#97C02F;
+	background:#101010;
 	overflow:hidden;
 
  .objectiveSelected 
@@ -34,7 +34,7 @@ a
 	padding:1em 1.5em;
 	margin:2em auto;
 	color:#fff;
-	background:#97C02F;
+	background:#101010;
 	overflow:hidden;
 	
 .objectiveSelected:before
@@ -42,15 +42,16 @@ a
 	position:absolute;
 	top:0;
 	right:0;
-	border-width:0 16px 16px 0; /* This trick side-steps a webkit bug */
+	border-width:0 64px 64px 0; /* This trick side-steps a webkit bug */
 	border-style:solid;
-	border-color:#fff #fff #658E15 #658E15; /* A bit more verbose to work with .rounded too */
-	background:#658E15; /* For when also applying a border-radius */
+	border-color:#fff #fff #101010 #101010; /* A bit more verbose to work with .rounded too */
+	background:#ff694b; /* For when also applying a border-radius */
 	display:block; width:0; /* Only for Firefox 3.0 damage limitation */
 	/* Optional: shadow */
-	-webkit-box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
-	-moz-box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
-	box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+	-webkit-box-shadow:0 2px 2px rgba(255,255,255,0.3), -2px 2px 2px rgba(255,255,255,0.2);
+	-moz-box-shadow:0 2px 2px rgba(255,255,255,0.3), -2px 2px 2px rgba(255,255,255,0.2);
+	box-shadow:0 2px 2px rgba(255,255,255,0.3), -2px 2px 2px rgba(255,255,255,0.2);
 	
+.objective.blue {background:#53A3B4;}
 .objectiveSelected.blue {background:#53A3B4;}
 .objectiveSelected.blue:before {border-color:#fff #fff transparent transparent; background:transparent;}
