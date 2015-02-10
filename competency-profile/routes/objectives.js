@@ -64,7 +64,7 @@ router.get('/list', function(req, res) {
 			// merge
 			if (metdoc) {
 				objectivesdoc.forEach(function(el) {
-						if (metdoc[0].objectivesMet.some(function(metObjective) {
+						if (metdoc.objectivesMet.some(function(metObjective) {
 							return metObjective.objectiveId === el.objectiveId;
 						})) {
 							el.isMet = true;
