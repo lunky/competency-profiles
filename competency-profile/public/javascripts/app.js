@@ -1,7 +1,7 @@
 ﻿(function(angular) {
 		'use strict';
 		console.log('consulting app');
-		angular.module('consultingServices', []);
+		angular.module('consultingServices', ['ui.bootstrap']);
 	var myApp = angular.module('consulting',
 			['ngRoute', 'ngAnimate', 'consultingControllers', 'consultingServices']);
 		myApp.config([

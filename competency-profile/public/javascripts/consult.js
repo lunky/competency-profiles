@@ -44,6 +44,10 @@
 					vm.changed = false;
 				});
 			};
+			vm.pageChanged = function () {
+				vm.currIndex = vm.pageNumber - 1;
+				vm.curr = vm.objectives[vm.currIndex];
+			};
 			vm.prev = function () {
 				if (vm.currIndex > 0) {
 					vm.currIndex -= 1;
