@@ -5,12 +5,16 @@
 			.row
 				.col-md-8
 					h1 Objectives
+					h2 Met: <img src="../images/checkmark.png" height="35px" ng-show="vm.curr.isMet" alt="scored">
 			.row
 				.col-xs-4.navleft
+					.hidden-xs.hidden-sm
+						#progress
+							|{{vm.currIndex+1}} / {{vm.objectives.length}}
 					button(class="btn glyphicon glyphicon-chevron-left", ng-click="vm.prev()", ng-disabled="vm.currIndex <= 0") 
 				.col-xs-4
 					#progress
-						|{{vm.currIndex+1}} / {{vm.objectives.length}}
+						pagination(ng-change="vm.pageChanged()" total-items="vm.objectives.length" ng-model="vm.pageNumber" class="pagination-sm" boundary-links="true" max-size="5" items-per-page="1")
 				.col-xs-4.navright
 					button(class="btn glyphicon glyphicon-chevron-right", ng-click="vm.next()" ng-disabled="vm.currIndex >= vm.objectives.length-1") 
 			.row
