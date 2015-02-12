@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "postinstall": "bower install",
-    "start": "node ./bin/www",
+    "start": "gulp start",
     "test": "karma start --single-run --browsers PhantomJS"
   },
   "description": "ExpressApp1",
@@ -36,6 +36,7 @@
     "gulp-jscs": "^1.4.0",
     "gulp-jshint": "^1.9.2",
     "gulp-load-plugins": "^0.8.0",
+    "gulp-nodemon": "^1.0.5",
     "gulp-plumber": "^0.6.6",
     "gulp-print": "^1.1.0",
     "gulp-task-listing": "^1.0.0",

@@ -10,7 +10,12 @@ module.exports = function () {
             './routes/**/*.js',
             './test/**/*.js',
             './app.js'
-        ]
+        ],
+        
+        nodeServer: './bin/www',
+        server: './',
+        defaultPort: '3000',
+        
     };
     return config;
 };
