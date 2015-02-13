@@ -1,1 +1,3 @@
-[{ "_id":"54dd905eef83d8836f5b0183", "levelId":1, "description":"Consultant", "minimumScore":0, "minimumGateScore":0 },{ "_id":"54dd9073ef83d8836f5b0184", "levelId":2, "description":"Intermediate", "minimumScore":31, "minimumGateScore":12},{ "_id":"54dd9083ef83d8836f5b0185", "levelId":3, "description":"Senior", "minimumScore":53, "minimumGateScore":27}]
+[{"levelId":1, "description":"Consultant", "minimumScore":0, "minimumGateScore":0 },
+{"levelId":2, "description":"Intermediate", "minimumScore":31, "minimumGateScore":12},
+{"levelId":3, "description":"Senior", "minimumScore":53, "minimumGateScore":27}]
