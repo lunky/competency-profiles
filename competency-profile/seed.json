@@ -1,5 +1,5 @@
 {
-	"undefined": "localhost/objective",
-	"dev": "localhost/objective",
-	"prod": "localhost/objective"
+	"undefined": "localhost/competencyprofiles",
+	"dev": "localhost/competencyprofiles",
+	"prod": "localhost/competencyprofiles"
 }
