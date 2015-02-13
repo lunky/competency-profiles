@@ -13,12 +13,17 @@
 							controller: 'MembersController',
 							controllerAs: 'vm'
 						})
+						.when('/objectiveLevels', {
+							templateUrl: 'objectiveLevels',
+							controller: 'ObjectiveLevelsController',
+							controllerAs: 'vm'
+						})
 						.when('/', {
 							templateUrl: 'objectives',
 							controller: 'CompetencyProfileController',
 							controllerAs: 'vm'
-						}).
-						otherwise({
+						})
+						.otherwise({
 							redirectTo: '/'
 						});
 //			$locationProvider.html5Mode(true);

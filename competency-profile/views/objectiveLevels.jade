@@ -1,0 +1,7 @@
+﻿.container-fluid
+	.row
+		.col-md-8
+			h1 Objective Levels
+			ul(ng-repeat="level in vm.objectiveLevels")
+				li
+					|{{level.levelId}} \ {{level.description}} \ {{level.minimumScore}} \ {{level.minimumGateScore}}

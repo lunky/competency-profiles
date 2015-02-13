@@ -38,8 +38,10 @@
     <Compile Include="public\javascripts\app.js" />
     <Compile Include="public\javascripts\consult.js" />
     <Compile Include="public\javascripts\membersService.js" />
+    <Compile Include="public\javascripts\objectiveLevelsService.js" />
     <Compile Include="public\javascripts\objectivesService.js" />
     <Compile Include="routes\index.js" />
+    <Compile Include="routes\objectiveLevels.js" />
     <Compile Include="routes\objectives.js" />
     <Compile Include="routes\members.js" />
     <Compile Include="bin\www" />
@@ -55,6 +57,7 @@
     <Content Include="views\footer.jade" />
     <Content Include="views\header.jade" />
     <Content Include="views\members.jade" />
+    <Content Include="views\objectiveLevels.jade" />
     <Content Include="views\objectives.jade" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="views\index.jade" />

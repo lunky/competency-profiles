@@ -23,6 +23,18 @@
 			};
 			vm.initialize();
 		}]);
+	
+	myApp.controller('ObjectiveLevelsController', [
+		'objectiveLevelsService', function (objectiveLevelsService) {
+			var vm = this;
+			vm.objectiveLevels = [];
+			vm.initialize = function () {
+				objectiveLevelsService.getObjectiveLevels().then(function (data) {
+					vm.objectiveLevels = data.data;
+				});
+			};
+			vm.initialize();
+		}]);
 
 	myApp.controller('CompetencyProfileController', [
 		'objectivesService', function (objectivesService) {
