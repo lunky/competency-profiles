@@ -1,7 +1,8 @@
 ﻿(function(angular) {
 		'use strict';
 		console.log('consulting app');
-		angular.module('consultingServices', []);
+	angular.module('consultingServices', []);
+	angular.module('consultingControllers', ['consultingServices']);
 	var myApp = angular.module('consulting',
 			['ngRoute', 'ngAnimate', 'consultingControllers', 'consultingServices']);
 		myApp.config([
