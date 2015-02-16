@@ -10,13 +10,14 @@ router.get('/', isAuthenticated, function (req, res) {
 });
 
 router.get('/login', function (req, res) {
-	res.render('login');
+	res.render('login',  { messages: req.flash('info') });
 });
 
 router.post('/login',
   passport.authenticate('obslocal', {
 		successRedirect: '/',
-		failureRedirect: '/loginFailure'
+		failureRedirect: '/login',
+		failureFlash: 'Invalid username or password.'
 	})
 );
 

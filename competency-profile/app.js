@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var configDB = require('./config/database.js');
 var passport = require('passport');
+var flash = require('connect-flash');
 
 var routes = require('./routes/index');
 var members = require('./routes/members');
@@ -28,7 +29,7 @@ app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
-
+app.use(flash());
 // required for passport
 app.use(session({secret: 'secretkey-tacocat-yekterces'}));
 app.use(passport.initialize());
