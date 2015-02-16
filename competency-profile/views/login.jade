@@ -13,10 +13,10 @@ block content
 				|&nbsp;
 				button.btn.btn-primary(type="button") Cancel
 	.row
-		.col-sm-6.col-md-2.col-md-offset-4
+		.col-sm-6.col-md-4.col-md-offset-4.loginform.heavyPad
 			br
-			- if(messages)
-				p.bg-danger.heavyPad #{messages}
+			- if(messages && messages.length)
+				.bg-danger #{messages}
 			br
 			br
-			p.bg-info.heavyPad Load users with `seed` - login with admin/admin or quinn/quinn
+			.bg-info Load users with `seed` - login with admin/admin or quinn/quinn
