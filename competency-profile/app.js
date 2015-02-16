@@ -31,7 +31,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use(flash());
 // required for passport
-app.use(session({secret: 'secretkey-tacocat-yekterces'}));
+app.use(session({
+	secret: 'secretkey-tacocat-yekterces',
+	resave: true,
+	saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
