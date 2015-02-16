@@ -18,7 +18,7 @@ module.exports = function (passport, db) {
 	
 	// used to deserialize the user
 	passport.deserializeUser(function (id, done) {
-		var users = db.get('UserData');
+		var users = db.get('userData');
 		var oid = users.id(id);
 		users.findOne({_id:oid}, function (err, user) {
 			done(err, user);
@@ -27,7 +27,7 @@ module.exports = function (passport, db) {
 	
 	passport.use('obslocal', new LocalStrategy(function (username, password, done) {
 			process.nextTick(function () {
-				var users = db.get('UserData');
+				var users = db.get('userData');
 				users.findOne({ 'username': username, 'password':password}, function (err, user) {
 				
 					if (err) {
