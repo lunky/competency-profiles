@@ -1,22 +1,23 @@
 ﻿var express = require('express');
 var router = express.Router();
 var Q = require('Q');
+var isAuthenticated = require('../config/auth');
 
 /* GET home page. */
-router.get('/', function (req, res) {
+router.get('/', isAuthenticated, function (req, res) {
 	res.render('objectives');
 });
 
-router.post('/save', function(req, res) {
+router.post('/save', isAuthenticated, function(req, res) {
 	var userid = req.user;
 	var db = req.db;
-	var selfEval = {'userid': userid.login, 'objectivesMet': req.body.objectives};
+	var selfEval = {'userid': userid.username, 'objectivesMet': req.body.objectives};
 	var collection = db.get('objectivesMet');
 
 	collection.findAndModify(
 		{
 			query: {
-				'userid': userid.login
+				'userid': userid.username
 			},
 			update: selfEval
 		},
@@ -33,7 +34,7 @@ router.post('/save', function(req, res) {
 	);
 });
 
-router.get('/list', function(req, res) {
+router.get('/list', isAuthenticated, function(req, res) {
 
 	var deferred = Q.defer();
 	var collection = req.db.get('objective');
@@ -42,7 +43,7 @@ router.get('/list', function(req, res) {
 	var objectivesdoc;
 	// there are two documents, the objectives master and the list of objectivesMet which is a per user document
 	// we have to merge them but the methods are async so we use promises to collect them when we're done
-	met.findOne({'userid': req.user.login}, function(err, doc) {
+	met.findOne({'userid': req.user.username}, function(err, doc) {
 		if (err) {
 			res.send(err);
 		}

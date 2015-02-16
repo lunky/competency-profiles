@@ -23,7 +23,7 @@
 				// Otherwise, use expected error message.
 				return ($q.reject(response.data.message));
 			}
-			
+
 			this.getObjectiveLevels = function () {
 				var request = $http({
 					method: 'get',
@@ -31,6 +31,6 @@
 				});
 				return (request.then(handleSuccess, handleError));
 			};
-			
+
 		}]);
 })();

@@ -23,7 +23,7 @@
 			};
 			vm.initialize();
 		}]);
-	
+
 	myApp.controller('ObjectiveLevelsController', [
 		'objectiveLevelsService', function (objectiveLevelsService) {
 			var vm = this;
