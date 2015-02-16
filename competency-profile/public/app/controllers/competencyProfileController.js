@@ -1,40 +1,7 @@
 ﻿'use strict';
 (function() {
 
-	var myApp = angular.module('consultingControllers', ['consultingServices']);
-
-	myApp.controller('MainCtrl', [
-		'$route', '$routeParams', '$location',
-		function($route, $routeParams, $location) {
-			this.$route = $route;
-			this.$location = $location;
-			this.$routeParams = $routeParams;
-		}
-	]);
-
-	myApp.controller('MembersController', [
-		'membersService', function(membersService) {
-			var vm = this;
-			vm.members = [];
-			vm.initialize = function () {
-				membersService.getMembers().then(function (data) {
-					vm.members = data.data;
-				});
-			};
-			vm.initialize();
-		}]);
-
-	myApp.controller('ObjectiveLevelsController', [
-		'objectiveLevelsService', function (objectiveLevelsService) {
-			var vm = this;
-			vm.objectiveLevels = [];
-			vm.initialize = function () {
-				objectiveLevelsService.getObjectiveLevels().then(function (data) {
-					vm.objectiveLevels = data.data;
-				});
-			};
-			vm.initialize();
-		}]);
+	var myApp = angular.module('consultingControllers');
 
 	myApp.controller('CompetencyProfileController', [
 		'objectivesService', function (objectivesService) {
