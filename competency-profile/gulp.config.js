@@ -6,7 +6,7 @@ module.exports = function () {
          */
         // all javascript that we want to vet
         alljs: [
-            './public/javascripts/*.js',
+            './public/**/*.js',
             './routes/**/*.js',
             './test/**/*.js',
             './app.js'
