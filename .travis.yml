@@ -4,7 +4,7 @@ git:
   depth: 10
 branches:
   only:
-    - master
+    - development
 script:
   - "cd competency-profile && npm install"
   - "npm test"
