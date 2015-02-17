@@ -6,8 +6,8 @@
 	myApp.controller('CompetencyProfileController', [
 		'objectivesService', '$routeParams', '$location', function (objectivesService, $routeParams, $location) {
 			var vm = this;
-			vm.changed = false;
 			vm.objectives = [];
+			vm.changed = false;
 			vm.currIndex = 0;
 
 			if($routeParams.oid){
@@ -30,7 +30,11 @@
 			};
 
 			function SyncLocation(){
-					$location.path(vm.currIndex+1, false);
+				var newPath = (vm.currIndex+1).toString();
+				var currPath = $location.path();
+				if(currPath !== "/" + newPath){
+					$location.skipReload().path(newPath).replace();
+				}
 				vm.curr = vm.objectives[vm.currIndex];
 			}
 
