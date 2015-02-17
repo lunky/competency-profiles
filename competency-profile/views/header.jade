@@ -1,5 +1,18 @@
 // header
-div.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+header.header
+	div.container
+		- if(!isAuthenticated)
+			div.row
+				div.col-sm-12.col-xs-12.text-center
+					h1.name Competency Calculator
+		- if(isAuthenticated)
+			img.profile-image.img-responsive.pull-left(src='images/consultant-codell.png' alt='Chelsea Odell')/
+			div.profile-content.pull-left
+				h1.name Competency Calculator
+				h2.desc #{userDisplayName}
+			a.btn.btn-cta-primary.pull-right(href="/logoff") Log Off
+// 
+	div.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
 	div.container-fluid
 		div.navbar-header
 			button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')

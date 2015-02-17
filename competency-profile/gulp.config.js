@@ -11,7 +11,8 @@ module.exports = function () {
             './test/**/*.js',
             './app.js'
         ],
-        
+        less: './less/styles.less',
+        css: './public/css',
         nodeServer: './bin/www',
         server: './',
         defaultPort: '3000',

@@ -3,6 +3,7 @@ var config = require('./gulp.config')();
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({ lazy: true });
 var port = process.env.PORT || config.defaultPort;
+var less = require('gulp-less');
 
 gulp.task('help', $.taskListing);
 gulp.task('default', ['help']);
@@ -18,6 +19,14 @@ gulp.task('vet', function () {
         .pipe($.jshint.reporter('jshint-stylish', { verbose: true }))
         .pipe($.jshint.reporter('fail'))
         .pipe($.jscs());
+});
+
+// Compiles LESS > CSS 
+gulp.task('build-less', function () {
+    return gulp
+        .src(config.less)
+        .pipe(less())
+        .pipe(gulp.dest(config.css));
 });
 
 gulp.task('start', function () {
