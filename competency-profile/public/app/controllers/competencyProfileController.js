@@ -4,9 +4,9 @@
 	var myApp = angular.module('consultingControllers');
 
 	myApp.controller('CompetencyProfileController', [
-		'objectivesService', function (objectivesService) {
+		'$filter', 'objectiveLevelsService', 'objectivesService', function ($filter, objectiveLevelsService, objectivesService) {
 			var vm = this;
-			vm.changed = false;
+            vm.changed = false;
 			vm.objectives = [];
 			vm.currIndex = 0;
 			vm.next = function() {
@@ -20,7 +20,6 @@
 				var objectives = vm.objectives;
 				objectivesService.save(objectives).then(function (data) {
 					vm.consultantLevel = data.score;
-					vm.changed = false;
 				});
 			};
 			vm.prev = function () {
@@ -31,15 +30,33 @@
 			};
 			vm.initialize = function() {
 				objectivesService.getObjectives().then(function(data) {
-					vm.objectives = data.data;
+                    var objectives = data.data;
+                    //TODO: remove when the answered property is stored
+                    angular.forEach(objectives, function (objective) {
+                        objective.answered = false;
+                    });
+                    
+				    vm.objectives = objectives;
 					vm.curr = vm.objectives[vm.currIndex];
-				});
+                });
+
+                objectiveLevelsService.getObjectiveLevels().then(function (data) {
+                    vm.objectiveLevels = data.data;
+                });
 			};
-			vm.meetObjective = function() {
-				vm.changed = true;
-				vm.curr.isMet = !vm.curr.isMet;
-				vm.save();
-			};
+			vm.yesObjective = function(objective) {
+                objective.answered = true;
+                //TODO save when the answered property is stored
+				//vm.save();
+            };
+            
+            vm.noObjective = function (objective) {
+                objective.answered = true;
+                //TODO save when the answered property is stored
+                //vm.save();
+            };
+            
+
 			vm.initialize();
 		}
 	]);

@@ -55,6 +55,12 @@
     <Content Include=".jscsrc" />
     <Content Include=".jshintrc" />
     <Content Include="bower.json" />
+    <Content Include="less\base.less" />
+    <Content Include="less\mixins.less" />
+    <Content Include="less\responsive.less" />
+    <Content Include="less\styles.less" />
+    <Content Include="less\theme-default.less" />
+    <Content Include="less\theme.less" />
     <Content Include="package.json" />
     <Content Include="public\images\checkmark.png" />
     <Content Include="views\footer.jade" />
@@ -63,7 +69,7 @@
     <Content Include="views\members.jade" />
     <Content Include="views\objectiveLevels.jade" />
     <Content Include="views\objectives.jade" />
-    <Content Include="public\stylesheets\style.styl" />
+    <Content Include="stylus\style.styl" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
     <Content Include="views\error.jade" />
@@ -71,10 +77,12 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="config\" />
+    <Folder Include="stylus\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
-    <Folder Include="public\stylesheets\" />
+    <Folder Include="less\" />
+    <Folder Include="public\css\" />
     <Folder Include="routes\" />
     <Folder Include="test\" />
     <Folder Include="test\server\" />
