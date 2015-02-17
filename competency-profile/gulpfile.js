@@ -32,6 +32,7 @@ function start(debug) {
         var debugMode = "--debug";
         nodeOptions.nodeArgs = [debugMode + '=5858'];
     }
+	nodeOptions.ignore = ['public/**']; // lets not reload the web app everytime we make a change to the client side files
 
     return $.nodemon(nodeOptions)
         .on('restart', ['vet'], function(ev) {
