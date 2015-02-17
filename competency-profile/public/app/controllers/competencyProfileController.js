@@ -4,17 +4,36 @@
 	var myApp = angular.module('consultingControllers');
 
 	myApp.controller('CompetencyProfileController', [
-		'objectivesService', function (objectivesService) {
+		'objectivesService', '$routeParams', '$location', function (objectivesService, $routeParams, $location) {
 			var vm = this;
 			vm.changed = false;
 			vm.objectives = [];
 			vm.currIndex = 0;
+
+			if($routeParams.oid){
+				var idx = Number($routeParams.oid) -1;
+				vm.currIndex = idx;
+			}
+
 			vm.next = function() {
 				if (vm.currIndex < vm.objectives.length - 1) {
 					vm.currIndex += 1;
+					SyncLocation();
 				}
-				vm.curr = vm.objectives[vm.currIndex];
 			};
+
+			vm.prev = function () {
+				if (vm.currIndex > 0) {
+					vm.currIndex -= 1;
+					SyncLocation();
+				}
+			};
+
+			function SyncLocation(){
+					$location.path(vm.currIndex+1, false);
+				vm.curr = vm.objectives[vm.currIndex];
+			}
+
 			vm.save = function () {
 				// TODO : filter objectives that have something changed?
 				var objectives = vm.objectives;
@@ -23,18 +42,20 @@
 					vm.changed = false;
 				});
 			};
-			vm.prev = function () {
-				if (vm.currIndex > 0) {
-					vm.currIndex -= 1;
-				}
-				vm.curr = vm.objectives[vm.currIndex];
-			};
+
 			vm.initialize = function() {
 				objectivesService.getObjectives().then(function(data) {
 					vm.objectives = data.data;
-					vm.curr = vm.objectives[vm.currIndex];
+					if(vm.currIndex < 0){
+						vm.currIndex = 0;
+					}
+					if(vm.currIndex > vm.objectives.length-1){
+						vm.currIndex = vm.objectives.length-1;
+					}
+					SyncLocation();
 				});
 			};
+
 			vm.meetObjective = function() {
 				vm.changed = true;
 				vm.curr.isMet = !vm.curr.isMet;
