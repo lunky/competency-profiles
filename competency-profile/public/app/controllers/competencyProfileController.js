@@ -10,30 +10,35 @@
 			vm.changed = false;
 			vm.currIndex = 0;
 
-			if($routeParams.oid){
-				var idx = Number($routeParams.oid) -1;
+			if ($routeParams.oid) {
+				var idx = Number($routeParams.oid) - 1;
 				vm.currIndex = idx;
 			}
 
 			vm.next = function() {
 				if (vm.currIndex < vm.objectives.length - 1) {
 					vm.currIndex += 1;
-					SyncLocation();
+					syncLocation();
 				}
 			};
 
 			vm.prev = function () {
 				if (vm.currIndex > 0) {
 					vm.currIndex -= 1;
-					SyncLocation();
+					syncLocation();
+
 				}
 			};
 
-			function SyncLocation(){
-				var newPath = (vm.currIndex+1).toString();
+			function syncLocation(replace) {
+				var newPath = (vm.currIndex + 1).toString();
 				var currPath = $location.path();
-				if(currPath !== "/" + newPath){
-					$location.skipReload().path(newPath).replace();
+				if (currPath !== '/' + newPath) {
+					if(replace){
+						$location.skipReload().path(newPath).replace();
+					}else{
+						$location.skipReload().path(newPath);
+					}
 				}
 				vm.curr = vm.objectives[vm.currIndex];
 			}
@@ -50,13 +55,13 @@
 			vm.initialize = function() {
 				objectivesService.getObjectives().then(function(data) {
 					vm.objectives = data.data;
-					if(vm.currIndex < 0){
+					if (vm.currIndex < 0) {
 						vm.currIndex = 0;
 					}
-					if(vm.currIndex > vm.objectives.length-1){
-						vm.currIndex = vm.objectives.length-1;
+					if (vm.currIndex > vm.objectives.length - 1) {
+						vm.currIndex = vm.objectives.length - 1;
 					}
-					SyncLocation();
+					syncLocation(true);
 				});
 			};
 
