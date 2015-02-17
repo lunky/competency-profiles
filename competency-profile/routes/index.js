@@ -10,7 +10,7 @@ router.get('/', isAuthenticated, function (req, res) {
 });
 
 router.get('/login', function (req, res) {
-	res.render('login',  { messages: req.flash('error')  });
+	res.render('login',  {messages: req.flash('error')});
 });
 
 router.post('/login',
