@@ -50,7 +50,8 @@ app.use(function (req, res, next) {
 	req.db = db;
 	res.locals = {
 		isAuthenticated : req.isAuthenticated(),
-		title : 'Competency Profile'
+        title : 'Competency Profile',
+        userDisplayName: 'Chelsea Odell'
 	};
 	next();
 });

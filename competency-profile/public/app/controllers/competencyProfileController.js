@@ -4,10 +4,11 @@
 	var myApp = angular.module('consultingControllers');
 
 	myApp.controller('CompetencyProfileController', [
-		'objectivesService', '$routeParams', '$location', function (objectivesService, $routeParams, $location) {
-			var vm = this;
-			vm.objectives = [];
+		'$filter', 'objectiveLevelsService', 'objectivesService', '$routeParams', '$location', function ($filter, objectiveLevelsService, objectivesService, $routeParams, $location) {
+<Merge Conflic		var vm = this;
+
 			vm.changed = false;
+			vm.objectives = [];
 			vm.currIndex = 0;
 
 			if ($routeParams.oid) {
@@ -48,28 +49,44 @@
 				var objectives = vm.objectives;
 				objectivesService.save(objectives).then(function (data) {
 					vm.consultantLevel = data.score;
-					vm.changed = false;
 				});
 			};
 
 			vm.initialize = function() {
 				objectivesService.getObjectives().then(function(data) {
-					vm.objectives = data.data;
-					if (vm.currIndex < 0) {
-						vm.currIndex = 0;
-					}
-					if (vm.currIndex > vm.objectives.length - 1) {
-						vm.currIndex = vm.objectives.length - 1;
-					}
-					syncLocation(true);
-				});
-			};
+				var objectives = data.data;
+				angular.forEach(objectives, function (objective) {
+				objective.answered = false;
+			});
+			vm.objectives = objectives;
+			if (vm.currIndex < 0) {
+				vm.currIndex = 0;
+			}
+			if (vm.currIndex > vm.objectives.length - 1) {
+				vm.currIndex = vm.objectives.length - 1;
+			}
+			syncLocation(true);
+                });
 
-			vm.meetObjective = function() {
-				vm.changed = true;
-				vm.curr.isMet = !vm.curr.isMet;
-				vm.save();
-			};
+                objectiveLevelsService.getObjectiveLevels().then(function (data) {
+                    vm.objectiveLevels = data.data;
+		});
+		vm.yesObjective = function(objective) {
+			objective.answered = true;
+			//TODO save when the answered property is stored
+			//vm.save();
+		});
+
+
+            };
+            
+            vm.noObjective = function (objective) {
+                objective.answered = true;
+                //TODO save when the answered property is stored
+                //vm.save();
+            };
+            
+
 			vm.initialize();
 		}
 	]);

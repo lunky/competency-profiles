@@ -21,6 +21,7 @@
     "debug": "~2.0.0",
     "express": "~4.9.0",
     "express-session": "^1.0.4",
+    "gulp-less": "^3.0.0",
     "jade": "~1.6.0",
     "mongodb": "^1.4.30",
     "monk": "^0.9.1",
