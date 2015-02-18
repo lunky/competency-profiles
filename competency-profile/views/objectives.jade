@@ -7,17 +7,22 @@
 						div.content
 							div.row
 								div.col-md-8.col-sm-12.col-xs-12
-									div.panel.panel-danger(data-ng-repeat="objective in vm.objectives | filter: { isMet: !true }")
+									div.panel(data-ng-repeat="objective in vm.objectives" data-ng-class="objective.isMet ? 'panel-success' : 'panel-danger'")
 										div.panel-heading
-											|Objective Not Met
+											span(data-ng-if="objective.isMet")
+												|Objective Met
+											a.pull-right(href="" data-ng-click="vm.noObjective(objective)" data-ng-if="objective.isMet")
+												i.fa.fa-undo
+											span(data-ng-if="!objective.isMet")
+												|Objective Not Met
 										div.panel-body
 											strong 
 												|{{objective.description}}?
-											div.row.voffset
+											div.row.voffset(data-ng-if="!objective.isMet")
 												div.col-xs-12.text-center
 													a.btn.btn-success(href="" data-ng-click="vm.yesObjective(objective)")
 														|Meet Objective
-											div.row
+											div.row(data-ng-if="objective.isMet")
 												div.col-xs-6
 													h3
 														small Supporting Example
@@ -26,18 +31,10 @@
 													h3 
 														small Counter Example
 													|{{vm.curr.counter_example}}
-									div.panel.panel-default(data-ng-repeat="objective in vm.objectives | filter: { isMet: true } as answeredResults" data-ng-class="(objective.isMet) ? 'panel-success': 'panel-danger'")
-										div.panel-heading
-											|Objective Met
-											a.pull-right(href="" data-ng-click="vm.noObjective(objective)")
-												i.fa.fa-undo
-										div.panel-body
-											strong 
-												|{{objective.description}}?
 								div.col-md-4.hidden-xs.hidden-sm.text-center
 									div.panel.panel-info
 										div.panel-body.text-center 
-											|You meet {{answeredResults.length}} of {{vm.objectives.length}} objectives
+											|You meet {{(vm.objectives|filter:{isMet: true}).length}} of {{vm.objectives.length}} objectives
 									a.btn.btn-default(href="" data-ng-click="vm.clearAll()")
 										|Clear all answers
 
