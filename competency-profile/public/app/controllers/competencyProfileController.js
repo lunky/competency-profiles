@@ -6,9 +6,13 @@
 	myApp.controller('CompetencyProfileController', [
 		'$filter', 'competencyLevelsService', 'objectivesService', '$routeParams', '$location'  function ($filter, competencyLevelsService, objectivesService, $routeParams, $location) {
 
-			vm.objectives = [];
+			var vm = this;
 			vm.changed = false;
+			vm.objectives = [];
+			vm.competencyLevels = [];
 			vm.currIndex = 0;
+			vm.clearAll = clearAll;
+			
 			if ($routeParams.oid) {
 				var idx = Number($routeParams.oid) - 1;
 				vm.currIndex = idx;
@@ -72,7 +76,7 @@
 			});
 
                 competencyLevelsService.getCompetencyLevels().then(function (data) {
-                    vm.objectiveLevels = data.data;
+                    vm.competencyLevels = data.data;
                 });
 			};
 			vm.yesObjective = function(objective) {
