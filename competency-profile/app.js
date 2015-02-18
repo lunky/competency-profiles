@@ -12,7 +12,7 @@ var flash = require('connect-flash');
 var routes = require('./routes/index');
 var members = require('./routes/members');
 var objectives = require('./routes/objectives');
-var objectiveLevels = require('./routes/objectiveLevels');
+var objectiveLevels = require('./routes/competencyLevels');
 
 var app = express();
 
@@ -59,7 +59,7 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/objectives', objectives);
 app.use('/members', members);
-app.use('/objectiveLevels', objectiveLevels);
+app.use('/competencyLevels', competencyLevels);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -66,7 +66,7 @@
 									h3.level-title
 										|Communication
 									div.level-bar
-										div.level-bar-inner(data-level="40%")
+										div.level-bar-inner(data-level="40%" style="width:50%;")
 								div.item
 									h3.level-title
 										|Leadership and Management
@@ -86,40 +86,4 @@
 									h3.level-title
 										|Corporate Citizenship
 									div.level-bar
-										div.level-bar-inner(data-level="77%")
-							a.pull-right(href="#/objectiveLevels") 
-								|More Details							
-//
-	.container-fluid
-		.row
-			.col-md-10.col-md-offset-1
-				#objectiveFrame
-				.row
-					.col-md-8
-						h1 Objectives
-				.row
-					.col-xs-4.navleft
-						button(class="btn glyphicon glyphicon-chevron-left", ng-click="vm.prev()", ng-disabled="vm.currIndex <= 0") 
-					.col-xs-4
-						#progress
-							|{{vm.currIndex+1}} / {{vm.objectives.length}}
-					.col-xs-4.navright
-						button(class="btn glyphicon glyphicon-chevron-right", ng-click="vm.next()" ng-disabled="vm.currIndex >= vm.objectives.length-1") 
-				.row
-					.col-md-12(ng-click="vm.meetObjective()" ng-class="(vm.curr.isMet) ? 'objectiveSelected' : 'objective'")
-						#objectiveBox
-							h2 Description
-							#instructionText
-								em click to score objective					
-							#descriptionText.p
-								|{{vm.curr.description}}
-							.row
-								.col-md-6
-									#supportingExample
-										h2 Supporting Example
-										|{{vm.curr.supporting_example}}
-								.col-md-6
-									#counterExample
-										h2 Counter Example
-										|{{vm.curr.counter_example}}
-						#earMarked(ng-show="(vm.curr.isMet)"  ng-class="(vm.curr.isMet) ? 'earMarked' : ''" )
+										div.level-bar-inner(data-level="77%")						

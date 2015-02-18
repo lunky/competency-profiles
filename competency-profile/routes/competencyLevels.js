@@ -4,12 +4,12 @@ var isAuthenticated = require('../config/auth');
 
 /* GET objectiveLevels listing. */
 router.get('/', isAuthenticated, function (req, res) {
-	res.render('objectiveLevels');
+	res.render('competencyLevels');
 });
 
 router.get('/list', isAuthenticated, function (req, res) {
 
-	var collection = req.db.get('objectivelevel');
+	var collection = req.db.get('competencylevel');
 
 	collection.find({}, function (err, doc) {
 		if (err) {
