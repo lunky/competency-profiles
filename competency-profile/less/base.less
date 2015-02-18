@@ -18,18 +18,7 @@ h1, h2, h3, h4, h5, h6  {
     color: @color;
 }
 
-a {
-    color: @color-2;
-    .transition (all 0.4s ease-in-out);
-    &:hover {
-        text-decoration: underline;
-        color: darken(@color, 10%);
-        color: darken(@color-2, 10%);
-    }
-    &:focus {
-        text-decoration: none;
-    }
-}
+
 
 ul.answers {
     padding-left: 0;
@@ -48,6 +37,10 @@ ul.answers {
 
 ul.no-bullet, li.no-bullet {
     list-style-type: none;
+}
+
+.voffset {
+	margin-top: 10px;
 }
 
 label.radio {
@@ -204,7 +197,7 @@ iframe {
     }
 }
 
-/* About Section */
+/* Objectives Section */
 .about {
     
 }

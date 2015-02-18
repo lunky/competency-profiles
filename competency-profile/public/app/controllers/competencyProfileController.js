@@ -9,6 +9,15 @@
             vm.changed = false;
 			vm.objectives = [];
 			vm.currIndex = 0;
+			vm.clearAll = clearAll;
+			
+			function clearAll() {
+				angular.forEach(vm.objectives, function (objective) {
+					objective.isMet = false;
+					vm.save();
+				});
+			}
+
 			vm.next = function() {
 				if (vm.currIndex < vm.objectives.length - 1) {
 					vm.currIndex += 1;
@@ -30,12 +39,7 @@
 			};
 			vm.initialize = function() {
 				objectivesService.getObjectives().then(function(data) {
-                    var objectives = data.data;
-                    //TODO: remove when the answered property is stored
-                    angular.forEach(objectives, function (objective) {
-                        objective.answered = false;
-                    });
-                    
+					var objectives = data.data;
 				    vm.objectives = objectives;
 					vm.curr = vm.objectives[vm.currIndex];
                 });
@@ -45,15 +49,13 @@
                 });
 			};
 			vm.yesObjective = function(objective) {
-                objective.answered = true;
-                //TODO save when the answered property is stored
-				//vm.save();
-            };
+			    objective.isMet = true;
+			    vm.save();
+			};
             
             vm.noObjective = function (objective) {
-                objective.answered = true;
-                //TODO save when the answered property is stored
-                //vm.save();
+                objective.isMet = false;
+                vm.save();
             };
             
 

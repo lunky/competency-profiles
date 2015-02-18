@@ -4008,22 +4008,6 @@ h6 {
   font-weight: 700;
   color: #778492;
 }
-a {
-  color: #3aaa64;
-  transition: all 0.4s ease-in-out;
-  -webkit-transition: all 0.4s ease-in-out;
-  -moz-transition: all 0.4s ease-in-out;
-  -ms-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-}
-a:hover {
-  text-decoration: underline;
-  color: #5f6b77;
-  color: #2d844e;
-}
-a:focus {
-  text-decoration: none;
-}
 ul.answers {
   padding-left: 0;
   margin-left: 2.14285714em;
@@ -4038,6 +4022,9 @@ ul.answers span {
 ul.no-bullet,
 li.no-bullet {
   list-style-type: none;
+}
+.voffset {
+  margin-top: 10px;
 }
 label.radio {
   display: inline-block;
@@ -4191,7 +4178,7 @@ iframe {
   margin-right: 5px;
   font-size: 14px;
 }
-/* About Section */
+/* Objectives Section */
 /* Latest Section */
 .latest .item {
   margin-bottom: 30px;

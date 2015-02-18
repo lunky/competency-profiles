@@ -69,6 +69,8 @@ router.get('/list', isAuthenticated, function(req, res) {
 							return metObjective.objectiveId === el.objectiveId;
 						})) {
 							el.isMet = true;
+						} else {
+							el.isMet = false;
 						}
 					}
 				);
