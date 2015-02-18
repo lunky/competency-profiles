@@ -77,7 +77,7 @@
 			syncLocation(true);
                 });
 
-                competencyLevelsService.getObjectiveLevels().then(function (data) {
+                competencyLevelsService.getCompetencyLevels().then(function (data) {
                     vm.objectiveLevels = data.data;
 		});
 		vm.yesObjective = function(objective) {
