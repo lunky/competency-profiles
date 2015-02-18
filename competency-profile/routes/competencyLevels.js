@@ -2,7 +2,7 @@
 var router = express.Router();
 var isAuthenticated = require('../config/auth');
 
-/* GET objectiveLevels listing. */
+/* GET competencyLevels listing. */
 router.get('/', isAuthenticated, function (req, res) {
 	res.render('competencyLevels');
 });
