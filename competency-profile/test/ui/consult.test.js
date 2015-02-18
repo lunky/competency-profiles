@@ -8,7 +8,7 @@
 		/* as soon as $route is used, karma requests the /objectives */
 		beforeEach(inject(function(_$templateCache_) {
 			var $templateCache = _$templateCache_;
-			$templateCache.put('objectives','');
+			$templateCache.put('objectives', '');
 		}));
 
 		it('is defined', inject(function($controller, $q) {
@@ -70,7 +70,7 @@
 		/* as soon as $route is used, karma requests the /objectives */
 		beforeEach(inject(function(_$templateCache_) {
 			var $templateCache = _$templateCache_;
-			$templateCache.put('objectives','');
+			$templateCache.put('objectives', '');
 		}));
 
 		beforeEach(inject(function($controller, $q, $rootScope) {

@@ -34,9 +34,9 @@
 				var newPath = (vm.currIndex + 1).toString();
 				var currPath = $location.path();
 				if (currPath !== '/' + newPath) {
-					if(replace){
+					if (replace) {
 						$location.skipReload().path(newPath).replace();
-					}else{
+					} else {
 						$location.skipReload().path(newPath);
 					}
 				}
