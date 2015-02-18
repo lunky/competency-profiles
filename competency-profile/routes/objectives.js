@@ -1,6 +1,6 @@
 ﻿var express = require('express');
 var router = express.Router();
-var Q = require('Q');
+var Q = require('q');
 var isAuthenticated = require('../config/auth');
 
 /* GET home page. */
