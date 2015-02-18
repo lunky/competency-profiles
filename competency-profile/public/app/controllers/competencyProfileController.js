@@ -44,7 +44,7 @@
 					vm.curr = vm.objectives[vm.currIndex];
                 });
 
-                competencyLevelsService.getObjectiveLevels().then(function (data) {
+                competencyLevelsService.getCompetencyLevels().then(function (data) {
                     vm.objectiveLevels = data.data;
                 });
 			};
