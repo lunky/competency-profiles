@@ -14,9 +14,9 @@
 						controller: 'MembersController',
 						controllerAs: 'vm'
 					})
-					.when('/objectiveLevels', {
-						templateUrl: 'objectiveLevels',
-						controller: 'ObjectiveLevelsController',
+						.when('/competencyLevels', {
+							templateUrl: 'competencyLevels',
+							controller: 'CompetencyLevelsController',
 						controllerAs: 'vm'
 					})
 					.when('/:oid?', {
