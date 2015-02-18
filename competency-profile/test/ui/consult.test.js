@@ -5,9 +5,11 @@
 	describe('CompetencyProfileController', function() {
 		beforeEach(module('consulting'));
 
-		beforeEach(function() {
-
-		});
+		/* as soon as $route is used, karma requests the /objectives */
+		beforeEach(inject(function(_$templateCache_) {
+			var $templateCache = _$templateCache_;
+			$templateCache.put('objectives','');
+		}));
 
 		it('is defined', inject(function($controller, $q) {
 
@@ -45,6 +47,7 @@
 					testObjective
 				]
 			});
+
 			//spec body
 			var scope = $rootScope.$new();
 			var ctrl = $controller('CompetencyProfileController as vm', {$scope: scope, objectivesService: svc});
@@ -54,6 +57,7 @@
 			expect(scope.vm.objectives[0]).toBe(testObjective);
 		}));
 	});
+
 	describe('MembersController', function() {
 		var deferred;
 		var scope;
@@ -62,6 +66,12 @@
 		var testUser = {'userId': 'testuser'};
 		var svc;
 		beforeEach(module('consulting'));
+
+		/* as soon as $route is used, karma requests the /objectives */
+		beforeEach(inject(function(_$templateCache_) {
+			var $templateCache = _$templateCache_;
+			$templateCache.put('objectives','');
+		}));
 
 		beforeEach(inject(function($controller, $q, $rootScope) {
 			deferred = $q.defer();
