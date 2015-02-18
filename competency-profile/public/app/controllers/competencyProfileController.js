@@ -4,7 +4,7 @@
 	var myApp = angular.module('consultingControllers');
 
 	myApp.controller('CompetencyProfileController', [
-		'$filter', 'objectiveLevelsService', 'objectivesService', '$routeParams', '$location', function ($filter, objectiveLevelsService, objectivesService, $routeParams, $location) {
+		'$filter', 'competencyLevelsService', 'objectivesService', '$routeParams', '$location', function ($filter, competencyLevelsService, objectivesService, $routeParams, $location) {
 <Merge Conflic		var vm = this;
 
 			vm.changed = false;
@@ -77,7 +77,7 @@
 			syncLocation(true);
                 });
 
-                objectiveLevelsService.getObjectiveLevels().then(function (data) {
+                competencyLevelsService.getObjectiveLevels().then(function (data) {
                     vm.objectiveLevels = data.data;
 		});
 		vm.yesObjective = function(objective) {
