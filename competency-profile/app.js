@@ -12,7 +12,7 @@ var flash = require('connect-flash');
 var routes = require('./routes/index');
 var members = require('./routes/members');
 var objectives = require('./routes/objectives');
-var objectiveLevels = require('./routes/competencyLevels');
+var competencyLevels = require('./routes/competencyLevels');
 
 var app = express();
 
