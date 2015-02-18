@@ -4,7 +4,7 @@
 	var myApp = angular.module('consultingControllers');
 
 	myApp.controller('CompetencyProfileController', [
-		'$filter', 'competencyLevelsService', 'objectivesService', '$routeParams', '$location'  function ($filter, competencyLevelsService, objectivesService, $routeParams, $location) {
+		'$filter', 'competencyLevelsService', 'objectivesService', '$routeParams', '$location',  function ($filter, competencyLevelsService, objectivesService, $routeParams, $location) {
 
 			var vm = this;
 			vm.changed = false;
@@ -63,9 +63,11 @@
 
 			vm.initialize = function() {
 				objectivesService.getObjectives().then(function(data) {
-				vm.objectives = data.data.forEach(objectives, function (objective) {
+				var objectives = data.data;
+				objectives.forEach(function (objective) {
 					objective.answered = false;
 				});
+				vm.objectives = objectives;
 				if (vm.currIndex < 0) {
 					vm.currIndex = 0;
 				}
