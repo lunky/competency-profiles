@@ -42,12 +42,13 @@
     <Compile Include="public\app\controllers\competencyProfileController.js" />
     <Compile Include="public\app\controllers\mainController.js" />
     <Compile Include="public\app\controllers\membersController.js" />
+
     <Compile Include="public\app\controllers\objectiveLevelsController.js" />
     <Compile Include="public\app\services\membersService.js" />
-    <Compile Include="public\app\services\objectiveLevelsService.js" />
-    <Compile Include="public\app\services\objectivesService.js" />
+    <Compile Include="public\javascripts\competencyLevelsService.js" />
+    <Compile Include="public\javascripts\objectivesService.js" />
     <Compile Include="routes\index.js" />
-    <Compile Include="routes\objectiveLevels.js" />
+    <Compile Include="routes\competencyLevels.js" />
     <Compile Include="routes\objectives.js" />
     <Compile Include="routes\members.js" />
     <Compile Include="bin\www" />
@@ -70,7 +71,8 @@
     <Content Include="views\header.jade" />
     <Content Include="views\login.jade" />
     <Content Include="views\members.jade" />
-    <Content Include="views\objectiveLevels.jade" />
+    <Content Include="views\objectiveAdmin.jade" />
+    <Content Include="views\competencyLevels.jade" />
     <Content Include="views\objectives.jade" />
     <Content Include="stylus\style.styl" />
     <Content Include="views\index.jade" />
