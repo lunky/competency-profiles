@@ -38,11 +38,14 @@
     <Compile Include="gulp.config.js" />
     <Compile Include="gulpfile.js" />
     <Compile Include="karma.conf.js" />
-    <Compile Include="public\javascripts\app.js" />
-    <Compile Include="public\javascripts\consult.js" />
-    <Compile Include="public\javascripts\membersService.js" />
-    <Compile Include="public\javascripts\competencyLevelsService.js" />
-    <Compile Include="public\javascripts\objectivesService.js" />
+    <Compile Include="public\app\app.js" />
+    <Compile Include="public\app\controllers\competencyLevelsController.js" />
+    <Compile Include="public\app\controllers\competencyProfileController.js" />
+    <Compile Include="public\app\controllers\mainController.js" />
+    <Compile Include="public\app\controllers\membersController.js" />
+    <Compile Include="public\app\services\competencyLevelsService.js" />
+    <Compile Include="public\app\services\membersService.js" />
+    <Compile Include="public\app\services\objectivesService.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\competencyLevels.js" />
     <Compile Include="routes\objectives.js" />
@@ -78,10 +81,12 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="config\" />
+    <Folder Include="public\app\" />
+    <Folder Include="public\app\controllers\" />
+    <Folder Include="public\app\services\" />
     <Folder Include="stylus\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
-    <Folder Include="public\javascripts\" />
     <Folder Include="less\" />
     <Folder Include="public\css\" />
     <Folder Include="routes\" />
