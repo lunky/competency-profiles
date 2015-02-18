@@ -9,6 +9,7 @@
 
 			vm.changed = false;
 			vm.objectives = [];
+			vm.competencyLevels = [];
 			vm.currIndex = 0;
 
 			if ($routeParams.oid) {
@@ -78,7 +79,7 @@
                 });
 
                 competencyLevelsService.getCompetencyLevels().then(function (data) {
-                    vm.objectiveLevels = data.data;
+                    vm.competencyLevels = data.data;
 		});
 		vm.yesObjective = function(objective) {
 			objective.answered = true;
