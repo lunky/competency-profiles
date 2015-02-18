@@ -44,7 +44,7 @@
 						h2.heading Objective Levels
 						div.content
 							p.intro
-								|Below is a summary of your current compentency scores...
+								|Below is a summary of your current compentency levels...
 							div.skillset(data-ng-repeat="level in vm.objectiveLevels")
 								div.item
 									h3.level-title
@@ -52,7 +52,43 @@
 									div.level-bar
 										div.level-bar-inner(data-level="96%")
 							a.pull-right(href="#/objectiveLevels") 
-								|More Details					
+								|More Details	
+								
+			div.secondary.col-md-4.col-sm-12.col-xs-12
+				aside.skills.aside.section
+					div.section-inner
+						h2.heading Competencies
+						div.content
+							p.intro
+								|Below is a summary of your current compentency breakdown...
+							div.skillset
+								div.item
+									h3.level-title
+										|Communication
+									div.level-bar
+										div.level-bar-inner(data-level="40%")
+								div.item
+									h3.level-title
+										|Leadership and Management
+									div.level-bar
+										div.level-bar-inner(data-level="96%")
+								div.item
+									h3.level-title
+										|Interpersonal and Adaptability
+									div.level-bar
+										div.level-bar-inner(data-level="80%")
+								div.item
+									h3.level-title
+										|Conflict and Stress Management
+									div.level-bar
+										div.level-bar-inner(data-level="69%")
+								div.item
+									h3.level-title
+										|Corporate Citizenship
+									div.level-bar
+										div.level-bar-inner(data-level="77%")
+							a.pull-right(href="#/objectiveLevels") 
+								|More Details							
 //
 	.container-fluid
 		.row
