@@ -16,6 +16,15 @@
 				vm.currIndex = idx;
 			}
 
+			vm.clearAll = clearAll;
+			
+			function clearAll() {
+				angular.forEach(vm.objectives, function (objective) {
+					objective.isMet = false;
+					vm.save();
+				});
+			}
+
 			vm.next = function() {
 				if (vm.currIndex < vm.objectives.length - 1) {
 					vm.currIndex += 1;
@@ -78,12 +87,11 @@
 		});
 
 
-            };
+			};
             
             vm.noObjective = function (objective) {
-                objective.answered = true;
-                //TODO save when the answered property is stored
-                //vm.save();
+                objective.isMet = false;
+                vm.save();
             };
             
 
