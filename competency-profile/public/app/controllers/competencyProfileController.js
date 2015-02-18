@@ -4,8 +4,8 @@
 	var myApp = angular.module('consultingControllers');
 
 	myApp.controller('CompetencyProfileController', [
-		'objectivesService', '$routeParams', '$location', function (objectivesService, $routeParams, $location) {
-			var vm = this;
+		'$filter', 'competencyLevelsService', 'objectivesService', '$routeParams', '$location'  function ($filter, competencyLevelsService, objectivesService, $routeParams, $location) {
+
 			vm.objectives = [];
 			vm.changed = false;
 			vm.currIndex = 0;
@@ -71,7 +71,7 @@
 				syncLocation(true);
 			});
 
-                objectiveLevelsService.getObjectiveLevels().then(function (data) {
+                competencyLevelsService.getObjectiveLevels().then(function (data) {
                     vm.objectiveLevels = data.data;
                 });
 			};
