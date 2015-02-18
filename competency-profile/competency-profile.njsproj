@@ -41,10 +41,10 @@
     <Compile Include="public\javascripts\app.js" />
     <Compile Include="public\javascripts\consult.js" />
     <Compile Include="public\javascripts\membersService.js" />
-    <Compile Include="public\javascripts\objectiveLevelsService.js" />
+    <Compile Include="public\javascripts\competencyLevelsService.js" />
     <Compile Include="public\javascripts\objectivesService.js" />
     <Compile Include="routes\index.js" />
-    <Compile Include="routes\objectiveLevels.js" />
+    <Compile Include="routes\competencyLevels.js" />
     <Compile Include="routes\objectives.js" />
     <Compile Include="routes\members.js" />
     <Compile Include="bin\www" />
@@ -67,7 +67,8 @@
     <Content Include="views\header.jade" />
     <Content Include="views\login.jade" />
     <Content Include="views\members.jade" />
-    <Content Include="views\objectiveLevels.jade" />
+    <Content Include="views\objectiveAdmin.jade" />
+    <Content Include="views\competencyLevels.jade" />
     <Content Include="views\objectives.jade" />
     <Content Include="stylus\style.styl" />
     <Content Include="views\index.jade" />

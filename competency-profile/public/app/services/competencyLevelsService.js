@@ -1,7 +1,7 @@
 ﻿'use strict';
 (function () {
 	var myApp = angular.module('consultingServices');
-	myApp.service('objectiveLevelsService', ['$http', '$q', function ($http, $q) {
+	myApp.service('competencyLevelsService', ['$http', '$q', function ($http, $q) {
 			// I transform the successful response, unwrapping the application data
 			// from the API response payload.
 			function handleSuccess(response) {
@@ -24,10 +24,10 @@
 				return ($q.reject(response.data.message));
 			}
 
-			this.getObjectiveLevels = function () {
+			this.getCompetencyLevels = function () {
 				var request = $http({
 					method: 'get',
-					url: '/objectiveLevels/list'
+					url: '/competencyLevels/list'
 				});
 				return (request.then(handleSuccess, handleError));
 			};

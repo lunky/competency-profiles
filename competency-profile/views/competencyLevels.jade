@@ -1,0 +1,25 @@
+﻿div.container.sections-wrapper
+		div.row
+			div.primary.col-sm-12.col-xs-12
+				section.section
+					div.section-inner
+						h2.heading.pull-left Competency Level Admin
+						a.btn.btn-cta-primary.pull-right(data-ng-click="vm.save()" )
+							|Save
+						div.content
+							div.row
+								div.col-sm-12.col-xs-12
+									div.panel(data-ng-repeat="level in vm.competencyLevels")
+										div.panel-heading
+											div.h3
+												|{{level.description}}
+											div.row
+												div.col-xs-2
+													|Minimum Score: 
+												div.col.xs-10
+													input(type="text" data-ng-bind="level.minimumScore")
+											div.row
+												div.col-xs-2
+													|Minimum Gate Score: 
+												div.col-xs-10
+													input(type="text" data-ng-bind="level.minimumGateScore")
