@@ -41,17 +41,17 @@
 			div.secondary.col-md-4.col-sm-12.col-xs-12
 				aside.skills.aside.section
 					div.section-inner
-						h2.heading Objective Levels
+						h2.heading Competency Levels
 						div.content
 							p.intro
 								|Below is a summary of your current compentency levels...
-							div.skillset(data-ng-repeat="level in vm.objectiveLevels")
+							div.skillset(data-ng-repeat="level in vm.competencyLevels")
 								div.item
 									h3.level-title
 										|{{level.description}}
 									div.level-bar
 										div.level-bar-inner(data-level="96%")
-							a.pull-right(href="#/objectiveLevels") 
+							a.pull-right(href="#/competencyLevels") 
 								|More Details	
 								
 			div.secondary.col-md-4.col-sm-12.col-xs-12
@@ -86,4 +86,4 @@
 									h3.level-title
 										|Corporate Citizenship
 									div.level-bar
-										div.level-bar-inner(data-level="77%")						
+										div.level-bar-inner(data-level="77%")				
