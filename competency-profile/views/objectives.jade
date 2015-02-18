@@ -7,19 +7,16 @@
 						div.content
 							div.row
 								div.col-md-8.col-sm-12.col-xs-12
-									div.panel.panel-default(data-ng-repeat="objective in vm.objectives | filter: { answered: false }")
+									div.panel.panel-danger(data-ng-repeat="objective in vm.objectives | filter: { isMet: !true }")
+										div.panel-heading
+											|Objective Not Met
 										div.panel-body
-											strong #{userDisplayName}:
+											strong 
 												|{{objective.description}}?
-											ul.no-bullet
-												li 
-													label.radio
-														input(type="radio" data-ng-model="objective.isMet" data-ng-value="true" data-ng-change="vm.yesObjective(objective)")
-														| Yes
-												li 
-													label.radio
-														input(type="radio" data-ng-model="objective.isMet" data-ng-value="false" data-ng-change="vm.noObjective(objective)")
-														| No
+											div.row.voffset
+												div.col-xs-12.text-center
+													a.btn.btn-success(href="" data-ng-click="vm.yesObjective(objective)")
+														|Meet Objective
 											div.row
 												div.col-xs-6
 													h3
@@ -29,23 +26,20 @@
 													h3 
 														small Counter Example
 													|{{vm.curr.counter_example}}
-									div.panel.panel-default(data-ng-repeat="objective in vm.objectives | filter: { answered: true } as answeredResults" data-ng-class="(objective.isMet) ? 'panel-success': 'panel-danger'")
+									div.panel.panel-default(data-ng-repeat="objective in vm.objectives | filter: { isMet: true } as answeredResults" data-ng-class="(objective.isMet) ? 'panel-success': 'panel-danger'")
+										div.panel-heading
+											|Objective Met
+											a.pull-right(href="" data-ng-click="vm.noObjective(objective)")
+												i.fa.fa-undo
 										div.panel-body
-											strong #{userDisplayName}:
+											strong 
 												|{{objective.description}}?
-											ul.answers
-												li(data-ng-class="{'no-bullet' : objective.isMet}")
-													i.fa-li.fa.fa-check(data-ng-if="objective.isMet")
-													s(data-ng-if="!objective.isMet") Yes
-													span(data-ng-if="objective.isMet") Yes
-												li(data-ng-class="{'no-bullet' : !objective.isMet}")  
-													i.fa-li.fa.fa-check(data-ng-if="!objective.isMet")
-													s(data-ng-if="objective.isMet") No
-													span(data-ng-if="!objective.isMet") No
-								div.col-md-4.hidden-xs.hidden-sm
+								div.col-md-4.hidden-xs.hidden-sm.text-center
 									div.panel.panel-info
 										div.panel-body.text-center 
-											|You've answered {{answeredResults.length}} of {{vm.objectives.length}} questions
+											|You meet {{answeredResults.length}} of {{vm.objectives.length}} objectives
+									a.btn.btn-default(href="" data-ng-click="vm.clearAll()")
+										|Clear all answers
 
 			div.secondary.col-md-4.col-sm-12.col-xs-12
 				aside.skills.aside.section

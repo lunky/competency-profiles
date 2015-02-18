@@ -9,10 +9,16 @@
 			vm.objectives = [];
 			vm.changed = false;
 			vm.currIndex = 0;
-
 			if ($routeParams.oid) {
 				var idx = Number($routeParams.oid) - 1;
 				vm.currIndex = idx;
+			}
+
+			function clearAll() {
+				angular.forEach(vm.objectives, function (objective) {
+					objective.isMet = false;
+					vm.save();
+				});
 			}
 
 			vm.next = function() {
@@ -53,32 +59,30 @@
 
 			vm.initialize = function() {
 				objectivesService.getObjectives().then(function(data) {
-                    var objectives = data.dataforEach(objectives, function (objective) {
-                        objective.answered = false;
-                    });;
-					if (vm.currIndex < 0) {
-						vm.currIndex = 0;
-					}
-					if (vm.currIndex > vm.objectives.length - 1) {
-						vm.currIndex = vm.objectives.length - 1;
-					}
-					syncLocation(true);
-                });
+				vm.objectives = data.data.forEach(objectives, function (objective) {
+					objective.answered = false;
+				});
+				if (vm.currIndex < 0) {
+					vm.currIndex = 0;
+				}
+				if (vm.currIndex > vm.objectives.length - 1) {
+					vm.currIndex = vm.objectives.length - 1;
+				}
+				syncLocation(true);
+			});
 
                 objectiveLevelsService.getObjectiveLevels().then(function (data) {
                     vm.objectiveLevels = data.data;
                 });
 			};
 			vm.yesObjective = function(objective) {
-                objective.answered = true;
-                //TODO save when the answered property is stored
-				//vm.save();
-            };
+			    objective.isMet = true;
+			    vm.save();
+			};
             
             vm.noObjective = function (objective) {
-                objective.answered = true;
-                //TODO save when the answered property is stored
-                //vm.save();
+                objective.isMet = false;
+                vm.save();
             };
             
 
