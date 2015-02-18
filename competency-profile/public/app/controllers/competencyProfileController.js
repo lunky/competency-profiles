@@ -4,7 +4,7 @@
 	var myApp = angular.module('consultingControllers');
 
 	myApp.controller('CompetencyProfileController', [
-		'$filter', 'objectiveLevelsService', 'objectivesService', function ($filter, objectiveLevelsService, objectivesService) {
+		'$filter', 'competencyLevelsService', 'objectivesService', function ($filter, competencyLevelsService, objectivesService) {
 			var vm = this;
             vm.changed = false;
 			vm.objectives = [];
@@ -44,7 +44,7 @@
 					vm.curr = vm.objectives[vm.currIndex];
                 });
 
-                objectiveLevelsService.getObjectiveLevels().then(function (data) {
+                competencyLevelsService.getObjectiveLevels().then(function (data) {
                     vm.objectiveLevels = data.data;
                 });
 			};
