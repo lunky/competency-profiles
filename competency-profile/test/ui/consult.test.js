@@ -6,10 +6,10 @@
 		beforeEach(module('consulting'));
 
 		/* as soon as $route is used, karma requests the /objectives */
-		beforeEach(inject(function(_$templateCache_) {
-			var $templateCache = _$templateCache_;
-			$templateCache.put('competencyLevels/list', '');
-		}));
+		beforeEach(inject(function($httpBackend) {
+			$httpBackend.whenGET("objectives").respond({});
+			$httpBackend.whenGET("/competencyLevels/list").respond({});
+		})); 
 
 		it('is defined', inject(function($controller, $q) {
 
