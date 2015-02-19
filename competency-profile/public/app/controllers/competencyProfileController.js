@@ -85,9 +85,8 @@
 			});
 
 			vm.yesObjective = function(objective) {
-				objective.answered = true;
-				//TODO save when the answered property is stored
-				//vm.save();
+				objective.isMet = true;
+				vm.save();
 			};
 
 			vm.noObjective = function (objective) {
