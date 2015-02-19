@@ -8,7 +8,7 @@
 		/* as soon as $route is used, karma requests the /objectives */
 		beforeEach(inject(function(_$templateCache_) {
 			var $templateCache = _$templateCache_;
-			$templateCache.put('objectives', '');
+			$templateCache.put('competencyLevels/list', '');
 		}));
 
 		it('is defined', inject(function($controller, $q) {
