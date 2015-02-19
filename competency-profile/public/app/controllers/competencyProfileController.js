@@ -4,8 +4,9 @@
 	var myApp = angular.module('consultingControllers');
 
 	myApp.controller('CompetencyProfileController', [
-		'$filter', 'competencyLevelsService', 'objectivesService', '$routeParams', '$location', function ($filter, competencyLevelsService, objectivesService, $routeParams, $location) {
-<Merge Conflic		var vm = this;
+		'$filter', 'competencyLevelsService', 'objectivesService', '$routeParams', '$location',
+		function ($filter, competencyLevelsService, objectivesService, $routeParams, $location) {
+			var vm = this;
 
 			vm.changed = false;
 			vm.objectives = [];
@@ -18,7 +19,7 @@
 			}
 
 			vm.clearAll = clearAll;
-			
+
 			function clearAll() {
 				angular.forEach(vm.objectives, function (objective) {
 					objective.isMet = false;
@@ -64,37 +65,35 @@
 
 			vm.initialize = function() {
 				objectivesService.getObjectives().then(function(data) {
-				var objectives = data.data;
-				angular.forEach(objectives, function (objective) {
-				objective.answered = false;
-			});
-			vm.objectives = objectives;
-			if (vm.currIndex < 0) {
-				vm.currIndex = 0;
-			}
-			if (vm.currIndex > vm.objectives.length - 1) {
-				vm.currIndex = vm.objectives.length - 1;
-			}
-			syncLocation(true);
-                });
-
-                competencyLevelsService.getCompetencyLevels().then(function (data) {
-                    vm.competencyLevels = data.data;
-		});
-		vm.yesObjective = function(objective) {
-			objective.answered = true;
-			//TODO save when the answered property is stored
-			//vm.save();
-		});
-
-
+					var objectives = data.data;
+					angular.forEach(objectives, function (objective) {
+						objective.answered = false;
+					});
+					vm.objectives = objectives;
+					if (vm.currIndex < 0) {
+						vm.currIndex = 0;
+					}
+					if (vm.currIndex > vm.objectives.length - 1) {
+						vm.currIndex = vm.objectives.length - 1;
+					}
+					syncLocation(true);
+				});
 			};
-            
-            vm.noObjective = function (objective) {
-                objective.isMet = false;
-                vm.save();
-            };
-            
+
+			competencyLevelsService.getCompetencyLevels().then(function (data) {
+				vm.competencyLevels = data.data;
+			});
+
+			vm.yesObjective = function(objective) {
+				objective.answered = true;
+				//TODO save when the answered property is stored
+				//vm.save();
+			};
+
+			vm.noObjective = function (objective) {
+				objective.isMet = false;
+				vm.save();
+			};
 
 			vm.initialize();
 		}
