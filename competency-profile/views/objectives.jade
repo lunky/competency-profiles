@@ -3,11 +3,19 @@
 			div.primary.col-md-8.col-sm-12.col-xs-12
 				section.section
 					div.section-inner
-						h2.heading Objectives
+						div.row
+							div.col-md-5.col-sm-12.col-xs-12
+								h2.heading Objectives
+							div.col-md-3.col-sm-12.col-xs-12
+								div.form-group				
+									select.form-control(data-ng-model="vm.sort" name="sort")
+										<option value="">Default Sort</option>
+										<option value="isMet">Sort by met</option>
+										<option value="-isMet">Sort by not met</option>
 						div.content
 							div.row
 								div.col-md-8.col-sm-12.col-xs-12
-									div.panel(data-ng-repeat="objective in vm.objectives" data-ng-class="objective.isMet ? 'panel-success' : 'panel-danger'")
+									div.panel(data-ng-repeat="objective in vm.objectives | orderBy: vm.sort" data-ng-class="objective.isMet ? 'panel-success' : 'panel-danger'")
 										div.panel-heading
 											span(data-ng-if="objective.isMet")
 												|Objective Met
