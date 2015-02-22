@@ -11,7 +11,7 @@
 										div.panel-heading
 											span(data-ng-if="objective.isMet")
 												|Objective Met
-											a.pull-right(href="" data-ng-click="vm.noObjective(objective)" data-ng-if="objective.isMet")
+											a.pull-right(href="" data-ng-click="vm.scoreObjective(objective, false)" data-ng-if="objective.isMet")
 												i.fa.fa-undo
 											span(data-ng-if="!objective.isMet")
 												|Objective Not Met
@@ -20,7 +20,7 @@
 												|{{objective.description}}?
 											div.row.voffset(data-ng-if="!objective.isMet")
 												div.col-xs-12.text-center
-													a.btn.btn-success(href="" data-ng-click="vm.yesObjective(objective)")
+													a.btn.btn-success(href="" data-ng-click="vm.scoreObjective(objective, true)")
 														|Meet Objective
 											div.row(data-ng-if="!objective.isMet")
 												div.col-xs-6
@@ -45,12 +45,16 @@
 						div.content
 							p.intro
 								|Below is a summary of your current compentency levels...
-							div.skillset(data-ng-repeat="level in vm.competencyLevels")
+							div.skillset
 								div.item
-									h3.level-title
-										|{{level.description}}
-									div.level-bar
-										div.level-bar-inner(data-level="96%")
+									h3.level-title Base
+									<progressbar class="progress-striped" value="vm.score.base">{{vm.score.base}}%</progressbar>
+								div.item
+									h3.level-title Intermediate
+									<progressbar class="progress-striped" value="vm.score.intermediate">{{vm.score.intermediate}}%</progressbar>
+								div.item
+									h3.level-title Senior
+									<progressbar class="progress-striped" value="vm.score.senior">{{vm.score.senior}}%</progressbar>
 							a.pull-right(href="#/competencyLevels") 
 								|More Details	
 								
@@ -63,27 +67,17 @@
 								|Below is a summary of your current compentency breakdown...
 							div.skillset
 								div.item
-									h3.level-title
-										|Communication
-									div.level-bar
-										div.level-bar-inner(data-level="40%" style="width:50%;")
+									h3.level-title Communication
+									<progressbar class="progress-striped" value="vm.score.communication">{{vm.score.communication}}%</progressbar>
 								div.item
-									h3.level-title
-										|Leadership and Management
-									div.level-bar
-										div.level-bar-inner(data-level="96%")
+									h3.level-title Leadership and Management
+									<progressbar class="progress-striped" value="vm.score.leadership">{{vm.score.leadership}}%</progressbar>
 								div.item
-									h3.level-title
-										|Interpersonal and Adaptability
-									div.level-bar
-										div.level-bar-inner(data-level="80%")
+									h3.level-title Interpersonal and Adaptability
+									<progressbar class="progress-striped" value="vm.score.interpersonal">{{vm.score.interpersonal}}%</progressbar>
 								div.item
-									h3.level-title
-										|Conflict and Stress Management
-									div.level-bar
-										div.level-bar-inner(data-level="69%")
+									h3.level-title Conflict and Stress Management
+									<progressbar class="progress-striped" value="vm.score.conflict">{{vm.score.conflict}}%</progressbar>
 								div.item
-									h3.level-title
-										|Corporate Citizenship
-									div.level-bar
-										div.level-bar-inner(data-level="77%")				
+									h3.level-title Corporate Citizenship
+									<progressbar class="progress-striped" value="vm.score.citizenship">{{vm.score.citizenship}}%</progressbar>
