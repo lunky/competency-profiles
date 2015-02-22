@@ -1,18 +1,30 @@
-'use strict';
-(function() {
-
-	var myApp = angular.module('consultingControllers');
-
-	myApp.controller('CompetencyLevelsController', [
-		'competencyLevelsService', function (competencyLevelsService) {
-			var vm = this;
-			vm.competencyLevels = [];
-			vm.initialize = function () {
-				competencyLevelsService.getCompetencyLevels().then(function (data) {
-					vm.competencyLevels = data.data;
-				});
-			};
-			vm.initialize();
-		}]);
-
+(function () {
+	'use strict';
+	
+	angular
+        .module('consultingControllers')
+        .controller('CompetencyLevelsController', CompetencyLevelsController);
+	
+	CompetencyLevelsController.$inject = ['competencyLevelsService'];
+	
+	function CompetencyLevelsController(competencyLevelsService) {
+		
+		var vm = this;
+		vm.competencyLevels = [];
+		vm.initialize = initialize;
+		vm.save = save;
+		
+		initialize();
+		
+		function initialize() {
+			competencyLevelsService.getCompetencyLevels().then(function (data) {
+				vm.competencyLevels = data.data;
+			});
+		}
+		
+		function save(level) {
+			level.edit = false;
+			//TODO: save updated level
+		}
+	}
 })();
