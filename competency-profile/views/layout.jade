@@ -27,8 +27,9 @@ head
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js')
 	<![endif]-->   
 body
-	include header
-	block content
+	div.page-wrap
+		include header
+		block content
 	include footer
 		
 script(src='/bower_components/angularjs/angular.js')

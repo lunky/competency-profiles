@@ -4136,6 +4136,23 @@ h6 {
   font-weight: 700;
   color: #778492;
 }
+html,
+body {
+  height: 100%;
+}
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -43px;
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.footer,
+.page-wrap:after {
+  height: 43px;
+}
 ul.answers {
   padding-left: 0;
   margin-left: 2.14285714em;
