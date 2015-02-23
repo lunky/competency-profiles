@@ -66,6 +66,10 @@
     <Content Include="less\theme.less" />
     <Content Include="package.json" />
     <Content Include="public\images\checkmark.png" />
+    <Content Include="seed.json" />
+    <Content Include="seeds\competencylevel.json" />
+    <Content Include="seeds\objective.json" />
+    <Content Include="seeds\userData.json" />
     <Content Include="views\footer.jade" />
     <Content Include="views\header.jade" />
     <Content Include="views\login.jade" />
@@ -84,6 +88,7 @@
     <Folder Include="public\app\" />
     <Folder Include="public\app\controllers\" />
     <Folder Include="public\app\services\" />
+    <Folder Include="seeds\" />
     <Folder Include="stylus\" />
     <Folder Include="public\" />
     <Folder Include="public\app\" />
