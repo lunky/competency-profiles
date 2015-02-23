@@ -1,9 +1,9 @@
-(function () {
+(function() {
 	'use strict';
 
 	angular
-				.module('consultingControllers')
-				.controller('CompetencyLevelsController', CompetencyLevelsController);
+		.module('consultingControllers')
+		.controller('CompetencyLevelsController', CompetencyLevelsController);
 
 	CompetencyLevelsController.$inject = ['competencyLevelsService'];
 
@@ -17,14 +17,16 @@
 		initialize();
 
 		function initialize() {
-			competencyLevelsService.getCompetencyLevels().then(function (data) {
+			competencyLevelsService.getCompetencyLevels().then(function(data) {
 				vm.competencyLevels = data.data;
 			});
 		}
 
 		function save(level) {
 			level.edit = false;
-			//TODO: save updated level
+			competencyLevelsService.save(level).then(function(data) {
+				//nothing?
+			});
 		}
 	}
 })();

@@ -6,7 +6,7 @@
 						h2.heading Competency Level Admin	
 						div.content
 							div.row
-								div.col-xs-12.col-sm-12.col-md-4(data-ng-repeat="level in vm.competencyLevels")
+								div.col-xs-12.col-sm-12.col-md-4(data-ng-repeat="level in vm.competencyLevels | orderBy:'levelId'")
 									div.panel.panel-primary
 										div.panel-heading
 											div.row
@@ -30,6 +30,6 @@
 												div.form-group
 													label(for="minGateScore{{$index+1}}") Minimum Gate Score
 													input.form-control(data-ng-if="level.edit" type="text" name="minGateScore{{$index+1}}" data-ng-model="level.minimumGateScore")
-												a.btn.btn-success(data-ng-if="level.edit" data-ng-click="level.edit = false") Save	
+												a.btn.btn-success(data-ng-if="level.edit" data-ng-click="vm.save(level)") Save	
 											
 			

@@ -10,8 +10,8 @@
 								div.form-group				
 									select.form-control(data-ng-model="vm.sort" name="sort")
 										<option value="">Default Sort</option>
-										<option value="isMet">Sort by met</option>
-										<option value="-isMet">Sort by not met</option>
+										<option value="-isMet">Sort by met</option>
+										<option value="isMet">Sort by not met</option>
 						div.content
 							div.row
 								div.col-md-8.col-sm-12.col-xs-12
@@ -34,11 +34,11 @@
 												div.col-xs-6
 													h3
 														small Supporting Example
-													|{{vm.curr.supportingExample}}
+													|{{objective.supportingExample}}
 												div.col-xs-6
 													h3 
 														small Counter Example
-													|{{vm.curr.counterExample}}
+													|{{objective.counterExample}}
 								div.col-md-4.hidden-xs.hidden-sm.text-center
 									div.panel.panel-info
 										div.panel-body.text-center 

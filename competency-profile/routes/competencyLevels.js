@@ -19,4 +19,28 @@ router.get('/list', isAuthenticated, function (req, res) {
 	});
 });
 
+router.post('/save', isAuthenticated, function (req, res) {
+	var userid = req.user;
+	var db = req.db;
+	var level = req.body.level;
+	var collection = db.get('competencylevel');
+	collection.findAndModify(
+		{
+			query: {
+				'levelId': level.levelId
+			},
+			update: level
+		},
+		{
+			'upsert': true
+		},
+		function (err, docs) {
+			if (err) {
+				res.send(err);
+			}
+			res.send({ 'result': 'success', 'level': docs});
+			});
+		}
+	);
+
 module.exports = router;
