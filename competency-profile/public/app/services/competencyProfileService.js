@@ -1,7 +1,7 @@
 ﻿'use strict';
  (function () {
 	var myApp = angular.module('consultingServices');
-	myApp.service('objectivesService', ['$http', '$q', function ($http, $q) {
+	myApp.service('competencyProfileService', ['$http', '$q', 'objectiveService', function ($http, $q, objectiveService) {
 		// I transform the successful response, unwrapping the application data
 		// from the API response payload.
 		function handleSuccess(response) {
@@ -25,11 +25,7 @@
 		}
 
 		this.getObjectives = function() {
-			var request = $http({
-				method: 'get',
-				url: '/objectives/list'
-			});
-			return (request.then(handleSuccess, handleError));
+			return objectiveService.getObjectives();
 		};
 
 		this.save = function(objectives) {
@@ -40,7 +36,7 @@
 			});
 			var request = $http({
 				method: 'post',
-				url: '/objectives/save',
+				url: '/competencyProfile/save',
 				data: {
 					objectives: justTheKeys
 				}

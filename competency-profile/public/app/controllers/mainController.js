@@ -1,14 +1,16 @@
-'use strict';
 (function() {
+	'use strict';
 
-	var myApp = angular.module('consultingControllers');
+	angular
+		.module('consultingControllers')
+		.controller('MainCtrl', MainController);
 
-	myApp.controller('MainCtrl', [
-		'$route', '$routeParams', '$location',
-		function($route, $routeParams, $location) {
-			this.$route = $route;
-			this.$location = $location;
-			this.$routeParams = $routeParams;
-		}
-	]);
+	MainController.$inject =
+	['$route', '$routeParams', '$location'];
+
+	function MainController($route, $routeParams, $location) {
+		this.$route = $route;
+		this.$location = $location;
+		this.$routeParams = $routeParams;
+	}
 })();

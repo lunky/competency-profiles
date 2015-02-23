@@ -11,6 +11,7 @@ var flash = require('connect-flash');
 
 var routes = require('./routes/index');
 var members = require('./routes/members');
+var profile = require('./routes/competencyProfile');
 var objectives = require('./routes/objectives');
 var competencyLevels = require('./routes/competencyLevels');
 
@@ -58,6 +59,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', routes);
+app.use('/competencyProfile', profile);
 app.use('/objectives', objectives);
 app.use('/members', members);
 app.use('/competencyLevels', competencyLevels);
@@ -81,6 +83,7 @@ if (app.get('env') === 'development') {
 			error: err
 		});
 	});
+	app.locals.pretty = true;
 }
 
 // production error handler

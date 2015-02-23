@@ -25,7 +25,11 @@
 		function save(level) {
 			level.edit = false;
 			competencyLevelsService.save(level).then(function(data) {
-				//nothing?
+				/* 
+				 * indicate to the user what's happened 
+				 * Save success - 
+				 * Save failed - 
+				*/ 
 			});
 		}
 	}

@@ -14,13 +14,13 @@
 				controller: 'MembersController',
 				controllerAs: 'vm'
 			})
-						.when('/competencyLevels', {
+					.when('/competencyLevels', {
 				templateUrl: 'competencyLevels',
 				controller: 'CompetencyLevelsController',
 				controllerAs: 'vm'
 			})
 					.when('/:oid?', {
-				templateUrl: 'objectives',
+				templateUrl: 'competencyProfile',
 				controller: 'CompetencyProfileController',
 				controllerAs: 'vm'
 			})

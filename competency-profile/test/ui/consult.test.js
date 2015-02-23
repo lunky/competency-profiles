@@ -19,7 +19,7 @@
 				data: []
 			});
 			//spec body
-			var ctrl = $controller('CompetencyProfileController', {objectivesService: svc});
+			var ctrl = $controller('CompetencyProfileController', { competencyProfileService: svc});
 		    expect(ctrl).to.be.defined;
 		}));
 		it('calls service', inject(function($controller, $q) {
@@ -31,7 +31,7 @@
 				data: []
 			});
 			//spec body
-			var ctrl = $controller('CompetencyProfileController', {objectivesService: svc});
+			var ctrl = $controller('CompetencyProfileController', {competencyProfileService: svc});
 			sinon.assert.called(svc.getObjectives);
 		}));
 		it('sets objectives with data from service', inject(function($controller, $q, $rootScope) {
@@ -49,7 +49,7 @@
 
 			//spec body
 			var scope = $rootScope.$new();
-			var ctrl = $controller('CompetencyProfileController as vm', {$scope: scope, objectivesService: svc});
+			var ctrl = $controller('CompetencyProfileController as vm', {$scope: scope, competencyProfileService: svc});
 			$rootScope.$apply(); // trigger digest
 			expect(scope.vm.objectives.length).to.be.defined;
 			expect(scope.vm.objectives.length).to.equal(1);

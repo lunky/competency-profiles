@@ -6,9 +6,9 @@
 				.controller('CompetencyProfileController', CompetencyProfileController);
 
 	CompetencyProfileController.$inject =
-			['$filter', 'competencyLevelsService', 'objectivesService'];
+			['$filter', 'competencyLevelsService', 'competencyProfileService'];
 
-	function CompetencyProfileController($filter, competencyLevelsService, objectivesService) {
+	function CompetencyProfileController($filter, competencyLevelsService, competencyProfileService) {
 		var vm = this;
 
 		vm.clearAll = clearAll;
@@ -27,7 +27,7 @@
 		}
 
 		function initialize() {
-			objectivesService.getObjectives().then(function (data) {
+			competencyProfileService.getObjectives().then(function (data) {
 				var objectives = data.data;
 				vm.objectives = objectives;
 				vm.score = data.summary;
@@ -37,7 +37,7 @@
 		function save() {
 			// TODO : filter objectives that have something changed?
 			var objectives = vm.objectives;
-			objectivesService.save(objectives).then(function (data) {
+			competencyProfileService.save(objectives).then(function (data) {
 				vm.objectives = data.data;
 				vm.score = data.summary;
 			});

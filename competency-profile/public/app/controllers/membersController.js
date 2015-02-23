@@ -1,17 +1,22 @@
-'use strict';
-(function() {
+(function () {
+	'use strict';
+	
+	angular
+		.module('consultingControllers')
+		.controller('MembersController', MembersController);
+	
+	MembersController.$inject = ['membersService'];
+	
+	function MembersController(membersService) {
+		var vm = this;
+		vm.members = [];
+		
+		initialize();
 
-	var myApp = angular.module('consultingControllers');
-
-	myApp.controller('MembersController', [
-		'membersService', function(membersService) {
-			var vm = this;
-			vm.members = [];
-			vm.initialize = function () {
-				membersService.getMembers().then(function (data) {
-					vm.members = data.data;
-				});
-			};
-			vm.initialize();
-		}]);
+		function initialize() {
+			membersService.getMembers().then(function (data) {
+				vm.members = data.data;
+			});
+		};
+	}
 })();
