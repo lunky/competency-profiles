@@ -31,7 +31,7 @@
 		}
 	]
 	);
-	
+
 	myApp.run(['$location', '$route', '$rootScope', function ($location, $route, $rootScope) {
 			$location.skipReload = function () {
 				var lastRoute = $route.current;

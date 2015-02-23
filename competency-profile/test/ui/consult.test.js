@@ -7,12 +7,11 @@
 
 		/* as soon as $route is used, karma requests the /objectives */
 		beforeEach(inject(function($httpBackend) {
-			$httpBackend.whenGET("objectives").respond({});
-			$httpBackend.whenGET("/competencyLevels/list").respond({});
-		})); 
+			$httpBackend.whenGET('objectives').respond({});
+			$httpBackend.whenGET('/competencyLevels/list').respond({});
+		}));
 
 		it('is defined', inject(function($controller, $q) {
-
 			var deferred = $q.defer();
 			var promise = deferred.promise;
 			var svc = {getObjectives: sinon.stub().returns(promise)};
