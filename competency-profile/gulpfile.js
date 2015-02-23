@@ -37,12 +37,12 @@ gulp.task('start', function () {
 var karma = require('gulp-karma');
  
 var testFiles = [
-	'bower_components/angular/angular.js',
-	'bower_components/angular-mocks/angular-mocks.js',
-	'bower_components/angular-route/angular-route.js',
-	'bower_components/angular-animate/angular-animate.js',
-	'public/app/**/*.js',
-	'test/**/*.js'
+    'bower_components/angular/angular.js',
+    'bower_components/angular-mocks/angular-mocks.js',
+    'bower_components/angular-route/angular-route.js',
+    'bower_components/angular-animate/angular-animate.js',
+    'public/app/**/*.js',
+    'test/**/*.js'
 ];
  
 gulp.task('test', function() {
@@ -72,7 +72,7 @@ function start(debug) {
         var debugMode = "--debug";
         nodeOptions.nodeArgs = [debugMode + '=5858'];
     }
-	nodeOptions.ignore = ['public/**']; // lets not reload the web app everytime we make a change to the client side files
+    nodeOptions.ignore = ['public/**']; // lets not reload the web app everytime we make a change to the client side files
 
     return $.nodemon(nodeOptions)
         .on('restart', ['vet'], function(ev) {

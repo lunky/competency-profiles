@@ -20,7 +20,7 @@
 			});
 			//spec body
 			var ctrl = $controller('CompetencyProfileController', {objectivesService: svc});
-			expect(ctrl).toBeDefined();
+		    expect(ctrl).to.be.defined;
 		}));
 		it('calls service', inject(function($controller, $q) {
 
@@ -51,9 +51,9 @@
 			var scope = $rootScope.$new();
 			var ctrl = $controller('CompetencyProfileController as vm', {$scope: scope, objectivesService: svc});
 			$rootScope.$apply(); // trigger digest
-			expect(scope.vm.objectives.length).toBeDefined();
-			expect(scope.vm.objectives.length).toBe(1);
-			expect(scope.vm.objectives[0]).toBe(testObjective);
+			expect(scope.vm.objectives.length).to.be.defined;
+			expect(scope.vm.objectives.length).to.equal(1);
+			expect(scope.vm.objectives[0]).to.equal(testObjective);
 		}));
 	});
 
@@ -86,7 +86,7 @@
 		}));
 
 		it('is defined', function () {
-			expect(ctrl).toBeDefined();
+			expect(ctrl).to.be.defined;
 		});
 		it('calls service', inject(function($controller, $q) {
 			sinon.assert.called(svc.getMembers);
@@ -94,9 +94,8 @@
 
 		it('sets members with data from service', inject(function ($controller, $q, $rootScope) {
 			$rootScope.$apply(); // trigger digest
-			expect(scope.vm.members.length).toBeDefined();
-			expect(scope.vm.members.length).toBe(1);
-			expect(scope.vm.members[0]).toBe(testUser);
+		    expect(scope.vm.members).to.have.length(1);
+			expect(scope.vm.members[0]).to.equal(testUser);
 		}));
 	});
 })();
