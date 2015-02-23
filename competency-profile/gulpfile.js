@@ -34,37 +34,24 @@ gulp.task('start', function () {
     start(true);
 });
 
-var karma = require('gulp-karma');
- 
-var testFiles = [
-    'bower_components/angular/angular.js',
-    'bower_components/angular-mocks/angular-mocks.js',
-    'bower_components/angular-route/angular-route.js',
-    'bower_components/angular-animate/angular-animate.js',
-    'public/app/**/*.js',
-    'test/**/*.js'
-];
- 
-gulp.task('test', function() {
-  // Be sure to return the stream 
-  return gulp.src(testFiles)
-    .pipe(karma({
-      configFile: 'D:/git/competency-profiles/competency-profile/karma.conf.js',
-      action: 'run'
-    }))
-    .on('error', function(err) {
-      // Make sure failed tests cause gulp to exit non-zero 
-      throw err;
-    });
+
+gulp.task('test', function (done) {
+    var karma = require('karma').server;
+    
+    karma.start({
+        configFile: __dirname + '/karma.conf.js'
+    }, karmaCompleted);
+    
+    function karmaCompleted(karmaResult) {
+        log('Karma completed');
+        if (karmaResult === 1) {
+            done('karma: tests failed with code ' + karmaResult);
+        } else {
+            done();
+        }
+    }
 });
 
-gulp.task('watchtest', function() {
-  gulp.src(testFiles)
-    .pipe(karma({
-      configFile: 'karma.conf.js',
-      action: 'watch'
-    }));
-});
 function start(debug) {    
     var nodeOptions = getNodeOptions(debug);
 
@@ -79,7 +66,7 @@ function start(debug) {
             log('*** nodemon restarted');
             log('files changed:\n' + ev);
         })
-        .on('start', ['watchtest'], function () {
+        .on('start', ['test'], function () {
             log('*** nodemon started');
         })
         .on('crash', function () {
