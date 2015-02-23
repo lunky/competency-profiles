@@ -8,6 +8,7 @@
 		/* as soon as $route is used, karma requests the /objectives */
 		beforeEach(inject(function($httpBackend) {
 			$httpBackend.whenGET('objectives').respond({});
+			$httpBackend.whenGET('competencyProfile').respond({});
 			$httpBackend.whenGET('/competencyLevels/list').respond({});
 		}));
 
@@ -70,6 +71,7 @@
 		beforeEach(inject(function(_$templateCache_) {
 			var $templateCache = _$templateCache_;
 			$templateCache.put('objectives', '');
+			$templateCache.put('competencyProfile', '');
 		}));
 
 		beforeEach(inject(function($controller, $q, $rootScope) {
