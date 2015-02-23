@@ -32,12 +32,15 @@
 			return (request.then(handleSuccess, handleError));
 		};
 
-		this.save = function(objectives) {
-			/*
-			 * this should save objectives ... not a competency profile
-			 * add save logic for objective admin <here> 
-			*/
-							
+		this.save = function(objective) {
+			var request = $http({
+				method: 'post',
+				url: '/objectives/save',
+				data: {
+					objective: objective
+				}
+			});
+			return (request.then(handleSuccess, handleError));
 		};
 	}]);
 })();

@@ -19,6 +19,11 @@
 				controller: 'CompetencyLevelsController',
 				controllerAs: 'vm'
 			})
+					.when('/objectives', {
+				templateUrl: 'objectives',
+				controller: 'ObjectiveController',
+				controllerAs: 'vm'
+			})
 					.when('/:oid?', {
 				templateUrl: 'competencyProfile',
 				controller: 'CompetencyProfileController',

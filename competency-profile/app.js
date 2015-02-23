@@ -52,8 +52,8 @@ app.use(function (req, res, next) {
 	res.locals = {
 		isAuthenticated : req.isAuthenticated(),
         title : 'Competency Profile',
-		userDisplayName: 'Chelsea Odell',
-		userScore: 'Intermediate Consultant' //TODO replace with real score
+		userDisplayName: 'Aaron Levine',
+		userScore: 'Senior Consultant' //TODO replace with real score
 	};
 	next();
 });

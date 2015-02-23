@@ -20,14 +20,13 @@ router.get('/list', isAuthenticated, function (req, res) {
 });
 
 router.post('/save', isAuthenticated, function (req, res) {
-	var userid = req.user;
 	var db = req.db;
-	var level = req.body.level;
-	var collection = db.get('competencylevel');
+	var objective = req.body.objective;
+	var collection = db.get('objectives');
 	collection.findAndModify(
 		{
 			query: {
-				'levelId': level.levelId
+				'objectiveId': objective.objectiveId
 			},
 			update: level
 		},
@@ -38,9 +37,9 @@ router.post('/save', isAuthenticated, function (req, res) {
 			if (err) {
 				res.send(err);
 			}
-			res.send({ 'result': 'success', 'level': docs});
-			});
-		}
-	);
+			res.send({ 'result': 'success', 'objective': docs });
+		});
+}
+);
 
 module.exports = router;
