@@ -45,6 +45,7 @@ function loginUser(done) {
 
         function onResponse(err, res) {
 			if (err) {
+				throw err;
 				return done(err);
 			}
 			return done();
