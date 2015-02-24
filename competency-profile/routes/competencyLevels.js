@@ -38,8 +38,6 @@ router.post('/save', isAuthenticated, function (req, res) {
 	var db = req.db;
 	var level = req.body.level;
 	var collection = db.get('competencylevel');
-	console.log("id: " + level._id);
-	console.log("minimumScore: " + level.minimumScore);
 	collection.findAndModify(
 		{
 			query: { '_id': level._id },
@@ -51,9 +49,7 @@ router.post('/save', isAuthenticated, function (req, res) {
 		function (err, docs) {
 			if (err) {
 				res.send(err);
-				console.log("errored out fool!");
 			}
-			console.log("success");
 			res.send({ 'result': 'success', 'level': docs });
 		});
 }

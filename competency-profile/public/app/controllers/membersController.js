@@ -14,8 +14,8 @@
 		initialize();
 
 		function initialize() {
-			membersService.getMembers().then(function (data) {
-				vm.members = data.data;
+			membersService.getMembers().then(function (response) {
+				vm.members = response.data;
 			});
 		};
 	}

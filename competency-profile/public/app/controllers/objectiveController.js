@@ -5,9 +5,9 @@
 		.module('consultingControllers')
 		.controller('ObjectiveController', ObjectiveController);
 
-	ObjectiveController.$inject = ['objectiveService'];
+	ObjectiveController.$inject = ['objectiveService', 'toaster'];
 
-	function ObjectiveController(objectiveService) {
+	function ObjectiveController(objectiveService, toaster) {
 
 		var vm = this;
 		vm.objectives = [];
@@ -16,22 +16,22 @@
 		
 		vm.gateLevels =
 		[
-			{ id: "base", name: "Base" },
-			{ id: "intermediate", name: "Intermediate" },
-			{ id: "senior", name: "Senior" }
+			{ id: 'base', name: '"Base' },
+			{ id: 'intermediate', name: 'Intermediate' },
+			{ id: 'senior', name: 'Senior' }
 		];
 
 		initialize();
 
 		function initialize() {
-			objectiveService.getObjectives().then(function(data) {
-				vm.objectives = data.data;
+			objectiveService.getObjectives().then(function(response) {
+				vm.objectives = response.data;
 			});
 		}
 
 		function save(objective) {
 			level.edit = false;
-			objectiveService.save(objective).then(function(data) {
+			objectiveService.save(objective).then(function(response) {
 				/* 
 				 * indicate to the user what's happened 
 				 * Save success - 
