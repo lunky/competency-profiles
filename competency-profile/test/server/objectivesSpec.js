@@ -30,7 +30,6 @@ describe("objectives", function(){
 				} 
 				res.body.should.have.property("data");
 				res.body.data.should.have.length(49);
-				console.log("--------------------------------------------------.." + err); 
 				done(); 
 			});
 	});
