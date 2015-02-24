@@ -22,8 +22,8 @@
 		function clearAll() {
 			angular.forEach(vm.objectives, function (objective) {
 				objective.isMet = false;
-				vm.save();
 			});
+			vm.save();
 		}
 
 		function initialize() {
