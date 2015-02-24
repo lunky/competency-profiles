@@ -30,7 +30,7 @@ module.exports = function () {
             files: [].concat(
                 bowerFiles,
                 'public/app/**/*.js',
-                'test/**/*.js'
+                'test/ui/**/*.js'
             ),
             exclude: [],
             preprocessors: []

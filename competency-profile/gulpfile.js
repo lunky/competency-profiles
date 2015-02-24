@@ -34,8 +34,9 @@ gulp.task('start', function () {
     start(true);
 });
 
+gulp.task('test', ['karma', 'mocha']);
 
-gulp.task('test', function (done) {
+gulp.task('karma', function (done) {
     var karma = require('karma').server;
     
     karma.start({
@@ -50,6 +51,17 @@ gulp.task('test', function (done) {
             done();
         }
     }
+});
+
+var mocha = require('gulp-mocha');
+gulp.task('mocha', function () {
+
+    return gulp.src('test/server/**/*.js', {read: false})
+        .pipe(mocha({reporter: 'spec'}))
+		.on('error', function (err) {
+			testErrorHandler(err);
+			process.emit('exit');
+		});
 });
 
 function start(debug) {    
