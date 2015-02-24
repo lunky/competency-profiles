@@ -31,7 +31,15 @@
 				url: '/competencyLevels/list'
 			});
 			return (request.then(handleSuccess, handleError));
-		};
+			};
+			
+		this.getCompetencyLevel = function (id) {
+				var request = $http({
+					method: 'get',
+					url: '/competencyLevels/level/' + id
+			});
+				return (request.then(handleSuccess, handleError));
+			};
 
 		this.save = function(competencyLevel) {
 			var request = $http({

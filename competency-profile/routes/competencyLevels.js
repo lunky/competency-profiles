@@ -19,6 +19,21 @@ router.get('/list', isAuthenticated, function (req, res) {
 	});
 });
 
+router.get('/level/:id', isAuthenticated, function (req, res) {
+	
+	var collection = req.db.get('competencylevel');
+	collection.findOne(
+		{
+			'levelId': parseInt(req.params.id)
+		}, 
+		function (err, doc) {
+		if (err) {
+			res.send(err);
+			}
+		res.send({ 'data': doc });
+	});
+});
+
 router.post('/save', isAuthenticated, function (req, res) {
 	var db = req.db;
 	var level = req.body.level;
