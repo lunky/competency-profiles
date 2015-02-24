@@ -4,7 +4,7 @@ var should = require('chai').should(),
 	var app = require('../../app');
 	var server = supertest.agent(app);
 
-describe("objectives", function(){
+describe("IntegrationTest: objectives", function(){
 	beforeEach(function(){ app.set('env', 'development'); });
 	before(function(done){ loginUser(done); });
 	it("should run a test", function(){

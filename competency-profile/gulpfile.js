@@ -59,7 +59,6 @@ gulp.task('mocha', function () {
     return gulp.src('test/server/**/*.js', {read: false})
         .pipe(mocha({reporter: 'spec'}))
 		.on('error', function (err) {
-			testErrorHandler(err);
 			process.emit('exit');
 		});
 });
