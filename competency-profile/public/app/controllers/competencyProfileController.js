@@ -2,13 +2,13 @@
 	'use strict';
 
 	angular
-				.module('consultingControllers')
-				.controller('CompetencyProfileController', CompetencyProfileController);
+		.module('consultingControllers')
+		.controller('CompetencyProfileController', CompetencyProfileController);
 
 	CompetencyProfileController.$inject =
-			['$filter', 'competencyLevelsService', 'competencyProfileService'];
+			['$filter', 'toaster', 'competencyLevelsService', 'competencyProfileService'];
 
-	function CompetencyProfileController($filter, competencyLevelsService, competencyProfileService) {
+	function CompetencyProfileController($filter, toaster, competencyLevelsService, competencyProfileService) {
 		var vm = this;
 
 		vm.clearAll = clearAll;
@@ -38,6 +38,8 @@
 			// TODO : filter objectives that have something changed?
 			var objectives = vm.objectives;
 			competencyProfileService.save(objectives).then(function (data) {
+				console.log('working?');
+				toaster.pop('success', "Save Successful", "Your competency score has been updated");
 				vm.objectives = data.data;
 				vm.score = data.summary;
 			});

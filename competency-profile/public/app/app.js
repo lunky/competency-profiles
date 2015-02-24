@@ -4,7 +4,7 @@
 	angular.module('consultingServices', []);
 	angular.module('consultingControllers', ['consultingServices']);
 	var myApp = angular.module('consulting',
-			['ngRoute', 'ngAnimate', 'ui.bootstrap', 'consultingControllers', 'consultingServices']);
+			['ngRoute', 'ngAnimate', 'ui.bootstrap', 'toaster', 'consultingControllers', 'consultingServices']);
 	myApp.config([
 		'$routeProvider', '$locationProvider',
 		function ($routeProvider, $locationProvider) {
