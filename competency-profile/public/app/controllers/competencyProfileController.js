@@ -30,7 +30,7 @@
 			competencyProfileService.getObjectives().then(function (response) {
 				var objectives = response.data;
 				vm.objectives = objectives;
-				vm.score = data.summary;
+				vm.score = response.summary;
 			});
 		}
 
