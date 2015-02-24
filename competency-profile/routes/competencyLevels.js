@@ -21,13 +21,13 @@ router.get('/list', isAuthenticated, function (req, res) {
 
 router.post('/save', isAuthenticated, function (req, res) {
 	var db = req.db;
-	var objective = req.body.objective;
-	var collection = db.get('objectives');
+	var level = req.body.level;
+	var collection = db.get('competencylevel');
+	console.log("id: " + level._id);
+	console.log("minimumScore: " + level.minimumScore);
 	collection.findAndModify(
 		{
-			query: {
-				'objectiveId': objective.objectiveId
-			},
+			query: { '_id': level._id },
 			update: level
 		},
 		{
@@ -36,8 +36,10 @@ router.post('/save', isAuthenticated, function (req, res) {
 		function (err, docs) {
 			if (err) {
 				res.send(err);
+				console.log("errored out fool!");
 			}
-			res.send({ 'result': 'success', 'objective': docs });
+			console.log("success");
+			res.send({ 'result': 'success', 'level': docs });
 		});
 }
 );

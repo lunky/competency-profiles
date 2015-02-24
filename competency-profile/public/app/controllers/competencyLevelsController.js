@@ -16,6 +16,23 @@
 
 		initialize();
 
+		vm.toggleEdit = function toggleEdit(level) {
+			level.edit = !level.edit;
+			
+			/*cancelling the edit doesn't reset the data - do we want that?
+			 * we probably want to only get the level being edited (not the entire collection) 
+			 * TODO: create route to return single comeptencylevel rather than the list
+			 *		if(!level.edit){
+			 * 			competencyLevelsService.getCompetencyLevels().then(function (data) {
+			 * 				for (var i = 0; i < data.data.length; i++) {
+			 * 					if (data.data[i]._id == level._id)
+			 * 						level.minimumScore = data.data[i].minimumScore;
+			 * 						level.minimumGateScore = data.data[i].minimumGateScore;
+			 * 				}
+			 *		}
+			 */
+		};
+
 		function initialize() {
 			competencyLevelsService.getCompetencyLevels().then(function(data) {
 				vm.competencyLevels = data.data;

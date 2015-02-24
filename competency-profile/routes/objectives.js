@@ -20,9 +20,25 @@ router.get('/list', isAuthenticated, function(req, res) {
 });
 
 router.post('/save', isAuthenticated, function (req, res) {
-	/*
-	 * populate with objective admin save logic
-	 */
+	var db = req.db;
+	var objective = req.body.objective;
+	var collection = db.get('objective');
+	collection.findAndModify(
+		{
+			query: {
+				'_id': objective._id
+			},
+			update: objective
+		},
+		{
+			'upsert': true
+		},
+		function (err, docs) {
+			if (err) {
+				res.send(err);
+			}
+			res.send({ 'result': 'success', 'objective': docs });
+		});
 });
 
 module.exports = router;

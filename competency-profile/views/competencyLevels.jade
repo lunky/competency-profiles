@@ -13,16 +13,16 @@
 												div.col-xs-8
 													h3.panel-title {{level.description}}
 												div.col-xs-4
-													a.edit.pull-right(href="" data-ng-click="level.edit = !level.edit")
+													a.edit.pull-right(href="" data-ng-click="vm.toggleEdit(level)")
 														i(data-ng-show="!level.edit").fa.fa-lg.fa-pencil-square-o
 														i(data-ng-show="level.edit").fa.fa-lg.fa-close
 										div.panel-body
 											p(data-ng-show="!level.edit") 
 												strong Minimum Score: 
-												{{level.minimumScore}} 
+												|{{level.minimumScore}} 
 											p(data-ng-show="!level.edit") 
 												strong Minimum Gate Score: 
-												{{level.minimumGateScore}}
+												|{{level.minimumGateScore}}
 											div.form(data-ng-show="level.edit")
 												div.form-group
 													label(for="minScore{{$index+1}}") Minimum Score
@@ -30,6 +30,4 @@
 												div.form-group
 													label(for="minGateScore{{$index+1}}") Minimum Gate Score
 													input.form-control(data-ng-if="level.edit" type="text" name="minGateScore{{$index+1}}" data-ng-model="level.minimumGateScore")
-												a.btn.btn-success(data-ng-if="level.edit" data-ng-click="vm.save(level)") Save	
-											
-			
+												a.btn.btn-success(data-ng-if="level.edit" data-ng-click="vm.save(level)") Save
