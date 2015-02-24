@@ -1,0 +1,53 @@
+var should = require('chai').should(),
+    supertest = require('supertest');
+	var assert = require('assert');
+	var app = require('../../app');
+	var server = supertest.agent(app);
+
+describe("objectives", function(){
+	beforeEach(function(){ app.set('env', 'development'); });
+	before(function(done){ loginUser(done); });
+	it("should run a test", function(){
+		assert.ok(true);
+		});
+	it("should respond to /objectives/list", function(done){
+		server 
+			.get('/objectives/list')
+			.expect('content-type', /application\/json/) 
+			.expect(200)
+			.end(function(err, res){
+			if (err) return done(err);
+ 			return done(); 
+		});
+	});
+	it("should spit out some nice json", function(done){
+		server 
+			.get('/objectives/list') 
+			.expect(200)  
+			.end(function(err, res){
+				if (err) { 
+					return done(err);
+				} 
+				res.body.should.have.property("data");
+				res.body.data.should.have.length(49);
+				console.log("--------------------------------------------------.." + err); 
+				done(); 
+			});
+	});
+});
+
+function loginUser(done) {
+        server
+            .post('/login')
+            .send({ username: 'admin', password: 'admin' })
+            .expect(302)
+            .expect('Location', '/')
+            .end(onResponse);
+
+        function onResponse(err, res) {
+			if (err) {
+				return done(err);
+			}
+			return done();
+		};
+};
