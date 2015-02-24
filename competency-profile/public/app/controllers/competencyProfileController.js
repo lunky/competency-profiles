@@ -27,8 +27,8 @@
 		}
 
 		function initialize() {
-			competencyProfileService.getObjectives().then(function (data) {
-				var objectives = data.data;
+			competencyProfileService.getObjectives().then(function (response) {
+				var objectives = response.data;
 				vm.objectives = objectives;
 				vm.score = data.summary;
 			});
@@ -37,11 +37,10 @@
 		function save() {
 			// TODO : filter objectives that have something changed?
 			var objectives = vm.objectives;
-			competencyProfileService.save(objectives).then(function (data) {
-				console.log('working?');
-				toaster.pop('success', "Save Successful", "Your competency score has been updated");
-				vm.objectives = data.data;
-				vm.score = data.summary;
+			competencyProfileService.save(objectives).then(function (response) {
+				toaster.pop('success', 'Save Successful', 'Your competency score has been updated');
+				vm.objectives = response.data;
+				vm.score = response.summary;
 			});
 		}
 
