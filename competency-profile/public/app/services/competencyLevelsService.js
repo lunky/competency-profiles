@@ -28,7 +28,7 @@
 		this.getCompetencyLevels = function() {
 			var request = $http({
 				method: 'get',
-				url: '/competencyLevels/list'
+				url: '/api/competencyLevels/'
 			});
 			return (request.then(handleSuccess, handleError));
 			};
@@ -36,15 +36,15 @@
 		this.getCompetencyLevel = function (id) {
 				var request = $http({
 					method: 'get',
-					url: '/competencyLevels/level/' + id
+					url: '/api/competencyLevels/' + id
 			});
 				return (request.then(handleSuccess, handleError));
 			};
 
 		this.save = function(competencyLevel) {
 			var request = $http({
-				method: 'post',
-				url: '/competencyLevels/save',
+				method: 'put',
+				url: '/api/competencyLevels/' + competencyLevel._id,
 				data: {
 					level: competencyLevel
 				}

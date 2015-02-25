@@ -9,11 +9,17 @@ var configDB = require('./config/database.js');
 var passport = require('passport');
 var flash = require('connect-flash');
 
+//TEMPLATES
 var routes = require('./routes/index');
 var members = require('./routes/members');
-var profile = require('./routes/competencyProfile');
+var competencyProfile = require('./routes/competencyProfile');
 var objectives = require('./routes/objectives');
 var competencyLevels = require('./routes/competencyLevels');
+
+//REST
+var competencyProfileApi = require('./api/competencyProfile');
+var objectivesApi = require('./api/objectives');
+var competencyLevelsApi = require('./api/competencyLevels');
 
 var app = express();
 
@@ -58,11 +64,18 @@ app.use(function (req, res, next) {
 	next();
 });
 
+//TEMPLATE Rendering
 app.use('/', routes);
-app.use('/competencyProfile', profile);
+app.use('/competencyProfile', competencyProfile);
 app.use('/objectives', objectives);
 app.use('/members', members);
 app.use('/competencyLevels', competencyLevels);
+
+//REST Calls
+app.use('/api/competencyProfile', competencyProfileApi);
+app.use('/api/objectives', objectivesApi);
+app.use('/api/competencyLevels', competencyLevelsApi);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

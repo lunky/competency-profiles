@@ -27,7 +27,7 @@
 		this.getObjectives = function() {
 			var request = $http({
 				method: 'get',
-				url: '/objectives/list'
+				url: '/api/objectives/list'
 			});
 			return (request.then(handleSuccess, handleError));
 		};
@@ -35,7 +35,7 @@
 		this.save = function(objective) {
 			var request = $http({
 				method: 'post',
-				url: '/objectives/save',
+				url: '/api/objectives/save',
 				data: {
 					objective: objective
 				}

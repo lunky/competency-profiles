@@ -36,7 +36,7 @@
 			});
 			var request = $http({
 				method: 'post',
-				url: '/competencyProfile/save',
+				url: '/api/competencyProfile/save',
 				data: {
 					objectives: justTheKeys
 				}

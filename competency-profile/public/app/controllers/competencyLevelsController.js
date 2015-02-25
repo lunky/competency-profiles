@@ -18,9 +18,8 @@
 
 		vm.toggleEdit = function toggleEdit(level) {
 			level.edit = !level.edit;
-			// TODO: replace with objectId express route
 			if(!level.edit) {
-				competencyLevelsService.getCompetencyLevel(level.levelId).then(function(response) {
+				competencyLevelsService.getCompetencyLevel(level._id).then(function(response) {
 					level.minimumScore = response.data.minimumScore;
 					level.minimumGateScore = response.data.minimumGateScore;
 				});
