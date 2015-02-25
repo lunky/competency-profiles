@@ -31,6 +31,12 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="api\competencyLevels.js" />
+    <Compile Include="api\competencyLevels.js" />
+    <Compile Include="api\competencyProfile.js" />
+    <Compile Include="api\competencyProfile.js" />
+    <Compile Include="api\objectives.js" />
+    <Compile Include="api\objectives.js" />
     <Compile Include="app.js" />
     <Compile Include="config\auth.js" />
     <Compile Include="config\database.js" />
@@ -86,6 +92,7 @@
     <Content Include="views\error.jade" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="api\" />
     <Folder Include="bin\" />
     <Folder Include="config\" />
     <Folder Include="public\app\" />

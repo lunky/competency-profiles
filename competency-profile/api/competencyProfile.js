@@ -87,7 +87,7 @@ function objectivesAndObjectivesMet(req, res, done) {
 	);
 }
 
-router.post('/save', isAuthenticated, function(req, res) {
+router.post('/', isAuthenticated, function(req, res) {
 	var userid = req.user;
 	var db = req.db;
 	var selfEval = {'userid': userid.username, 'objectivesMet': req.body.objectives};
@@ -114,7 +114,7 @@ router.post('/save', isAuthenticated, function(req, res) {
 	);
 });
 
-router.get('/list', isAuthenticated, function(req, res) {
+router.get('/', isAuthenticated, function(req, res) {
 	objectivesAndObjectivesMet(req, res, function(metDocument) {
 				res.send({'data': metDocument, 'summary' : getStats(metDocument)});
 	});

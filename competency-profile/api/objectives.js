@@ -3,7 +3,7 @@ var router = express.Router();
 var Q = require('q');
 var isAuthenticated = require('../config/auth');
 
-router.get('/list', isAuthenticated, function(req, res) {
+router.get('/', isAuthenticated, function(req, res) {
 	var collection = req.db.get('objective');
 	
 	collection.find({}, function (err, doc) {
@@ -14,14 +14,14 @@ router.get('/list', isAuthenticated, function(req, res) {
 	});
 });
 
-router.post('/save', isAuthenticated, function (req, res) {
+router.post('/:id', isAuthenticated, function (req, res) {
 	var db = req.db;
 	var objective = req.body.objective;
 	var collection = db.get('objective');
 	collection.findAndModify(
 		{
 			query: {
-				'_id': objective._id
+				'_id': req.params.id
 			},
 			update: objective
 		},

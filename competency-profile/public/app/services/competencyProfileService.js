@@ -25,7 +25,7 @@
 		}
 
 		this.getObjectives = function() {
-			return objectiveService.getObjectives();
+			return objectiveService.get();
 		};
 
 		this.save = function(objectives) {
@@ -36,7 +36,7 @@
 			});
 			var request = $http({
 				method: 'post',
-				url: '/api/competencyProfile/save',
+				url: '/api/competencyProfile/',
 				data: {
 					objectives: justTheKeys
 				}

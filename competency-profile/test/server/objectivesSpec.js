@@ -12,7 +12,7 @@ describe("IntegrationTest: objectives", function(){
 		});
 	it("should respond to /objectives/list", function(done){
 		server 
-			.get('/api/objectives/list')
+			.get('/api/objectives')
 			.expect('content-type', /application\/json/) 
 			.expect(200)
 			.end(function(err, res){
@@ -22,7 +22,7 @@ describe("IntegrationTest: objectives", function(){
 	});
 	it("should spit out some nice json", function(done){
 		server 
-			.get('/api/objectives/list') 
+			.get('/api/objectives') 
 			.expect(200)  
 			.end(function(err, res){
 				if (err) { 

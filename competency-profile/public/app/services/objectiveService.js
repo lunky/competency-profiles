@@ -24,10 +24,10 @@
 			return ($q.reject(response.data.message));
 		}
 
-		this.getObjectives = function() {
+		this.get = function() {
 			var request = $http({
 				method: 'get',
-				url: '/api/objectives/list'
+				url: '/api/objectives/'
 			});
 			return (request.then(handleSuccess, handleError));
 		};
@@ -35,7 +35,7 @@
 		this.save = function(objective) {
 			var request = $http({
 				method: 'post',
-				url: '/api/objectives/save',
+				url: '/api/objectives/' + objective._id,
 				data: {
 					objective: objective
 				}
