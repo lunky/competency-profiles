@@ -4326,6 +4326,14 @@ iframe {
   margin-top: 0;
   margin-bottom: 10px;
 }
+.skills .score {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  color: #3aaa64;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
 /* ======= Footer ======= */
 .footer {
   background: #32383e;
