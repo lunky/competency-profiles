@@ -1,4 +1,4 @@
-﻿
+
 (function () {
 	'use strict';
 
@@ -12,7 +12,7 @@
 			$httpBackend.whenGET('/competencyLevels/list').respond({});
 		}));
 
-		it('is defined', inject(function($controller, $q) {
+		it('is defined', inject(function($controller, $q, $rootScope) {
 			var deferred = $q.defer();
 			var promise = deferred.promise;
 			var svc = {getObjectives: sinon.stub().returns(promise)};
@@ -20,10 +20,11 @@
 				data: []
 			});
 			//spec body
-			var ctrl = $controller('CompetencyProfileController', { competencyProfileService: svc});
+            var scope = $rootScope.$new();
+			var ctrl = $controller('CompetencyProfileController', {$scope: scope, competencyProfileService: svc});
 		    expect(ctrl).to.be.defined;
 		}));
-		it('calls service', inject(function($controller, $q) {
+		it('calls service', inject(function($controller, $q, $rootScope) {
 
 			var deferred = $q.defer();
 			var promise = deferred.promise;
@@ -32,7 +33,8 @@
 				data: []
 			});
 			//spec body
-			var ctrl = $controller('CompetencyProfileController', {competencyProfileService: svc});
+            var scope = $rootScope.$new();
+			var ctrl = $controller('CompetencyProfileController', {$scope: scope, competencyProfileService: svc});
 			sinon.assert.called(svc.getObjectives);
 		}));
 		it('sets objectives with data from service', inject(function($controller, $q, $rootScope) {

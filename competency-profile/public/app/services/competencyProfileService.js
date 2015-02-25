@@ -1,7 +1,12 @@
-﻿'use strict';
+'use strict';
  (function () {
 	var myApp = angular.module('consultingServices');
-	myApp.service('competencyProfileService', ['$http', '$q', 'objectiveService', function ($http, $q, objectiveService) {
+
+	myApp.service('competencyProfileService',  competencyProfileService);
+
+	competencyProfileService.$inject = ['$rootScope', '$http', '$q', 'appEvents', 'objectiveService'];
+
+	function competencyProfileService($rootScope, $http, $q, appEvents, objectiveService) {
 		// I transform the successful response, unwrapping the application data
 		// from the API response payload.
 		function handleSuccess(response) {
@@ -14,10 +19,11 @@
 		// normalized format. However, if the request was not handled by the
 		// server (or what not handles properly - ex. server error), then we
 		// may have to normalize it on our end, as best we can.
-		if (
-			!angular.isObject(response.data) ||
-				!response.data.message
-		) {
+		if(
+            !angular.isObject(response.data) || 
+            !response.data.message
+        ) 
+        {
 			return ($q.reject('An unknown error occurred.'));
 		}
 			// Otherwise, use expected error message.
@@ -25,10 +31,15 @@
 		}
 
 		this.getObjectives = function() {
+			$rootScope.$broadcast(appEvents.updateLevel, {msg: 'loading'});
+
 			return objectiveService.get();
 		};
 
 		this.save = function(objectives) {
+            
+            $rootScope.$broadcast(appEvents.updateLevel, {msg: 'saving'});
+            
 			var justTheKeys = objectives.filter(function(item) {
 				return item.isMet;
 			}).map(function(objective) {
@@ -44,5 +55,5 @@
 
 			return (request.then(handleSuccess, handleError));
 		};
-	}]);
+	}
 })();

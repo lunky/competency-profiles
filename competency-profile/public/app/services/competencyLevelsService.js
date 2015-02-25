@@ -1,9 +1,14 @@
-﻿'use strict';
+'use strict';
 (function() {
 	var myApp = angular.module('consultingServices');
-	myApp.service('competencyLevelsService', ['$http', '$q', function($http, $q) {
-// I transform the successful response, unwrapping the application data
-// from the API response payload.
+    
+    myApp.service('competencyLevelsService', competencyLevelsService);
+    
+    competencyLevelsService.$inject = ['$http', '$q'];
+    
+    function competencyLevelsService ($http, $q) {
+        // I transform the successful response, unwrapping the application data
+        // from the API response payload.
 
 		function handleSuccess(response) {
 			return (response.data);
@@ -51,5 +56,5 @@
 			});
 			return (request.then(handleSuccess, handleError));
 		};
-	}]);
+	}
 })();

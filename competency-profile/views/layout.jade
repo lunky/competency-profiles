@@ -27,7 +27,7 @@ head
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js')
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js')
 	<![endif]-->   
-body
+body(ng-app="consulting" ngCloak)
 	div.page-wrap
 		include header
 		block content
@@ -38,11 +38,16 @@ script(src='/bower_components/angular-route/angular-route.js')
 script(src='/bower_components/angular-animate/angular-animate.js')
 script(src='/bower_components/angular-bootstrap/ui-bootstrap-tpls.js')
 script(src='/bower_components/angularjs-toaster/toaster.js')
+
 script(src='/app/app.js')
+
+script(src='/app/common.js')
+
 script(src='/app/services/objectiveService.js')
 script(src='/app/services/membersService.js')
 script(src='/app/services/competencyLevelsService.js')
 script(src='/app/services/competencyProfileService.js')
+
 script(src='/app/controllers/objectiveController.js')
 script(src='/app/controllers/competencyProfileController.js')
 script(src='/app/controllers/mainController.js')

@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
 	'use strict';
 
 	angular
@@ -6,9 +6,9 @@
 		.controller('CompetencyProfileController', CompetencyProfileController);
 
 	CompetencyProfileController.$inject =
-			['$filter', 'toaster', 'competencyLevelsService', 'competencyProfileService'];
+			['$filter', '$scope', 'toaster', 'competencyLevelsService', 'competencyProfileService', 'appEvents'];
 
-	function CompetencyProfileController($filter, toaster, competencyLevelsService, competencyProfileService) {
+	function CompetencyProfileController($filter, $scope, toaster, competencyLevelsService, competencyProfileService, appEvents) {
 		var vm = this;
 
 		vm.clearAll = clearAll;
@@ -27,6 +27,11 @@
 		}
 
 		function initialize() {
+			$scope.$on(appEvents.updateLevel, function(event, data){            
+                console.log('received data: ' + data.msg);
+                toaster.pop('success', 'Broadcast Received', 'Your data message payload was: ' + data.msg);
+            });
+
 			competencyProfileService.getObjectives().then(function (response) {
 				var objectives = response.data;
 				vm.objectives = objectives;
@@ -48,5 +53,6 @@
 			objective.isMet = score;
 			vm.save();
 		}
-	}
+       
+    }
 })();

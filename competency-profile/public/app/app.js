@@ -1,8 +1,9 @@
 ﻿(function (angular) {
 	'use strict';
 	console.log('consulting app');
-	angular.module('consultingServices', []);
-	angular.module('consultingControllers', ['consultingServices']);
+	angular.module('consultingCommon', []);
+	angular.module('consultingServices', ['consultingCommon']);
+	angular.module('consultingControllers', ['consultingCommon', 'consultingServices']);
 	var myApp = angular.module('consulting',
 			['ngRoute', 'ngAnimate', 'ui.bootstrap', 'toaster', 'consultingControllers', 'consultingServices']);
 	myApp.config([

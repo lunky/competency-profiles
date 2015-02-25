@@ -1,7 +1,12 @@
-﻿'use strict';
+'use strict';
  (function () {
 	var myApp = angular.module('consultingServices');
-	myApp.service('objectiveService', ['$http', '$q', function ($http, $q) {
+     
+    myApp.service('objectiveService', objectiveService);
+    
+    objectiveService.$inject = ['$http', '$q'];
+                                       
+    function objectiveService($http, $q) {
 		// I transform the successful response, unwrapping the application data
 		// from the API response payload.
 		function handleSuccess(response) {
@@ -42,5 +47,5 @@
 			});
 			return (request.then(handleSuccess, handleError));
 		};
-	}]);
+	}
 })();
