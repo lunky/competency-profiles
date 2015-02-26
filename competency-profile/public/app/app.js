@@ -1,4 +1,4 @@
-﻿(function (angular) {
+(function (angular) {
 	'use strict';
 	console.log('consulting app');
 	angular.module('consultingCommon', []);
@@ -22,7 +22,7 @@
 			})
 					.when('/objectives', {
 				templateUrl: 'objectives',
-				controller: 'ObjectiveController',
+				controller: 'ObjectivesController',
 				controllerAs: 'vm'
 			})
 					.when('/:oid?', {

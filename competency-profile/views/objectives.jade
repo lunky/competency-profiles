@@ -1,4 +1,4 @@
-﻿div.container.sections-wrapper
+div.container.sections-wrapper
 		div.row
 			div.primary.col-md-12.col-sm-12.col-xs-12
 				section.section
@@ -27,7 +27,7 @@
 												div.col-xs-6
 													div.form-group
 														label(for="objectiveScore{{$index+1}}") Gate Level
-														input.form-control(type="select" name="objectiveScore{{$index+1}}" ng-model="objective.gateLevel" data-ng-options="g.id as g.name for g in vm.gateLevels")
+														input.form-control(type="select" name="gateLevel{{$index+1}}" data-ng-model="objective.gateLevel" ng-options="opt as opt.label for opt in vm.gateLevels")
 												div.col-xs-6
 													div.form-group
 														label(for="objectiveScore{{$index+1}}") Score
@@ -54,4 +54,4 @@
 														small Citizenship
 													input(type="checkbox" data-ng-model="objective.Citizenship" data-ng-true-value="'Y'" data-ng-false-value="''")
 											div.row
-												a.btn.btn-success(data-ng-if="level.edit" data-ng-click="vm.save(objective)") Save
+												a.btn.btn-success(data-ng-click="vm.save(objective)") Save
