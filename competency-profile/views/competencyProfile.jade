@@ -1,4 +1,4 @@
-﻿toaster-container(toaster-options="{'time-out': 3000, 'close-button':true, 'position-class': 'toast-bottom-right'}")
+toaster-container(toaster-options="{'time-out': 3000, 'close-button':true, 'position-class': 'toast-bottom-right'}")
 div.container.sections-wrapper
 		div.row
 			div.primary.col-md-8.col-sm-12.col-xs-12
@@ -46,6 +46,14 @@ div.container.sections-wrapper
 											|You meet {{(vm.objectives|filter:{isMet: true}).length}} of {{vm.objectives.length}} objectives
 									a.btn.btn-default(href="" data-ng-click="vm.clearAll()")
 										|Clear all answers
+
+			div.secondary.col-md-4.col-sm-12.col-xs-12
+				aside.skills.aside.section
+					div.section-inner
+						h2.heading Score
+						div.content
+							p.score
+								|{{vm.score.level}}
 
 			div.secondary.col-md-4.col-sm-12.col-xs-12
 				aside.skills.aside.section

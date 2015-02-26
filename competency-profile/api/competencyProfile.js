@@ -1,9 +1,9 @@
-﻿var express = require('express');
+var express = require('express');
 var router = express.Router();
 var Q = require('q');
 var isAuthenticated = require('../config/auth');
 
-function getStats(objectives) {
+function getStats(objectives, levels) {
 	var doc = {};
 	var stats = {
 		base: 0, intermediate: 0, senior: 0, baseTotal: 0, intermediateTotal: 0, seniorTotal: 0,
@@ -37,10 +37,49 @@ function getStats(objectives) {
 		leadership: Math.round(doc.Leadership / doc.LeadershipTotal * 100),
 		interpersonal: Math.round(doc.Interpersonal / doc.InterpersonalTotal * 100),
 		conflict: Math.round(doc.Conflict / doc.ConflictTotal * 100),
-		citizenship: Math.round(doc.Citizenship / doc.CitizenshipTotal * 100)
+		citizenship: Math.round(doc.Citizenship / doc.CitizenshipTotal * 100),
+        level: getLevel(doc, levels)
 	};
 	return summary;
 }
+
+function getLevel(stats, levels) {
+    var level = 'base';
+    var totalScore = ['base', 'intermediate', 'senior'].reduce(function(total, l) {
+        return total + stats[l];
+    }, 0);
+	['intermediate', 'senior'].every(function (l) {
+        if (totalScore < levels[l].minimumScore){
+            return false; // Didn't make it, no use checking the next level
+        }
+		if (stats[l] < levels[l].minimumGateScore) {
+			return false;
+		}
+        level = l;
+        return true;
+	});
+    return levels[level].description;
+}
+
+function getCompetencyLevels(db) {
+    var deferred = Q.defer();
+    var levels = db.get('competencylevel');
+
+	levels.find({}, '-_id', function (err, doc) {
+		if (err) {            
+            return deferred.reject(new Error(err));
+		}
+        var result = doc.reduce(function(obj, i) {                        
+            if (i.levelId == 1) { obj['base'] = i }
+            else if (i.levelId == 2) { obj['intermediate'] = i; }
+            else if (i.levelId == 3) { obj['senior'] = i; }
+            return obj;
+        }, {});
+        deferred.resolve(result);
+	});
+    return deferred.promise;
+}
+
 
 function objectivesAndObjectivesMet(req, res, done) {
 	var deferred = Q.defer();
@@ -91,7 +130,7 @@ router.post('/', isAuthenticated, function(req, res) {
 	var userid = req.user;
 	var db = req.db;
 	var selfEval = {'userid': userid.username, 'objectivesMet': req.body.objectives};
-	var collection = db.get('objectivesMet');
+	var collection = db.get('objectivesMet');    
 
 	collection.findAndModify(
 		{
@@ -107,17 +146,21 @@ router.post('/', isAuthenticated, function(req, res) {
 			if (err) {
 				res.send(err);
 			}
-			objectivesAndObjectivesMet(req, res, function(metDocument) {
-				res.send({'data': metDocument, 'summary' : getStats(metDocument)});
-			});
+            getCompetencyLevels(db).then(function (levels) {
+                objectivesAndObjectivesMet(req, res, function(metDocument) {                
+                    res.send({'data': metDocument, 'summary' : getStats(metDocument, levels)});
+                });
+            });
 		}
 	);
 });
 
 router.get('/', isAuthenticated, function(req, res) {
-	objectivesAndObjectivesMet(req, res, function(metDocument) {
-				res.send({'data': metDocument, 'summary' : getStats(metDocument)});
-	});
+    getCompetencyLevels(res.db).then(function (levels) {
+        objectivesAndObjectivesMet(req, res, function(metDocument) {
+                    res.send({'data': metDocument, 'summary' : getStats(metDocument, levels)});
+        });
+    });
 });
 
 module.exports = router;
