@@ -1,7 +1,7 @@
 var should = require('chai').should(),
     supertest = require('supertest');
 	var assert = require('assert');
-	var app = require('../../app');
+	var app = require('../../server');
 	var server = supertest.agent(app);
 
 describe("IntegrationTest: objectives", function(){
