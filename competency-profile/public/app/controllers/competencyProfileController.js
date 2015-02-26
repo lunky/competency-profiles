@@ -36,6 +36,8 @@
 				var objectives = response.data;
 				vm.objectives = objectives;
 				vm.score = response.summary;
+			}, function(err){
+				toaster.pop('error', 'An error occured getting objectives.', err);
 			});
 		}
 
@@ -46,6 +48,8 @@
 				toaster.pop('success', 'Save Successful', 'Your competency score has been updated');
 				vm.objectives = response.data;
 				vm.score = response.summary;
+			}, function(err){
+				toaster.pop('error', 'An error occured saving', err);
 			});
 		}
 
