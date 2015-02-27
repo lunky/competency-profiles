@@ -1,5 +1,3 @@
-// [{"levelId":1, "description":"Consultant", "minimumScore":0, "minimumGateScore":0 }
-
 var mongoose = require('mongoose');
 
 var CompetencyLevelSchema = new mongoose.Schema({
