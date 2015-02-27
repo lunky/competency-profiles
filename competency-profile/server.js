@@ -5,9 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var configDB = require('./config/database.js');
 var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
+var mongo = require('mongodb');
+var mongoose = require('mongoose');
 
 //TEMPLATES
 var routes = require('./routes/index');
@@ -47,11 +49,20 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk(configDB.url);
+// Attach mongoose to Mongo and initiate the connection
+mongoose.connect('localhost', 'competencyprofiles');
+var db = mongoose.connection;
 
-require('./config/passport')(passport, db);
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback() {
+	console.log('Connected to DB');
+});
+
+// Include our User model
+require('./models/UserData');
+
+// Configure Passport to handle authentication
+require('./config/passport')(passport);
 
 // Make some things accessible to our router
 app.use(function (req, res, next) {
