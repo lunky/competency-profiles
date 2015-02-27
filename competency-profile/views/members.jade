@@ -1,7 +1,8 @@
-﻿.container-fluid
+.container-fluid
 	.row
 		.col-md-8
-			h1 Members
+			h2 Direct Reports
 			ul(ng-repeat="member in vm.members")
 				li
-					|{{member.userId}}
+					a(href="#/profileReport/{{member.username}}")
+						{{member.displayName}}
