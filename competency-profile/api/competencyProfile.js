@@ -81,19 +81,19 @@ function getCompetencyLevels(db) {
 }
 
 
-function objectivesAndObjectivesMet(req, res, done) {
+function objectivesAndProfile(req, res, done) {
 	var deferred = Q.defer();
 	var collection = req.db.get('objective');
-	var met = req.db.get('objectivesMet');
-	var metdoc;
+	var profile = req.db.get('profile');
+	var profiledoc;
 	var objectivesdoc;
-	// there are two documents, the objectives master and the list of objectivesMet which is a per user document
+	// there are two documents, the objectives master and the profile which is a per user document
 	// we have to merge them but the methods are async so we use promises to collect them when we're done
-	met.findOne({ 'userid': req.user.username }, function (err, doc) {
+	profile.findOne({ 'userid': req.user.username }, function (err, doc) {
 		if (err) {
 			res.send(err);
 		}
-		metdoc = doc;
+		profiledoc = doc;
 		deferred.resolve(doc);
 	});
 	
@@ -109,9 +109,9 @@ function objectivesAndObjectivesMet(req, res, done) {
 	Q.all([deferred.promise, deferred2.promise])
 		.then(function () {
 		// merge
-		if (metdoc) {
+		if (profiledoc) {
 			objectivesdoc.forEach(function (el) {
-				if (metdoc.objectivesMet.some(function (metObjective) {
+				if (profiledoc.metObjectives.some(function (metObjective) {
 					return metObjective.objectiveId === el.objectiveId;
 				})) {
 					el.isMet = true;
@@ -129,15 +129,15 @@ function objectivesAndObjectivesMet(req, res, done) {
 router.post('/', isAuthenticated, function(req, res) {
 	var userid = req.user;
 	var db = req.db;
-	var selfEval = {'userid': userid.username, 'objectivesMet': req.body.objectives};
-	var collection = db.get('objectivesMet');    
+	var profile = {'userid': userid.username, 'metObjectives': req.body.objectives};
+	var collection = db.get('profile');    
 
 	collection.findAndModify(
 		{
 			query: {
 				'userid': userid.username
 			},
-			update: selfEval
+			update: profile
 		},
 		{
 			'upsert': true
@@ -147,8 +147,8 @@ router.post('/', isAuthenticated, function(req, res) {
 				res.send(err);
 			}
             getCompetencyLevels(db).then(function (levels) {
-                objectivesAndObjectivesMet(req, res, function(metDocument) {                
-                    res.send({'data': metDocument, 'summary' : getStats(metDocument, levels)});
+                objectivesAndProfile(req, res, function(profile) {                
+                    res.send({'data': profile, 'summary' : getStats(profile, levels)});
                 });
             });
 		}
@@ -156,9 +156,11 @@ router.post('/', isAuthenticated, function(req, res) {
 });
 
 router.get('/', isAuthenticated, function(req, res) {
-    getCompetencyLevels(res.db).then(function (levels) {
-        objectivesAndObjectivesMet(req, res, function(metDocument) {
-                    res.send({'data': metDocument, 'summary' : getStats(metDocument, levels)});
+	var db = req.db;
+	
+    getCompetencyLevels(db).then(function (levels) {
+        objectivesAndProfile(req, res, function(profile) {
+                    res.send({'data': profile, 'summary' : getStats(profile, levels)});
         });
     });
 });

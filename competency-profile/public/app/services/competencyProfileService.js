@@ -32,8 +32,12 @@
 
 		this.getObjectives = function() {
 			$rootScope.$broadcast(appEvents.updateLevel, {msg: 'loading'});
+			var request = $http({
+				method: 'get',
+				url: '/api/competencyProfile/',
+			});
 
-			return objectiveService.get();
+			return (request.then(handleSuccess, handleError));
 		};
 
 		this.save = function(objectives) {
