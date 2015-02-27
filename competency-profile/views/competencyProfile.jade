@@ -5,17 +5,21 @@ div.container.sections-wrapper
 				section.section
 					div.section-inner
 						div.row
-							div.col-md-5.col-sm-12.col-xs-12
+							div.col-md-4.col-sm-12.col-xs-12
 								h2.heading Objectives
-							div.col-md-3.col-sm-12.col-xs-12
+							div.col-md-4.col-sm-12.col-xs-12
 								div.form-group				
 									select.form-control(data-ng-model="vm.sort" name="sort")
-										<option value="">Default Sort</option>
-										<option value="-isMet">Sort by met</option>
-										<option value="isMet">Sort by not met</option>
+										option(value="" label="Default Sort")
+										option(value="-isMet" label="prioritize met")
+										option(value="isMet" label="prioritize not met")
+							div.col-md-4.col-sm-12.col-xs-12
+								div.form-group				
+									a.btn.btn-default(href="" data-ng-click="vm.clearAll()")
+										|Clear all answers
 						div.content
 							div.row
-								div.col-md-8.col-sm-12.col-xs-12
+								div.col-md-12.col-sm-12.col-xs-12
 									div.panel(data-ng-repeat="objective in vm.objectives | orderBy: vm.sort" data-ng-class="objective.isMet ? 'panel-success' : 'panel-danger'")
 										div.panel-heading
 											span(data-ng-if="objective.isMet")
@@ -40,13 +44,6 @@ div.container.sections-wrapper
 													h3 
 														small Counter Example
 													|{{objective.counterExample}}
-								div.col-md-4.hidden-xs.hidden-sm.text-center
-									div.panel.panel-info
-										div.panel-body.text-center 
-											|You meet {{(vm.objectives|filter:{isMet: true}).length}} of {{vm.objectives.length}} objectives
-									a.btn.btn-default(href="" data-ng-click="vm.clearAll()")
-										|Clear all answers
-
 			div.secondary.col-md-4.col-sm-12.col-xs-12
 				aside.skills.aside.section
 					div.section-inner

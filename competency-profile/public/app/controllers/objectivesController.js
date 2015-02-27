@@ -14,12 +14,7 @@
 		vm.initialize = initialize;
 		vm.save = save;
 		
-		vm.gateLevels =
-		[
-			{ id: 'base', label: 'Base' },
-			{ id: 'intermediate', label: 'Intermediate' },
-			{ id: 'senior', label: 'Senior' }
-		];
+		vm.gateLevels = [{ id: 'base', label: 'Base' }, { id: 'intermediate', label: 'Intermediate' }, { id: 'senior', label: 'Senior' }];
 
 		initialize();
 
@@ -34,7 +29,7 @@
 		}
 
 		function save(objective) {
-			level.edit = false;
+			objective.edit = false;
 			objectiveService.save(objective).then(function(response) {
 				toaster.pop('success', 'Save Successful', 'Your objective metadata was updated');
 			});
