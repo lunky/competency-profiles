@@ -62,6 +62,10 @@ app.use(function (req, res, next) {
 		userDisplayName: 'Aaron Levine',
 		userScore: 'Senior Consultant' //TODO replace with real score
 	};
+	if(req.user ){
+		res.locals.userDisplayName = req.user.displayName;
+		res.locals.directReports = req.user.directReports;
+	}
 	next();
 });
 
