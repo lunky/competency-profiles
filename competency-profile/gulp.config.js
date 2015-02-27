@@ -11,7 +11,7 @@ module.exports = function () {
             './public/**/*.js',
             './routes/**/*.js',
             './test/**/*.js',
-            './app.js'
+            './server.js'
         ],
         less: './less/styles.less',
         css: './public/css',

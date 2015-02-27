@@ -6,8 +6,10 @@ header.header
 				div.col-sm-12.col-xs-12.text-center
 					h1.name Competency Calculator
 		- if(isAuthenticated)
-			img.profile-image.img-responsive.pull-left.img-circle(src='images/consultant-codell-square.png' alt='#{userDisplayName}')/
+			a(href="/")
+				img.profile-image.img-responsive.pull-left.img-circle(src='images/consultant-codell-square.png' alt='#{userDisplayName}')/
 			div.profile-content.pull-left
-				h1.name Competency Profile
+				a(href="#/")
+					h1.name Competency Profile
 				h2.desc #{userDisplayName} - #{userScore}
 			a.btn.btn-cta-primary.pull-right(href="/logoff") Log Off

@@ -1,4 +1,4 @@
-﻿var express = require('express');
+var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -20,6 +20,7 @@ var competencyLevels = require('./routes/competencyLevels');
 var competencyProfileApi = require('./api/competencyProfile');
 var objectivesApi = require('./api/objectives');
 var competencyLevelsApi = require('./api/competencyLevels');
+var membersApi = require('./api/members');
 
 var app = express();
 
@@ -75,6 +76,7 @@ app.use('/competencyLevels', competencyLevels);
 app.use('/api/competencyProfile', competencyProfileApi);
 app.use('/api/objectives', objectivesApi);
 app.use('/api/competencyLevels', competencyLevelsApi);
+app.use('/api/members', membersApi);
 
 
 // catch 404 and forward to error handler
