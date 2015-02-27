@@ -8,3 +8,5 @@ branches:
 script:
   - "cd competency-profile && npm install"
   - "npm test"
+notifications:
+  slack: obsglobal:YauVsqiLcqoUsFO8jJJMEZJk
