@@ -50,7 +50,7 @@ div.container.sections-wrapper
 						h2.heading Score
 						div.content
 							p.score
-								|{{vm.score.level}}
+								|{{vm.score.level||"Not Started"}}
 
 			div.secondary.col-md-4.col-sm-12.col-xs-12
 				aside.skills.aside.section
