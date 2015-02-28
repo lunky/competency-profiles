@@ -15,9 +15,4 @@ var ObjectiveSchema = new mongoose.Schema({
 	counterExample: String
 });
 
-// findAndModify has not been implemented in the driver so we write our own
-ObjectiveSchema.statics.findAndModify = function (query, sort, doc, options, callback) {
-	return this.collection.findAndModify(query, sort, doc, options, callback);
-};
-
 module.exports = mongoose.model('Objectives', ObjectiveSchema);
