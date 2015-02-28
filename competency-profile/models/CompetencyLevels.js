@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 
 var CompetencyLevelSchema = new mongoose.Schema({
-	levelId: { type: Number, default: 1 },
+	levelId: Number,
 	description: String,
-	minimumScore: { type: Number, default: 0 },
-	minimumGateScore: { type: Number, default: 0 }
+	minimumScore: Number,
+	minimumGateScore: Number,
 });
 
-mongoose.model('CompetencyLevel', CompetencyLevelSchema);
+mongoose.model('CompetencyLevels', CompetencyLevelSchema);
