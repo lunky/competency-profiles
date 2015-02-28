@@ -28,7 +28,8 @@ router.post('/login',
 
 /* Handle Logout */
 router.get('/logoff', function(req, res) {
-  req.logout();
+    res.locals = {};
+    req.logout();
   res.redirect('/login');
 });
 
