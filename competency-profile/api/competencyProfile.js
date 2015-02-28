@@ -97,7 +97,9 @@ function objectivesAndProfile(req, res) {
 
 			if (profiledoc) {
 				objectivesdoc.forEach(function (el) {
-					el.isMet = areObjectivesMet(profiledoc);
+					el.isMet = profiledoc.metObjectives.some(function (metObjective) {
+						return metObjective.objectiveId === el.objectiveId;
+					});
 				});
 			}
 		
@@ -105,12 +107,6 @@ function objectivesAndProfile(req, res) {
 
 			return deferred.promise;
 		});
-}
-
-function areObjectivesMet(profiledoc) {
-	return profiledoc.metObjectives.some(function (metObjective) {
-		return metObjective.objectiveId === el.objectiveId;
-	});
 }
 
 function findProfileDoc(profile, req, res) {
