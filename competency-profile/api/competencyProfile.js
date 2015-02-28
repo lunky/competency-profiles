@@ -80,50 +80,59 @@ function getCompetencyLevels(db) {
     return deferred.promise;
 }
 
-
-function objectivesAndProfile(req, res, done) {
-	var deferred = Q.defer();
-	var collection = req.db.get('objective');
+function objectivesAndProfile(req, res) {
 	var profile = req.db.get('profile');
-	var profiledoc;
-	var objectivesdoc;
+	var objective = req.db.get('objective');
+	
 	// there are two documents, the objectives master and the profile which is a per user document
 	// we have to merge them but the methods are async so we use promises to collect them when we're done
+	return Q.all([ 
+			findProfileDoc(profile, req, res), 
+			findObjectivesDoc(objective, req, res)
+	  	]).then(function (results) {
+			var profiledoc = results[0];
+			var objectivesdoc = results[1];
+		
+			var deferred = Q.defer();
+
+			if (profiledoc) {
+				objectivesdoc.forEach(function (el) {
+					el.isMet = areObjectivesMet(profiledoc);
+				});
+			}
+		
+			deferred.resolve(objectivesdoc);
+
+			return deferred.promise;
+		});
+}
+
+function areObjectivesMet(profiledoc) {
+	return profiledoc.metObjectives.some(function (metObjective) {
+		return metObjective.objectiveId === el.objectiveId;
+	});
+}
+
+function findProfileDoc(profile, req, res) {
+	var deferred = Q.defer();
 	profile.findOne({ 'userid': req.user.username }, function (err, doc) {
 		if (err) {
 			res.send(err);
-		}
-		profiledoc = doc;
+		}		
 		deferred.resolve(doc);
 	});
-	
-	var deferred2 = Q.defer();
-	collection.find({}, function (err, doc) {
+	return deferred.promise;
+}
+
+function findObjectivesDoc(objective, req, res) {
+	var deferred = Q.defer();
+	objective.find({}, function (err, doc) {
 		if (err) {
 			res.send(err);
 		}
-		objectivesdoc = doc;
-		deferred2.resolve(doc);
+		deferred.resolve(doc);
 	});
-	
-	Q.all([deferred.promise, deferred2.promise])
-		.then(function () {
-		// merge
-		if (profiledoc) {
-			objectivesdoc.forEach(function (el) {
-				if (profiledoc.metObjectives.some(function (metObjective) {
-					return metObjective.objectiveId === el.objectiveId;
-				})) {
-					el.isMet = true;
-				} else {
-					el.isMet = false;
-				}
-			}
-			);
-		}
-		done(objectivesdoc);
-	}
-	);
+	return deferred.promise;
 }
 
 router.post('/', isAuthenticated, function(req, res) {
@@ -147,9 +156,10 @@ router.post('/', isAuthenticated, function(req, res) {
 				res.send(err);
 			}
             getCompetencyLevels(db).then(function (levels) {
-                objectivesAndProfile(req, res, function(profile) {                
-                    res.send({'data': profile, 'summary' : getStats(profile, levels)});
-                });
+                objectivesAndProfile(req, res)
+					.then(function(profile) {                
+						res.send({'data': profile, 'summary' : getStats(profile, levels)});
+					});
             });
 		}
 	);
@@ -158,12 +168,15 @@ router.post('/', isAuthenticated, function(req, res) {
 router.get('/', isAuthenticated, function(req, res) {
 	var db = req.db;
 	
-    getCompetencyLevels(db).then(function (levels) {
-        objectivesAndProfile(req, res, function(profile) {
-            res.send({'data': profile, 'summary' : getStats(profile, levels)});
-        });
+	getCompetencyLevels(db).then(function (levels) {
+		objectivesAndProfile(req, res)
+			.then(function(profile) {
+				res.send({'data': profile, 'summary' : getStats(profile, levels)});
+			});
     });
 });
+
+
 
 module.exports = router;
 
