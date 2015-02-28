@@ -12,7 +12,6 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
 //DB
-// Attach mongoose to Mongo and initiate the connection
 mongoose.connect('localhost', 'competencyprofiles');
 var db = mongoose.connection;
 
@@ -21,9 +20,10 @@ db.once('open', function callback() {
 	console.log('Connected to DB');
 });
 
-// Include our models
+//MODELS
 require('./models/UserData');
 require('./models/Objectives');
+require('./models/CompetencyLevels');
 
 //TEMPLATES
 var routes = require('./routes/index');
