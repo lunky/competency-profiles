@@ -44,9 +44,13 @@
 			var testObjective = {
 				'reviewedObjective': 'Organizes work and manage teams to achieve specific goals or outcomes'
 			};
+			var level = 'consultant';
 			deferred.resolve({
 				data: [
 					testObjective
+				],
+				summary: [
+					level
 				]
 			});
 
