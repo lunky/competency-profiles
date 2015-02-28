@@ -1,87 +1,32 @@
 toaster-container(toaster-options="{'time-out': 3000, 'close-button':true, 'position-class': 'toast-bottom-right'}")
 div.container.sections-wrapper
-		div.row
-			div.primary.col-md-8.col-sm-12.col-xs-12
-				section.section
-					div.section-inner
-						div.row
-							div.col-md-4.col-sm-12.col-xs-12
-								h2.heading Objectives
-							div.col-md-4.col-sm-12.col-xs-12
-								div.form-group				
-									select.form-control(data-ng-model="vm.sort" name="sort")
-										option(value="" label="Default Sort")
-										option(value="-isMet" label="prioritize met")
-										option(value="isMet" label="prioritize not met")
-							div.col-md-4.col-sm-12.col-xs-12
-								div.form-group				
-									a.btn.btn-default(href="" data-ng-click="vm.clearAll()")
-										|Clear all answers
-						div.content
-							div.row
-								div.col-md-12.col-sm-12.col-xs-12
-									div.panel(data-ng-repeat="objective in vm.objectives | orderBy: vm.sort" data-ng-class="objective.isMet ? 'panel-success' : 'panel-danger'")
-										div.panel-heading
-											span(data-ng-if="objective.isMet")
-												|Objective Met
-											a.pull-right(href="" data-ng-click="vm.scoreObjective(objective, false)" data-ng-if="objective.isMet")
-												i.fa.fa-undo
-											span(data-ng-if="!objective.isMet")
-												|Objective Not Met
-										div.panel-body
-											strong 
-												|{{objective.description}}?
-											div.row.voffset(data-ng-if="!objective.isMet")
-												div.col-xs-12.text-center
-													a.btn.btn-success(href="" data-ng-click="vm.scoreObjective(objective, true)")
-														|Meet Objective
-											div.row(data-ng-if="!objective.isMet")
-												div.col-xs-6
-													h3
-														small Supporting Example
-													|{{objective.supportingExample}}
-												div.col-xs-6
-													h3 
-														small Counter Example
-													|{{objective.counterExample}}
-			div.secondary.col-md-4.col-sm-12.col-xs-12
-				aside.skills.aside.section
-					div.section-inner
-						h2.heading Level Summary
-						div.content
-							p.intro
-							div.skillset
-								div.item
-									h3.level-title Base
-									progressbar(class="progress-striped" value="vm.score.base"){{vm.score.base}}%
-								div.item
-									h3.level-title Intermediate
-									progressbar(class="progress-striped" value="vm.score.intermediate"){{vm.score.intermediate}}%
-								div.item
-									h3.level-title Senior
-									progressbar(class="progress-striped" value="vm.score.senior"){{vm.score.senior}}%
-							a.pull-right(href="#/competencyLevels") 
-								|More Details	
-								
-			div.secondary.col-md-4.col-sm-12.col-xs-12
-				aside.skills.aside.section
-					div.section-inner
-						h2.heading Competency Distribution
-						div.content
-							p.intro
-							div.skillset
-								div.item
-									h3.level-title Communication
-									progressbar(class="progress-striped" value="vm.score.communication"){{vm.score.communication}}%
-								div.item
-									h3.level-title Leadership and Management
-									progressbar(class="progress-striped" value="vm.score.leadership"){{vm.score.leadership}}%
-								div.item
-									h3.level-title Interpersonal and Adaptability
-									progressbar(class="progress-striped" value="vm.score.interpersonal"){{vm.score.interpersonal}}%
-								div.item
-									h3.level-title Conflict and Stress Management
-									progressbar(class="progress-striped" value="vm.score.conflict"){{vm.score.conflict}}%
-								div.item
-									h3.level-title Corporate Citizenship
-									progressbar(class="progress-striped" value="vm.score.citizenship"){{vm.score.citizenship}}%
+	div.secondary.col-md-4.col-sm-12.col-xs-12.pull-right
+		aside.skills.aside.section.col-md-12.col-sm-6
+			div.section-inner
+				include ./partials/levelSummary.jade
+
+		aside.skills.aside.section.col-md-12.col-sm-6
+			div.section-inner
+				include ./partials/competencyDistribution.jade
+
+	div.primary.col-md-8.col-sm-12.col-xs-12
+		section.section
+			div.section-inner
+				div.row
+					div.col-md-4.col-sm-12.col-xs-12
+						h2.heading Objectives
+					div.col-md-4.col-sm-12.col-xs-12
+						div.form-group				
+							select.form-control(data-ng-model="vm.sort" name="sort")
+								option(value="" label="Default Sort")
+								option(value="-isMet" label="prioritize met")
+								option(value="isMet" label="prioritize not met")
+					div.col-md-4.col-sm-12.col-xs-12
+						div.form-group				
+							a.btn.btn-default(href="" data-ng-click="vm.clearAll()")
+								|Clear all answers
+				div.content
+					div.row
+						div.col-md-12.col-sm-12.col-xs-12
+							div.panel(data-ng-repeat="objective in vm.objectives | orderBy: vm.sort" data-ng-class="objective.isMet ? 'panel-success' : 'panel-danger'")
+								include ./partials/objective.jade
