@@ -160,7 +160,7 @@ router.get('/', isAuthenticated, function(req, res) {
 	
     getCompetencyLevels(db).then(function (levels) {
         objectivesAndProfile(req, res, function(profile) {
-                    res.send({'data': profile, 'summary' : getStats(profile, levels)});
+            res.send({'data': profile, 'summary' : getStats(profile, levels)});
         });
     });
 });

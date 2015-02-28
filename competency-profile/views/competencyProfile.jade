@@ -47,51 +47,41 @@ div.container.sections-wrapper
 			div.secondary.col-md-4.col-sm-12.col-xs-12
 				aside.skills.aside.section
 					div.section-inner
-						h2.heading Score
-						div.content
-							p.score
-								|{{vm.score.level||"Not Started"}}
-
-			div.secondary.col-md-4.col-sm-12.col-xs-12
-				aside.skills.aside.section
-					div.section-inner
-						h2.heading Competency Levels
+						h2.heading Level Summary
 						div.content
 							p.intro
-								|Below is a summary of your current compentency levels...
 							div.skillset
 								div.item
 									h3.level-title Base
-									<progressbar class="progress-striped" value="vm.score.base">{{vm.score.base}}%</progressbar>
+									progressbar(class="progress-striped" value="vm.score.base"){{vm.score.base}}%
 								div.item
 									h3.level-title Intermediate
-									<progressbar class="progress-striped" value="vm.score.intermediate">{{vm.score.intermediate}}%</progressbar>
+									progressbar(class="progress-striped" value="vm.score.intermediate"){{vm.score.intermediate}}%
 								div.item
 									h3.level-title Senior
-									<progressbar class="progress-striped" value="vm.score.senior">{{vm.score.senior}}%</progressbar>
+									progressbar(class="progress-striped" value="vm.score.senior"){{vm.score.senior}}%
 							a.pull-right(href="#/competencyLevels") 
 								|More Details	
 								
 			div.secondary.col-md-4.col-sm-12.col-xs-12
 				aside.skills.aside.section
 					div.section-inner
-						h2.heading Competencies
+						h2.heading Competency Distribution
 						div.content
 							p.intro
-								|Below is a summary of your current compentency breakdown...
 							div.skillset
 								div.item
 									h3.level-title Communication
-									<progressbar class="progress-striped" value="vm.score.communication">{{vm.score.communication}}%</progressbar>
+									progressbar(class="progress-striped" value="vm.score.communication"){{vm.score.communication}}%
 								div.item
 									h3.level-title Leadership and Management
-									<progressbar class="progress-striped" value="vm.score.leadership">{{vm.score.leadership}}%</progressbar>
+									progressbar(class="progress-striped" value="vm.score.leadership"){{vm.score.leadership}}%
 								div.item
 									h3.level-title Interpersonal and Adaptability
-									<progressbar class="progress-striped" value="vm.score.interpersonal">{{vm.score.interpersonal}}%</progressbar>
+									progressbar(class="progress-striped" value="vm.score.interpersonal"){{vm.score.interpersonal}}%
 								div.item
 									h3.level-title Conflict and Stress Management
-									<progressbar class="progress-striped" value="vm.score.conflict">{{vm.score.conflict}}%</progressbar>
+									progressbar(class="progress-striped" value="vm.score.conflict"){{vm.score.conflict}}%
 								div.item
 									h3.level-title Corporate Citizenship
-									<progressbar class="progress-striped" value="vm.score.citizenship">{{vm.score.citizenship}}%</progressbar>
+									progressbar(class="progress-striped" value="vm.score.citizenship"){{vm.score.citizenship}}%
