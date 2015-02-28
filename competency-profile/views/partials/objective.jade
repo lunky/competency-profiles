@@ -1,0 +1,23 @@
+div.panel-heading
+	span(data-ng-if="objective.isMet")
+		|Objective Met
+	a.pull-right(href="" data-ng-click="vm.scoreObjective(objective, false)" data-ng-if="objective.isMet")
+		i.fa.fa-undo
+	span(data-ng-if="!objective.isMet")
+		|Objective Not Met
+div.panel-body
+	strong 
+		|{{objective.description}}?
+	div.row.voffset(data-ng-if="!objective.isMet")
+		div.col-xs-12.text-center
+			a.btn.btn-success(href="" data-ng-click="vm.scoreObjective(objective, true)")
+				|Meet Objective
+	div.row(data-ng-if="!objective.isMet")
+		div.col-xs-6
+			h3
+				small Supporting Example
+			|{{objective.supportingExample}}
+		div.col-xs-6
+			h3 
+				small Counter Example
+			|{{objective.counterExample}}

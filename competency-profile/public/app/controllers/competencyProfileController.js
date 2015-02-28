@@ -6,9 +6,12 @@
 		.controller('CompetencyProfileController', CompetencyProfileController);
 
 	CompetencyProfileController.$inject =
-			['$filter', '$scope', 'toaster', 'competencyLevelsService', 'competencyProfileService', 'appEvents'];
+			['$filter', '$scope', '$rootScope', 
+			'appEvents', 'competencyLevelsService', 'competencyProfileService', 'toaster'];
 
-	function CompetencyProfileController($filter, $scope, toaster, competencyLevelsService, competencyProfileService, appEvents) {
+	function CompetencyProfileController(
+		$filter, $scope, $rootScope, 
+		appEvents, competencyLevelsService, competencyProfileService, toaster) {
 		var vm = this;
 
 		vm.clearAll = clearAll;
@@ -27,15 +30,11 @@
 		}
 
 		function initialize() {
-			$scope.$on(appEvents.updateLevel, function(event, data){            
-                console.log('received data: ' + data.msg);
-                toaster.pop('success', 'Broadcast Received', 'Your data message payload was: ' + data.msg);
-            });
-
 			competencyProfileService.getObjectives().then(function (response) {
 				var objectives = response.data;
 				vm.objectives = objectives;
 				vm.score = response.summary;
+				$rootScope.$broadcast(appEvents.updateLevel, {level: vm.score.level});
 			}, function(err){
 				toaster.pop('error', 'An error occured getting objectives.', err);
 			});
@@ -48,6 +47,7 @@
 				toaster.pop('success', 'Save Successful', 'Your competency score has been updated');
 				vm.objectives = response.data;
 				vm.score = response.summary;
+				$rootScope.$broadcast(appEvents.updateLevel, {level: vm.score.level});
 			}, function(err){
 				toaster.pop('error', 'An error occured saving', err);
 			});
@@ -57,6 +57,5 @@
 			objective.isMet = score;
 			vm.save();
 		}
-       
     }
 })();
