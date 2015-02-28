@@ -1,4 +1,19 @@
 [
-{ "username" : "admin", "password" : "admin" },
-{ "username" : "quinn", "password" : "quinn" }
+	{
+		"username": "admin",
+		"password": "admin",
+		"displayName": "Mr. Adminstrator"
+	},
+	{
+		"username": "aaron",
+		"password": "aaron",
+		"displayName": "Aaron 'The Playmaker' Levine"
+	},
+	{
+		"username": "quinn",
+		"password": "quinn",
+		"displayName": "His Worship, Quinn Wilson, Peer of the Realm",
+		"directReports": [{"username": "aaron", "displayName": "Aaron 'The Playmaker' Levine"},
+						  {"username": "dsanders", "displayName": "Deion 'Prime Time' Sanders"}]
+	}
 ]

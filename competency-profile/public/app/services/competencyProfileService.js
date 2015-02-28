@@ -31,16 +31,16 @@
 		}
 
 		this.getObjectives = function() {
-			$rootScope.$broadcast(appEvents.updateLevel, {msg: 'loading'});
+			var request = $http({
+				method: 'get',
+				url: '/api/competencyProfile/',
+			});
 
-			return objectiveService.get();
+			return (request.then(handleSuccess, handleError));
 		};
 
 		this.save = function(objectives) {
-            
-            $rootScope.$broadcast(appEvents.updateLevel, {msg: 'saving'});
-            
-			var justTheKeys = objectives.filter(function(item) {
+            var justTheKeys = objectives.filter(function(item) {
 				return item.isMet;
 			}).map(function(objective) {
 				return {_id: objective._id, 'objectiveId': objective.objectiveId};

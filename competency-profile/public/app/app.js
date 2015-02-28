@@ -30,6 +30,11 @@
 				controller: 'CompetencyProfileController',
 				controllerAs: 'vm'
 			})
+					.when('/profileReport/:username', {
+						templateUrl: 'profileReport',
+						controller: 'ProfileReportController',
+						controllerAs: 'vm'
+			})
 					.otherwise({
 				redirectTo: '/'
 			});

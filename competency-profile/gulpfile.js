@@ -4,6 +4,10 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({ lazy: true });
 var port = process.env.PORT || config.defaultPort;
 var less = require('gulp-less');
+var karma = require('gulp-karma');
+var mocha = require('gulp-mocha');
+var livereload = require('gulp-livereload');
+var watch = require('gulp-watch');
 
 gulp.task('help', $.taskListing);
 gulp.task('default', ['help']);
@@ -26,7 +30,8 @@ gulp.task('build-less', function () {
     return gulp
         .src(config.less)
         .pipe(less())
-        .pipe(gulp.dest(config.css));
+        .pipe(gulp.dest(config.css))
+        .pipe(livereload());
 });
 
 gulp.task('start', function () {
@@ -36,24 +41,34 @@ gulp.task('start', function () {
 
 gulp.task('test', ['karma', 'mocha']);
 
-gulp.task('karma', function (done) {
-    var karma = require('karma').server;
-    
-    karma.start({
-        configFile: __dirname + '/karma.conf.js'
-    }, karmaCompleted);
-    
-    function karmaCompleted(karmaResult) {
-        log('Karma completed');
-        if (karmaResult === 1) {
-            done('karma: tests failed with code ' + karmaResult);
-        } else {
-            done();
-        }
-    }
+gulp.task('karma', function () {
+    return gulp
+        .src(config.karma.files)
+        .pipe( karma({
+            configFile: __dirname + '/karma.conf.js',
+            action: 'run'
+        })).on('error', function (err) {
+        throw err;
+    });
 });
 
-var mocha = require('gulp-mocha');
+gulp.task('watch', function () {
+    livereload.listen();
+    log(config.lessfiles);
+    gulp.watch(config.lessfiles, ['build-less']);
+    gulp.watch(config.karma.files, function () {
+        log('watching...');
+        return gulp
+            .src(config.karma.files)
+            .pipe(karma({
+                configFile: __dirname + '/karma.conf.js',
+                action: 'run'
+            })).on('error', function (err) {
+                throw err;
+            });
+    });
+});
+
 gulp.task('mocha', function () {
 
     return gulp.src('test/server/**/*.js', {read: false})
@@ -73,11 +88,11 @@ function start(debug) {
     nodeOptions.ignore = ['public/**']; // lets not reload the web app everytime we make a change to the client side files
 
     return $.nodemon(nodeOptions)
-        .on('restart', ['vet'], function(ev) {
+        .on('restart', ['vet', 'watch'], function(ev) {
             log('*** nodemon restarted');
             log('files changed:\n' + ev);
         })
-        .on('start', ['test'], function () {
+        .on('start', ['build-less', 'test', 'watch'], function () {
             log('*** nodemon started');
         })
         .on('crash', function () {

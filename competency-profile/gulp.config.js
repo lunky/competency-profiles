@@ -14,6 +14,7 @@ module.exports = function () {
             './server.js'
         ],
         less: './less/styles.less',
+        lessfiles: './less/*.less',
         css: './public/css',
         nodeServer: './bin/www',
         server: './',

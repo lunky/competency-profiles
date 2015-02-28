@@ -9,7 +9,7 @@ doctype html
 <html lang="en">
 <!--<![endif]-->
 head
-	title Online Competency Calculator
+	title Online Competency Profile
 	meta(charset='utf-8')
 	meta(http-equiv='X-UA-Compatible' content='IE=edge')
 	meta(name='viewport' content='width=device-width, initial-scale=1.0')
@@ -28,6 +28,7 @@ head
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js')
 	<![endif]-->   
 body(ng-app="consulting" ngCloak)
+	include nav
 	div.page-wrap
 		include header
 		block content
@@ -48,9 +49,11 @@ script(src='/app/services/membersService.js')
 script(src='/app/services/competencyLevelsService.js')
 script(src='/app/services/competencyProfileService.js')
 
+script(src='/app/controllers/headerController.js')
 script(src='/app/controllers/objectivesController.js')
 script(src='/app/controllers/competencyProfileController.js')
 script(src='/app/controllers/mainController.js')
 script(src='/app/controllers/membersController.js')
 script(src='/app/controllers/competencyLevelsController.js')
+script(src='/app/controllers/profileReportController.js')
 
