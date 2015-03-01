@@ -7,7 +7,7 @@
     competencyProfileService.$inject = ['$rootScope', '$http', '$q', 'appEvents', 'objectiveService'];
 
     function competencyProfileService($rootScope, $http, $q, appEvents, objectiveService) {
-        var svc;
+        var svc = {};
         // I transform the successful response, unwrapping the application data
         // from the API response payload.
         function handleSuccess(response) {
