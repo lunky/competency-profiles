@@ -39,7 +39,7 @@
 			return (request.then(handleSuccess, handleError));
 		};
 
-		this.save = function(objectives) {
+		this.save = function(objectives, level) {
             var justTheKeys = objectives.filter(function(item) {
 				return item.isMet;
 			}).map(function(objective) {
@@ -49,7 +49,8 @@
 				method: 'post',
 				url: '/api/competencyProfile/',
 				data: {
-					objectives: justTheKeys
+					objectives: justTheKeys,
+					level: level
 				}
 			});
 

@@ -42,8 +42,7 @@
 
 		function save() {
 			// TODO : filter objectives that have something changed?
-			var objectives = vm.objectives;
-			competencyProfileService.save(objectives).then(function (response) {
+			competencyProfileService.save(vm.objectives, vm.score.level).then(function (response) {
 				toaster.pop('success', 'Save Successful', 'Your competency score has been updated');
 				vm.objectives = response.data;
 				vm.score = response.summary;
