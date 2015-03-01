@@ -7,5 +7,4 @@ router.get('/', isAuthenticated, function (req, res) {
 	res.render('competencyProfile');
 });
 
-
 module.exports = router;

@@ -1,4 +1,4 @@
-
+/*jshint -W030 */
 (function () {
 	'use strict';
 
@@ -22,7 +22,7 @@
 			//spec body
             var scope = $rootScope.$new();
 			var ctrl = $controller('CompetencyProfileController', {$scope: scope, competencyProfileService: svc});
-		    expect(ctrl).to.be.defined;
+            expect(ctrl).to.be.defined;
 		}));
 		it('calls service', inject(function($controller, $q, $rootScope) {
 
@@ -102,7 +102,7 @@
 
 		it('sets members with data from service', inject(function ($controller, $q, $rootScope) {
 			$rootScope.$apply(); // trigger digest
-		    expect(scope.vm.members).to.have.length(1);
+            expect(scope.vm.members).to.have.length(1);
 			expect(scope.vm.members[0]).to.equal(testUser);
 		}));
 	});

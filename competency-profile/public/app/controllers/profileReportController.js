@@ -11,5 +11,5 @@
 		var vm = this;
 		vm.username = $routeParams.username;
 		// go get this user and the user document
-	};
+	}
 })();

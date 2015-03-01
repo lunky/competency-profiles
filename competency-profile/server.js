@@ -62,7 +62,7 @@ app.use(function (req, res, next) {
 		userDisplayName: 'Aaron Levine',
 		userScore: 'Senior Consultant' //TODO replace with real score
 	};
-	if(req.user ){
+	if (req.user) {
 		res.locals.userDisplayName = req.user.displayName;
 		res.locals.directReports = req.user.directReports;
 	}
@@ -81,7 +81,6 @@ app.use('/api/competencyProfile', competencyProfileApi);
 app.use('/api/objectives', objectivesApi);
 app.use('/api/competencyLevels', competencyLevelsApi);
 app.use('/api/members', membersApi);
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -54,10 +54,9 @@ gulp.task('karma', function () {
 
 gulp.task('watch', function () {
     livereload.listen();
-    log(config.lessfiles);
+    log("watching... ");
     gulp.watch(config.lessfiles, ['build-less']);
     gulp.watch(config.karma.files, function () {
-        log('watching...');
         return gulp
             .src(config.karma.files)
             .pipe(karma({
@@ -70,11 +69,11 @@ gulp.task('watch', function () {
 });
 
 gulp.task('mocha', function () {
-
     return gulp.src('test/server/**/*.js', {read: false})
         .pipe(mocha({reporter: 'spec'}))
 		.on('error', function (err) {
-			process.emit('exit');
+//			process.emit('exit');
+                throw err;
 		});
 });
 
