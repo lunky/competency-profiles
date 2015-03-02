@@ -26,13 +26,13 @@ head
 	<!--[if lt IE 9]>
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js')
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js')
-	<![endif]-->   
-body(ng-app="consulting" ngCloak)
-	include nav
-	div.page-wrap
-		include header
-		block content
-	include footer
+	<![endif]-->
+	body(ng-app=(isAuthenticated ? 'consulting':'') ngCloak)
+		include nav
+		div.page-wrap
+						include header
+						block content
+		include footer
 		
 script(src='/bower_components/angularjs/angular.js')
 script(src='/bower_components/angular-route/angular-route.js')

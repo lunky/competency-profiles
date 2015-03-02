@@ -1,14 +1,14 @@
 // header
 header.header
-	div.container(data-ng-controller="HeaderController as vm")
 		- if(!isAuthenticated)
-			div.row
-				div.col-sm-12.col-xs-12.text-center
-					h1.name Competency Profile
+				div.row
+						div.col-sm-12.col-xs-12.text-center
+								h1.name Competency Profile
 		- if(isAuthenticated)
-			a(href="/")
-				img.profile-image.img-responsive.pull-left.img-circle(src='images/consultant-codell-square.png' alt='#{userDisplayName}')/
-			div.profile-content.pull-left
-				a(href="#/")
-					h1.name Competency Profile
-				h2.desc #{userDisplayName} - {{vm.consultantLevel}}
+				div.container(data-ng-controller="HeaderController as vm")
+						a(href="/")
+								img.profile-image.img-responsive.pull-left.img-circle(src='images/consultant-codell-square.png' alt='#{userDisplayName}')/
+						div.profile-content.pull-left
+								a(href="#/")
+										h1.name Competency Profile
+								h2.desc #{userDisplayName} - {{vm.consultantLevel}}
