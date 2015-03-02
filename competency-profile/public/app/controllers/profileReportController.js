@@ -24,8 +24,8 @@
 			.then(
 				function(response){
 					vm.objectives = response.data;
-				}
-				,function(err){
+				},
+				function(err){
 					toaster.pop('error', 'Error Retrieving Objectives', err);
 				}
 			);
