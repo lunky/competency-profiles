@@ -25,6 +25,11 @@
 				controller: 'ObjectivesController',
 				controllerAs: 'vm'
 			})
+            		.when('/rankings', {
+				templateUrl: 'rankings',
+				controller: 'RankingsController',
+				controllerAs: 'vm'
+			})
 					.when('/:oid?', {
 				templateUrl: 'competencyProfile',
 				controller: 'CompetencyProfileController',
