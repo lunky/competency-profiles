@@ -12,7 +12,7 @@ div
 div.content
 	div.row
 		div.col-md-12.col-sm-12.col-xs-12
-			div.panel(data-ng-repeat="objective in vm.objectives | orderBy: vm.sort" data-ng-class="objective.isMet ? 'panel-success' : 'panel-danger'")
+			div.panel(data-ng-repeat="objective in vm.objectives | orderBy: '-score' | filter: objective.isMet == false")
 				div.panel-body
 					strong 
 						|{{objective.description}}
@@ -29,7 +29,3 @@ div.content
 						h3 
 							small Gate Level
 						|{{objective.gateLevel}}
-					div.col-xs-2
-						h3 
-							small Weighting
-						|{{objective.competencyWeighting}}
