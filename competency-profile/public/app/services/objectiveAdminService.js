@@ -2,11 +2,11 @@
  (function () {
 	var myApp = angular.module('consultingServices');
 
-    myApp.service('objectiveService', objectiveService);
+    myApp.service('objectiveAdminService', objectiveAdminService);
 
-     objectiveService.$inject = ['$http', '$q'];
+    objectiveAdminService.$inject = ['$http', '$q'];
 
-    function objectiveService($http, $q) {
+    function objectiveAdminService($http, $q) {
         var svc = {};
 		// I transform the successful response, unwrapping the application data
 		// from the API response payload.

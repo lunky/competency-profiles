@@ -53,7 +53,7 @@
     <Compile Include="public\app\services\competencyLevelsService.js" />
     <Compile Include="public\app\services\membersService.js" />
     <Compile Include="public\app\services\competencyProfileService.js" />
-    <Compile Include="public\app\services\objectiveService.js" />
+    <Compile Include="public\app\services\objectiveAdminService.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\competencyLevels.js" />
     <Compile Include="routes\competencyProfile.js" />

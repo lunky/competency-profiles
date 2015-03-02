@@ -13,7 +13,7 @@ var flash = require('connect-flash');
 var routes = require('./routes/index');
 var members = require('./routes/members');
 var competencyProfile = require('./routes/competencyProfile');
-var objectives = require('./routes/objectives');
+var objectiveAdmin = require('./routes/objectiveAdmin');
 var competencyLevels = require('./routes/competencyLevels');
 
 //REST
@@ -73,7 +73,7 @@ app.use(function (req, res, next) {
 //TEMPLATE Rendering
 app.use('/', routes);
 app.use('/competencyProfile', competencyProfile);
-app.use('/objectives', objectives);
+app.use('/objectiveAdmin', objectiveAdmin);
 app.use('/members', members);
 app.use('/competencyLevels', competencyLevels);
 

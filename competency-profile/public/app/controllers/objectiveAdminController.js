@@ -3,11 +3,11 @@
 
     angular
         .module('consultingControllers')
-        .controller('ObjectivesController', ObjectivesController);
+        .controller('ObjectiveAdminController', ObjectiveAdminController);
 
-    ObjectivesController.$inject = ['objectiveService', 'toaster'];
+    ObjectiveAdminController.$inject = ['objectiveAdminService', 'toaster'];
 
-    function ObjectivesController(objectiveService, toaster) {
+    function ObjectiveAdminController(objectiveAdminService, toaster) {
 
         var vm = this;
         vm.objectives = [];
@@ -29,7 +29,7 @@
         function initialize() {
             console.log('Objectives admin initialize started');
 
-            objectiveService.get().then(function (response) {
+            objectiveAdminService.get().then(function (response) {
                 vm.objectives = response.data;
             });
 
@@ -38,7 +38,7 @@
 
         function save(objective) {
             objective.edit = false;
-            objectiveService.save(objective).then(function (response) {
+            objectiveAdminService.save(objective).then(function (response) {
                 toaster.pop('success', 'Save Successful', 'Your objective metadata was updated');
             });
         }

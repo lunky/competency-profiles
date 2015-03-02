@@ -20,9 +20,9 @@
 				controller: 'CompetencyLevelsController',
 				controllerAs: 'vm'
 			})
-					.when('/objectives', {
-				templateUrl: 'objectives',
-				controller: 'ObjectivesController',
+					.when('/objectiveAdmin', {
+				templateUrl: 'objectiveAdmin',
+				controller: 'ObjectiveAdminController',
 				controllerAs: 'vm'
 			})
 					.when('/:oid?', {
@@ -31,9 +31,9 @@
 				controllerAs: 'vm'
 			})
 					.when('/profileReport/:username', {
-						templateUrl: 'profileReport',
-						controller: 'ProfileReportController',
-						controllerAs: 'vm'
+				templateUrl: 'profileReport',
+				controller: 'ProfileReportController',
+				controllerAs: 'vm'
 			})
 					.otherwise({
 				redirectTo: '/'

@@ -4,9 +4,9 @@
 
     myApp.service('competencyProfileService', competencyProfileService);
 
-    competencyProfileService.$inject = ['$rootScope', '$http', '$q', 'appEvents', 'objectiveService'];
+    competencyProfileService.$inject = ['$rootScope', '$http', '$q', 'appEvents'];
 
-    function competencyProfileService($rootScope, $http, $q, appEvents, objectiveService) {
+    function competencyProfileService($rootScope, $http, $q, appEvents) {
         var svc = {};
         // I transform the successful response, unwrapping the application data
         // from the API response payload.
@@ -32,7 +32,7 @@
         svc.getObjectives = function () {
             var request = $http({
                 method: 'get',
-                url: '/api/competencyProfile/',
+                url: '/api/competencyProfile/'
             });
 
             return (request.then(handleSuccess, handleError));

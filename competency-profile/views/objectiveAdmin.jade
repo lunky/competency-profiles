@@ -1,0 +1,61 @@
+toaster-container(toaster-options="{'time-out': 3000, 'close-button':true, 'position-class': 'toast-bottom-right'}")
+div.container.sections-wrapper
+	div.row
+		div.primary.col-md-12.col-sm-12.col-xs-12
+			section.section
+				div.section-inner
+					div.row
+						div.col-md-12.col-sm-12.col-xs-12
+							h2.heading Objectives
+						div.row
+						div.row
+							div.col-md-12.col-sm-12.col-xs-12
+								div.panel(data-ng-repeat="objective in vm.objectives" data-ng-class="panel-success")
+									div.panel-heading
+										span
+											|{{objective.description}}
+									div.panel-body
+										div.row
+											div.col-xs-6
+												h3
+													small Supporting Example
+												|{{objective.supportingExample}}
+											div.col-xs-6
+												h3 
+													small Counter Example
+												|{{objective.counterExample}}
+										div.row
+											div.col-xs-6
+												div.form-group
+													label(for="objectiveGateLevel{{$index+1}}") Gate Level
+													select.form-control(name="gateLevel{{$index+1}}" data-ng-model="objective.gateLevel" )
+														option(value="base" label="Base")
+														option(value="intermediate" label="Intermediate")
+														option(value="senior" label="Senior")
+											div.col-xs-6
+												div.form-group
+													label(for="objectiveScore{{$index+1}}") Score
+													input.form-control(type="text" name="objectiveScore{{$index+1}}" data-ng-model="objective.score")
+										div.row
+											div.col-xs-2.col-xs-offset-1
+												h3
+													small Communication
+												input(type="checkbox" data-ng-model="objective.Communication" ng-true-value="'Y'" ng-false-value="''")
+											div.col-xs-2
+												h3 
+													small Leadership
+												input(type="checkbox" data-ng-model="objective.Leadership" data-ng-true-value="'Y'" data-ng-false-value="''")
+											div.col-xs-2
+												h3 
+													small Interpersonal
+												input(type="checkbox" data-ng-model="objective.Interpersonal" data-ng-true-value="'Y'" data-ng-false-value="''")
+											div.col-xs-2
+												h3 
+													small Conflict
+												input(type="checkbox" data-ng-model="objective.Conflict" data-ng-true-value="'Y'" data-ng-false-value="''")
+											div.col-xs-2
+												h3 
+													small Citizenship
+												input(type="checkbox" data-ng-model="objective.Citizenship" data-ng-true-value="'Y'" data-ng-false-value="''")
+										div.row
+											a.btn.btn-success(data-ng-click="vm.save(objective)") Save Objective

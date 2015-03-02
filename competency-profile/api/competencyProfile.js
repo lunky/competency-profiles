@@ -145,14 +145,6 @@ function findAndModify(collection, userid, entity, fn) {
     fn);
 }
 
-//usage
-//findAndModify(collection, userid, levelProfile, function(err, docs){
-//    if(err){
-//        res.send(err);
-//    }
-//    res.send(profileResponse);
-//});
-
 router.post('/', isAuthenticated, function(req, res) {
 	var userid = req.user;
 	var db = req.db;
