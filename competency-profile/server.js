@@ -15,6 +15,7 @@ var members = require('./routes/members');
 var competencyProfile = require('./routes/competencyProfile');
 var objectives = require('./routes/objectives');
 var competencyLevels = require('./routes/competencyLevels');
+var rankings = require('./routes/rankings');
 
 //REST
 var competencyProfileApi = require('./api/competencyProfile');
@@ -76,6 +77,7 @@ app.use('/competencyProfile', competencyProfile);
 app.use('/objectives', objectives);
 app.use('/members', members);
 app.use('/competencyLevels', competencyLevels);
+app.use('/rankings', rankings);
 
 //REST Calls
 app.use('/api/competencyProfile', competencyProfileApi);

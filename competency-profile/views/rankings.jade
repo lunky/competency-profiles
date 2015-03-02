@@ -1,0 +1,29 @@
+div.container.sections-wrapper
+    div.row
+        div.primary.col-md-12.col-sm-12.col-xs-12
+            section.section
+                div.section-inner
+                    div.row
+                        div.col-md-4.col-sm-12.col-xs-12
+                            h2.heading Consultant Rankings
+                        div.col-md-8.col-sm-12.col-xs-12                            
+                            div.col-md-6.col-sm-12.col-xs-12
+                                div.form-group
+                                    label.col-sm-2.control-label(for="consultantLevel")
+                                        |Level
+                                    div.col-sm-10
+                                        select.form-control(data-ng-model="vm.search.level" name="level" id="consultantLevel")
+                                            option(value="" label="All")
+                                            option(value="consultant" label="Consultant")
+                                            option(value="intermediate" label="Intermediate")
+                                            option(value="senior" label="Senior")									
+                            div.col-md-6.col-sm-12.col-xs-12
+                                div.form-group
+                                    input.form-control(id="consultantName" placeholder="Consultant Name" data-ng-model="vm.search.name")
+                    div.row
+                        div.col-md-12.col-sm-12.col-xs-12
+                            ul.list-group(data-ng-repeat="consultant in vm.consultants | filter:vm.search:strict")
+                                li.list-group-item                                
+                                    span.badge
+                                        |{{consultant.level}}
+                                    |{{consultant.name}}
