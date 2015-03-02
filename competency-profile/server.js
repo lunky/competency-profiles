@@ -63,12 +63,16 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+var monk = require('monk');
+var configDB = require('./config/database.js');
+var monkdb = monk(configDB.url);
+
 // Configure Passport to handle authentication
 require('./config/passport')(passport);
 
 // Make some things accessible to our router
 app.use(function (req, res, next) {
-	req.db = db;
+	req.db = monkdb;
 	res.locals = {
 		isAuthenticated : req.isAuthenticated(),
         title : 'Competency Profile',
