@@ -23,7 +23,7 @@
 
 The first time you run the application you will need to seed your mongoDB database. 
 
- 1. Startup the mongoDB.exe executable. You may need to use the argument `--dbpath <path>` to tell mongoDB where you want your data stored.
+ 1. Startup the mongoDB.exe executable (Windows) or run `mongod` (OSX and *nix). You may need to use the argument `--dbpath <path>` to tell mongoDB where you want your data stored.
  2. Run `npm install -g node-mongo-seeds`.
  3. Run `seed` from inside the competency-profile folder.
 
