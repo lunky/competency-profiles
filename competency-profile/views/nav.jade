@@ -1,17 +1,17 @@
 - if(isAuthenticated)
-    div.navbar.navbar-fixed-top.navbar-default
-        div.container
-            ul.nav.navbar-nav.navbar-left
-                li
-                    a(href="/#") Profile
-                - if(directReports)
-                    li
-                        a(href="/#/members") Team List
-                - if(isAdmin)
-                    li
-                        a(href="/#/competencyLevels") Competency Levels Admin
-                    li
-                        a(href="/#/objectives") Objectives Admin
-            ul.nav.navbar-nav.navbar-right
-                li
-                    a(href="/logoff") Log Off
+		div.navbar.navbar-fixed-top.navbar-default(role='navigation')
+				div.container
+						ul.nav.navbar-nav.navbar-left
+								li
+										a(href="/#/") Profile
+								- if(directReports)
+										li
+												a(href="/#/members") Team List
+								- if(isAdmin)
+										li
+												a(href="/#/competencyLevels") Competency Levels Admin
+										li
+												a(href="/#/objectives") Objectives Admin
+						ul.nav.navbar-nav.navbar-right
+								li
+										a(href="/logoff") Log Off
