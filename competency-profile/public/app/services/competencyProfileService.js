@@ -37,6 +37,15 @@
 
             return (request.then(handleSuccess, handleError));
         };
+		
+		svc.getObjectivesByUsername = function(username) {
+			var request = $http({
+				method: 'get',
+				url: '/api/competencyProfile/' + username
+			})
+			
+			return (request.then(handleSuccess, handleError));
+		}
 
         svc.save = function (objectives, level) {
             var justTheKeys = objectives.filter(function (item) {

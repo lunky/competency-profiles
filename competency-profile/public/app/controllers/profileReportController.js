@@ -20,7 +20,7 @@
 		
 		// go get this user and the user document
 		function initialize(){
-			competencyProfileService.getObjectives()
+			competencyProfileService.getObjectivesByUsername(vm.username)
 			.then(
 				function(response){
 					vm.objectives = response.data;

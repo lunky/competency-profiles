@@ -1,6 +1,6 @@
 div 
-    h3 Profile Report for:
-    strong {{vm.username}}
+	h3 Profile Report for:
+	strong {{vm.username}}
 
 //TODO
 //  Filter to only display isMet = False
@@ -10,26 +10,26 @@ div
 //  Indicate which Objective is a gate
 
 div.content
-    div.row
-        div.col-md-12.col-sm-12.col-xs-12
-            div.panel(data-ng-repeat="objective in vm.objectives | orderBy: vm.sort" data-ng-class="objective.isMet ? 'panel-success' : 'panel-danger'")
-                div.panel-body
-                    strong 
-                        |{{objective.description}}
-                div.row
-                    div.col-xs-2
-                        h3 
-                            small Met
-                        |{{objective.isMet}}
-                    div.col-xs-2
-                        h3
-                            small Score
-                        |{{objective.score}}
-                    div.col-xs-2
-                        h3 
-                            small Gate Level
-                        |{{objective.gateLevel}}
-                    div.col-xs-2
-                        h3 
-                            small Weighting
-                        |{{objective.competencyWeighting}}
+	div.row
+		div.col-md-12.col-sm-12.col-xs-12
+			div.panel(data-ng-repeat="objective in vm.objectives | orderBy: vm.sort" data-ng-class="objective.isMet ? 'panel-success' : 'panel-danger'")
+				div.panel-body
+					strong 
+						|{{objective.description}}
+				div.row
+					div.col-xs-2
+						h3 
+							small Met
+						|{{objective.isMet}}
+					div.col-xs-2
+						h3
+							small Score
+						|{{objective.score}}
+					div.col-xs-2
+						h3 
+							small Gate Level
+						|{{objective.gateLevel}}
+					div.col-xs-2
+						h3 
+							small Weighting
+						|{{objective.competencyWeighting}}

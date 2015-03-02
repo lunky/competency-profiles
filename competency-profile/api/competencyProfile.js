@@ -80,14 +80,15 @@ function getCompetencyLevels(db) {
     return deferred.promise;
 }
 
-function objectivesAndProfile(req, res) {
+function objectivesAndProfile(username, req, res) {
 	var profile = req.db.get('profile');
 	var objective = req.db.get('objective');
+	var username = username;
 	
 	// there are two documents, the objectives master and the profile which is a per user document
 	// we have to merge them but the methods are async so we use promises to collect them when we're done
 	return Q.all([ 
-			findProfileDoc(profile, req, res), 
+			findProfileDoc(profile, username, res), 
 			findObjectivesDoc(objective, req, res)
 	  	]).then(function (results) {
 			var profiledoc = results[0];
@@ -109,9 +110,9 @@ function objectivesAndProfile(req, res) {
 		});
 }
 
-function findProfileDoc(profile, req, res) {
+function findProfileDoc(profile, username, res) {
 	var deferred = Q.defer();
-	profile.findOne({ 'userid': req.user.username }, function (err, doc) {
+	profile.findOne({ 'userid': username }, function (err, doc) {
 		if (err) {
 			res.send(err);
 		}		
@@ -120,7 +121,7 @@ function findProfileDoc(profile, req, res) {
 	return deferred.promise;
 }
 
-function findObjectivesDoc(objective, req, res) {
+function findObjectivesDoc(objective, res) {
 	var deferred = Q.defer();
 	objective.find({}, function (err, doc) {
 		if (err) {
@@ -147,6 +148,7 @@ function findAndModify(collection, userid, entity, fn) {
 
 router.post('/', isAuthenticated, function(req, res) {
 	var userid = req.user;
+	var username = userid.username;
 	var db = req.db;
 	var profile = {'userid': userid.username, 'level': req.body.level, 'metObjectives': req.body.objectives};
 	var collection = db.get('profile');    
@@ -156,7 +158,7 @@ router.post('/', isAuthenticated, function(req, res) {
 	        res.send(err);
 	    }
 	    getCompetencyLevels(db).then(function (levels) {
-                objectivesAndProfile(req, res)
+                objectivesAndProfile(username, req, res)
 					.then(function(fullObjectivesList) {  
 						var profileResponse = {'data': fullObjectivesList, 'summary' : getStats(fullObjectivesList, levels)};						
 						profile.level = profileResponse.summary.level;
@@ -174,9 +176,24 @@ router.post('/', isAuthenticated, function(req, res) {
 
 router.get('/', isAuthenticated, function(req, res) {
 	var db = req.db;
+	var username = req.user.username;
 	
 	getCompetencyLevels(db).then(function (levels) {
-		objectivesAndProfile(req, res)
+		objectivesAndProfile(username, req, res)
+			.then(function(profile) {
+				res.send({'data': profile, 'summary' : getStats(profile, levels)});
+			});
+    });
+});
+
+router.get('/:username', isAuthenticated, function(req, res) {
+	var db = req.db;
+	var username = req.params.username;
+	
+	//TODO: Retrieve data for :user
+	
+	getCompetencyLevels(db).then(function (levels) {
+		objectivesAndProfile(username, req, res)
 			.then(function(profile) {
 				res.send({'data': profile, 'summary' : getStats(profile, levels)});
 			});
