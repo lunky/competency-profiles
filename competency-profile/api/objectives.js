@@ -6,7 +6,7 @@ var isAuthenticated = require('../config/auth');
 var Objectives = mongoose.model('Objectives');
 
 router.get('/', isAuthenticated, function (req, res) {
-	Objectives.find(function (err, doc) {
+	Objectives.find({}, function (err, doc) {
 		if (err) {
 			res.send(err);
 		}
@@ -15,7 +15,7 @@ router.get('/', isAuthenticated, function (req, res) {
 });
 
 router.post('/:id', isAuthenticated, function (req, res) {
-	Objectives.update(req.params.id, req.body.objective.toObject(), { upsert: true }, function (err, doc) {
+	Objectives.update(req.params.id, req.body.objective, { upsert: true }, function (err, doc) {
 		if (err) {
 			res.send(err);
 		}
