@@ -31,8 +31,7 @@ router.get('/:id', isAuthenticated, function (req, res) {
 //TODO: additionally, this route should make it clear that it's for a SINGLE competencylevel
 router.put('/:id', isAuthenticated, function (req, res) {
 
-	var level = req.body.level;
-	CompetencyLevels.update(req.params.id, level, { upsert: true }, function (err, doc) {
+	CompetencyLevels.update(req.params.id, req.body.level, { upsert: true }, function (err, doc) {
 		if (err) {
 			res.send(err);
 		}
