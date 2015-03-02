@@ -1,3 +1,3 @@
 module.exports = {
-	'url' : 'localhost:27017/competencyprofiles'
+	'url' : 'localhost:27017/lunkycompetencyprofiles'
 };
