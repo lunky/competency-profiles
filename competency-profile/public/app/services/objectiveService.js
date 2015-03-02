@@ -1,12 +1,13 @@
 'use strict';
  (function () {
 	var myApp = angular.module('consultingServices');
-     
+
     myApp.service('objectiveService', objectiveService);
-    
-    objectiveService.$inject = ['$http', '$q'];
-                                       
+
+     objectiveService.$inject = ['$http', '$q'];
+
     function objectiveService($http, $q) {
+        var svc = {};
 		// I transform the successful response, unwrapping the application data
 		// from the API response payload.
 		function handleSuccess(response) {
@@ -29,7 +30,7 @@
 			return ($q.reject(response.data.message));
 		}
 
-		this.get = function() {
+		svc.get = function() {
 			var request = $http({
 				method: 'get',
 				url: '/api/objectives/'
@@ -37,7 +38,7 @@
 			return (request.then(handleSuccess, handleError));
 		};
 
-		this.save = function(objective) {
+		svc.save = function(objective) {
 			var request = $http({
 				method: 'post',
 				url: '/api/objectives/' + objective._id,
@@ -47,5 +48,6 @@
 			});
 			return (request.then(handleSuccess, handleError));
 		};
+        return svc;
 	}
 })();

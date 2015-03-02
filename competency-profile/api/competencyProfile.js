@@ -131,34 +131,53 @@ function findObjectivesDoc(objective, req, res) {
 	return deferred.promise;
 }
 
+function findAndModify(collection, userid, entity, fn) {
+    collection.findAndModify(
+    { 
+        query: { 
+            'userid': userid.username 
+        },
+        update: entity
+    },
+    {
+        'upsert': true
+    },
+    fn);
+}
+
+//usage
+//findAndModify(collection, userid, levelProfile, function(err, docs){
+//    if(err){
+//        res.send(err);
+//    }
+//    res.send(profileResponse);
+//});
+
 router.post('/', isAuthenticated, function(req, res) {
 	var userid = req.user;
 	var db = req.db;
-	var profile = {'userid': userid.username, 'metObjectives': req.body.objectives};
+	var profile = {'userid': userid.username, 'level': req.body.level, 'metObjectives': req.body.objectives};
 	var collection = db.get('profile');    
 
-	collection.findAndModify(
-		{
-			query: {
-				'userid': userid.username
-			},
-			update: profile
-		},
-		{
-			'upsert': true
-		},
-		function(err, docs) {
-			if (err) {
-				res.send(err);
-			}
-            getCompetencyLevels(db).then(function (levels) {
+	findAndModify(collection, userid, profile, function(err, docs){
+	    if(err){
+	        res.send(err);
+	    }
+	    getCompetencyLevels(db).then(function (levels) {
                 objectivesAndProfile(req, res)
-					.then(function(profile) {                
-						res.send({'data': profile, 'summary' : getStats(profile, levels)});
-					});
-            });
-		}
-	);
+					.then(function(fullObjectivesList) {  
+						var profileResponse = {'data': fullObjectivesList, 'summary' : getStats(fullObjectivesList, levels)};						
+						profile.level = profileResponse.summary.level;
+					
+						findAndModify(collection, userid, profile, function(err, docs){
+							if(err){
+								res.send(err);
+							}
+							res.send(profileResponse);
+						});
+				});
+		});
+	});
 });
 
 router.get('/', isAuthenticated, function(req, res) {
