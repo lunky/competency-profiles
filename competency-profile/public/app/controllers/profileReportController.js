@@ -1,7 +1,3 @@
-//TODO
-//  Change to load data for provided User (vs. current user)
-//      this _should_ require checking to ensure that the current user has access to view the seleted user's data
-
 (function() {
 	'use strict';
 
