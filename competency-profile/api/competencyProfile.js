@@ -12,16 +12,16 @@ function getStats(objectives, levels) {
 		baseTotal: 0,
 		intermediateTotal: 0,
 		seniorTotal: 0,
-		'Communication': 0,
-		'Leadership': 0,
-		'Interpersonal': 0,
-		'Conflict': 0,
-		'Citizenship': 0,
-		'CommunicationTotal': 0,
-		'LeadershipTotal': 0,
-		'InterpersonalTotal': 0,
-		'ConflictTotal': 0,
-		'CitizenshipTotal': 0
+		'communication': 0,
+		'leadership': 0,
+		'interpersonal': 0,
+		'conflict': 0,
+		'citizenship': 0,
+		'communicationTotal': 0,
+		'leadershipTotal': 0,
+		'interpersonalTotal': 0,
+		'conflictTotal': 0,
+		'citizenshipTotal': 0
 	};
 	doc = objectives.reduce(function (prev, curr, idx, arr) {
 		['base', 'intermediate', 'senior'].forEach(function (level) {
@@ -32,7 +32,7 @@ function getStats(objectives, levels) {
 				}
 			}
 		});
-		['Communication', 'Leadership', 'Interpersonal', 'Conflict', 'Citizenship'].forEach(function (competency) {
+		['communication', 'leadership', 'interpersonal', 'conflict', 'citizenship'].forEach(function (competency) {
 			if (curr[competency] === 'Y') {
 				prev[competency + 'Total'] += curr.competencyWeighting;
 				if (curr.isMet) {
@@ -46,25 +46,25 @@ function getStats(objectives, levels) {
 		base: Math.round(doc.base / doc.baseTotal * 100),
 		intermediate: Math.round(doc.intermediate / doc.intermediateTotal * 100),
 		senior: Math.round(doc.senior / doc.seniorTotal * 100),
-		communication: Math.round(doc.Communication / doc.CommunicationTotal * 100),
-		leadership: Math.round(doc.Leadership / doc.LeadershipTotal * 100),
-		interpersonal: Math.round(doc.Interpersonal / doc.InterpersonalTotal * 100),
-		conflict: Math.round(doc.Conflict / doc.ConflictTotal * 100),
-		citizenship: Math.round(doc.Citizenship / doc.CitizenshipTotal * 100),
-		level: getLevel(doc, levels)
+		communication: Math.round(doc.communication / doc.communicationTotal * 100),
+		leadership: Math.round(doc.leadership / doc.leadershipTotal * 100),
+		interpersonal: Math.round(doc.interpersonal / doc.interpersonalTotal * 100),
+		conflict: Math.round(doc.conflict / doc.conflictTotal * 100),
+		citizenship: Math.round(doc.citizenship / doc.citizenshipTotal * 100),
+        level: getLevel(doc, levels)
 	};
 	return summary;
 }
 
 function getLevel(stats, levels) {
-	var level = 'base';
-	var totalScore = ['base', 'intermediate', 'senior'].reduce(function (total, l) {
-		return total + stats[l];
-	}, 0);
+    var level = 'base';
+    var totalScore = ['base', 'intermediate', 'senior'].reduce(function(total, l) {
+        return total + stats[l];
+    }, 0);
 	['intermediate', 'senior'].every(function (l) {
-		if (totalScore < levels[l].minimumScore) {
-			return false; // Didn't make it, no use checking the next level
-		}
+        if (totalScore < levels[l].minimumScore){
+            return false; // Didn't make it, no use checking the next level
+        }
 		if (stats[l] < levels[l].minimumGateScore) {
 			return false;
 		}
@@ -75,8 +75,8 @@ function getLevel(stats, levels) {
 }
 
 function getCompetencyLevels(db) {
-	var deferred = Q.defer();
-	var levels = db.get('competencylevel');
+    var deferred = Q.defer();
+    var levels = db.get('competencylevel');
 
 	levels.find({}, '-_id', function (err, doc) {
 		if (err) {
