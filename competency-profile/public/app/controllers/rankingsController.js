@@ -5,7 +5,6 @@
         .module('consultingControllers')
         .controller('RankingsController', RankingsController);
 
-
     function RankingsController() {
         var vm = this;
         vm.level = 'all';
