@@ -5,15 +5,32 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var configDB = require('./config/database.js');
 var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
+var mongo = require('mongodb');
+var mongoose = require('mongoose');
+
+//DB
+mongoose.connect('localhost', 'competencyprofiles');
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback() {
+	console.log('Connected to DB');
+});
+
+//MODELS
+require('./models/UserData');
+require('./models/Objectives');
+require('./models/CompetencyLevels');
 
 //TEMPLATES
 var routes = require('./routes/index');
 var members = require('./routes/members');
 var competencyProfile = require('./routes/competencyProfile');
 var objectiveAdmin = require('./routes/objectiveAdmin');
+var profileReport = require('./routes/profileReport');
 var competencyLevels = require('./routes/competencyLevels');
 var rankings = require('./routes/rankings');
 
@@ -33,7 +50,9 @@ app.set('view engine', 'jade');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+	extended: false
+}));
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -48,25 +67,26 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk(configDB.url);
+var configDB = require('./config/database.js');
+var monkdb = monk(configDB.url);
 
-require('./config/passport')(passport, db);
+// Configure Passport to handle authentication
+require('./config/passport')(passport);
 
 // Make some things accessible to our router
 app.use(function (req, res, next) {
-	req.db = db;
+	req.db = monkdb;
 	res.locals = {
-		isAuthenticated : req.isAuthenticated(),
-        title : 'Competency Profile',
+		isAuthenticated: req.isAuthenticated(),
+		title: 'Competency Profile',
 		userDisplayName: 'Aaron Levine',
 		userScore: 'Senior Consultant' //TODO replace with real score
 	};
 	if (req.user) {
 		res.locals.userDisplayName = req.user.displayName;
 		res.locals.directReports = req.user.directReports;
-        res.locals.isAdmin = true;
+		res.locals.isAdmin = true;
 	}
 	next();
 });
@@ -75,6 +95,7 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/competencyProfile', competencyProfile);
 app.use('/objectiveAdmin', objectiveAdmin);
+app.use('/profileReport', profileReport);
 app.use('/members', members);
 app.use('/competencyLevels', competencyLevels);
 app.use('/rankings', rankings);
