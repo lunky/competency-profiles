@@ -51,20 +51,20 @@ function getStats(objectives, levels) {
 		interpersonal: Math.round(doc.interpersonal / doc.interpersonalTotal * 100),
 		conflict: Math.round(doc.conflict / doc.conflictTotal * 100),
 		citizenship: Math.round(doc.citizenship / doc.citizenshipTotal * 100),
-        level: getLevel(doc, levels)
+		level: getLevel(doc, levels)
 	};
 	return summary;
 }
 
 function getLevel(stats, levels) {
-    var level = 'base';
-    var totalScore = ['base', 'intermediate', 'senior'].reduce(function(total, l) {
-        return total + stats[l];
-    }, 0);
+	var level = 'base';
+	var totalScore = ['base', 'intermediate', 'senior'].reduce(function (total, l) {
+		return total + stats[l];
+	}, 0);
 	['intermediate', 'senior'].every(function (l) {
-        if (totalScore < levels[l].minimumScore){
-            return false; // Didn't make it, no use checking the next level
-        }
+		if (totalScore < levels[l].minimumScore) {
+			return false; // Didn't make it, no use checking the next level
+		}
 		if (stats[l] < levels[l].minimumGateScore) {
 			return false;
 		}
@@ -75,8 +75,8 @@ function getLevel(stats, levels) {
 }
 
 function getCompetencyLevels(db) {
-    var deferred = Q.defer();
-    var levels = db.get('competencylevel');
+	var deferred = Q.defer();
+	var levels = db.get('competencylevels');
 
 	levels.find({}, '-_id', function (err, doc) {
 		if (err) {
@@ -98,8 +98,8 @@ function getCompetencyLevels(db) {
 }
 
 function objectivesAndProfile(username, req, res) {
-	var profile = req.db.get('profile');
-	var objective = req.db.get('objective');
+	var profile = req.db.get('profiles');
+	var objective = req.db.get('objectives');
 	var username = username;
 
 	// there are two documents, the objectives master and the profile which is a per user document
@@ -172,7 +172,7 @@ router.post('/', isAuthenticated, function (req, res) {
 		'level': req.body.level,
 		'metObjectives': req.body.objectives
 	};
-	var collection = db.get('profile');
+	var collection = db.get('profiles');
 
 	findAndModify(collection, userid, profile, function (err, docs) {
 		if (err) {

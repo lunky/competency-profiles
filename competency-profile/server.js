@@ -30,6 +30,7 @@ var routes = require('./routes/index');
 var members = require('./routes/members');
 var competencyProfile = require('./routes/competencyProfile');
 var objectiveAdmin = require('./routes/objectiveAdmin');
+var profileReport = require('./routes/profileReport');
 var competencyLevels = require('./routes/competencyLevels');
 var rankings = require('./routes/rankings');
 
@@ -49,7 +50,9 @@ app.set('view engine', 'jade');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+	extended: false
+}));
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -75,15 +78,15 @@ require('./config/passport')(passport);
 app.use(function (req, res, next) {
 	req.db = monkdb;
 	res.locals = {
-		isAuthenticated : req.isAuthenticated(),
-        title : 'Competency Profile',
+		isAuthenticated: req.isAuthenticated(),
+		title: 'Competency Profile',
 		userDisplayName: 'Aaron Levine',
 		userScore: 'Senior Consultant' //TODO replace with real score
 	};
 	if (req.user) {
 		res.locals.userDisplayName = req.user.displayName;
 		res.locals.directReports = req.user.directReports;
-        res.locals.isAdmin = true;
+		res.locals.isAdmin = true;
 	}
 	next();
 });
@@ -92,6 +95,7 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/competencyProfile', competencyProfile);
 app.use('/objectiveAdmin', objectiveAdmin);
+app.use('/profileReport', profileReport);
 app.use('/members', members);
 app.use('/competencyLevels', competencyLevels);
 app.use('/rankings', rankings);
