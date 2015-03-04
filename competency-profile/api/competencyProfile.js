@@ -3,7 +3,38 @@ var router = express.Router();
 var Q = require('q');
 var isAuthenticated = require('../config/auth');
 
+var mongoose = require('mongoose');
+var Profiles = mongoose.model('Profiles');
+var CompetencyLevels = mongoose.model('CompetencyLevels');
+var Objectives = mongoose.model('Objectives');
+
 function getStats(objectives, levels) {
+
+	//Competency Level Percentage Calculation
+	// 1) get the sum of all objectives scores grouped by level
+	// 2) get the sum of all selected objectives scores grouped by level
+	// 3) divide
+	//
+	//Competency Group Percentage Calculation
+	// 1) get the count of all objectives grouped by competency
+	// 2) get the count of all selected objectives grouped by competency
+	// 3) divide
+	//
+	//Consultant Competency Level Calculation
+	// 1) If
+	//                      the sum of all selected non-gate objectives is greater than intermediate score
+	//                      &
+	//                      the sum of all selected gated objectives is greater than base intermediate score
+	//                      then consultant is intermediate
+	// 2) If
+	//                      consultant meets intermediate requirements
+	//                      &
+	//                      the sum of all selected non-gate objectives is greater than senior score
+	//                      &
+	//                      the sum of all selected gated objectives is greater than base senior score
+	//                      then consultant is senior
+
+
 	var doc = {};
 	var stats = {
 		base: 0,
@@ -74,11 +105,10 @@ function getLevel(stats, levels) {
 	return levels[level].description;
 }
 
-function getCompetencyLevels(db) {
+function getCompetencyLevels() {
 	var deferred = Q.defer();
-	var levels = db.get('competencylevels');
 
-	levels.find({}, '-_id', function (err, doc) {
+	CompetencyLevels.find({}, '-_id', function (err, doc) {
 		if (err) {
 			return deferred.reject(new Error(err));
 		}
@@ -98,15 +128,13 @@ function getCompetencyLevels(db) {
 }
 
 function objectivesAndProfile(username, req, res) {
-	var profile = req.db.get('profiles');
-	var objective = req.db.get('objectives');
 	var username = username;
 
 	// there are two documents, the objectives master and the profile which is a per user document
 	// we have to merge them but the methods are async so we use promises to collect them when we're done
 	return Q.all([
-			findProfileDoc(profile, username, res),
-			findObjectivesDoc(objective, req, res)
+			findProfileDoc(username, res),
+			findObjectivesDoc(res)
 	  	]).then(function (results) {
 		var profiledoc = results[0];
 		var objectivesdoc = results[1];
@@ -127,10 +155,10 @@ function objectivesAndProfile(username, req, res) {
 	});
 }
 
-function findProfileDoc(profile, username, res) {
+function findProfileDoc(username, res) {
 	var deferred = Q.defer();
-	profile.findOne({
-		'userid': username
+	Profiles.findOne({
+		userid: username
 	}, function (err, doc) {
 		if (err) {
 			res.send(err);
@@ -140,9 +168,9 @@ function findProfileDoc(profile, username, res) {
 	return deferred.promise;
 }
 
-function findObjectivesDoc(objective, res) {
+function findObjectivesDoc(res) {
 	var deferred = Q.defer();
-	objective.find({}, function (err, doc) {
+	Objectives.find({}, function (err, doc) {
 		if (err) {
 			res.send(err);
 		}
@@ -151,14 +179,12 @@ function findObjectivesDoc(objective, res) {
 	return deferred.promise;
 }
 
-function findAndModify(collection, userid, entity, fn) {
-	collection.findAndModify({
-			query: {
-				'userid': userid.username
-			},
-			update: entity
-		}, {
-			'upsert': true
+function findAndModify(model, userid, entity, fn) {
+	model.update({
+			'userid': userid.username
+		},
+		entity, {
+			upsert: true
 		},
 		fn);
 }
@@ -172,13 +198,12 @@ router.post('/', isAuthenticated, function (req, res) {
 		'level': req.body.level,
 		'metObjectives': req.body.objectives
 	};
-	var collection = db.get('profiles');
 
-	findAndModify(collection, userid, profile, function (err, docs) {
+	findAndModify(Profiles, userid, profile, function (err, docs) {
 		if (err) {
 			res.send(err);
 		}
-		getCompetencyLevels(db).then(function (levels) {
+		getCompetencyLevels().then(function (levels) {
 			objectivesAndProfile(username, req, res)
 				.then(function (fullObjectivesList) {
 					var profileResponse = {
@@ -187,7 +212,7 @@ router.post('/', isAuthenticated, function (req, res) {
 					};
 					profile.level = profileResponse.summary.level;
 
-					findAndModify(collection, userid, profile, function (err, docs) {
+					findAndModify(Profiles, userid, profile, function (err, docs) {
 						if (err) {
 							res.send(err);
 						}
@@ -202,7 +227,7 @@ router.get('/', isAuthenticated, function (req, res) {
 	var db = req.db;
 	var username = req.user.username;
 
-	getCompetencyLevels(db).then(function (levels) {
+	getCompetencyLevels().then(function (levels) {
 		objectivesAndProfile(username, req, res)
 			.then(function (profile) {
 				res.send({
@@ -210,6 +235,22 @@ router.get('/', isAuthenticated, function (req, res) {
 					'summary': getStats(profile, levels)
 				});
 			});
+	});
+});
+
+router.get('/rankings', isAuthenticated, function (req, res) {
+	//if !user.groups.contains("peoplecare");
+	Profiles.find({}, {
+		userid: 1,
+		level: 1
+	}, function (err, profileList) {
+		if (err) {
+			res.send(err);
+		}
+		res.send({
+			'result': 'success',
+			'profileList': profileList
+		});
 	});
 });
 
@@ -266,27 +307,3 @@ function getMembers() {
 */
 
 module.exports = router;
-
-//Competency Level Percentage Calculation
-// 1) get the sum of all objectives scores grouped by level
-// 2) get the sum of all selected objectives scores grouped by level
-// 3) divide
-//
-//Competency Group Percentage Calculation
-// 1) get the count of all objectives grouped by competency
-// 2) get the count of all selected objectives grouped by competency
-// 3) divide
-//
-//Consultant Competency Level Calculation
-// 1) If
-//                      the sum of all selected non-gate objectives is greater than intermediate score
-//                      &
-//                      the sum of all selected gated objectives is greater than base intermediate score
-//                      then consultant is intermediate
-// 2) If
-//                      consultant meets intermediate requirements
-//                      &
-//                      the sum of all selected non-gate objectives is greater than senior score
-//                      &
-//                      the sum of all selected gated objectives is greater than base senior score
-//                      then consultant is senior
