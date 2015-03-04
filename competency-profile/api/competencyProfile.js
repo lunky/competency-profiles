@@ -238,17 +238,34 @@ router.get('/', isAuthenticated, function (req, res) {
 	});
 });
 
-router.get('/:username', isAuthenticated, function (req, res) {
-			var db = req.db;
-			var username = req.params.username;
+router.get('/list', isAuthenticated, function (req, res) {
+	//if !user.groups.contains("peoplecare");
+	Profiles.find({}, {
+		userid: 1,
+		level: 1
+	}, function (err, profileList) {
+		if (err) {
+			res.send(err);
+		}
+		res.send({
+			'result': 'success',
+			'profileList': profileList
+		});
+	});
+});
 
-			var valid = false;
-			for (i = 0; i < req.user.directReports.length; i++) {
-				valid = (req.user.directReports[i].username == username);
-				if (valid) {
-					break;
-				}
-			}
+
+router.get('/:username', isAuthenticated, function (req, res) {
+	var db = req.db;
+	var username = req.params.username;
+
+	var valid = false;
+	for (i = 0; i < req.user.directReports.length; i++) {
+		valid = (req.user.directReports[i].username == username);
+		if (valid) {
+			break;
+		}
+	}
 
 
 	if (!(valid || username == req.user.username)) {

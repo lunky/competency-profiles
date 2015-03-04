@@ -33,7 +33,7 @@ router.post('/login', function (req, res, next) {
 				return next(err);
 			}
 			if (user.directReports.length > 0) {
-				res.redirect('/#/members');
+				res.redirect('/#/rankings');
 			}
 			return res.redirect('/');
 		});
