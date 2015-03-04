@@ -32,9 +32,11 @@ router.post('/login', function (req, res, next) {
 			if (err) {
 				return next(err);
 			}
+			/*
 			if (user.directReports) {
 				res.redirect('/#/members');
 			}
+			*/
 			return res.redirect('/');
 		});
 	})(req, res, next);

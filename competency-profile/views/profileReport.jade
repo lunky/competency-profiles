@@ -12,20 +12,20 @@ div
 div.content
 	div.row
 		div.col-md-12.col-sm-12.col-xs-12
-			div.panel(data-ng-repeat="objective in vm.objectives | orderBy: '-score' | filter: objective.isMet == false")
+			div.panel(data-ng-repeat="objective in vm.objectives | orderBy: '-score'" )
 				div.panel-body
 					strong 
 						|{{objective.description}}
 				div.row
 					div.col-xs-2
-						h3 
+						h3
 							small Met
-						|{{objective.isMet}}
+						|{{objective.isMissingData}}
 					div.col-xs-2
 						h3
 							small Score
 						|{{objective.score}}
 					div.col-xs-2
-						h3 
+						h3
 							small Gate Level
 						|{{objective.gateLevel}}
