@@ -180,13 +180,11 @@ function findObjectivesDoc(res) {
 }
 
 function findAndModify(model, userid, entity, fn) {
-	model.findAndModify({
-			query: {
-				'userid': userid.username
-			},
-			update: entity
-		}, {
-			'upsert': true
+	model.update({
+			'userid': userid.username
+		},
+		entity, {
+			upsert: true
 		},
 		fn);
 }
@@ -229,24 +227,6 @@ router.get('/', isAuthenticated, function (req, res) {
 	var db = req.db;
 	var username = req.user.username;
 
-	var test = CompetencyLevels.find({}, "-id", function (err, result) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log(result.length);
-		}
-	});
-
-	var profileTest = Profiles.findOne({
-		userid: 'admin'
-	}, function (err, result) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log(result.length);
-		}
-	});
-
 	getCompetencyLevels().then(function (levels) {
 		objectivesAndProfile(username, req, res)
 			.then(function (profile) {
@@ -259,16 +239,17 @@ router.get('/', isAuthenticated, function (req, res) {
 });
 
 router.get('/:username', isAuthenticated, function (req, res) {
-	var db = req.db;
-	var username = req.params.username;
+			var db = req.db;
+			var username = req.params.username;
 
-	var valid = false;
-	for (i = 0; i < req.user.directReports.length; i++) {
-		valid = (req.user.directReports[i].username == username);
-		if (valid) {
-			break;
-		}
-	}
+			var valid = false;
+			for (i = 0; i < req.user.directReports.length; i++) {
+				valid = (req.user.directReports[i].username == username);
+				if (valid) {
+					break;
+				}
+			}
+
 
 	if (!(valid || username == req.user.username)) {
 		//ERROR
