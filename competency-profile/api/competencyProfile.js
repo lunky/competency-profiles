@@ -267,7 +267,6 @@ router.get('/:username', isAuthenticated, function (req, res) {
 		}
 	}
 
-
 	if (!(valid || username == req.user.username)) {
 		//ERROR
 		res.send({}); //TODO: Define proper error
