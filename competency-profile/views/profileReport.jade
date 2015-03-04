@@ -12,7 +12,7 @@ div
 div.content
 	div.row
 		div.col-md-12.col-sm-12.col-xs-12
-			div.panel(data-ng-repeat="objective in vm.objectives | orderBy: '-score'" )
+			div.panel(data-ng-repeat="objective in vm.objectives | orderBy: '-score' | filter: '!isMet'" )
 				div.panel-body
 					strong 
 						|{{objective.description}}
@@ -20,7 +20,7 @@ div.content
 					div.col-xs-2
 						h3
 							small Met
-						|{{objective.isMissingData}}
+						|{{objective.isMet}}
 					div.col-xs-2
 						h3
 							small Score
