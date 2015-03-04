@@ -254,7 +254,6 @@ router.get('/list', isAuthenticated, function (req, res) {
 	});
 });
 
-
 router.get('/:username', isAuthenticated, function (req, res) {
 	var db = req.db;
 	var username = req.params.username;
