@@ -92,12 +92,53 @@ label.radio {
 	}
 }
 
-a.btn-cta-primary, .btn-cta-primary {
+.panel-not-met {
+	border-color: lighten(@color-2, 15%);
+}
+
+.panel-not-met > .panel-heading {
+	color: #fff;
+	background-color: @color-2;
+	border-color: #ebccd1;
+}
+
+.panel-met {
+	border-color: lighten(@color, 15%);
+}
+
+.panel-met {
+	> .panel-heading {
+		color: #fff;
+		background-color: @color;
+		border-color: #ebccd1;
+	}
+
+	a {
+		.fa-pencil-square-o, .fa-undo {
+			color: @smoky-white;
+		}
+
+		.fa-close {
+			color: red;
+		}
+	}
+
+	a:hover {
+		.fa-pencil-square-o, .fa-undo {
+			color: darken(@smoky-white, 50%);
+		}
+
+		.fa-close {
+			color: darken(red, 15%);
+		}
+	}
+}
+
+a.btn-obs-primary, .btn-obs-primary {
 	background: @btn-color;
 	border: 1px solid @btn-color;
 	color: #fff;
 	font-weight: 600;
-	text-transform: uppercase;
 
 	&:hover {
 		background: darken(@btn-color, 5%);
@@ -106,12 +147,11 @@ a.btn-cta-primary, .btn-cta-primary {
 	}
 }
 
-a.btn-cta-secondary, .btn-cta-secondary {
+a.btn-obs-secondary, .btn-obs-secondary {
 	background: @btn-color-2;
 	border: 1px solid @btn-color-2;
 	color: #fff;
 	font-weight: 600;
-	text-transform: uppercase;
 
 	&:hover {
 		background: darken(@btn-color-2, 5%);
@@ -175,7 +215,7 @@ iframe {
 			color: darken(@color, 20%);
 			font-size: 38px;
 			margin-bottom: 5px;
-			margin-top: 50px;
+			margin-top: 25px;
 		}
 
 		.desc {
@@ -186,6 +226,10 @@ iframe {
 			margin-top: 0;
 			margin-bottom: 15px;
 		}
+	}
+
+	.logo {
+		margin-top: 5px;
 	}
 }
 
@@ -222,26 +266,6 @@ iframe {
 
 /* Objectives levels Section */
 .admin {
-
-	a {
-		.fa-pencil-square-o {
-			color: @smoky-white;
-		}
-
-		.fa-close {
-			color: red;
-		}
-	}
-
-	a:hover {
-		.fa-pencil-square-o {
-			color: darken(@smoky-white, 50%);
-		}
-
-		.fa-close {
-			color: darken(red, 15%);
-		}
-	}
 }
 
 /* Skills Section */

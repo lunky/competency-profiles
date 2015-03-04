@@ -7,8 +7,11 @@ header.header
 		- if(isAuthenticated)
 				div.container(data-ng-controller="HeaderController as vm")
 						a(href="/")
-								img.profile-image.img-responsive.pull-left.img-circle(src='images/consultant-codell-square.png' alt='#{userDisplayName}')/
+								img.profile-image.img-responsive.pull-left.img-circle(src='images/consultant-codell-square-small.png' alt='#{userDisplayName}')
 						div.profile-content.pull-left
 								a(href="#/")
 										h1.name Competency Profile
 								h2.desc #{userDisplayName} - {{vm.consultantLevel}}
+						div.pull-right
+							a(href="http://www.obsglobal.com/")
+								img.logo.img-responsive(src='images/OBSlogo.png' alt='Online Logo')

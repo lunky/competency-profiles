@@ -5069,7 +5069,7 @@ a.list-group-item-danger.active:focus {
 body {
   font-family: 'Lato', arial, sans-serif;
   color: #434343;
-  background: #dae3e7;
+  background: #e0dcd7;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -5084,7 +5084,7 @@ h5,
 h6 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  color: #778492;
+  color: #3f647e;
 }
 html,
 body {
@@ -5145,48 +5145,76 @@ a.btn .fa {
 a.btn:focus {
   color: #fff;
 }
-a.btn-cta-primary,
-.btn-cta-primary {
-  background: #54ba4e;
-  border: 1px solid #54ba4e;
+.panel-not-met {
+  border-color: #d73235;
+}
+.panel-not-met > .panel-heading {
+  color: #fff;
+  background-color: #9d1f21;
+  border-color: #ebccd1;
+}
+.panel-met {
+  border-color: #5c8cae;
+}
+.panel-met > .panel-heading {
+  color: #fff;
+  background-color: #3f647e;
+  border-color: #ebccd1;
+}
+.panel-met a .fa-pencil-square-o,
+.panel-met a .fa-undo {
+  color: #f5f5f5;
+}
+.panel-met a .fa-close {
+  color: red;
+}
+.panel-met a:hover .fa-pencil-square-o,
+.panel-met a:hover .fa-undo {
+  color: #767676;
+}
+.panel-met a:hover .fa-close {
+  color: #b30000;
+}
+a.btn-obs-primary,
+.btn-obs-primary {
+  background: #9d1f21;
+  border: 1px solid #9d1f21;
   color: #fff;
   font-weight: 600;
-  text-transform: uppercase;
 }
-a.btn-cta-primary:hover,
-.btn-cta-primary:hover {
-  background: #49ac43;
-  border: 1px solid #49ac43;
+a.btn-obs-primary:hover,
+.btn-obs-primary:hover {
+  background: #881b1d;
+  border: 1px solid #881b1d;
   color: #fff;
 }
-a.btn-cta-secondary,
-.btn-cta-secondary {
-  background: #479fc8;
-  border: 1px solid #479fc8;
+a.btn-obs-secondary,
+.btn-obs-secondary {
+  background: #3f647e;
+  border: 1px solid #3f647e;
   color: #fff;
   font-weight: 600;
-  text-transform: uppercase;
 }
-a.btn-cta-secondary:hover,
-.btn-cta-secondary:hover {
-  background: #3893bd;
-  border: 1px solid #3893bd;
+a.btn-obs-secondary:hover,
+.btn-obs-secondary:hover {
+  background: #37576d;
+  border: 1px solid #37576d;
   color: #fff;
 }
 .text-highlight {
-  color: #32383e;
+  color: #0c1318;
 }
 .label-theme {
-  background: #3aaa64;
+  background: #9d1f21;
   font-size: 12px;
 }
 a.dotted-link {
-  border-bottom: 1px dotted #778492;
-  color: #778492;
+  border-bottom: 1px dotted #3f647e;
+  color: #3f647e;
 }
 a.dotted-link:hover {
   text-decoration: none;
-  color: #49515a;
+  color: #1d2e3a;
 }
 /*
 iframe {
@@ -5205,7 +5233,7 @@ iframe {
 .header {
   padding: 30px 0;
   background: #f5f5f5;
-  border-top: 10px solid #778492;
+  border-top: 10px solid #3f647e;
 }
 .header .btn {
   margin-top: 60px;
@@ -5215,18 +5243,21 @@ iframe {
   margin-right: 30px;
 }
 .header .profile-content .name {
-  color: #49515a;
+  color: #1d2e3a;
   font-size: 38px;
   margin-bottom: 5px;
-  margin-top: 50px;
+  margin-top: 25px;
 }
 .header .profile-content .desc {
-  color: #778492;
+  color: #3f647e;
   font-family: "Lato", arial, sans-serif;
   font-weight: 400;
   font-size: 24px;
   margin-top: 0;
   margin-bottom: 15px;
+}
+.header .logo {
+  margin-top: 5px;
 }
 /* ======= Sections======= */
 .sections-wrapper {
@@ -5243,7 +5274,7 @@ iframe {
 .section .heading {
   margin-top: 0;
   margin-bottom: 30px;
-  color: #545e69;
+  color: #263c4b;
   font-size: 24px;
 }
 .section .content .more-link .fa {
@@ -5251,18 +5282,6 @@ iframe {
   font-size: 14px;
 }
 /* Objectives levels Section */
-.admin a .fa-pencil-square-o {
-  color: #f5f5f5;
-}
-.admin a .fa-close {
-  color: red;
-}
-.admin a:hover .fa-pencil-square-o {
-  color: #767676;
-}
-.admin a:hover .fa-close {
-  color: #b30000;
-}
 /* Skills Section */
 .skills .intro {
   margin-bottom: 30px;
@@ -5280,19 +5299,19 @@ iframe {
   font-size: 32px;
   font-weight: bold;
   text-align: center;
-  color: #3aaa64;
+  color: #9d1f21;
   margin-bottom: 0px;
   margin-top: 0px;
 }
 /* ======= Footer ======= */
 .footer {
-  background: #32383e;
+  background: #0c1318;
   color: #fff;
   padding: 10px 0;
 }
 .footer .copyright {
   line-height: 1.6;
-  color: #a1aab4;
+  color: #5c8cae;
   font-size: 14px;
 }
 .footer a {

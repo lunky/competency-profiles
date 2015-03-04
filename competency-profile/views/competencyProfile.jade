@@ -15,18 +15,17 @@ div.container.sections-wrapper
 				div.row
 					div.col-md-4.col-sm-12.col-xs-12
 						h2.heading Objectives
-					div.col-md-4.col-sm-12.col-xs-12
+					div.col-md-4.col-sm-12.col-xs-12.col-md-offset-1
 						div.form-group
 							select.form-control(data-ng-model="vm.sort" name="sort")
 								option(value="" label="Default Sort")
 								option(value="-isMet" label="prioritize met")
 								option(value="isMet" label="prioritize not met")
-					div.col-md-4.col-sm-12.col-xs-12
-						div.form-group
-							a.btn.btn-default(href="" data-ng-click="vm.clearAll()")
-								|Clear all answers
+					div.col-md-3.col-sm-12.col-xs-12
+						a.btn.btn-default.pull-right(href="" data-ng-click="vm.clearAll()")
+							|Clear all answers
 				div.content
 					div.row
 						div.col-md-12.col-sm-12.col-xs-12
-							div.panel(data-ng-repeat="objective in vm.objectives | orderBy: vm.sort" data-ng-class="objective.isMet ? 'panel-success' : 'panel-danger'")
+							div.panel(data-ng-repeat="objective in vm.objectives | orderBy: vm.sort" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'")
 								include ./partials/objective.jade
