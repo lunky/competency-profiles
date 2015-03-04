@@ -12,7 +12,8 @@ var ObjectiveSchema = new mongoose.Schema({
 	competencyWeighting: Number,
 	description: String,
 	supportingExample: String,
-	counterExample: String
+	counterExample: String,
+	isMet: Boolean
 });
 
 module.exports = mongoose.model('Objectives', ObjectiveSchema);

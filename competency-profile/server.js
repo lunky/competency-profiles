@@ -24,6 +24,7 @@ db.once('open', function callback() {
 require('./models/UserData');
 require('./models/Objectives');
 require('./models/CompetencyLevels');
+require('./models/Profiles');
 
 //TEMPLATES
 var routes = require('./routes/index');

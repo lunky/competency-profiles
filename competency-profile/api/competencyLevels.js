@@ -1,4 +1,4 @@
-﻿/* REST API */
+/* REST API */
 
 var express = require('express');
 var mongoose = require('mongoose');
@@ -13,29 +13,36 @@ router.get('/', isAuthenticated, function (req, res) {
 		if (err) {
 			res.send(err);
 		}
-		res.send({ 'data': doc });
+		res.send({
+			'data': doc
+		});
 	});
 });
 
 router.get('/:id', isAuthenticated, function (req, res) {
-	
+
 	CompetencyLevels.findOne(req.params.id, function (err, doc) {
 		if (err) {
 			res.send(err);
 		}
-		res.send({ 'data': doc });
+		res.send({
+			'data': doc
+		});
 	});
 });
 
-//TODO: consider change save to root to more closly align with REST API best practices
-//TODO: additionally, this route should make it clear that it's for a SINGLE competencylevel
 router.put('/:id', isAuthenticated, function (req, res) {
 
-	CompetencyLevels.update(req.params.id, req.body.level, { upsert: true }, function (err, doc) {
+	CompetencyLevels.update(req.params.id, req.body.level, {
+		upsert: true
+	}, function (err, doc) {
 		if (err) {
 			res.send(err);
 		}
-		res.send({ 'result': 'success', 'level': doc });
+		res.send({
+			'result': 'success',
+			'level': doc
+		});
 	});
 });
 
