@@ -238,7 +238,7 @@ router.get('/', isAuthenticated, function (req, res) {
 	});
 });
 
-router.get('/list', isAuthenticated, function (req, res) {
+router.get('/rankings', isAuthenticated, function (req, res) {
 	//if !user.groups.contains("peoplecare");
 	Profiles.find({}, {
 		userid: 1,
