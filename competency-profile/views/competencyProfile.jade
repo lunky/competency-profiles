@@ -13,15 +13,15 @@ div.container.sections-wrapper
 		section.section
 			div.section-inner
 				div.row
-					div.col-md-4
+					div.col-md-4.col-xs-12
 						h2.heading Objectives
-					div.col-md-4.col-sm-6
+					div.col-md-4.col-sm-6.col-xs-12
 						div.form-group
 							select.form-control(data-ng-model="vm.sort" name="sort")
 								option(value="" label="Default Sort")
 								option(value="-isMet" label="prioritize met")
 								option(value="isMet" label="prioritize not met")
-					div.col-md-4.col-sm-6
+					div.col-md-4.col-sm-6.col-xs-12
 						a.btn.btn-default.pull-right(href="" data-ng-click="vm.clearAll()")
 							|Clear all answers
 				div.content
