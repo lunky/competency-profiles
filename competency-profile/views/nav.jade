@@ -1,6 +1,6 @@
 - if(isAuthenticated)
 	nav.navbar.navbar-fixed-top.navbar-default
-		div.container
+		div.container(data-ng-controller="NavController as vm")
 			div.navbar-header
 				button.navbar-toggle(data-toggle="collapse", data-target=".navbar-collapse")				
 					span.icon-bar
@@ -10,16 +10,16 @@
 					img(src="images/OBSlogo_tiny.png")
 			div.collapse.navbar-collapse
 				ul.nav.navbar-nav
-					li
+					li(ng-class="vm.getClass('')")
 						a(href="/#") Your Profile
 					- if(isAdmin)
-						li(ng-click="isCollapsed = true")
+						li(ng-class="vm.getClass('/competencyLevels')")
 							a(href="/#/competencyLevels") Competency Levels Admin
-						li(ng-click="isCollapsed = true")
+						li(ng-class="vm.getClass('/objectiveAdmin')")
 							a(href="/#/objectiveAdmin") Objectives Admin
 					- if(directReports.length > 0)
-						li(ng-click="isCollapsed = true")
+						li(ng-class="vm.getClass('/rankings')")
 							a(href="/#/rankings") Your Team
 				ul.nav.navbar-nav.navbar-right
-					li(ng-click="isCollapsed = true")
+					li
 						a(href="/logoff") Log Off
