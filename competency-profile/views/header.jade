@@ -9,13 +9,13 @@ header.header
 					div.row
 						div.col-xs-12.col-sm-2
 							a(href="#/")
-								img.profile-image.img-responsive.img-circle(src='images/consultant-codell-square-small.png' alt='#{userDisplayName}')							
+								img.profile-image.img-responsive.img-circle(src='images/consultant-codell-square-small.png' alt='#{userDisplayName}')
 						div.profile-content.col-xs-12.col-sm-6
 							h2.desc #{userDisplayName}
 						div.col-xs-12.col-sm-2
 							h4.desc Calculated Competency Level:
-							h2.desc {{vm.consultantLevel}} 
+							h4.desc.hidden-lg {{vm.consultantLevel}}
+							h2.desc.visible-lg {{vm.consultantLevel}} 
 						div.col-xs-12.col-sm-2
 							a(href="http://www.obsglobal.com/")
 								img.logo.img-responsive(src='images/OBSlogo.png' alt='Online Logo')
-								
