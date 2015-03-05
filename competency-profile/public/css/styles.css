@@ -5333,6 +5333,10 @@ iframe {
     float: none !important;
     text-align: center;
   }
+ 	
+  .header .logo {
+	  margin: 0 auto; 
+  }
   .header .btn {
     margin-top: 30px;
     float: none !important;
