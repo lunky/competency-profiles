@@ -5,17 +5,27 @@
         .module('consultingControllers')
         .controller('RankingsController', RankingsController);
 
-    function RankingsController() {
+    RankingsController.$inject = ['competencyProfileService'];
+
+    function RankingsController(competencyProfileService) {
         var vm = this;
         vm.level = 'all';
-        vm.consultants = [
-            {name: 'admin', level: 'Senior'},
-            {name: 'aaron', level: 'Intermediate'},
-            {name: 'quinn', level: 'Consultant'}];
+        vm.consultants = [];
 
         initialize();
 
         function initialize() {
+            competencyProfileService.getRankings().then(function (response) {
+                if (response.result === 'success') {
+                    vm.consultants = response.profileList.map(function (user) {
+                        return {
+                            userid: user.userid,
+                            name: user.displayName || user.userid,
+                            level: user.level
+                        };
+                    });
+                }
+            });
         }
     }
 })();
