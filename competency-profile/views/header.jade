@@ -6,12 +6,16 @@ header.header
 								h1.name Competency Profile
 		- if(isAuthenticated)
 				div.container(data-ng-controller="HeaderController as vm")
-						a(href="/")
-								img.profile-image.img-responsive.pull-left.img-circle(src='images/consultant-codell-square-small.png' alt='#{userDisplayName}')
-						div.profile-content.pull-left
-								a(href="#/")
-										h1.name Competency Profile
-								h2.desc #{userDisplayName} - {{vm.consultantLevel}}
-						div.pull-right
+					div.row
+						div.col-xs-12.col-md-2
+							a(href="#/")
+								img.profile-image.img-responsive.pull-right.img-circle(src='images/consultant-codell-square-small.png' alt='#{userDisplayName}')							
+						div.profile-content.col-xs-12.col-md-6
+							h2.desc #{userDisplayName}
+						div.col-xs-12.col-md-2
+							h4.desc Calculated Competency Level:
+							h2.desc {{vm.consultantLevel}} 
+						div.col-xs-12.col-md-2
 							a(href="http://www.obsglobal.com/")
 								img.logo.img-responsive(src='images/OBSlogo.png' alt='Online Logo')
+								
