@@ -11,16 +11,16 @@
 					img(src="images/OBSlogo_tiny.png", height="45")
 			div#navigationbar.collapse.navbar-collapse
 				ul.nav.navbar-nav
-					li
+					li(data-toggle="collapse",data-target="#navigationbar")
 						a(href="/#") Your Profile
 					- if(isAdmin)
-						li
+						li(data-toggle="collapse",data-target="#navigationbar")
 							a(href="/#/competencyLevels") Competency Levels Admin
-						li
+						li(data-toggle="collapse",data-target="#navigationbar")
 							a(href="/#/objectiveAdmin") Objectives Admin
 					- if(directReports.length > 0)
-						li
+						li(data-toggle="collapse",data-target="#navigationbar")
 							a(href="/#/rankings") Your Team
 				ul.nav.navbar-nav.navbar-right
-					li
+					li(data-toggle="collapse",data-target="#navigationbar")
 						a(href="/logoff") Log Off
