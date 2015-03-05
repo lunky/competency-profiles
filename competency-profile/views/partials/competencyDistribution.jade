@@ -2,18 +2,32 @@ h2.heading Competency Distribution
 div.content
 	p.intro
 	div.skillset
-		div.item
-			h3.level-title Communication
-			progressbar(class="progress-striped" value="vm.score.communication") {{vm.score.communication}}%
-		div.item
-			h3.level-title Leadership and Management
-			progressbar(class="progress-striped" value="vm.score.leadership") {{vm.score.leadership}}%
-		div.item
-			h3.level-title Interpersonal and Adaptability
-			progressbar(class="progress-striped" value="vm.score.interpersonal") {{vm.score.interpersonal}}%
-		div.item
-			h3.level-title Conflict and Stress Management
-			progressbar(class="progress-striped" value="vm.score.conflict") {{vm.score.conflict}}%
-		div.item
-			h3.level-title Corporate Citizenship
-			progressbar(class="progress-striped" value="vm.score.citizenship") {{vm.score.citizenship}}%
+		div.row
+			h3.col-xs-6.col-md-12.level-title 
+				span Communication
+			div.col-xs-6.col-md-12
+				progressbar.progress-striped(value="vm.score.communication") {{vm.score.communication}}%
+		div.row
+			h3.col-xs-6.col-md-12.level-title 
+				span Leadership
+				span.hidden-sm.hidden-xs  and Management
+			div.col-xs-6.col-md-12
+				progressbar.progress-striped(value="vm.score.leadership") {{vm.score.leadership}}%
+		div.row
+			h3.col-xs-6.col-md-12.level-title 
+				span Interpersonal
+				span.hidden-sm.hidden-xs  and Adaptability
+			div.col-xs-6.col-md-12
+				progressbar.progress-striped(value="vm.score.interpersonal") {{vm.score.interpersonal}}%
+		div.row
+			h3.col-xs-6.col-md-12.level-title 
+				span Conflict
+				span.hidden-sm.hidden-xs  and Stress Management
+			div.col-xs-6.col-md-12
+				progressbar.progress-striped(value="vm.score.conflict") {{vm.score.conflict}}%
+		div.row
+			h3.col-xs-6.col-md-12.level-title 
+				span.hidden-sm.hidden-xs Corporate
+				span  Citizenship
+			div.col-xs-6.col-md-12
+				progressbar.progress-striped(value="vm.score.citizenship") {{vm.score.citizenship}}%
