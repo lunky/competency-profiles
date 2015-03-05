@@ -1,26 +1,25 @@
 - if(isAuthenticated)
-	nav.navbar.navbar-fixed-top.navbar-default(role="navigation")
-		div#navfluid.container-fluid
+	nav.navbar.navbar-fixed-top.navbar-default
+		div.container
 			div.navbar-header
-				button.navbar-toggle(data-toggle="collapse",data-target="#navigationbar",type="button")
-					span.sr-only Toggle navigation
+				button.navbar-toggle(data-toggle="collapse", data-target=".navbar-collapse")				
 					span.icon-bar
 					span.icon-bar
 					span.icon-bar
 				a.navbar-brand
-					img(src="images/OBSlogo_tiny.png", height="45")
-			div#navigationbar.collapse.navbar-collapse
+					img(src="images/OBSlogo_tiny.png")
+			div.collapse.navbar-collapse
 				ul.nav.navbar-nav
-					li(data-toggle="collapse",data-target="#navigationbar")
+					li
 						a(href="/#") Your Profile
 					- if(isAdmin)
-						li(data-toggle="collapse",data-target="#navigationbar")
+						li(ng-click="isCollapsed = true")
 							a(href="/#/competencyLevels") Competency Levels Admin
-						li(data-toggle="collapse",data-target="#navigationbar")
+						li(ng-click="isCollapsed = true")
 							a(href="/#/objectiveAdmin") Objectives Admin
 					- if(directReports.length > 0)
-						li(data-toggle="collapse",data-target="#navigationbar")
+						li(ng-click="isCollapsed = true")
 							a(href="/#/rankings") Your Team
 				ul.nav.navbar-nav.navbar-right
-					li(data-toggle="collapse",data-target="#navigationbar")
+					li(ng-click="isCollapsed = true")
 						a(href="/logoff") Log Off
