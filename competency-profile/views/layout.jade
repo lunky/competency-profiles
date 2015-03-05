@@ -30,13 +30,15 @@ head
 	body(ng-app=(isAuthenticated ? 'consulting':'') ngCloak)
 		include nav
 		div.page-wrap
-						include header
-						block content
+			include header
+			block content
 		include footer
 		
 script(src='/bower_components/angularjs/angular.js')
 script(src='/bower_components/angular-route/angular-route.js')
 script(src='/bower_components/angular-animate/angular-animate.js')
+script(src='/bower_components/jquery/dist/jquery.min.js')
+script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
 script(src='/bower_components/angular-bootstrap/ui-bootstrap-tpls.js')
 script(src='/bower_components/angularjs-toaster/toaster.js')
 
@@ -58,4 +60,3 @@ script(src='/app/controllers/membersController.js')
 script(src='/app/controllers/competencyLevelsController.js')
 script(src='/app/controllers/profileReportController.js')
 script(src='/app/controllers/rankingsController.js')
-

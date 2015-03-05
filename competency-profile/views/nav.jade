@@ -1,20 +1,26 @@
 - if(isAuthenticated)
-    div.navbar.navbar-fixed-top.navbar-default
-        div.container(data-ng-controller="NavController as vm")
-
-            ul.nav.navbar-nav.navbar-left
-                li(ng-class="vm.getClass('')")
-                    a(href="/#") Profile
-                - if(directReports)
-                    li(ng-class="vm.getClass('/members')")
-                        a(href="/#/members") Team List
-                - if(isAdmin)
-                    li(ng-class="vm.getClass('/competencyLevels')")
-                        a(href="/#/competencyLevels") Competency Levels Admin
-                    li(ng-class="vm.getClass('/objectiveAdmin')")
-                        a(href="/#/objectiveAdmin") Objectives Admin
-                    li(ng-class="vm.getClass('/rankings')")
-                        a(href="/#/rankings") Consultant Rankings
-            ul.nav.navbar-nav.navbar-right
-                li
-                    a(href="/logoff") Log Off
+	nav.navbar.navbar-fixed-top.navbar-default(role="navigation")
+		div#navfluid.container-fluid(data-ng-controller="NavController as vm")
+			div.navbar-header
+				button.navbar-toggle(data-toggle="collapse",data-target="#navigationbar",type="button")
+					span.sr-only Toggle navigation
+					span.icon-bar
+					span.icon-bar
+					span.icon-bar
+				a.navbar-brand
+					img(src="images/OBSlogo_tiny.png", height="45")
+			div#navigationbar.collapse.navbar-collapse
+				ul.nav.navbar-nav
+					li(ng-class="vm.getClass('')", data-toggle="collapse",data-target="#navigationbar")
+						a(href="/#") Your Profile
+					- if(isAdmin)
+						li(ng-class="vm.getClass('/competencyLevels')", data-toggle="collapse",data-target="#navigationbar")
+							a(href="/#/competencyLevels") Competency Levels Admin
+						li(ng-class="vm.getClass('/objectiveAdmin')", data-toggle="collapse",data-target="#navigationbar")
+							a(href="/#/objectiveAdmin") Objectives Admin
+					- if(directReports.length > 0)
+						li(ng-class="vm.getClass('/rankings')", data-toggle="collapse",data-target="#navigationbar")
+							a(href="/#/rankings") Your Team
+				ul.nav.navbar-nav.navbar-right
+					li(data-toggle="collapse",data-target="#navigationbar")
+						a(href="/logoff") Log Off

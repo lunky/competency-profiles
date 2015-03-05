@@ -5,12 +5,48 @@ div.container.sections-wrapper
 			section.section
 				div.section-inner
 					div.row
+						h2.heading Filter Criteria
+					div.row
+						div.col-md-4.form-group
+							span
+								|Description filter
+							input.form-control(placeholder="Description" data-ng-model="vm.search.description")
+						div.col-md-4.form-group
+							span
+								|Gate Level filter
+							select.form-control(data-ng-model="vm.search.gateLevel" )
+								option(value="" label="All")
+								option(value="base" label="Consultant")
+								option(value="intermediate" label="Intermediate")
+								option(value="senior" label="Senior")
+					div.row
+						div.col-md-12.form-group
+							div.col-xs-2.col-xs-offset-1
+								h3
+									small Communication
+								input(type="checkbox" data-ng-model="vm.search.communication" ng-true-value="'Y'" ng-false-value="''")
+							div.col-xs-2
+								h3
+									small Leadership
+								input(type="checkbox" data-ng-model="vm.search.leadership" data-ng-true-value="'Y'" data-ng-false-value="''")
+							div.col-xs-2
+								h3
+									small Interpersonal
+								input(type="checkbox" data-ng-model="vm.search.interpersonal" data-ng-true-value="'Y'" data-ng-false-value="''")
+							div.col-xs-2
+								h3
+									small Conflict
+								input(type="checkbox" data-ng-model="vm.search.conflict" data-ng-true-value="'Y'" data-ng-false-value="''")
+							div.col-xs-2
+								h3
+									small Citizenship
+								input(type="checkbox" data-ng-model="vm.search.citizenship" data-ng-true-value="'Y'" data-ng-false-value="''")
 						div.col-md-12.col-sm-12.col-xs-12
 							h2.heading Objectives
 						div.row
 						div.row
 							div.col-md-12.col-sm-12.col-xs-12
-								div.panel(data-ng-repeat="objective in vm.objectives" data-ng-class="panel-success")
+								div.panel(data-ng-repeat="objective in vm.objectives | filter:vm.search:strict" data-ng-class="panel-success")
 									div.panel-heading
 										span
 											|{{objective.description}}
