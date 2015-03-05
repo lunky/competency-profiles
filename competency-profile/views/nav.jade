@@ -1,18 +1,19 @@
 - if(isAuthenticated)
     div.navbar.navbar-fixed-top.navbar-default
-        div.container
+        div.container(data-ng-controller="NavController as vm")
+
             ul.nav.navbar-nav.navbar-left
-                li
+                li(ng-class="vm.getClass('')")
                     a(href="/#") Profile
                 - if(directReports)
-                    li
+                    li(ng-class="vm.getClass('/members')")
                         a(href="/#/members") Team List
                 - if(isAdmin)
-                    li
+                    li(ng-class="vm.getClass('/competencyLevels')")
                         a(href="/#/competencyLevels") Competency Levels Admin
-                    li
+                    li(ng-class="vm.getClass('/objectiveAdmin')")
                         a(href="/#/objectiveAdmin") Objectives Admin
-                    li
+                    li(ng-class="vm.getClass('/rankings')")
                         a(href="/#/rankings") Consultant Rankings
             ul.nav.navbar-nav.navbar-right
                 li
