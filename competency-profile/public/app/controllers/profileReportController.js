@@ -12,8 +12,13 @@
 		vm.objectives = [];
 		vm.username = $routeParams.username;
 		vm.nextLevel = 'base';
+		vm.showExamples = true;
 
 		initialize();
+
+		vm.toggleExamples = function toggleExamples() {
+			vm.showExamples = !vm.showExamples;
+		};
 
 		// go get this user and the user document
 		function initialize() {

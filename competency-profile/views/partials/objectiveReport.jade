@@ -1,0 +1,18 @@
+div.panel-heading
+	span(data-ng-if="objective.isMet")
+		|Objective Met
+	span(data-ng-if="!objective.isMet")
+		|Objective Not Met
+	strong.pull-right ( Gate Level: {{objective.gateLevel}} )
+div.panel-body
+	strong
+		|{{objective.description}}?
+	div.row(data-ng-if="vm.showExamples")
+		div.col-xs-6
+			h3
+				small Supporting Example
+			|{{objective.supportingExample}}
+		div.col-xs-6
+			h3
+				small Counter Example
+			|{{objective.counterExample}}

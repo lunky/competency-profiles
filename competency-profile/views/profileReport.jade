@@ -1,39 +1,27 @@
-div
-	h3 Profile Report for:
-	strong {{vm.username}}
-
+toaster-container(toaster-options="{'time-out': 3000, 'close-button':true, 'position-class': 'toast-bottom-right'}")
+div.container.sections-wrapper
+	div.primary.col-xs-12
+		section.section
+			div.section-inner
+				div.row
+					div.col-xs-12
+						a.btn.btn-success.pull-right(data-ng-click="vm.toggleExamples()") Toggle Examples
+						h3.heading Profile Report for:
+							span.strong(ng-bind="vm.username")
+					div.col-xs-12
+						|Restrict Objective Results to Level: {{vm.nextLevel}}
+						input(type="checkbox" data-ng-model="vm.search.gateLevel" data-ng-true-value="'{{vm.nextLevel}}'" data-ng-false-value="''")
+					div.col-xs-12
+						|Restrict Objective Results to UnMet
+						input(type="checkbox" data-ng-model="vm.search.isMet" data-ng-true-value="false" data-ng-false-value="true")
+				div.content
+					div.row
+						div.col-xs-12
+							div.panel(data-ng-repeat="objective in vm.objectives | orderBy: '-score' | filter:vm.search:strict" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'")
+								include ./partials/objectiveReport.jade
 //TODO
 //  Filter to only display isMet = False
 //  Determine current Level
 //  Order by Gate Level w/ next Gate Level @ top (e.g. if currently base, order so Intermediate is first)
 //  Then order by Weighting descending
 //  Indicate which Objective is a gate
-
-div.content
-	div.row
-		div.col-md-12.col-sm-12.col-xs-12
-			|Restrict Objective Results to Level: {{vm.nextLevel}}
-			input(type="checkbox" data-ng-model="vm.search.gateLevel" data-ng-true-value="'{{vm.nextLevel}}'" data-ng-false-value="''")
-	div.row
-		div.col-md-12.col-sm-12.col-xs-12
-			|Restrict Objective Results to UnMet
-			input(type="checkbox" data-ng-model="vm.search.isMet" data-ng-true-value="false" data-ng-false-value="true")
-	div.row
-		div.col-md-12.col-sm-12.col-xs-12
-			div.panel(data-ng-repeat="objective in vm.objectives | orderBy: '-score' | filter:vm.search:strict" )
-				div.panel-body
-					strong
-						|{{objective.description}}
-				div.row
-					div.col-xs-2
-						h3
-							small Met
-						|{{objective.isMet}}
-					div.col-xs-2
-						h3
-							small Score
-						|{{objective.score}}
-					div.col-xs-2
-						h3
-							small Gate Level
-						|{{objective.gateLevel}}

@@ -26,6 +26,6 @@ div.container.sections-wrapper
 							|Clear all answers
 				div.content
 					div.row
-						div.col-md-12.col-sm-12.col-xs-12
+						div.col-xs-12
 							div.panel(data-ng-repeat="objective in vm.objectives | orderBy: vm.sort" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'")
 								include ./partials/objective.jade
