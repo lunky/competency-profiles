@@ -12,7 +12,7 @@ module.exports = function (passport) {
 	// required for persistent login sessions
 	// passport needs ability to serialize and unserialize users out of session
 
-	var UserData = mongoose.model('UserData');
+	var Users = mongoose.model('Users');
 	
 	// used to serialize the user for the session
 	passport.serializeUser(function (user, done) {
@@ -21,14 +21,14 @@ module.exports = function (passport) {
 
 	// used to deserialize the user
 	passport.deserializeUser(function (id, done) {
-		UserData.findById(id , function (err, user) {
+		Users.findById(id , function (err, user) {
 			done(err, user);
 		});
 	});
 
 	passport.use('obslocal', new LocalStrategy(function (username, password, done) {
 		process.nextTick(function () {
-			UserData.findOne({ 'username': username, 'password': password }, function (err, user) {
+			Users.findOne({ 'username': username, 'password': password }, function (err, user) {
 				if (err) {
 					return done(err);
 				}

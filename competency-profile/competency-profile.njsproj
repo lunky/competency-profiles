@@ -78,7 +78,7 @@
     <Content Include="seed.json" />
     <Content Include="seeds\competencylevel.json" />
     <Content Include="seeds\objective.json" />
-    <Content Include="seeds\userData.json" />
+    <Content Include="seeds\user.json" />
     <Content Include="views\footer.jade" />
     <Content Include="views\header.jade" />
     <Content Include="views\login.jade" />

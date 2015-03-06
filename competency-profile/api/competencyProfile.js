@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var Profiles = mongoose.model('Profiles');
 var CompetencyLevels = mongoose.model('CompetencyLevels');
 var Objectives = mongoose.model('Objectives');
-var UserData = mongoose.model('UserData');
+var Users = mongoose.model('Users');
 
 function getStats(objectives, levels) {
 

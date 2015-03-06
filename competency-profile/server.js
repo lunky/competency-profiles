@@ -21,7 +21,7 @@ db.once('open', function callback() {
 });
 
 //MODELS
-require('./models/UserData');
+require('./models/Users');
 
 require('./models/Objectives');
 require('./models/CompetencyLevels');
