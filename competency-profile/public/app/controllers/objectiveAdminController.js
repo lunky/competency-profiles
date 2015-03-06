@@ -22,17 +22,16 @@
 			if (!objective.edit) {
 				objectiveAdminService.get(objective._id).then(function (response) {
 					//reset form data
-					objective = response.data;
-					//objective.description = response.data.description;
-					//objective.supportingExample = response.data.supportingExample;
-					//objective.counterExample = response.data.counterExample;
-					//objective.gateLevel = response.data.gateLevel;
-					//objective.score = response.data.score;
-					//objective.communication = response.data.communication;
-					//objective.leadership = response.data.leadership;
-					//objective.interpersonal = response.data.interpersonal;
-					//objective.conflict = response.data.conflict;
-					//objective.citizenship = response.data.citizenship;
+					objective.description = response.data.description;
+					objective.supportingExample = response.data.supportingExample;
+					objective.counterExample = response.data.counterExample;
+					objective.gateLevel = response.data.gateLevel;
+					objective.score = response.data.score;
+					objective.communication = response.data.communication;
+					objective.leadership = response.data.leadership;
+					objective.interpersonal = response.data.interpersonal;
+					objective.conflict = response.data.conflict;
+					objective.citizenship = response.data.citizenship;
 				});
 			}
 		};
