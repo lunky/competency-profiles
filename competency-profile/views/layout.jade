@@ -30,13 +30,16 @@ head
 	body(ng-app=(isAuthenticated ? 'consulting':'') ngCloak)
 		include nav
 		div.page-wrap
-						include header
-						block content
+			include header
+			block content
 		include footer
 		
 script(src='/bower_components/angularjs/angular.js')
 script(src='/bower_components/angular-route/angular-route.js')
 script(src='/bower_components/angular-animate/angular-animate.js')
+script(src='/bower_components/jquery/dist/jquery.min.js')
+script(src='/bower_components/bootstrap/js/transition.js')
+script(src='/bower_components/bootstrap/js/collapse.js')
 script(src='/bower_components/angular-bootstrap/ui-bootstrap-tpls.js')
 script(src='/bower_components/angularjs-toaster/toaster.js')
 
@@ -49,6 +52,7 @@ script(src='/app/services/membersService.js')
 script(src='/app/services/competencyLevelsService.js')
 script(src='/app/services/competencyProfileService.js')
 
+script(src='/app/controllers/navController.js')
 script(src='/app/controllers/headerController.js')
 script(src='/app/controllers/objectiveAdminController.js')
 script(src='/app/controllers/competencyProfileController.js')
@@ -57,4 +61,3 @@ script(src='/app/controllers/membersController.js')
 script(src='/app/controllers/competencyLevelsController.js')
 script(src='/app/controllers/profileReportController.js')
 script(src='/app/controllers/rankingsController.js')
-
