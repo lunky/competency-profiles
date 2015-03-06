@@ -19,6 +19,22 @@ router.get('/', isAuthenticated, function (req, res) {
 	});
 });
 
+router.get('/lookup', isAuthenticated, function (req, res) {
+
+	CompetencyLevels.find({}, {
+		levelId: 1,
+		gateLevelDescription: 1,
+		description: 1
+	}, function (err, doc) {
+		if (err) {
+			res.send(err);
+		}
+		res.send({
+			'data': doc
+		});
+	});
+});
+
 router.get('/:id', isAuthenticated, function (req, res) {
 
 	CompetencyLevels.findOne(req.params.id, function (err, doc) {

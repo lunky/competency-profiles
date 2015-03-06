@@ -8,4 +8,4 @@ var UserSchema = new mongoose.Schema({
 	directReports: [{username: String, displayName: String}]
 });
 
-module.exports = mongoose.model('UserData', UserSchema);
+module.exports = mongoose.model('Users', UserSchema);

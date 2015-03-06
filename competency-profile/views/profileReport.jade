@@ -1,4 +1,4 @@
-div 
+div
 	h3 Profile Report for:
 	strong {{vm.username}}
 
@@ -12,9 +12,17 @@ div
 div.content
 	div.row
 		div.col-md-12.col-sm-12.col-xs-12
-			div.panel(data-ng-repeat="objective in vm.objectives | orderBy: '-score' | filter: '!isMet'" )
+			|Restrict Objective Results to Level: {{vm.nextLevel}}
+			input(type="checkbox" data-ng-model="vm.search.gateLevel" data-ng-true-value="'{{vm.nextLevel}}'" data-ng-false-value="''")
+	div.row
+		div.col-md-12.col-sm-12.col-xs-12
+			|Restrict Objective Results to UnMet
+			input(type="checkbox" data-ng-model="vm.search.isMet" data-ng-true-value="false" data-ng-false-value="true")
+	div.row
+		div.col-md-12.col-sm-12.col-xs-12
+			div.panel(data-ng-repeat="objective in vm.objectives | orderBy: '-score' | filter:vm.search:strict" )
 				div.panel-body
-					strong 
+					strong
 						|{{objective.description}}
 				div.row
 					div.col-xs-2

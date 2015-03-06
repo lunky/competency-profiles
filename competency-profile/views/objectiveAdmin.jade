@@ -1,97 +1,146 @@
 toaster-container(toaster-options="{'time-out': 3000, 'close-button':true, 'position-class': 'toast-bottom-right'}")
 div.container.sections-wrapper
-	div.row
-		div.primary.col-md-12.col-sm-12.col-xs-12
-			section.section
-				div.section-inner
-					div.row
-						h2.heading Filter Criteria
-					div.row
-						div.col-md-4.form-group
-							span
-								|Description filter
-							input.form-control(placeholder="Description" data-ng-model="vm.search.description")
-						div.col-md-4.form-group
-							span
-								|Gate Level filter
-							select.form-control(data-ng-model="vm.search.gateLevel" )
-								option(value="" label="All")
-								option(value="base" label="Consultant")
-								option(value="intermediate" label="Intermediate")
-								option(value="senior" label="Senior")
-					div.row
-						div.col-md-12.form-group
-							div.col-xs-2.col-xs-offset-1
-								h3
-									small Communication
-								input(type="checkbox" data-ng-model="vm.search.communication" ng-true-value="'Y'" ng-false-value="''")
-							div.col-xs-2
-								h3
-									small Leadership
-								input(type="checkbox" data-ng-model="vm.search.leadership" data-ng-true-value="'Y'" data-ng-false-value="''")
-							div.col-xs-2
-								h3
-									small Interpersonal
-								input(type="checkbox" data-ng-model="vm.search.interpersonal" data-ng-true-value="'Y'" data-ng-false-value="''")
-							div.col-xs-2
-								h3
-									small Conflict
-								input(type="checkbox" data-ng-model="vm.search.conflict" data-ng-true-value="'Y'" data-ng-false-value="''")
-							div.col-xs-2
-								h3
-									small Citizenship
-								input(type="checkbox" data-ng-model="vm.search.citizenship" data-ng-true-value="'Y'" data-ng-false-value="''")
-						div.col-md-12.col-sm-12.col-xs-12
-							h2.heading Objectives
-						div.row
-						div.row
-							div.col-md-12.col-sm-12.col-xs-12
-								div.panel(data-ng-repeat="objective in vm.objectives | filter:vm.search:strict" data-ng-class="panel-success")
+		div.row
+			div.primary.col-sm-12.col-xs-12
+				section.section.admin
+					div.section-inner
+						h2.heading Objective Filter
+						div.content
+							div.row
+								div.panel.panel-met
 									div.panel-heading
-										span
-											|{{objective.description}}
+										div.row
+											div.col-xs-12
+												h3.panel-title Criteria
 									div.panel-body
 										div.row
-											div.col-xs-6
-												h3
-													small Supporting Example
-												|{{objective.supportingExample}}
-											div.col-xs-6
-												h3 
-													small Counter Example
-												|{{objective.counterExample}}
-										div.row
-											div.col-xs-6
-												div.form-group
-													label(for="objectiveGateLevel{{$index+1}}") Gate Level
-													select.form-control(name="gateLevel{{$index+1}}" data-ng-model="objective.gateLevel" )
-														option(value="base" label="Base")
-														option(value="intermediate" label="Intermediate")
-														option(value="senior" label="Senior")
-											div.col-xs-6
-												div.form-group
-													label(for="objectiveScore{{$index+1}}") Score
-													input.form-control(type="text" name="objectiveScore{{$index+1}}" data-ng-model="objective.score")
-										div.row
-											div.col-xs-2.col-xs-offset-1
-												h3
-													small Communication
-												input(type="checkbox" data-ng-model="objective.communication" ng-true-value="'Y'" ng-false-value="''")
-											div.col-xs-2
-												h3 
-													small Leadership
-												input(type="checkbox" data-ng-model="objective.leadership" data-ng-true-value="'Y'" data-ng-false-value="''")
-											div.col-xs-2
-												h3 
-													small Interpersonal
-												input(type="checkbox" data-ng-model="objective.interpersonal" data-ng-true-value="'Y'" data-ng-false-value="''")
-											div.col-xs-2
-												h3 
-													small Conflict
-												input(type="checkbox" data-ng-model="objective.conflict" data-ng-true-value="'Y'" data-ng-false-value="''")
-											div.col-xs-2
-												h3 
-													small Citizenship
-												input(type="checkbox" data-ng-model="objective.citizenship" data-ng-true-value="'Y'" data-ng-false-value="''")
-										div.row
-											a.btn.btn-success(data-ng-click="vm.save(objective)") Save Objective
+											div.col-xs-12.col-md-12
+												div.row
+													div.col-xs-12.col-md-8
+														div.form-group
+															label(for="descriptionSearch") Description
+															input.form-control( type="multiline" data-ng-model="vm.search.description")
+														div.form-group
+															label(for="supportingExampleSearch") Supporting Example
+															input.form-control(type="text" data-ng-model="vm.search.supportingExample")
+														div.form-group
+															label(for="counterExampleSearch") Counter Example
+															input.form-control(type="text" data-ng-model="vm.search.counterExample")
+													div.col-xs-12.col-md-2
+														div.form-group
+															strong Communication
+															input(type="checkbox" data-ng-model="vm.search.communication" ng-true-value="'Y'" ng-false-value="''")
+														div.form-group
+															strong Leadership
+															input(type="checkbox" data-ng-model="vm.search.leadership" ng-true-value="'Y'" ng-false-value="''")
+														div.form-group
+															strong Interpersonal
+															input(type="checkbox" data-ng-model="vm.search.interpersonal" ng-true-value="'Y'" ng-false-value="''")
+														div.form-group
+															strong Conflict
+															input(type="checkbox" data-ng-model="vm.search.conflict" ng-true-value="'Y'" ng-false-value="''")
+														div.form-group
+															strong Citizenship
+															input(type="checkbox" data-ng-model="vm.search.citizenship" ng-true-value="'Y'" ng-false-value="''")
+													div.col-xs-12.col-md-2
+														div.form-group
+															strong Gate Level
+															select.form-control(data-ng-model="vm.search.gateLevel" )
+																option(value="base" label="Base")
+																option(value="intermediate" label="Intermediate")
+																option(value="senior" label="Senior")
+														div.form-group
+															label(for="scoreSearch") Score
+															input.form-control( multiline="true" type="text" data-ng-model="vm.search.score")
+div.container.sections-wrapper
+		div.row
+			div.primary.col-sm-12.col-xs-12
+				section.section.admin
+					div.section-inner
+						h2.heading Objectives Admin
+						div.content
+							div.row
+								div.col-xs-12(data-ng-repeat="objective in vm.objectives | orderBy:'objectiveId' | filter:vm.search:strict")
+									div.panel.panel-met
+										div.panel-heading
+											div.row
+												div.col-xs-8
+													h3.panel-title {{objective.description}}
+												div.col-xs-4
+													a.edit.pull-right(href="" data-ng-click="vm.toggleEdit(objective)")
+														i(data-ng-show="!objective.edit").fa.fa-lg.fa-pencil-square-o
+														i(data-ng-show="objective.edit").fa.fa-lg.fa-close
+										div.panel-body
+											div.row
+												div.col-xs-12.col-md-8
+													p(data-ng-show="!objective.edit")
+														strong Description:
+														|{{objective.description}}
+													p(data-ng-show="!objective.edit")
+														strong Supporting Example:
+														|{{objective.supportingExample}}
+													p(data-ng-show="!objective.edit")
+														strong Counter Example:
+														|{{objective.counterExample}}
+												div.col-xs-12.col-md-2
+													p(data-ng-show="!objective.edit")
+														strong Communication
+														input(type="checkbox" disabled="true" data-ng-model="objective.communication" ng-true-value="'Y'" ng-false-value="''")
+													p(data-ng-show="!objective.edit")
+														strong Leadership
+														input(type="checkbox" disabled="true" data-ng-model="objective.leadership" ng-true-value="'Y'" ng-false-value="''")
+													p(data-ng-show="!objective.edit")
+														strong Interpersonal
+														input(type="checkbox" disabled="true" data-ng-model="objective.interpersonal" ng-true-value="'Y'" ng-false-value="''")
+													p(data-ng-show="!objective.edit")
+														strong Conflict
+														input(type="checkbox" disabled="true" data-ng-model="objective.conflict" ng-true-value="'Y'" ng-false-value="''")
+													p(data-ng-show="!objective.edit")
+														strong Citizenship
+														input(type="checkbox" disabled="true" data-ng-model="objective.citizenship" ng-true-value="'Y'" ng-false-value="''")
+												div.col-xs-12.col-md-2
+													p(data-ng-show="!objective.edit")
+														strong Gate Level
+														|{{objective.gateLevel}}
+													p(data-ng-show="!objective.edit")
+														strong Score
+														|{{objective.score}}
+											div.form(data-ng-show="objective.edit")
+												div.row
+													div.col-xs-12.col-md-8
+														div.form-group
+															label(for="description{{$index+1}}") Description
+															input.form-control( multiline="true" type="multiline" name="description{{$index+1}}" data-ng-model="objective.description")
+														div.form-group
+															label(for="supportingExample{{$index+1}}") Supporting Example
+															input.form-control( multiline="true" type="text" name="supportingExample{{$index+1}}" data-ng-model="objective.supportingExample")
+														div.form-group
+															label(for="counterExample{{$index+1}}") Counter Example
+															input.form-control( multiline="true" type="text" name="counterExample{{$index+1}}" data-ng-model="objective.counterExample")
+														a.btn.btn-success( data-ng-click="vm.save(objective)") Save
+													div.col-xs-12.col-md-2
+														div.form-group
+															strong Communication
+															input(type="checkbox" data-ng-model="objective.communication" ng-true-value="'Y'" ng-false-value="''")
+														div.form-group
+															strong Leadership
+															input(type="checkbox" data-ng-model="objective.leadership" ng-true-value="'Y'" ng-false-value="''")
+														div.form-group
+															strong Interpersonal
+															input(type="checkbox" data-ng-model="objective.interpersonal" ng-true-value="'Y'" ng-false-value="''")
+														div.form-group
+															strong Conflict
+															input(type="checkbox" data-ng-model="objective.conflict" ng-true-value="'Y'" ng-false-value="''")
+														div.form-group
+															strong Citizenship
+															input(type="checkbox" data-ng-model="objective.citizenship" ng-true-value="'Y'" ng-false-value="''")
+													div.col-xs-12.col-md-2
+														div.form-group
+															strong Gate Level
+															select.form-control(name="gateLevel{{$index+1}}" data-ng-model="objective.gateLevel" )
+																option(value="base" label="Base")
+																option(value="intermediate" label="Intermediate")
+																option(value="senior" label="Senior")
+														div.form-group
+															label(for="score{{$index+1}}") Score
+															input.form-control( multiline="true" type="text" name="score{{$index+1}}" data-ng-model="objective.score")

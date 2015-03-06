@@ -1,4 +1,4 @@
-﻿var express = require('express');
+var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
 var isAuthenticated = require('../config/auth');
@@ -10,16 +10,34 @@ router.get('/', isAuthenticated, function (req, res) {
 		if (err) {
 			res.send(err);
 		}
-		res.send({ 'data': doc });
+		res.send({
+			'data': doc
+		});
+	});
+});
+
+router.get('/:id', isAuthenticated, function (req, res) {
+	Objectives.findOne(req.params.id, function (err, doc) {
+		if (err) {
+			res.send(err);
+		}
+		res.send({
+			'data': doc
+		});
 	});
 });
 
 router.post('/:id', isAuthenticated, function (req, res) {
-	Objectives.update(req.params.id, req.body.objective, { upsert: true }, function (err, doc) {
+	Objectives.update(req.params.id, req.body.objective, {
+		upsert: true
+	}, function (err, doc) {
 		if (err) {
 			res.send(err);
 		}
-		res.send({ 'result': 'success', 'objective': doc });
+		res.send({
+			'result': 'success',
+			'objective': doc
+		});
 	});
 });
 
