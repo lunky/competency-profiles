@@ -262,11 +262,7 @@ router.get('/rankings', isAuthenticated, function (req, res) {
 			res.send(err);
 		}
 
-		//Filter profiles for which the current user has
-		//in their direct reports collection
-		var filteredProfiles = profileList.filter(function (el) {
-			return userIsDirectReport(req.user.directReports, el.userid)
-		});
+		var filteredProfiles = getFilteredProfiles(profileList, req.user.directReports)
 
 		res.send({
 			'result': 'success',
@@ -274,6 +270,32 @@ router.get('/rankings', isAuthenticated, function (req, res) {
 		});
 	});
 });
+
+function getFilteredProfiles(profileList, directReports) {
+
+	//Filter the profile list to only users who are direct reports
+	var filteredProfiles = profileList.filter(function (el) {
+		return userIsDirectReport(directReports, el.userid)
+	});
+
+	//Add all the users who haven't completed a profile
+	for (var i = 0; i < directReports.length; i++) {
+		//for direct report check if it exists in  filteredProfiles 
+		var addReport = filteredProfiles.some(function (el) {
+			return el.userid == directReports[i].username;
+		});
+
+		//if no profile was found, add a 'No Profile Data' entry 
+		if (!addReport)
+			filteredProfiles.push({
+				userid: directReports[i].username,
+				displayName: directReports[i].displayName,
+				level: 'No Profile Data'
+			});
+	}
+
+	return filteredProfiles;
+}
 
 
 
