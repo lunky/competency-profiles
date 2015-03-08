@@ -5386,6 +5386,9 @@ input[type="checkbox"] {
 .col-no-padding-right {
   padding-right: 0;
 }
+.badge {
+  background: #9d1f21;
+}
 .controls-row .checkbox:first-child {
   margin-top: 0;
 }
