@@ -11,6 +11,7 @@
 
 		var vm = this;
 		vm.objectives = [];
+		vm.originalObjectives = [];
 		vm.gateLevels = [];
 		vm.initialize = initialize;
 		vm.save = save;
@@ -18,23 +19,36 @@
 		initialize();
 
 		vm.toggleEdit = function toggleEdit(objective) {
+
 			objective.edit = !objective.edit;
-			if (!objective.edit) {
-				objectiveAdminService.get(objective._id).then(function (response) {
-					//reset form data
-					objective.description = response.data.description;
-					objective.supportingExample = response.data.supportingExample;
-					objective.counterExample = response.data.counterExample;
-					objective.gateLevel = response.data.gateLevel;
-					objective.score = response.data.score;
-					objective.communication = response.data.communication;
-					objective.leadership = response.data.leadership;
-					objective.interpersonal = response.data.interpersonal;
-					objective.conflict = response.data.conflict;
-					objective.citizenship = response.data.citizenship;
+
+			if (objective.edit) {
+				vm.originalObjectives.push(angular.copy(objective));
+			} else {
+
+				for (var i = 0; i < vm.originalObjectives.length; i++) {
+					if (vm.originalObjectives[i].objectiveId == objective.objectiveId) {
+						objective.description = vm.originalObjectives[i].description;
+						objective.supportingExample = vm.originalObjectives[i].supportingExample;
+						objective.counterExample = vm.originalObjectives[i].counterExample;
+						objective.gateLevel = vm.originalObjectives[i].gateLevel;
+						objective.score = vm.originalObjectives[i].score;
+						objective.communication = vm.originalObjectives[i].communication;
+						objective.leadership = vm.originalObjectives[i].leadership;
+						objective.interpersonal = vm.originalObjectives[i].interpersonal;
+						objective.conflict = vm.originalObjectives[i].conflict;
+						objective.citizenship = vm.originalObjectives[i].citizenship;
+						break;
+					}
+				}
+
+				vm.originalObjectives = vm.originalObjectives.filter(function (el) {
+					return el.objectiveId != objectiveId.objectiveId;
 				});
 			}
 		};
+
+
 
 		function initialize() {
 			console.log('Objectives admin initialize started');
