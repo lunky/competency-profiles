@@ -48,18 +48,21 @@ router.get('/:id', isAuthenticated, function (req, res) {
 });
 
 router.put('/:id', isAuthenticated, function (req, res) {
-
-	CompetencyLevels.update(req.params.id, req.body.level, {
-		upsert: true
-	}, function (err, doc) {
-		if (err) {
-			res.send(err);
-		}
-		res.send({
-			'result': 'success',
-			'level': doc
+	CompetencyLevels.update({
+			'_id': req.params.id
+		},
+		req.body.level, {
+			upsert: true
+		},
+		function (err, doc) {
+			if (err) {
+				res.send(err);
+			}
+			res.send({
+				'result': 'success',
+				'objective': doc
+			});
 		});
-	});
 });
 
 module.exports = router;

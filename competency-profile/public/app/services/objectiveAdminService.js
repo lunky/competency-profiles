@@ -47,7 +47,7 @@
 
 		svc.save = function (objective) {
 			var request = $http({
-				method: 'post',
+				method: 'put',
 				url: '/api/objectives/' + objective._id,
 				data: {
 					objective: objective

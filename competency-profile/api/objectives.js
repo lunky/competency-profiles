@@ -27,18 +27,22 @@ router.get('/:id', isAuthenticated, function (req, res) {
 	});
 });
 
-router.post('/:id', isAuthenticated, function (req, res) {
-	Objectives.update(req.params.id, req.body.objective, {
-		upsert: true
-	}, function (err, doc) {
-		if (err) {
-			res.send(err);
-		}
-		res.send({
-			'result': 'success',
-			'objective': doc
+router.put('/:id', isAuthenticated, function (req, res) {
+	Objectives.update({
+			'_id': req.params.id
+		},
+		req.body.objective, {
+			upsert: true
+		},
+		function (err, doc) {
+			if (err) {
+				res.send(err);
+			}
+			res.send({
+				'result': 'success',
+				'objective': doc
+			});
 		});
-	});
 });
 
 module.exports = router;

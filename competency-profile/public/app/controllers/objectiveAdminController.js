@@ -48,8 +48,6 @@
 			}
 		};
 
-
-
 		function initialize() {
 			console.log('Objectives admin initialize started');
 
@@ -66,10 +64,11 @@
 		}
 
 		function save(objective) {
-			objective.edit = false;
-			objectiveAdminService.save(objective).then(function (response) {
-				toaster.pop('success', 'Save Successful', 'Your objective metadata was updated');
-			});
+				objective.edit = false;
+				objectiveAdminService.save(objective).then(function (response) {
+					toaster.pop('success', 'Save Successful', 'Your objective metadata was updated');
+				});
+
 		}
 	}
 })();
