@@ -1,28 +1,21 @@
 - if(isAuthenticated)
-	nav.navbar.navbar-fixed-top.navbar-default
+	nav.main-nav(role="navigation")
 		div.container(data-ng-controller="NavController as vm")
-			div.container(data-ng-controller="HeaderController as hvm")
-				div.navbar-header
-					button.navbar-toggle(data-toggle="collapse", data-target=".navbar-collapse")
-						span.icon-bar
-						span.icon-bar
-						span.icon-bar
-					div.small-logo-container
-						div.small-logo
-							a.navbar-brand(href="/")
-								img.profile-image.img-responsive.img-circle(src='images/consultant-codell-square-small.png' alt='#{userDisplayName}' style="height:35px")
-							span.hidden-sm {{hvm.consultantLevel}}
-				div.collapse.navbar-collapse
-					ul.nav.navbar-nav.navbar-right
-						li(ng-class="vm.getClass('')")
-							a(href="/#") Your Profile
-						- if(isAdmin)
-							li(ng-class="vm.getClass('/competencyLevels')")
+			div.navbar-header
+				button.navbar-toggle(type="button" data-toggle="collapse" data-target="#navbar-collapse")
+					span.sr-only Toggle navigation
+					span.icon-bar
+					span.icon-bar
+					span.icon-bar
+			div.navbar-collapse.collapse(id="navbar-collapse")
+				ul.nav.navbar-nav
+					li.nav-item(ng-class="vm.getClass('')")
+						a(href="/#") Home
+					- if(isAdmin)
+							li.nav-item(ng-class="vm.getClass('/competencyLevels')")
 								a(href="/#/competencyLevels") Competency Levels Admin
-							li(ng-class="vm.getClass('/objectiveAdmin')")
+							li.nav-item(ng-class="vm.getClass('/objectiveAdmin')")
 								a(href="/#/objectiveAdmin") Objectives Admin
-						- if(directReports.length > 0)
-							li(ng-class="vm.getClass('/rankings')")
+					- if(directReports.length > 0)
+							li.nav-item(ng-class="vm.getClass('/rankings')")
 								a(href="/#/rankings") Your Team
-						li
-							a(href="/logoff") Log Off

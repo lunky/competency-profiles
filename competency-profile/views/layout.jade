@@ -28,9 +28,9 @@ head
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js')
 	<![endif]-->
 	body(ng-app=(isAuthenticated ? 'consulting':'') ngCloak)
-		include nav
 		div.page-wrap
 			include header
+			include nav
 			block content
 		include footer
 		

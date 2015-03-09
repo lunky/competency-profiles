@@ -2,58 +2,60 @@
 @import "theme-default.less";
 
 /* Extra small devices (phones, less than 768px) */
-@media (max-width: 767px) { 
+@media (max-width: 767px) {
+	.pull-right,
+	.pull-left {
+		float: none !important;
+	}
 
-    .header {
-        text-align: center;
-    }
-    .header .profile-image {
-        float: none !important;
-        margin: 0 auto;
-    }
-    
-    .header .profile-content {
-        float: none !important;
-        text-align: center;
-    }
-    
-    .header .btn {
-        margin-top: 30px;
-        float: none !important;
-    }
-    
-    .header .logo {
-        margin: 0 auto; 
-    }
-    
-    .project-image {
-        margin-bottom: 15px;
-    }
-    
-    
+	.logo {
+		text-align: center;
+	}
+
+	.header .menu-top {
+		text-align: center;
+		margin-top: 10px;
+	}
+
+	.header .menu-top li {
+		float: none;
+		display: inline-block;
+	}
+
+	.main-nav .navbar-collapse {
+		padding-left: 15px;
+		padding-right: 15px;
+		border-top: 0;
+		-webkit-box-shadow: 0;
+		-moz-box-shadow: 0;
+		box-shadow: 0;
+	}
+
+	.navbar-nav {
+		margin-top: 0;
+	}
+
+	.main-nav .nav .nav-item.active > a:before {
+		content: none;
+	}
 }
 
 /* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) { 
-    
+@media (min-width: 768px) {
 }
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-    
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-
 }
 
 
 /* Ex-Large devices (large desktops, 1200px and up) */
 @media (min-width: 1400px) {
-    .container {
-        width: 1360px;
-    }
+	.container {
+		width: 1360px;
+	}
 }
-
-
