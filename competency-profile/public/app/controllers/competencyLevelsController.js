@@ -22,22 +22,37 @@
 			level.edit = !level.edit;
 
 			if (level.edit) {
-				vm.originalLevels.push(angular.copy(level));
+				remember(level);
 			} else {
-
-				for (var i = 0; i < vm.originalLevels.length; i++) {
-					if (vm.originalLevels[i].levelId == level.levelId) {
-						level.minimumScore = vm.originalLevels[i].minimumScore;
-						level.minimumGateScore = vm.originalLevels[i].minimumGateScore;
-						break;
-					}
+				var prev = recall(level.levelid);
+				if (prev != null) {
+					level.minimumScore = prev.minimumScore;
+					level.minimumGateScore = prev.minimumGateScore;
 				}
-
-				vm.originalLevels = vm.originalLevels.filter(function (el) {
-					return el.levelId != level.levelId;
-				});
+				unremember(level.levelid);
 			}
 		};
+
+		function remember(level) {
+			vm.originalLevels.push(angular.copy(level));
+		}
+
+		function unremember(levelId) {
+			vm.originalLevels = vm.originalLevels.filter(function (el) {
+				return el.levelId !== levelId;
+			});
+		}
+
+		function recall(levelId) {
+			var level;
+			for (var i = 0; i < vm.originalLevels.length; i++) {
+				if (vm.originalLevels[i].levelId === level.levelId) {
+					level = vm.originalLevels[i];
+					break;
+				}
+			}
+			return level;
+		}
 
 		function initialize() {
 			competencyLevelsService.getCompetencyLevels().then(function (response) {
@@ -48,13 +63,14 @@
 		function save(level) {
 			level.edit = false;
 			competencyLevelsService.save(level).then(function (response) {
-				console.log('service succes:' + response.data);
-				toaster.pop('success', 'Save Successful', 'Your competency score has been updated');
-				/*
-				 * indicate to the user what's happened in the event of a failure
-				 *
-				 * Save failed -
-				 */
+				toaster.pop('success', 'Save Successful', 'Your competency level changes have been saved.');
+				vm.originalLevels = vm.originalLevels.filter(function (el) {
+					return el.levelId !== level.levelId;
+				});
+
+			}, function (err) {
+				toaster.pop('error', 'Save Unsuccessful',
+					'An error has occured. Your competency level changes have not been updated');
 			});
 		}
 	}
