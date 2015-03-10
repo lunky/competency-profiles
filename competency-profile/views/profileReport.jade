@@ -6,19 +6,39 @@ div.container.sections-wrapper
 				div.row
 					div.col-xs-12
 						a.btn.btn-success.pull-right(data-ng-click="vm.toggleExamples()") Toggle Examples
-						h3.heading Profile Report for:
+						h3.heading Profile Report for: 
 							span.strong(ng-bind="vm.username")
-					div.col-xs-12
-						|Restrict Objective Results to Level: {{vm.nextLevel}}
-						input(type="checkbox" data-ng-model="vm.search.gateLevel" data-ng-true-value="'{{vm.nextLevel}}'" data-ng-false-value="''")
-					div.col-xs-12
-						|Restrict Objective Results to UnMet
-						input(type="checkbox" data-ng-model="vm.search.isMet" data-ng-true-value="false" data-ng-false-value="true")
+						h4.heading Current Level: 
+							span.strong(ng-bind="vm.profile.summary.level")
+						h4.heading Objectives Required For: 
+							span.strong(ng-bind="vm.profile.summary.nextLevel")
+					//div.col-xs-12
+					//	|Restrict Objective Results to Level: {{vm.nextLevel}}
+					//	input(type="checkbox" data-ng-model="vm.search.gateLevel" data-ng-true-value="'{{vm.nextLevel}}'" data-ng-false-value="''")
+					//div.col-xs-12
+					//	|Restrict Objective Results to UnMet
+					//	input(type="checkbox" data-ng-model="vm.search.isMet" data-ng-true-value="false" data-ng-false-value="true")
 				div.content
+					// Display Unmet Gates for the NEXT Level
 					div.row
 						div.col-xs-12
-							div.panel(data-ng-repeat="objective in vm.objectives | orderBy: '-score' | filter:vm.search:strict" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'")
+							//div.panel(data-ng-repeat="objective in vm.objectives | orderBy: '-score' | filter:vm.search:strict" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'")
+							div.panel(data-ng-repeat="objective in vm.profile.data | orderBy: '-gateLevel' | filter:vm.gateFilter:strict" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'")
 								include ./partials/objectiveReport.jade
+					div.row
+						div.col-xs-12
+							h3.heading Score Awarded: 
+								|{{vm.profile.summary.score}} 
+							h3.heading Score Required for Next Level: 
+								|{{vm.profile.summary.nextLevelScore}}
+							h3.heading {{vm.profile.summary.nextLevelScore - vm.profile.summary.score}} Points Required to Reach {{vm.profile.summary.nextLevel}} Level
+					// Display Unmet Objectives (excluding those above) order by Score desc
+					div.row
+						div.col-xs-12
+							div.panel(data-ng-repeat="objective in vm.profile.data | orderBy: '-score' | filter:vm.scoreFilter:strict" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'")
+								//TODO: Display Score
+								include ./partials/objectiveReport.jade
+
 //TODO
 //  Filter to only display isMet = False
 //  Determine current Level

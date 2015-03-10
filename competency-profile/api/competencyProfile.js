@@ -44,6 +44,7 @@ function getStats(objectives, levels) {
 		baseTotal: 0,
 		intermediateTotal: 0,
 		seniorTotal: 0,
+		score: 0,
 		'communication': 0,
 		'leadership': 0,
 		'interpersonal': 0,
@@ -74,16 +75,33 @@ function getStats(objectives, levels) {
 		});
 		return prev;
 	}, stats);
+
+	var currentLevelIndex = getLevel(doc, levels);
+	//TODO: Logic to handle not finding the Level
+	var nextLevelIndex = getNextLevel(currentLevelIndex);
+	
+	var nextLevel = "Principle";
+	var nextLevelScore = 1;
+	if (nextLevelIndex != "principle") {
+		nextLevel = levels[nextLevelIndex].description;
+		nextLevelScore = levels[nextLevelIndex].minimumScore;
+	}
+	
+
 	var summary = {
 		base: Math.round(doc.base / doc.baseTotal * 100),
 		intermediate: Math.round(doc.intermediate / doc.intermediateTotal * 100),
 		senior: Math.round(doc.senior / doc.seniorTotal * 100),
+		score: Math.round(doc.base + doc.intermediate + doc.senior),
 		communication: Math.round(doc.communication / doc.communicationTotal * 100),
 		leadership: Math.round(doc.leadership / doc.leadershipTotal * 100),
 		interpersonal: Math.round(doc.interpersonal / doc.interpersonalTotal * 100),
 		conflict: Math.round(doc.conflict / doc.conflictTotal * 100),
 		citizenship: Math.round(doc.citizenship / doc.citizenshipTotal * 100),
-		level: getLevel(doc, levels)
+		level: levels[currentLevelIndex].description,
+		levelScore: levels[currentLevelIndex].minimumScore,
+		nextLevel: nextLevel,
+		nextLevelScore: nextLevelScore
 	};
 	return summary;
 }
@@ -103,7 +121,17 @@ function getLevel(stats, levels) {
 		level = l;
 		return true;
 	});
-	return levels[level].description;
+	return level;
+}
+
+function getNextLevel(level) {
+	if (level === 'base') {
+		return 'intermediate'
+	} else if (level === 'intermediate') {
+		return 'senior'
+	} else {
+		return 'principle'
+	}
 }
 
 function getCompetencyLevels() {
