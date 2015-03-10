@@ -9,11 +9,10 @@
 
 	function ProfileReportController($routeParams, competencyProfileService, competencyLevelsService, toaster) {
 		var vm = this;
-		//vm.objectives = [];
+
 		vm.profile = {};
 		vm.username = $routeParams.username;
 		vm.showExamples = false;
-		//vm.nextLevel = 'base';
 		vm.gateFilter = {};
 		vm.scoreFilter = {};
 
@@ -33,8 +32,6 @@
 					function (response) {
 						vm.profile = response;
 
-						//vm.nextLevel = getProfileNextLevel(vm.profile.summary.level);
-
 						vm.gateFilter = {
 							isMet: false,
 							gateLevel: response.summary.nextLevel
@@ -50,17 +47,5 @@
 					}
 				);
 		}
-
-		/*
-		function getProfileNextLevel(level) {
-			if (level === 'Consultant') {
-				return 'intermediate'
-			} else if (level === 'Intermediate') {
-				return 'senior'
-			} else {
-				return 'principle'
-			}
-		}
-		*/
 	}
 })();
