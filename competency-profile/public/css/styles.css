@@ -5342,6 +5342,9 @@ h6 {
   font-weight: 700;
   color: #3f647e;
 }
+.capitalize {
+  text-transform: capitalize;
+}
 html,
 body {
   height: 100%;
@@ -5358,17 +5361,6 @@ body {
 .footer,
 .page-wrap:after {
   height: 43px;
-}
-ul.answers {
-  padding-left: 0;
-  margin-left: 2.14285714em;
-}
-ul.answers > li {
-  position: relative;
-}
-ul.answers .fa-check,
-ul.answers span {
-  color: #5cb85c;
 }
 ul.no-bullet,
 li.no-bullet {
