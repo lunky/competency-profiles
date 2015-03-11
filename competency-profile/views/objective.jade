@@ -1,0 +1,82 @@
+div.panel.panel-met
+	div.panel-heading
+		div.row
+			div.col-xs-11
+				h3.panel-title {{vm.objective.description}}
+			div.col-xs-1
+				a.edit.pull-right(href="" data-ng-click="vm.toggleEdit(vm.objective)")
+					i(data-ng-show="!vm.objective.edit").fa.fa-lg.fa-pencil-square-o
+					i(data-ng-show="vm.objective.edit").fa.fa-lg.fa-close
+	div.panel-body
+		div.row(data-ng-show="!vm.objective.edit")
+			div.col-xs-12.col-md-7
+				label Description
+				p.form-control-static {{vm.objective.description}}
+				label Supporting Example
+				p.form-control-static {{vm.objective.supportingExample}}
+				label Counter Example
+				p.form-control-static {{vm.objective.counterExample}}
+			div.col-xs-12.col-md-2.col-no-padding-right
+				label Gate Level
+				p {{vm.objective.gateLevel}}
+				label Score
+				p {{vm.objective.score}}
+			div.col-xs-12.col-md-3
+					div.controls-row
+						label.checkbox
+							input(type="checkbox" disabled="true" data-ng-model="vm.objective.communication" ng-true-value="'Y'" ng-false-value="''")
+							| Communication
+						label.checkbox
+							input(type="checkbox" disabled="true" data-ng-model="vm.objective.leadership" ng-true-value="'Y'" ng-false-value="''")
+							| Leadership
+						label.checkbox
+							input(type="checkbox" disabled="true" data-ng-model="vm.objective.interpersonal" ng-true-value="'Y'" ng-false-value="''")
+							| Interpersonal
+						label.checkbox
+							input(type="checkbox" disabled="true" data-ng-model="vm.objective.conflict" ng-true-value="'Y'" ng-false-value="''")
+							| Conflict
+						label.checkbox
+							input(type="checkbox" disabled="true" data-ng-model="vm.objective.citizenship" ng-true-value="'Y'" ng-false-value="''")
+							| Citizenship
+		div.form(data-ng-show="vm.objective.edit")
+			div.row
+				div.col-xs-12.col-md-7
+					div.form-group
+						label(for="description{{$index+1}}") Description
+						textarea.form-control(rows="6" name="description{{$index+1}}" data-ng-model="vm.objective.description")
+					div.form-group
+						label(for="supportingExample{{$index+1}}") Supporting Example
+						textarea.form-control(rows="6" name="supportingExample{{$index+1}}" data-ng-model="vm.objective.supportingExample")
+					div.form-group
+						label(for="counterExample{{$index+1}}") Counter Example
+						textarea.form-control(rows="6" name="counterExample{{$index+1}}" data-ng-model="vm.objective.counterExample")
+				div.col-xs-12.col-md-2
+					div.form-group
+						label Gate Level
+						select.form-control(name="gateLevel{{$index+1}}" data-ng-model="vm.objective.gateLevel" )
+							option(value="base" label="Base")
+							option(value="intermediate" label="Intermediate")
+							option(value="senior" label="Senior")
+					div.form-group
+						label(for="score{{$index+1}}") Score
+						input.form-control( multiline="true" type="text" name="score{{$index+1}}" data-ng-model="vm.objective.score")
+				div.col-xs-12.col-md-3
+					div.controls-row
+						label.checkbox
+							input(type="checkbox" data-ng-model="vm.objective.communication" ng-true-value="'Y'" ng-false-value="''")
+							| Communication
+						label.checkbox
+							input(type="checkbox" data-ng-model="vm.objective.leadership" ng-true-value="'Y'" ng-false-value="''")
+							| Leadership
+						label.checkbox
+							input(type="checkbox" data-ng-model="vm.objective.interpersonal" ng-true-value="'Y'" ng-false-value="''")
+							| Interpersonal
+						label.checkbox
+							input(type="checkbox" data-ng-model="vm.objective.conflict" ng-true-value="'Y'" ng-false-value="''")
+							| Conflict
+						label.checkbox
+							input(type="checkbox" data-ng-model="vm.objective.citizenship" ng-true-value="'Y'" ng-false-value="''")
+							| Citizenship
+			div.row
+				div.col-xs-12
+					a.btn.btn-success( data-ng-click="vm.save(vm.objective)") Save

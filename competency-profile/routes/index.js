@@ -18,6 +18,10 @@ router.get('/level', isAuthenticated, function (req, res) {
 	res.render('level');
 });
 
+router.get('/objective', isAuthenticated, function (req, res) {
+	res.render('objective');
+});
+
 router.get('/login', function (req, res) {
 	res.render('login', {
 		messages: req.flash('error')
