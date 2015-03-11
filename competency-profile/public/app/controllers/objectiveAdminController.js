@@ -82,6 +82,7 @@
 			vm.originalObjectives = vm.originalObjectives.filter(function (el) {
 				return el.objectiveId !== objective.objectiveId;
 			});
+
 			objectiveAdminService.save(objective).then(function (response) {
 				toaster.pop('success', 'Save Successful', 'Your objective metadata was updated');
 			}, function (err) {
