@@ -88,8 +88,6 @@
 				toaster.pop('error', 'Save Unsuccessful',
 					'An error has occured. Your objective metadata changes have not been updated');
 			});
-
-
 		}
 	}
 })();

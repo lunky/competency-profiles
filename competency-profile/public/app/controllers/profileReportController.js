@@ -5,7 +5,8 @@
 		.module('consultingControllers')
 		.controller('ProfileReportController', ProfileReportController);
 
-	ProfileReportController.$inject = ['$routeParams', 'competencyProfileService', 'competencyLevelsService', 'toaster'];
+	ProfileReportController.$inject = [
+		'$routeParams', 'competencyProfileService', 'competencyLevelsService', 'toaster'];
 
 	function ProfileReportController($routeParams, competencyProfileService, competencyLevelsService, toaster) {
 		var vm = this;
@@ -39,7 +40,7 @@
 
 						vm.scoreFilter = {
 							isMet: false,
-							gateLevel: "!" + response.summary.nextLevel
+							gateLevel: '!' + response.summary.nextLevel
 						};
 					},
 					function (err) {

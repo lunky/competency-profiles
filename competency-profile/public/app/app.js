@@ -3,7 +3,8 @@
 	console.log('consulting app');
 	angular.module('consultingCommon', []);
 	angular.module('consultingServices', ['consultingCommon']);
-	angular.module('consultingControllers', ['consultingCommon', 'consultingServices']);
+	angular.module('consultingDirectives', []);
+	angular.module('consultingControllers', ['consultingCommon', 'consultingServices', 'consultingDirectives']);
 	var myApp = angular.module('consulting', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'toaster',
 								'consultingControllers', 'consultingServices']);
 

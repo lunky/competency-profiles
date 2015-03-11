@@ -14,6 +14,10 @@ router.get('/profileReport', isAuthenticated, function (req, res) {
 	res.render('profileReport');
 });
 
+router.get('/level', isAuthenticated, function (req, res) {
+	res.render('level');
+});
+
 router.get('/login', function (req, res) {
 	res.render('login', {
 		messages: req.flash('error')
