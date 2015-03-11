@@ -5,9 +5,11 @@
 		.module('consultingControllers')
 		.controller('ProfileReportController', ProfileReportController);
 
-	ProfileReportController.$inject = ['$filter', '$routeParams', 'competencyProfileService', 'competencyLevelsService', 'toaster'];
+	ProfileReportController.$inject = ['$filter', '$routeParams',
+									'competencyProfileService', 'competencyLevelsService', 'toaster'];
 
-	function ProfileReportController($filter, $routeParams, competencyProfileService, competencyLevelsService, toaster) {
+	function ProfileReportController($filter, $routeParams, competencyProfileService,
+		competencyLevelsService, toaster) {
 		var vm = this;
 
 		vm.profile = {};
@@ -29,23 +31,23 @@
 
 			competencyProfileService.getObjectivesByUsername(vm.username)
 				.then(
-				function (response) {
-					vm.profile = response;
+					function (response) {
+						vm.profile = response;
 
-					vm.gateFilter = {
-						isMet: false,
-						gateLevel: response.summary.nextLevel
-					};
+						vm.gateFilter = {
+							isMet: false,
+							gateLevel: response.summary.nextLevel
+						};
 
-					vm.scoreFilter = {
-						isMet: false,
-						gateLevel: "!" + response.summary.nextLevel
-					};
-				},
+						vm.scoreFilter = {
+							isMet: false,
+							gateLevel: '!' + response.summary.nextLevel
+						};
+					},
 					function (err) {
-					toaster.pop('error', 'Error Retrieving Objectives', err);
-				}
-			);
+						toaster.pop('error', 'Error Retrieving Objectives', err);
+					}
+				);
 		}
 
 		function toggleExamples() {
