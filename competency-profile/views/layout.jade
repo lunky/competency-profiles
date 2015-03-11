@@ -13,6 +13,7 @@ head
 	meta(charset='utf-8')
 	meta(http-equiv='X-UA-Compatible' content='IE=edge')
 	meta(name='viewport' content='width=device-width, initial-scale=1.0')
+
 	link(rel='shortcut icon', href='favicon.ico')
 	link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic')
 	link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Montserrat:400,700')
@@ -27,11 +28,12 @@ head
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js')
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js')
 	<![endif]-->
-	body(ng-app=(isAuthenticated ? 'consulting':'') ngCloak)
+	body(ng-app=(isAuthenticated ? 'CompetencyProfiles':'') ngCloak)
 		div.page-wrap
 			include header
 			include nav
 			block content
+			toaster-container(toaster-options="{'time-out': 3000, 'close-button':true, 'position-class': 'toast-bottom-right'}")
 		include footer
 		
 script(src='/bower_components/angularjs/angular.js')

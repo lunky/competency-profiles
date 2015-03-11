@@ -1,7 +1,7 @@
 //levelHolder
 'use strict';
 (function () {
-	var myApp = angular.module('consultingDirectives')
+	var myApp = angular.module('CompetencyProfilesDirectives')
 		.directive('levelHolder', levelHolder);
 
 	function levelHolder() {

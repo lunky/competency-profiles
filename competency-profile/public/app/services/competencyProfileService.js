@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-	var myApp = angular.module('consultingServices');
+	var myApp = angular.module('CompetencyProfilesServices');
 
 	myApp.service('competencyProfileService', competencyProfileService);
 

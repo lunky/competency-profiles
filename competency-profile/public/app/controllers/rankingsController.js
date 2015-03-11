@@ -1,31 +1,31 @@
 (function () {
-    'use strict';
+	'use strict';
 
-    angular
-        .module('consultingControllers')
-        .controller('RankingsController', RankingsController);
+	angular
+		.module('CompetencyProfilesControllers')
+		.controller('RankingsController', RankingsController);
 
-    RankingsController.$inject = ['competencyProfileService'];
+	RankingsController.$inject = ['competencyProfileService'];
 
-    function RankingsController(competencyProfileService) {
-        var vm = this;
-        vm.level = 'all';
-        vm.consultants = [];
+	function RankingsController(competencyProfileService) {
+		var vm = this;
+		vm.level = 'all';
+		vm.consultants = [];
 
-        initialize();
+		initialize();
 
-        function initialize() {
-            competencyProfileService.getRankings().then(function (response) {
-                if (response.result === 'success') {
-                    vm.consultants = response.profileList.map(function (user) {
-                        return {
-                            userid: user.userid,
-                            name: user.displayName || user.userid,
-                            level: user.level
-                        };
-                    });
-                }
-            });
-        }
-    }
+		function initialize() {
+			competencyProfileService.getRankings().then(function (response) {
+				if (response.result === 'success') {
+					vm.consultants = response.profileList.map(function (user) {
+						return {
+							userid: user.userid,
+							name: user.displayName || user.userid,
+							level: user.level
+						};
+					});
+				}
+			});
+		}
+	}
 })();

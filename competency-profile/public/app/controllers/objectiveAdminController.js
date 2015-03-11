@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('consultingControllers')
+		.module('CompetencyProfilesControllers')
 		.controller('ObjectiveAdminController', ObjectiveAdminController);
 
 	ObjectiveAdminController.$inject = ['competencyLevelsService', 'objectiveAdminService', 'toaster'];
@@ -63,8 +63,6 @@
 		}
 
 		function initialize() {
-			console.log('Objectives admin initialize started');
-
 			//todo handle failures
 			objectiveAdminService.getObjectives().then(function (response) {
 				vm.objectives = response.data;
@@ -73,8 +71,6 @@
 			competencyLevelsService.getCompetencyLevelLookups().then(function (response) {
 				vm.gateLevels = response.data;
 			});
-
-			console.log('Objectives admin initialize completed');
 		}
 
 		function save(objective) {

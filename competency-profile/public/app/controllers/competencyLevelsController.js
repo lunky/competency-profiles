@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('consultingControllers')
+		.module('CompetencyProfilesControllers')
 		.controller('CompetencyLevelsController', CompetencyLevelsController);
 
 	CompetencyLevelsController.$inject = ['competencyLevelsService', 'toaster'];

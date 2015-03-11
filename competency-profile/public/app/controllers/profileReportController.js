@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('consultingControllers')
+		.module('CompetencyProfilesControllers')
 		.controller('ProfileReportController', ProfileReportController);
 
 	ProfileReportController.$inject = ['$filter', '$routeParams',

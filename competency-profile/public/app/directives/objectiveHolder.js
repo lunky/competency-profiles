@@ -1,7 +1,7 @@
 //objectiveHolder
 'use strict';
 (function () {
-	var myApp = angular.module('consultingDirectives')
+	var myApp = angular.module('CompetencyProfilesDirectives')
 		.directive('objectiveHolder', objectiveHolder);
 
 	function objectiveHolder() {

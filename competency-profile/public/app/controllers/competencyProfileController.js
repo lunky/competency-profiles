@@ -2,11 +2,11 @@
 	'use strict';
 
 	angular
-		.module('consultingControllers')
+		.module('CompetencyProfilesControllers')
 		.controller('CompetencyProfileController', CompetencyProfileController);
 
 	CompetencyProfileController.$inject = ['$filter', '$scope', '$rootScope',
-   'appEvents', 'competencyLevelsService', 'competencyProfileService', 'toaster'];
+	'appEvents', 'competencyLevelsService', 'competencyProfileService', 'toaster'];
 
 	function CompetencyProfileController(
 		$filter, $scope, $rootScope,
