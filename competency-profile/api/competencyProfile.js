@@ -79,14 +79,14 @@ function getStats(objectives, levels) {
 	var currentLevelIndex = getLevel(doc, levels);
 	//TODO: Logic to handle not finding the Level
 	var nextLevelIndex = getNextLevel(currentLevelIndex);
-	
+
 	var nextLevel = "Principle";
 	var nextLevelScore = 1;
 	if (nextLevelIndex != "principle") {
 		nextLevel = levels[nextLevelIndex].description;
 		nextLevelScore = levels[nextLevelIndex].minimumScore;
 	}
-	
+
 
 	var summary = {
 		base: Math.round(doc.base / doc.baseTotal * 100),
@@ -334,7 +334,7 @@ router.get('/:username', isAuthenticated, function (req, res) {
 	if (!((userIsDirectReport(req.user.directReports, username)) ||
 			req.user.username == username)) {
 		//TODO: Define proper error
-		res.send(new Error("This consultant is not a direct report"));
+		res.status(403).send(new Error("This consultant is not a direct report"));
 	}
 
 	getCompetencyLevels().then(function (levels) {
