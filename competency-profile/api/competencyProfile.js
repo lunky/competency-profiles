@@ -1,4 +1,21 @@
 var express = require('express');
+//var Sequelize = require('sequelize');
+//var sequelize = new Sequelize('DBName', 'username', 'password', {
+//	host: 'servername',
+//	dialect: 'mssql',
+//
+//	pool: {
+//		max: 5,
+//		min: 0,
+//		idle: 10000
+//	},
+//	dialectOptions: {
+//		encrypt: true
+//	}
+//
+//});
+
+
 var router = express.Router();
 var Q = require('q');
 var isAuthenticated = require('../config/auth');
@@ -79,14 +96,14 @@ function getStats(objectives, levels) {
 	var currentLevelIndex = getLevel(doc, levels);
 	//TODO: Logic to handle not finding the Level
 	var nextLevelIndex = getNextLevel(currentLevelIndex);
-	
+
 	var nextLevel = "Principle";
 	var nextLevelScore = 1;
 	if (nextLevelIndex != "principle") {
 		nextLevel = levels[nextLevelIndex].description;
 		nextLevelScore = levels[nextLevelIndex].minimumScore;
 	}
-	
+
 
 	var summary = {
 		base: Math.round(doc.base / doc.baseTotal * 100),
@@ -267,7 +284,7 @@ router.post('/', isAuthenticated, function (req, res) {
 router.get('/', isAuthenticated, function (req, res) {
 	var db = req.db;
 	var username = req.user.username;
-
+	console.log('getting profile');
 	getCompetencyLevels().then(function (levels) {
 		objectivesAndProfile(username, req, res)
 			.then(function (profile) {
@@ -325,6 +342,50 @@ function getFilteredProfiles(profileList, directReports) {
 	return filteredProfiles;
 }
 
+
+router.get('/testdb', isAuthenticated, function (req, res) {
+	console.log('hit correct route');
+	testdb();
+	res.send({
+		'thing': 'stuff'
+	});
+});
+
+function testdb() {
+	//	console.log('Initilizaing Connection');
+	//
+	//	console.log('defining model:  ConsultingLevels');
+	//
+	//	var ConsultingLevels = sequelize.define('ConsultingLevels',
+	//		//Column Definitions
+	//		{
+	//			Id: {
+	//				type: Sequelize.INTEGER,
+	//				primaryKey: true
+	//			},
+	//			description: {
+	//				type: Sequelize.STRING
+	//			}
+	//		},
+	//		//Table Options
+	//		{
+	//			timestamps: false
+	//		});
+	//
+	//	console.log('Model definition complete ... ');
+	//	console.log('Locate all levels in DB (via model)');
+	//	ConsultingLevels.findAll().then(function (levels) {
+	//		console.log('returned from findAll');
+	//		console.log('levels.length():' + levels.length);
+	//		for (var i = 0; i < levels.length; i++) {
+	//			console.log('level: ' + levels[i]);
+	//			console.log('level: ' + levels[i].Id);
+	//			console.log('level: ' + levels[i].description);
+	//		}
+	//	});
+	//
+	//	console.log('returning...');
+}
 
 
 router.get('/:username', isAuthenticated, function (req, res) {
