@@ -6,6 +6,7 @@
  2. [NodeJS](http://nodejs.org/download/)
  3. [npm](https://www.npmjs.com/) (comes with NodeJS)
  4. [mongoDB](http://www.mongodb.org/)
+ 5. [Sequelize](http://docs.sequelizejs.com/en/latest/)
  
  ## Optional ##
  5. [Node.js Tools for Visual Studio](https://nodejstools.codeplex.com/) (need for opening .njsproj files)
