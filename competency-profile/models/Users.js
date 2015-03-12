@@ -5,7 +5,11 @@ var UserSchema = new mongoose.Schema({
 	username: String,
 	password: String,
 	displayName: String,
-	directReports: [{username: String, displayName: String}]
+	isAdmin: Boolean,
+	directReports: [{
+		username: String,
+		displayName: String
+	}]
 });
 
 module.exports = mongoose.model('Users', UserSchema);

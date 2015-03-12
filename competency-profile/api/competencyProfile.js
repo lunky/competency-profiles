@@ -290,7 +290,7 @@ router.get('/rankings', isAuthenticated, function (req, res) {
 			res.send(err);
 		}
 
-		var filteredProfiles = getFilteredProfiles(profileList, req.user.directReports)
+		var filteredProfiles = getFilteredProfiles(profileList, req.user)
 
 		res.send({
 			'result': 'success',
@@ -299,25 +299,28 @@ router.get('/rankings', isAuthenticated, function (req, res) {
 	});
 });
 
-function getFilteredProfiles(profileList, directReports) {
+function getFilteredProfiles(profileList, user) {
+	if (user.isAdmin) {
+		return profileList;
+	}
 
 	//Filter the profile list to only users who are direct reports
 	var filteredProfiles = profileList.filter(function (el) {
-		return userIsDirectReport(directReports, el.userid)
+		return userIsDirectReport(user.directReports, el.userid)
 	});
 
 	//Add all the users who haven't completed a profile
-	for (var i = 0; i < directReports.length; i++) {
+	for (var i = 0; i < user.directReports.length; i++) {
 		//for direct report check if it exists in  filteredProfiles 
 		var addReport = filteredProfiles.some(function (el) {
-			return el.userid == directReports[i].username;
+			return el.userid == user.directReports[i].username
 		});
 
 		//if no profile was found, add a 'No Profile Data' entry 
 		if (!addReport)
 			filteredProfiles.push({
-				userid: directReports[i].username,
-				displayName: directReports[i].displayName,
+				userid: user.directReports[i].username,
+				displayName: user.directReports[i].displayName,
 				level: 'No Profile Data'
 			});
 	}
@@ -331,7 +334,7 @@ router.get('/:username', isAuthenticated, function (req, res) {
 	var username = req.params.username;
 
 
-	if (!((userIsDirectReport(req.user.directReports, username)) ||
+	if (!((userIsDirectReport(req.user.directReports, username)) || req.user.isAdmin ||
 			req.user.username == username)) {
 		//TODO: Define proper error
 		res.status(403).send(new Error("This consultant is not a direct report"));

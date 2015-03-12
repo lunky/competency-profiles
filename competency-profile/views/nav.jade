@@ -16,6 +16,6 @@
 								a(href="/#/competencyLevels") Competency Levels Admin
 							li.nav-item(ng-class="vm.getClass('/objectiveAdmin')")
 								a(href="/#/objectiveAdmin") Objectives Admin
-					- if(directReports.length > 0)
+					- if(directReports.length > 0 || isAdmin)
 							li.nav-item(ng-class="vm.getClass('/rankings')")
 								a(href="/#/rankings") Your Team
