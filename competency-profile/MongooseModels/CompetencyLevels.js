@@ -9,3 +9,4 @@ var CompetencyLevelSchema = new mongoose.Schema({
 });
 
 mongoose.model('CompetencyLevels', CompetencyLevelSchema);
+

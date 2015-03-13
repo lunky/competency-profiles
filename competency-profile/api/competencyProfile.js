@@ -1,25 +1,13 @@
+//
+var models = require('../models')
 var express = require('express');
-//var Sequelize = require('sequelize');
-//var sequelize = new Sequelize('DBName', 'username', 'password', {
-//	host: 'servername',
-//	dialect: 'mssql',
-//
-//	pool: {
-//		max: 5,
-//		min: 0,
-//		idle: 10000
-//	},
-//	dialectOptions: {
-//		encrypt: true
-//	}
-//
-//});
-
-
 var router = express.Router();
+
+//
 var Q = require('q');
 var isAuthenticated = require('../config/auth');
-
+//
+////mongoose stuff
 var mongoose = require('mongoose');
 var Profiles = mongoose.model('Profiles');
 var CompetencyLevels = mongoose.model('CompetencyLevels');
@@ -345,7 +333,6 @@ function getFilteredProfiles(profileList, user) {
 	return filteredProfiles;
 }
 
-
 router.get('/testdb', isAuthenticated, function (req, res) {
 	console.log('hit correct route');
 	testdb();
@@ -355,39 +342,23 @@ router.get('/testdb', isAuthenticated, function (req, res) {
 });
 
 function testdb() {
-	//	console.log('Initilizaing Connection');
-	//
-	//	console.log('defining model:  ConsultingLevels');
-	//
-	//	var ConsultingLevels = sequelize.define('ConsultingLevels',
-	//		//Column Definitions
-	//		{
-	//			Id: {
-	//				type: Sequelize.INTEGER,
-	//				primaryKey: true
-	//			},
-	//			description: {
-	//				type: Sequelize.STRING
-	//			}
-	//		},
-	//		//Table Options
-	//		{
-	//			timestamps: false
-	//		});
-	//
-	//	console.log('Model definition complete ... ');
-	//	console.log('Locate all levels in DB (via model)');
-	//	ConsultingLevels.findAll().then(function (levels) {
-	//		console.log('returned from findAll');
-	//		console.log('levels.length():' + levels.length);
-	//		for (var i = 0; i < levels.length; i++) {
-	//			console.log('level: ' + levels[i]);
-	//			console.log('level: ' + levels[i].Id);
-	//			console.log('level: ' + levels[i].description);
-	//		}
-	//	});
-	//
-	//	console.log('returning...');
+
+	console.log('Locate all levels in DB (via model)');
+
+	models.ConsultingLevel.findAll().then(function (levels) {
+		console.log('returned from findAll');
+		console.log('levels.length():' + levels.length);
+		for (var i = 0; i < levels.length; i++) {
+			console.log('level: ' + levels[i]);
+			console.log('level: ' + levels[i].Id);
+			console.log('level: ' + levels[i].description);
+		}
+
+
+	});
+
+	console.log('returning...');
+
 }
 
 

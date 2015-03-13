@@ -11,9 +11,11 @@ var flash = require('connect-flash');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
+
 //DB
 mongoose.connect('localhost', 'competencyprofiles');
 var db = mongoose.connection;
+
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback() {
@@ -21,11 +23,10 @@ db.once('open', function callback() {
 });
 
 //MODELS
-require('./models/Users');
-
-require('./models/Objectives');
-require('./models/CompetencyLevels');
-require('./models/Profiles');
+require('./MongooseModels/Users');
+require('./MongooseModels/Objectives');
+require('./MongooseModels/CompetencyLevels');
+require('./MongooseModels/Profiles');
 
 //TEMPLATES
 var routes = require('./routes/index');
@@ -70,6 +71,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 var monk = require('monk');
+
 var configDB = require('./config/database.js');
 var monkdb = monk(configDB.url);
 
