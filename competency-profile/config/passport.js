@@ -1,43 +1,59 @@
 // config/passport.js
-
-var mongoose = require('mongoose');
 var LocalStrategy = require('passport-local').Strategy;
+var extend = require('node.extend');
+var ActiveDirectory = require('activedirectory');
+var config = require("./passport.conf.js");
+
+var authConfig = {
+	url: 'ldap://ldap.obsglobal.com',
+	baseDN: 'dc=obsglobal,dc=com',
+	attributes: {
+		user: ['sAMAccountName', 'directreports', 'userPrincipalName', 'thumbnailPhoto']
+	}
+};
+
+authConfig = extend(config, authConfig);
+var qad = new ActiveDirectory(authConfig);
+var ad = new ActiveDirectory({
+	url: 'ldap://ldap.obsglobal.com',
+	baseDN: 'dc=obsglobal,dc=com'
+});
 
 // expose this function to our app using module.exports
 module.exports = function (passport) {
-	
-	// =========================================================================
-	// passport session setup ==================================================
-	// =========================================================================
-	// required for persistent login sessions
-	// passport needs ability to serialize and unserialize users out of session
-
-	var Users = mongoose.model('Users');
-	
-	// used to serialize the user for the session
 	passport.serializeUser(function (user, done) {
-		done(null, user._id);
+		done(null, user.sAMAccountName);
 	});
 
 	// used to deserialize the user
-	passport.deserializeUser(function (id, done) {
-		Users.findById(id , function (err, user) {
-			done(err, user);
+	passport.deserializeUser(function (username, done) {
+		qad.findUser(username, function (err, user) {
+			if (!user) {
+				err = 'User: ' + username + ' not found.';
+			}
+			user.directReports = user.directReports || [];
+			return done(err, user);
 		});
 	});
 
 	passport.use('obslocal', new LocalStrategy(function (username, password, done) {
-		process.nextTick(function () {
-			Users.findOne({ 'username': username, 'password': password }, function (err, user) {
-				if (err) {
-					return done(err);
-				}
-				if (!user) {
-					return done(null, false);
-				}
-				return done(null, user);
-			});
+		ad.authenticate(username, password, function (err, isAuthenticated) {
+			if (err) return done(err, null);
+			if (isAuthenticated) {
+				// strip off domain or @obsglobal.com
+				var sAMAccountName = username.replace(/^obs\\/i, "");
+				sAMAccountName = 'alevine';
+				qad.findUser(sAMAccountName, function (err, user) {
+					if (!user) {
+						err = 'User: ' + username + ' not found.';
+					}
+					user.directReports = user.directReports || [];
+					return done(null, user);
+				});
+			} else {
+				return done(null, false);
+			}
 		});
 	}));
-	
+
 };
