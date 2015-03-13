@@ -2,6 +2,7 @@
 	{
 		"username": "admin",
 		"password": "admin",
+		"isAdmin": true,
 		"displayName": "Mr. Adminstrator"
 	},
 	{
@@ -10,10 +11,21 @@
 		"displayName": "Aaron 'The Playmaker' Levine"
 	},
 	{
+		"username": "user",
+		"password": "user",
+		"displayName": "Another User"
+	},
+	{
 		"username": "quinn",
 		"password": "quinn",
 		"displayName": "His Worship, Quinn Wilson, Peer of the Realm",
-		"directReports": [{"username": "aaron", "displayName": "Aaron 'The Playmaker' Levine"},
-						  {"username": "dsanders", "displayName": "Deion 'Prime Time' Sanders"}]
+		"directReports": [{
+				"username": "aaron",
+				"displayName": "Aaron 'The Playmaker' Levine"
+			},
+			{
+				"username": "dsanders",
+				"displayName": "Deion 'Prime Time' Sanders"
+			}]
 	}
 ]

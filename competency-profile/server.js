@@ -88,7 +88,7 @@ app.use(function (req, res, next) {
 	if (req.user) {
 		res.locals.userDisplayName = req.user.displayName;
 		res.locals.directReports = req.user.directReports;
-		res.locals.isAdmin = true;
+		res.locals.isAdmin = req.user.isAdmin;
 	}
 	next();
 });

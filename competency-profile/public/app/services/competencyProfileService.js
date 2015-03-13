@@ -23,6 +23,9 @@
 			if (!angular.isObject(response.data) ||
 				!response.data.message
 			) {
+				if (response.status && response.status === 403) {
+					return ($q.reject('Access is denied'));
+				}
 				return ($q.reject('An unknown error occurred.'));
 			}
 			// Otherwise, use expected error message.
