@@ -58,7 +58,9 @@
 			responseError: function (rejection) {
 				if (rejection.status === 401) {
 					console.log('Response Error 401', rejection);
-					$window.location.href = '/login';
+					var currentUrl = $window.location.pathname + $window.location.hash;
+					var newUrl = '/login?redirectUrl=' + escape(currentUrl);
+					$window.location.href = newUrl;
 					return;
 				}
 				return $q.reject(rejection);
