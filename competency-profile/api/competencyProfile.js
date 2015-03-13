@@ -1,5 +1,6 @@
 //
-var models = require('../models')
+var models = require('../models/index');
+
 var express = require('express');
 var router = express.Router();
 
@@ -345,7 +346,7 @@ function testdb() {
 
 	console.log('Locate all levels in DB (via model)');
 
-	models.ConsultingLevel.findAll().then(function (levels) {
+	models.CompetencyLevel.findAll().then(function (levels) {
 		console.log('returned from findAll');
 		console.log('levels.length():' + levels.length);
 		for (var i = 0; i < levels.length; i++) {
