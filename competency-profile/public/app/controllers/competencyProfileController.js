@@ -45,7 +45,6 @@
 			// TODO : filter objectives that have something changed?
 			competencyProfileService.save(vm.objectives, vm.score.level).then(function (response) {
 				toaster.pop('success', 'Save Successful', 'Your competency score has been updated');
-				vm.objectives = response.data;
 				vm.score = response.summary;
 				$rootScope.$broadcast(appEvents.updateLevel, {
 					level: vm.score.level
