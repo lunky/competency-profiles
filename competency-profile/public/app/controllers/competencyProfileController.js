@@ -24,6 +24,7 @@
 		function clearAll() {
 			angular.forEach(vm.objectives, function (objective) {
 				objective.isMet = false;
+				objective.skipped = false;
 			});
 			vm.save();
 		}
@@ -56,6 +57,7 @@
 
 		function scoreObjective(objective, score) {
 			objective.isMet = score;
+			objective.skipped = false;
 			vm.save();
 		}
 	}
