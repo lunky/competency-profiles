@@ -33,5 +33,5 @@ div.container.sections-wrapper
 				div.content
 					div.row
 						div.col-xs-12
-							div.panel(data-ng-repeat="objective in vm.objectives | orderBy: vm.sort" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'")
+							div.panel(data-ng-repeat="objective in vm.objectives  | orderBy: [vm.sort, 'objectiveId']" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'")
 								include ./partials/objective.jade
