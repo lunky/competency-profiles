@@ -27,11 +27,13 @@ div.container.sections-wrapper
 									| Prioritize met
 								option(value="isMet" label="Prioritize not met")
 									| Prioritize not met
+								option(value="skipped" label="Prioritize skipped")
+									| Prioritize skipped
 					div.col-md-4.col-sm-6.col-xs-12
 						a.btn.btn-default.pull-right(href="" data-ng-click="vm.clearAll()")
 							|Clear all answers
 				div.content
 					div.row
 						div.col-xs-12
-							div.panel(data-ng-repeat="objective in vm.objectives  | orderBy: [vm.sort, 'objectiveId']" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'")
+							div.panel(data-ng-repeat="objective in vm.objectives | orderBy: [vm.sort, '-skipped', 'objectiveId']" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'")
 								include ./partials/objective.jade
