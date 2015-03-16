@@ -54,10 +54,14 @@ function getStats(objectives, levels) {
 		'leadershipTotal': 0,
 		'interpersonalTotal': 0,
 		'conflictTotal': 0,
-		'citizenshipTotal': 0
+		'citizenshipTotal': 0,
+		'answeredTotal': 0
 	};
 	doc = objectives.reduce(function (prev, curr, idx, arr) {
-  ['base', 'intermediate', 'senior'].forEach(function (level) {
+		if (curr.isMet) {
+			prev.answeredTotal += curr.competencyWeighting;
+		}
+		['base', 'intermediate', 'senior'].forEach(function (level) {
 			if (curr.gateLevel === level) {
 				prev[level + 'Total'] += curr.score;
 				if (curr.isMet) {
@@ -65,7 +69,7 @@ function getStats(objectives, levels) {
 				}
 			}
 		});
-  ['communication', 'leadership', 'interpersonal', 'conflict', 'citizenship'].forEach(function (competency) {
+		['communication', 'leadership', 'interpersonal', 'conflict', 'citizenship'].forEach(function (competency) {
 			if (curr[competency] === 'Y') {
 				prev[competency + 'Total'] += curr.competencyWeighting;
 				if (curr.isMet) {
@@ -93,11 +97,17 @@ function getStats(objectives, levels) {
 		intermediate: Math.round(doc.intermediate / doc.intermediateTotal * 100),
 		senior: Math.round(doc.senior / doc.seniorTotal * 100),
 		score: Math.round(doc.base + doc.intermediate + doc.senior),
+
 		communication: Math.round(doc.communication / doc.communicationTotal * 100),
+		communicationAnswered: Math.round(doc.communication / doc.answeredTotal * 100),
 		leadership: Math.round(doc.leadership / doc.leadershipTotal * 100),
+		leadershipAnswered: Math.round(doc.leadership / doc.answeredTotal * 100),
 		interpersonal: Math.round(doc.interpersonal / doc.interpersonalTotal * 100),
+		interpersonalAnswered: Math.round(doc.interpersonal / doc.answeredTotal * 100),
 		conflict: Math.round(doc.conflict / doc.conflictTotal * 100),
+		conflictAnswered: Math.round(doc.conflict / doc.answeredTotal * 100),
 		citizenship: Math.round(doc.citizenship / doc.citizenshipTotal * 100),
+		citizenshipAnswered: Math.round(doc.citizenship / doc.answeredTotal * 100),
 		level: levels[currentLevelIndex].description,
 		levelScore: levels[currentLevelIndex].minimumScore,
 		nextLevel: nextLevel,
