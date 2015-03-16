@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
@@ -50,16 +50,13 @@
     <Compile Include="public\app\controllers\competencyLevelsController.js" />
     <Compile Include="public\app\controllers\competencyProfileController.js" />
     <Compile Include="public\app\controllers\mainController.js" />
-    <Compile Include="public\app\controllers\membersController.js" />
     <Compile Include="public\app\services\competencyLevelsService.js" />
-    <Compile Include="public\app\services\membersService.js" />
     <Compile Include="public\app\services\competencyProfileService.js" />
     <Compile Include="public\app\services\objectiveAdminService.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\competencyLevels.js" />
     <Compile Include="routes\competencyProfile.js" />
     <Compile Include="routes\objectives.js" />
-    <Compile Include="routes\members.js" />
     <Compile Include="bin\www" />
     <Compile Include="test\ui\consult.test.js" />
     <Content Include="..\README.md">
@@ -83,7 +80,6 @@
     <Content Include="views\footer.jade" />
     <Content Include="views\header.jade" />
     <Content Include="views\login.jade" />
-    <Content Include="views\members.jade" />
     <Content Include="views\objectives.jade" />
     <Content Include="views\competencyLevels.jade" />
     <Content Include="views\competencyProfile.jade" />
