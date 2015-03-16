@@ -1,3 +1,4 @@
+/*global escape: true */
 (function (angular) {
 	'use strict';
 	console.log('CompetencyProfiles app');
