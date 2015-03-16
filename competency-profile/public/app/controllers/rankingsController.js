@@ -5,9 +5,9 @@
 		.module('CompetencyProfilesControllers')
 		.controller('RankingsController', RankingsController);
 
-	RankingsController.$inject = ['competencyProfileService'];
+	RankingsController.$inject = ['competencyProfileService', 'toaster'];
 
-	function RankingsController(competencyProfileService) {
+	function RankingsController(competencyProfileService, toaster) {
 		var vm = this;
 		vm.level = 'all';
 		vm.consultants = [];
@@ -16,16 +16,20 @@
 
 		function initialize() {
 			competencyProfileService.getRankings().then(function (response) {
-				if (response.result === 'success') {
-					vm.consultants = response.profileList.map(function (user) {
-						return {
-							userid: user.userid,
-							name: user.displayName || user.userid,
-							level: user.level
-						};
-					});
+					if (response.result === 'success') {
+						vm.consultants = response.profileList.map(function (user) {
+							return {
+								userid: user.userid,
+								name: user.displayName || user.userid,
+								level: user.level
+							};
+						});
+					}
+				},
+				function (err) {
+					toaster.pop('error', 'Error loading rankings', err);
 				}
-			});
+			);
 		}
 	}
 })();

@@ -63,13 +63,16 @@
 		}
 
 		function initialize() {
-			//todo handle failures
 			objectiveAdminService.getObjectives().then(function (response) {
 				vm.objectives = response.data;
+			}, function (err) {
+				toaster.pop('error', 'Error loading objectives', err);
 			});
 
 			competencyLevelsService.getCompetencyLevelLookups().then(function (response) {
 				vm.gateLevels = response.data;
+			}, function (err) {
+				toaster.pop('error', 'Error loading levels', err);
 			});
 		}
 
