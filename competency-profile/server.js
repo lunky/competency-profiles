@@ -29,7 +29,6 @@ require('./models/Profiles');
 
 //TEMPLATES
 var routes = require('./routes/index');
-var members = require('./routes/members');
 var competencyProfile = require('./routes/competencyProfile');
 var objectiveAdmin = require('./routes/objectiveAdmin');
 var profileReport = require('./routes/profileReport');
@@ -40,7 +39,6 @@ var rankings = require('./routes/rankings');
 var competencyProfileApi = require('./api/competencyProfile');
 var objectivesApi = require('./api/objectives');
 var competencyLevelsApi = require('./api/competencyLevels');
-var membersApi = require('./api/members');
 
 var app = express();
 
@@ -98,7 +96,6 @@ app.use('/', routes);
 app.use('/competencyProfile', competencyProfile);
 app.use('/objectiveAdmin', objectiveAdmin);
 app.use('/profileReport', profileReport);
-app.use('/members', members);
 app.use('/competencyLevels', competencyLevels);
 app.use('/rankings', rankings);
 
@@ -106,7 +103,6 @@ app.use('/rankings', rankings);
 app.use('/api/competencyProfile', competencyProfileApi);
 app.use('/api/objectives', objectivesApi);
 app.use('/api/competencyLevels', competencyLevelsApi);
-app.use('/api/members', membersApi);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

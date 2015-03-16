@@ -13,11 +13,6 @@
 		'$routeProvider', '$locationProvider',
 		function ($routeProvider, $locationProvider) {
 			$routeProvider
-				.when('/members', {
-					templateUrl: 'members',
-					controller: 'MembersController',
-					controllerAs: 'vm'
-				})
 				.when('/competencyLevels', {
 					templateUrl: 'competencyLevels',
 					controller: 'CompetencyLevelsController',
