@@ -1,7 +1,92 @@
-div
-	h3 Profile Report for:
-	strong {{vm.username}}
-
+div.container.sections-wrapper
+	div.row
+		div.col-md-4.col-sm-12.col-xs-12
+			section.section
+				div.section-inner
+						div.row
+							div.col-xs-12
+								h2.heading Profile Report for&nbsp;
+									span.capitalize {{vm.username}}
+						div.content
+							div.row
+								div.col-xs-12
+									p
+										strong Current Level:
+										{{vm.profile.summary.level}}
+									p
+										strong Next Level:
+										{{vm.profile.summary.nextLevel}}
+									p
+										strong Current Score:
+										|{{vm.profile.summary.score}}
+									p
+										strong Score Required for Next Level:
+										|{{vm.profile.summary.nextLevelScore}}
+									p
+										strong Points Required to Reach {{vm.profile.summary.nextLevel}} Level:
+										{{vm.profile.summary.nextLevelScore - vm.profile.summary.score}}
+		div.col-xs-12.col-md-8
+			section.section
+				div.section-inner
+					div.row
+						div.col-xs-8
+							// Display Unmet Gates for the NEXT Level
+							h2.heading
+								|Objectives required for the next level
+						div.col-xs-4
+							a.btn.btn-obs-primary.pull-right(data-ng-click="vm.showRequiredExamples = !vm.showRequiredExamples;vm.toggleRequiredExamples()")
+								span(data-ng-hide="vm.showRequiredExamples") Show Examples
+								span(data-ng-hide="!vm.showRequiredExamples") Hide Examples
+					div.content
+						div.row
+							div.col-xs-12
+								accordion(close-others="false")
+									accordion-group(data-ng-repeat="objective in vm.profile.data | orderBy: '-gateLevel' | filter:vm.gateFilter:strict" is-open="objective.open")
+										accordion-heading
+											p {{objective.description}}?
+											|Gate Level: {{objective.gateLevel}}
+										div.row
+											div.col-xs-6
+												h3
+													small Supporting Example
+												|{{objective.supportingExample}}
+											div.col-xs-6
+												h3
+													small Counter Example
+												|{{objective.counterExample}}
+	div.row
+		div.col-xs-12.col-md-8.col-md-offset-4
+			section.section
+				div.section-inner
+					div.row
+						div.col-xs-8
+							// Display Unmet Objectives (excluding those above) order by Score desc
+							h2.heading Objectives that will contribute to the next level
+						div.col-xs-4
+							a.btn.btn-obs-primary.pull-right(data-ng-click="vm.showExamples = !vm.showExamples;vm.toggleExamples()")
+								span(data-ng-hide="vm.showExamples") Show Examples
+								span(data-ng-hide="!vm.showExamples") Hide Examples
+					div.content
+						div.row
+							div.col-xs-12
+								accordion(close-others="oneAtATime")
+									accordion-group(data-ng-repeat="objective in vm.profile.data | orderBy: '-score' | filter:vm.scoreFilter:strict" is-open="vm.showExamples")
+										accordion-heading
+											p {{objective.description}}?
+											|Gate Level: {{objective.gateLevel}}
+										//div.row
+											//div.col-xs-12
+												//TODO: Display Score
+												//p Gate Level: {{objective.gateLevel}}
+										div.row
+											div.col-xs-6
+												h3
+													small Supporting Example
+												|{{objective.supportingExample}}
+											div.col-xs-6
+												h3
+													small Counter Example
+												|{{objective.counterExample}}
 //TODO
 //  Filter to only display isMet = False
 //  Determine current Level
@@ -9,31 +94,10 @@ div
 //  Then order by Weighting descending
 //  Indicate which Objective is a gate
 
-div.content
-	div.row
-		div.col-md-12.col-sm-12.col-xs-12
-			|Restrict Objective Results to Level: {{vm.nextLevel}}
-			input(type="checkbox" data-ng-model="vm.search.gateLevel" data-ng-true-value="'{{vm.nextLevel}}'" data-ng-false-value="''")
-	div.row
-		div.col-md-12.col-sm-12.col-xs-12
-			|Restrict Objective Results to UnMet
-			input(type="checkbox" data-ng-model="vm.search.isMet" data-ng-true-value="false" data-ng-false-value="true")
-	div.row
-		div.col-md-12.col-sm-12.col-xs-12
-			div.panel(data-ng-repeat="objective in vm.objectives | orderBy: '-score' | filter:vm.search:strict" )
-				div.panel-body
-					strong
-						|{{objective.description}}
-				div.row
-					div.col-xs-2
-						h3
-							small Met
-						|{{objective.isMet}}
-					div.col-xs-2
-						h3
-							small Score
-						|{{objective.score}}
-					div.col-xs-2
-						h3
-							small Gate Level
-						|{{objective.gateLevel}}
+//i.pull-right.glyphicon(data-ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}")
+						//div.col-xs-12
+						//	|Restrict Objective Results to Level: {{vm.nextLevel}}
+						//	input(type="checkbox" data-ng-model="vm.search.gateLevel" data-ng-true-value="'{{vm.nextLevel}}'" data-ng-false-value="''")
+						//div.col-xs-12
+						//	|Restrict Objective Results to UnMet
+						//	input(type="checkbox" data-ng-model="vm.search.isMet" data-ng-true-value="false" data-ng-false-value="true")

@@ -1,0 +1,33 @@
+h2.heading Answered Competency Distribution
+div.content
+	p.intro
+	div.skillset
+		div.row
+			h3.col-xs-6.col-md-12.level-title(title="Communication")
+				span Communication
+			div.col-xs-6.col-md-12
+				progressbar.progress-striped(value="vm.score.communicationAnswered") {{vm.score.communicationAnswered}}%
+		div.row
+			h3.col-xs-6.col-md-12.level-title(title="Leadership and Management")
+				span Leadership
+				span.hidden-sm.hidden-xs  and Management
+			div.col-xs-6.col-md-12
+				progressbar.progress-striped(value="vm.score.leadershipAnswered") {{vm.score.leadershipAnswered}}%
+		div.row
+			h3.col-xs-6.col-md-12.level-title(title="Interpersonal and Adaptability")
+				span Interpersonal
+				span.hidden-sm.hidden-xs  and Adaptability
+			div.col-xs-6.col-md-12
+				progressbar.progress-striped(value="vm.score.interpersonalAnswered") {{vm.score.interpersonalAnswered}}%
+		div.row
+			h3.col-xs-6.col-md-12.level-title(title="Conflict and Stress Management")
+				span Conflict
+				span.hidden-sm.hidden-xs  and Stress Management
+			div.col-xs-6.col-md-12
+				progressbar.progress-striped(value="vm.score.conflictAnswered") {{vm.score.conflictAnswered}}%
+		div.row
+			h3.col-xs-6.col-md-12.level-title(title="Corporate Citizenship")
+				span.hidden-sm.hidden-xs Corporate
+				span  Citizenship
+			div.col-xs-6.col-md-12
+				progressbar.progress-striped(value="vm.score.citizenship") {{vm.score.citizenship}}%

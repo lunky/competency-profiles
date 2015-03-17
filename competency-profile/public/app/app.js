@@ -1,21 +1,19 @@
+/*global escape: true */
 (function (angular) {
 	'use strict';
-	console.log('consulting app');
-	angular.module('consultingCommon', []);
-	angular.module('consultingServices', ['consultingCommon']);
-	angular.module('consultingControllers', ['consultingCommon', 'consultingServices']);
-	var myApp = angular.module('consulting', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'toaster',
-								'consultingControllers', 'consultingServices']);
+	console.log('CompetencyProfiles app');
+	angular.module('CompetencyProfilesCommon', []);
+	angular.module('CompetencyProfilesServices', ['CompetencyProfilesCommon']);
+	angular.module('CompetencyProfilesDirectives', []);
+	angular.module('CompetencyProfilesControllers', ['CompetencyProfilesCommon',
+													'CompetencyProfilesServices', 'CompetencyProfilesDirectives']);
+	var myApp = angular.module('CompetencyProfiles', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'toaster',
+													'CompetencyProfilesControllers', 'CompetencyProfilesServices']);
 
 	myApp.config([
 		'$routeProvider', '$locationProvider',
 		function ($routeProvider, $locationProvider) {
 			$routeProvider
-				.when('/members', {
-					templateUrl: 'members',
-					controller: 'MembersController',
-					controllerAs: 'vm'
-				})
 				.when('/competencyLevels', {
 					templateUrl: 'competencyLevels',
 					controller: 'CompetencyLevelsController',
@@ -40,9 +38,6 @@
 					templateUrl: 'profileReport',
 					controller: 'ProfileReportController',
 					controllerAs: 'vm'
-				})
-				.otherwise({
-					redirectTo: '/'
 				});
 			//			$locationProvider.html5Mode(true);
 		}
@@ -59,8 +54,9 @@
 			responseError: function (rejection) {
 				if (rejection.status === 401) {
 					console.log('Response Error 401', rejection);
-					//              $location.url('/login').search('returnTo', $location.path());
-					$window.location.href = '/login';
+					var currentUrl = $window.location.pathname + $window.location.hash;
+					var newUrl = '/login?redirectUrl=' + escape(currentUrl);
+					$window.location.href = newUrl;
 					return;
 				}
 				return $q.reject(rejection);
@@ -73,17 +69,13 @@
 		$httpProvider.interceptors.push('authHttpResponseInterceptor');
 		$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 	}]);
-
 	myApp.run(['$location', '$route', '$rootScope', function ($location, $route, $rootScope) {
-		$location.skipReload = function () {
-			var lastRoute = $route.current;
-			var un = $rootScope.$on('$locationChangeSuccess', function () {
-				$route.current = lastRoute;
-				un();
-			});
-			return $location;
-		};
-		return $location;
-	}]);
+		/*
+				$rootScope.$on('$locationChangeStart', function (event, newUrl, oldUrl) {
+					console.log("$location: " + $location.$$absUrl);
+					console.log('Starting to leave %s to go to %s', oldUrl, newUrl);
+				});
+		*/
+}]);
 
 })(window.angular);

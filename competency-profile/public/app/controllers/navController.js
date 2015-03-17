@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('consultingControllers')
+		.module('CompetencyProfilesControllers')
 		.controller('NavController', NavController);
 
 	NavController.$inject = ['$location'];

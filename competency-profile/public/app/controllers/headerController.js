@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('consultingControllers')
+        .module('CompetencyProfilesControllers')
         .controller('HeaderController', HeaderController);
 
     HeaderController.$inject = ['$scope', 'appEvents', 'toaster'];

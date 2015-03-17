@@ -17,7 +17,7 @@ var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback() {
-    console.log('Connected to DB');
+	console.log('Connected to DB');
 });
 
 //MODELS
@@ -29,7 +29,6 @@ require('./models/Profiles');
 
 //TEMPLATES
 var routes = require('./routes/index');
-var members = require('./routes/members');
 var competencyProfile = require('./routes/competencyProfile');
 var objectiveAdmin = require('./routes/objectiveAdmin');
 var profileReport = require('./routes/profileReport');
@@ -40,7 +39,6 @@ var rankings = require('./routes/rankings');
 var competencyProfileApi = require('./api/competencyProfile');
 var objectivesApi = require('./api/objectives');
 var competencyLevelsApi = require('./api/competencyLevels');
-var membersApi = require('./api/members');
 
 var app = express();
 
@@ -49,11 +47,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/fav-icon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+	extended: false
 }));
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
@@ -62,9 +60,9 @@ app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use(flash());
 // required for passport
 app.use(session({
-    secret: 'secretkey-tacocat-yekterces',
-    resave: true,
-    saveUninitialized: true
+	secret: 'secretkey-tacocat-yekterces',
+	resave: true,
+	saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -78,19 +76,19 @@ require('./config/passport')(passport);
 
 // Make some things accessible to our router
 app.use(function (req, res, next) {
-    req.db = monkdb;
-    res.locals = {
-        isAuthenticated: req.isAuthenticated(),
-        title: 'Competency Profile',
-        userDisplayName: 'Aaron Levine',
-        userScore: 'Senior Consultant' //TODO replace with real score
-    };
-    if (req.user) {
-        res.locals.userDisplayName = req.user.displayName;
-        res.locals.directReports = req.user.directReports;
-        res.locals.isAdmin = true;
-    }
-    next();
+	req.db = monkdb;
+	res.locals = {
+		isAuthenticated: req.isAuthenticated(),
+		title: 'Competency Profile',
+		userDisplayName: 'Aaron Levine',
+		userScore: 'Senior Consultant' //TODO replace with real score
+	};
+	if (req.user) {
+		res.locals.userDisplayName = req.user.displayName;
+		res.locals.directReports = req.user.directReports;
+		res.locals.isAdmin = req.user.isAdmin;
+	}
+	next();
 });
 
 //TEMPLATE Rendering
@@ -98,7 +96,6 @@ app.use('/', routes);
 app.use('/competencyProfile', competencyProfile);
 app.use('/objectiveAdmin', objectiveAdmin);
 app.use('/profileReport', profileReport);
-app.use('/members', members);
 app.use('/competencyLevels', competencyLevels);
 app.use('/rankings', rankings);
 
@@ -106,13 +103,12 @@ app.use('/rankings', rankings);
 app.use('/api/competencyProfile', competencyProfileApi);
 app.use('/api/objectives', objectivesApi);
 app.use('/api/competencyLevels', competencyLevelsApi);
-app.use('/api/members', membersApi);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+	var err = new Error('Not Found');
+	err.status = 404;
+	next(err);
 });
 
 // error handlers
@@ -120,25 +116,25 @@ app.use(function (req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-    app.locals.pretty = true;
+	app.use(function (err, req, res, next) {
+		res.status(err.status || 500);
+		res.render('error', {
+			message: err.message,
+			error: err
+		});
+	});
+	app.locals.pretty = true;
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        title: 'Competency Profile',
-        message: err.message,
-        error: {}
-    });
+	res.status(err.status || 500);
+	res.render('error', {
+		title: 'Competency Profile',
+		message: err.message,
+		error: {}
+	});
 });
 
 module.exports = app;

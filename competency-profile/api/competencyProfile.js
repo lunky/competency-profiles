@@ -44,6 +44,7 @@ function getStats(objectives, levels) {
 		baseTotal: 0,
 		intermediateTotal: 0,
 		seniorTotal: 0,
+		score: 0,
 		'communication': 0,
 		'leadership': 0,
 		'interpersonal': 0,
@@ -53,10 +54,14 @@ function getStats(objectives, levels) {
 		'leadershipTotal': 0,
 		'interpersonalTotal': 0,
 		'conflictTotal': 0,
-		'citizenshipTotal': 0
+		'citizenshipTotal': 0,
+		'answeredTotal': 0
 	};
 	doc = objectives.reduce(function (prev, curr, idx, arr) {
-  ['base', 'intermediate', 'senior'].forEach(function (level) {
+		if (curr.isMet) {
+			prev.answeredTotal += curr.competencyWeighting;
+		}
+		['base', 'intermediate', 'senior'].forEach(function (level) {
 			if (curr.gateLevel === level) {
 				prev[level + 'Total'] += curr.score;
 				if (curr.isMet) {
@@ -64,7 +69,7 @@ function getStats(objectives, levels) {
 				}
 			}
 		});
-  ['communication', 'leadership', 'interpersonal', 'conflict', 'citizenship'].forEach(function (competency) {
+		['communication', 'leadership', 'interpersonal', 'conflict', 'citizenship'].forEach(function (competency) {
 			if (curr[competency] === 'Y') {
 				prev[competency + 'Total'] += curr.competencyWeighting;
 				if (curr.isMet) {
@@ -74,16 +79,39 @@ function getStats(objectives, levels) {
 		});
 		return prev;
 	}, stats);
+
+	var currentLevelIndex = getLevel(doc, levels);
+	//TODO: Logic to handle not finding the Level
+	var nextLevelIndex = getNextLevel(currentLevelIndex);
+
+	var nextLevel = "Principle";
+	var nextLevelScore = 1;
+	if (nextLevelIndex != "principle") {
+		nextLevel = levels[nextLevelIndex].description;
+		nextLevelScore = levels[nextLevelIndex].minimumScore;
+	}
+
+
 	var summary = {
 		base: Math.round(doc.base / doc.baseTotal * 100),
 		intermediate: Math.round(doc.intermediate / doc.intermediateTotal * 100),
 		senior: Math.round(doc.senior / doc.seniorTotal * 100),
+		score: Math.round(doc.base + doc.intermediate + doc.senior),
+
 		communication: Math.round(doc.communication / doc.communicationTotal * 100),
+		communicationAnswered: Math.round(doc.communication / doc.answeredTotal * 100),
 		leadership: Math.round(doc.leadership / doc.leadershipTotal * 100),
+		leadershipAnswered: Math.round(doc.leadership / doc.answeredTotal * 100),
 		interpersonal: Math.round(doc.interpersonal / doc.interpersonalTotal * 100),
+		interpersonalAnswered: Math.round(doc.interpersonal / doc.answeredTotal * 100),
 		conflict: Math.round(doc.conflict / doc.conflictTotal * 100),
+		conflictAnswered: Math.round(doc.conflict / doc.answeredTotal * 100),
 		citizenship: Math.round(doc.citizenship / doc.citizenshipTotal * 100),
-		level: getLevel(doc, levels)
+		citizenshipAnswered: Math.round(doc.citizenship / doc.answeredTotal * 100),
+		level: levels[currentLevelIndex].description,
+		levelScore: levels[currentLevelIndex].minimumScore,
+		nextLevel: nextLevel,
+		nextLevelScore: nextLevelScore
 	};
 	return summary;
 }
@@ -103,7 +131,17 @@ function getLevel(stats, levels) {
 		level = l;
 		return true;
 	});
-	return levels[level].description;
+	return level;
+}
+
+function getNextLevel(level) {
+	if (level === 'base') {
+		return 'intermediate'
+	} else if (level === 'intermediate') {
+		return 'senior'
+	} else {
+		return 'principle'
+	}
 }
 
 function getCompetencyLevels() {
@@ -262,11 +300,7 @@ router.get('/rankings', isAuthenticated, function (req, res) {
 			res.send(err);
 		}
 
-		//Filter profiles for which the current user has
-		//in their direct reports collection
-		var filteredProfiles = profileList.filter(function (el) {
-			return userIsDirectReport(req.user.directReports, el.userid)
-		});
+		var filteredProfiles = getFilteredProfiles(profileList, req.user)
 
 		res.send({
 			'result': 'success',
@@ -275,16 +309,45 @@ router.get('/rankings', isAuthenticated, function (req, res) {
 	});
 });
 
+function getFilteredProfiles(profileList, user) {
+	if (user.isAdmin) {
+		return profileList;
+	}
+
+	//Filter the profile list to only users who are direct reports
+	var filteredProfiles = profileList.filter(function (el) {
+		return userIsDirectReport(user.directReports, el.userid)
+	});
+
+	//Add all the users who haven't completed a profile
+	for (var i = 0; i < user.directReports.length; i++) {
+		//for direct report check if it exists in  filteredProfiles 
+		var addReport = filteredProfiles.some(function (el) {
+			return el.userid == user.directReports[i].username
+		});
+
+		//if no profile was found, add a 'No Profile Data' entry 
+		if (!addReport)
+			filteredProfiles.push({
+				userid: user.directReports[i].username,
+				displayName: user.directReports[i].displayName,
+				level: 'No Profile Data'
+			});
+	}
+
+	return filteredProfiles;
+}
+
 
 
 router.get('/:username', isAuthenticated, function (req, res) {
 	var username = req.params.username;
 
 
-	if (!((userIsDirectReport(req.user.directReports, username)) ||
+	if (!((userIsDirectReport(req.user.directReports, username)) || req.user.isAdmin ||
 			req.user.username == username)) {
 		//TODO: Define proper error
-		res.send(new Error("This consultant is not a direct report"));
+		res.status(403).send(new Error("This consultant is not a direct report"));
 	}
 
 	getCompetencyLevels().then(function (levels) {

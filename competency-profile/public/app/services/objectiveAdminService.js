@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-	var myApp = angular.module('consultingServices');
+	var myApp = angular.module('CompetencyProfilesServices');
 
 	myApp.service('objectiveAdminService', objectiveAdminService);
 
@@ -47,7 +47,7 @@
 
 		svc.save = function (objective) {
 			var request = $http({
-				method: 'post',
+				method: 'put',
 				url: '/api/objectives/' + objective._id,
 				data: {
 					objective: objective

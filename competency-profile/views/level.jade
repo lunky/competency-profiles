@@ -1,0 +1,24 @@
+div.panel.panel-met
+	div.panel-heading
+		div.row
+			div.col-xs-8
+				h3.panel-title {{vm.level.description}}
+			div.col-xs-4
+				a.edit.pull-right(href="" data-ng-click="vm.toggleEdit(vm.level)")
+					i(data-ng-show="!vm.level.edit").fa.fa-lg.fa-pencil-square-o
+					i(data-ng-show="vm.level.edit").fa.fa-lg.fa-close
+	div.panel-body
+		p(data-ng-show="!vm.level.edit")
+			strong Minimum Score:
+			|&nbsp;{{vm.level.minimumScore}}
+		p(data-ng-show="!vm.level.edit")
+			strong Minimum Gate Score:
+			|&nbsp;{{vm.level.minimumGateScore}}
+		div.form(data-ng-show="vm.level.edit")
+			div.form-group
+				label(for="minScore{{$index+1}}") Minimum Score
+				input.form-control(type="text" name="minScore{{$index+1}}" data-ng-model="vm.level.minimumScore")
+			div.form-group
+				label(for="minGateScore{{$index+1}}") Minimum Gate Score
+				input.form-control(type="text" name="minGateScore{{$index+1}}" data-ng-model="vm.level.minimumGateScore")
+			a.btn.btn-success(data-ng-click="vm.save(vm.level)") Save

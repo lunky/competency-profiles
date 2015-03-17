@@ -1,18 +1,16 @@
 // header
 header.header
-		- if(!isAuthenticated)
-				div.row
-						div.col-xs-12.text-center
-								h1.name Competency Profile
-		- if(isAuthenticated)
-				div.container(data-ng-controller="HeaderController as vm")
-					div.row
-						div.col-xs-12.col-sm-2
-							a(href="#/")
-								img.profile-image.img-responsive.img-circle(src='images/consultant-codell-square-small.png' alt='#{userDisplayName}')
-						div.profile-content.col-xs-12.col-sm-6
-							h2.desc #{userDisplayName}
-						div.col-xs-12.col-sm-4
-							h4.desc Calculated Competency:
-							h4.desc.hidden-lg(ng-bind="vm.consultantLevel")
-							h2.desc.visible-lg(ng-bind="vm.consultantLevel")
+	- if(!isAuthenticated)
+		div.row
+			div.col-xs-12.text-center
+				img.logo(src='images/OBSlogo_tiny.png' alt='logo')
+				h1.desc Consulting Tools
+	- if(isAuthenticated)
+		div.header-main.container
+			div.logo.col-sm-5
+				img.logo.pull-left(src='images/OBSlogo_tiny.png' alt='logo')
+				h1.desc.pull-left Consulting Tools
+			div.info.col-sm-7
+				ul.menu-top.navbar-right
+					li
+						a(href="/logoff") Log Off
