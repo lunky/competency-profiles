@@ -1,0 +1,10 @@
+{
+  "main": {
+    "styles": "<link href='/bundle/main-a0dc103e.css' media='all' rel='stylesheet' type='text/css'/>",
+    "scripts": "<script src='/bundle/main-77c87e5f.js' type='text/javascript'></script>"
+  },
+  "vendor": {
+    "styles": "<link href='/bundle/vendor-a2069276.css' media='all' rel='stylesheet' type='text/css'/>",
+    "scripts": "<script src='/bundle/vendor-fd4aec00.js' type='text/javascript'></script>"
+  }
+}

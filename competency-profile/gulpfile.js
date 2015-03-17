@@ -11,6 +11,7 @@ var mocha = require('gulp-mocha');
 var livereload = require('gulp-livereload');
 var watch = require('gulp-watch');
 var bundle = require('gulp-bundle-assets');
+var del = require('del');
 
 gulp.task('help', $.taskListing);
 gulp.task('default', ['help']);
@@ -60,6 +61,7 @@ gulp.task('karma', function () {
 gulp.task('watch', function () {
 	livereload.listen();
 	log("watching... ");
+	gulp.watch(['bundle.result.json']).on('change', livereload);
 	gulp.watch(config.lessfiles, ['build-less']);
 	gulp.watch(config.karma.files, function () {
 		return gulp
@@ -73,17 +75,30 @@ gulp.task('watch', function () {
 	});
 });
 
-gulp.task('bundle', function () {
-	return gulp.src('./bundle.config.js')
+gulp.task('clean', function () {
+	del([
+		// here we use a globbing pattern to match everything inside the `bundle` folder
+		'public/bundle/**',
+		'public/fonts'
+	]);
+});
+
+//});
+
+gulp.task('bundle', ['clean', 'build-less'], function () {
+	gulp.src('./bundle.config.js')
 		.pipe(bundle({
 			quietMode: false
 		}))
-		.pipe(gulp.dest('./public'))
-		.pipe(bundle.results('./'))
-		.on('error', function (err) {
-			//			process.emit('exit');
-			throw err;
-		});
+		.pipe(gulp.dest('./public/bundle'))
+		.pipe(bundle.results({
+			dest: './',
+			pathPrefix: '/bundle/'
+		}));
+	log("copying font-awesome files");
+	gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,woff2,eof,svg}')
+		.pipe(gulp.dest('./public/fonts'));
+
 });
 
 gulp.task('mocha', function () {
@@ -113,7 +128,7 @@ function start(debug) {
 			log('*** nodemon restarted');
 			log('files changed:\n' + ev);
 		})
-		.on('start', ['build-less', 'test', 'watch'], function () {
+		.on('start', ['build-less', 'bundle', 'test', 'watch'], function () {
 			log('*** nodemon started');
 		})
 		.on('crash', function () {
@@ -143,7 +158,6 @@ function getNodeOptions(isDev) {
 		env: {
 			'PORT': port,
 			'NODE_ENV': isDev ? 'dev' : 'build'
-		},
-		watch: [config.server]
+		}
 	};
 }

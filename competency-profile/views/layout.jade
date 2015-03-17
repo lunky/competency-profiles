@@ -15,12 +15,10 @@ head
 	meta(charset='utf-8')
 	meta(http-equiv='X-UA-Compatible' content='IE=edge')
 	meta(name='viewport' content='width=device-width, initial-scale=1.0')
-
 	link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic')
 	link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Montserrat:400,700')
-	//- Latest compiled and minified CSS - TODO replace with grunt task
-
-		
+	!=bundle.vendor.styles
+	!=bundle.main.styles
 	//HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
 	<!--[if lt IE 9]>
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js')
@@ -31,30 +29,8 @@ body(data-ng-app=(isAuthenticated ? 'CompetencyProfiles':'') data-ngCloak)
 		include header
 		include nav
 		block content
-		div(data-toaster-container, data-toaster-options="{'time-out': 3000, 'close-button':true, 'position-class': 'toast-bottom-right'}")
+			div(data-toaster-container, data-toaster-options="{'time-out': 3000, 'close-button':true, 'position-class': 'toast-bottom-right'}")
 	include footer
-	script(src='/bower_components/angularjs/angular.js')
-	script(src='/bower_components/angular-route/angular-route.js')
-	script(src='/bower_components/angular-animate/angular-animate.js')
-	script(src='/bower_components/angular-bootstrap/ui-bootstrap-tpls.js')
-	script(src='/bower_components/angularjs-toaster/toaster.js')
-
-	script(src='/app/app.js')
-
-	script(src='/app/common.js')
-
-	script(src='/app/services/objectiveAdminService.js')
-	script(src='/app/services/competencyLevelsService.js')
-	script(src='/app/services/competencyProfileService.js')
-
-	script(src='/app/directives/levelHolder.js')
-	script(src='/app/directives/objectiveHolder.js')
-
-	script(src='/app/controllers/navController.js')
-	script(src='/app/controllers/headerController.js')
-	script(src='/app/controllers/objectiveAdminController.js')
-	script(src='/app/controllers/competencyProfileController.js')
-	script(src='/app/controllers/mainController.js')
-	script(src='/app/controllers/competencyLevelsController.js')
-	script(src='/app/controllers/profileReportController.js')
-	script(src='/app/controllers/rankingsController.js')
+	!=bundle.vendor.scripts
+	!=bundle.main.scripts
+</html>
