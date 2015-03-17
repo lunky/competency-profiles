@@ -1,3 +1,6 @@
+/*jslint node: true */
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
@@ -34,14 +37,18 @@ router.get('/login', function (req, res) {
 
 router.post('/login', function (req, res, next) {
 	passport.authenticate('obslocal', function (err, user, info) {
+		var failureFlash = 'Invalid username or password.';
 		if (err) {
+			req.flash('error', failureFlash);
 			return next(err);
 		}
 		if (!user) {
+			req.flash('error', failureFlash);
 			return res.redirect('/login');
 		}
 		req.logIn(user, function (err) {
 			if (err) {
+				req.flash('error', failureFlash);
 				return next(err);
 			}
 			if (req.session.redirectUrl) {
