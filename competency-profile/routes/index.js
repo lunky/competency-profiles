@@ -3,6 +3,7 @@
 
 var express = require('express');
 var router = express.Router();
+var bundles = require('../bundle.result.json');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var isAuthenticated = require('../config/auth');
@@ -10,7 +11,9 @@ var url = require('url');
 
 /* GET home page. */
 router.get('/', isAuthenticated, function (req, res) {
-	res.render('index');
+	res.render('index', {
+		bundle: bundles
+	});
 });
 
 /* GET home page. */
@@ -31,7 +34,8 @@ router.get('/login', function (req, res) {
 		req.session.redirectUrl = req.query.redirectUrl;
 	}
 	res.render('login', {
-		messages: req.flash('error')
+		messages: req.flash('error'),
+		bundle: bundles
 	});
 });
 
