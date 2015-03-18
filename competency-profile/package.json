@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "bower install",
     "start": "gulp start",
-    "test": "mocha test/server -i -g \"^IntegrationTest\" && karma start --single-run --browsers PhantomJS"
+    "test": "node node_modules/gulp/bin/gulp.js bundle && mocha test/server -i -g \"^IntegrationTest\" && karma start --single-run --browsers PhantomJS"
   },
   "description": "ExpressApp1",
   "author": {
