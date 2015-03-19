@@ -1,3 +1,5 @@
+/*jslint node: true, nomen: true */
+'use strict';
 var express = require('express');
 var compression = require('compression');
 var path = require('path');
@@ -11,6 +13,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+var fs = require('fs');
 
 //DB
 mongoose.connect('localhost', 'competencyprofiles');
@@ -90,6 +93,10 @@ app.use(function (req, res, next) {
 		res.locals.directReports = req.user.directReports;
 		res.locals.isAdmin = req.user.isAdmin;
 	}
+	// reload
+	fs.readFile('./bundle.result.json', 'utf8', function (err, data) {
+		res.locals.bundles = JSON.parse(data);
+	});
 	next();
 });
 

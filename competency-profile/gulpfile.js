@@ -12,6 +12,7 @@ var livereload = require('gulp-livereload');
 var watch = require('gulp-watch');
 var bundle = require('gulp-bundle-assets');
 var del = require('del');
+var path = require('path');
 
 gulp.task('help', $.taskListing);
 gulp.task('default', ['help']);
@@ -40,7 +41,7 @@ gulp.task('build-less', function () {
 		.pipe(livereload());
 });
 
-gulp.task('start', ['bundle'], function () {
+gulp.task('start', ['clean', 'bundle'], function () {
 	log('Starting comptency-profiles...');
 	start(true);
 });
@@ -62,12 +63,20 @@ gulp.task('watch', function () {
 	livereload.listen();
 	log("watching... ");
 	gulp.watch(['bundle.result.json']).on('change', livereload);
+	bundle.watch({
+		configPath: path.join(__dirname, 'bundle.config.js'),
+		results: {
+			dest: __dirname,
+			pathPrefix: '/bundle/'
+		},
+		dest: path.join(__dirname, 'public/bundle')
+	});
 	gulp.watch(config.lessfiles, ['build-less']);
 	gulp.watch(config.karma.files, function () {
 		return gulp
 			.src(config.karma.files)
 			.pipe(karma({
-				configFile: __dirname + '/karma.conf.js',
+				configFile: path.join(__dirname, 'karma.conf.js'),
 				action: 'run'
 			})).on('error', function (err) {
 				throw err;
@@ -86,7 +95,7 @@ gulp.task('clean', function () {
 
 //});
 
-gulp.task('bundle', ['clean', 'build-less'], function () {
+gulp.task('bundle', ['build-less'], function () {
 	log("copying font-awesome files");
 	gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,woff2,eof,svg}')
 		.pipe(gulp.dest('./public/fonts'));
