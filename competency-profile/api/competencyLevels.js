@@ -11,9 +11,9 @@ router.get('/', isAuthenticated, function (req, res) {
 
 	CompetencyLevels.find({}, function (err, doc) {
 		if (err) {
-			res.send(err);
+			res.status(500).send(err);
 		}
-		res.send({
+		res.json({
 			'data': doc
 		});
 	});
@@ -27,7 +27,8 @@ router.get('/lookup', isAuthenticated, function (req, res) {
 		description: 1
 	}, function (err, doc) {
 		if (err) {
-			res.send(err);
+			res.
+status(500).send(err);
 		}
 		res.send({
 			'data': doc
@@ -39,9 +40,9 @@ router.get('/:id', isAuthenticated, function (req, res) {
 
 	CompetencyLevels.findOne(req.params.id, function (err, doc) {
 		if (err) {
-			res.send(err);
+			res.status(500).send(err);
 		}
-		res.send({
+		res.json({
 			'data': doc
 		});
 	});
@@ -56,9 +57,9 @@ router.put('/:id', isAuthenticated, function (req, res) {
 		},
 		function (err, doc) {
 			if (err) {
-				res.send(err);
+				res.status(500).send(err);
 			}
-			res.send({
+			res.json({
 				'result': 'success',
 				'objective': doc
 			});

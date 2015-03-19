@@ -30,7 +30,8 @@ module.exports = {
 				'./bower_components/angular-route/angular-route.js',
 				'./bower_components/angular-animate/angular-animate.js',
 				'./bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-				'./bower_components/angularjs-toaster/toaster.js'
+				'./bower_components/angularjs-toaster/toaster.js',
+				'./bower_components/angular-google-chart/ng-google-chart.js'
 			],
 			styles: [
 				'./bower_components/angularjs-toaster/toaster.css',

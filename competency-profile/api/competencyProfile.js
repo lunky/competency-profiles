@@ -200,7 +200,7 @@ function findProfileDoc(username, res) {
 		userid: username
 	}, function (err, doc) {
 		if (err) {
-			res.send(err);
+			res.status(500).send(err);
 		}
 		deferred.resolve(doc);
 	});
@@ -211,7 +211,7 @@ function findObjectivesDoc(res) {
 	var deferred = Q.defer();
 	Objectives.find({}, function (err, doc) {
 		if (err) {
-			res.send(err);
+			res.status(500).send(err);
 		}
 		deferred.resolve(doc);
 	});
@@ -252,7 +252,7 @@ router.post('/', isAuthenticated, function (req, res) {
 
 	findAndModify(Profiles, userid, profile, function (err, docs) {
 		if (err) {
-			res.send(err);
+			res.status(500).send(err);
 		}
 		getCompetencyLevels().then(function (levels) {
 			objectivesAndProfile(username, req, res)
@@ -265,9 +265,9 @@ router.post('/', isAuthenticated, function (req, res) {
 
 					findAndModify(Profiles, userid, profile, function (err, docs) {
 						if (err) {
-							res.send(err);
+							res.status(500).send(err);
 						}
-						res.send(profileResponse);
+						res.json(profileResponse);
 					});
 				});
 		});
@@ -281,7 +281,8 @@ router.get('/', isAuthenticated, function (req, res) {
 	getCompetencyLevels().then(function (levels) {
 		objectivesAndProfile(username, req, res)
 			.then(function (profile) {
-				res.send({
+				res.setHeader('Cache-Control', 'no-cache');
+				res.json({
 					'data': profile,
 					'summary': getStats(profile, levels)
 				});
@@ -297,12 +298,13 @@ router.get('/rankings', isAuthenticated, function (req, res) {
 		level: 1
 	}, function (err, profileList) {
 		if (err) {
-			res.send(err);
+			res.status(500).send(err);
 		}
 
 		var filteredProfiles = getFilteredProfiles(profileList, req.user)
 
-		res.send({
+		res.setHeader('Cache-Control', 'no-cache');
+		res.json({
 			'result': 'success',
 			'profileList': filteredProfiles
 		});
@@ -353,10 +355,12 @@ router.get('/:username', isAuthenticated, function (req, res) {
 	getCompetencyLevels().then(function (levels) {
 		objectivesAndProfile(username, req, res)
 			.then(function (profile) {
-				res.send({
+				var fullProfile = {
 					'data': profile,
 					'summary': getStats(profile, levels)
-				});
+				};
+				res.setHeader('Cache-Control', 'no-cache');
+				res.json(fullProfile);
 			});
 	});
 });
