@@ -6,7 +6,8 @@
 	angular.module('CompetencyProfilesServices', ['CompetencyProfilesCommon']);
 	angular.module('CompetencyProfilesDirectives', []);
 	angular.module('CompetencyProfilesControllers', ['CompetencyProfilesCommon',
-													'CompetencyProfilesServices', 'CompetencyProfilesDirectives']);
+													'CompetencyProfilesServices', 'CompetencyProfilesDirectives',
+													'googlechart']);
 	var myApp = angular.module('CompetencyProfiles', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'toaster',
 													'CompetencyProfilesControllers', 'CompetencyProfilesServices']);
 
