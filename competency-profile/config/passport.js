@@ -21,33 +21,7 @@ var ad = new ActiveDirectory({
 	baseDN: 'dc=obsglobal,dc=com'
 });
 
-// expose this function to our app using module.exports
 module.exports = function (passport) {
-	passport.serializeUser(function (user, done) {
-		done(null, user.sAMAccountName);
-	});
-	//	passport.deserializeUser(function (user, done) {
-	//		done(null, user);
-	//	});
-	//
-	//	// used to deserialize the user
-	passport.deserializeUser(function (username, done) {
-		qad.findUser(username, function (err, user) {
-			if (!user) {
-				err = 'User: ' + username + ' not found.';
-			} else {
-				user.username = user.sAMAccountName;
-				var groupName = 'CPAdmin';
-				Q.all([
-					addIsAdmin(groupName, user, qad),
-					addDirectReports(user, qad)
-				]).then(function (results) {
-					return done(null, user);
-				});
-
-			}
-		});
-	});
 
 	function addDirectReports(user, qad) {
 		var deferred = Q.defer();
@@ -59,7 +33,7 @@ module.exports = function (passport) {
 			dr = {
 				filter: query,
 				scope: 'sub',
-				attributes: ['sAMAccountName'],
+				attributes: ['sAMAccountName', 'displayName'],
 			};
 
 			qad.findUsers(
@@ -69,7 +43,10 @@ module.exports = function (passport) {
 						return done(err2, null);
 					}
 					var reports = users.map(function (el) {
-						return el.sAMAccountName;
+						return {
+							username: el.sAMAccountName,
+							displayName: el.displayName
+						};
 					});
 					user.directReports = reports;
 					deferred.resolve();
@@ -78,37 +55,42 @@ module.exports = function (passport) {
 		return deferred.promise;
 	}
 
-	function addIsAdmin(groupName, user, qad) {
-			var deferred = Q.defer();
-			var username = user.dn.replace(/\\/g, '\\\\').replace(/\*/, "\\*");
-			qad.isUserMemberOf(username, groupName, function (err, isMember) {
-				if (err) {
-					return done(err, false);
-				}
-				user.isAdmin = isMember;
-				deferred.resolve();
-			});
-			return deferred.promise;
-		}
-		/*
-			passport.serializeUser(function (user, done) {
-				var sessionUser = {
-					sAMAccountName: user.sAMAccountName,
-					directreports: user.directreports,
-					userPrincipalName: user.userPrincipalName,
-					directreports: user.directreports,
-					displayName: user.displayName,
-					directReportsUsers: user.directReportsUsers
-				};
-				done(null, sessionUser)
-			})
 
-			passport.deserializeUser(function (sessionUser, done) {
-				// The sessionUser object is different from the AD
-				// it's actually req.session.passport.user and comes from the session collection
-				done(null, sessionUser)
-			})
-		*/
+	function addIsAdmin(groupName, user, qad) {
+		var deferred = Q.defer();
+		var username = user.dn.replace(/\\/g, '\\\\').replace(/\*/, '\\*');
+		qad.isUserMemberOf(username, groupName, function (err, isMember) {
+			if (err) {
+				return done(err, false);
+			}
+			user.isAdmin = isMember;
+			deferred.resolve();
+		});
+		return deferred.promise;
+	}
+
+	passport.serializeUser(function (user, done) {
+		var sessionUser = {
+			sAMAccountName: user.sAMAccountName,
+			userPrincipalName: user.userPrincipalName,
+			displayName: user.displayName,
+			directReports: JSON.stringify(user.directReports),
+			isAdmin: user.isAdmin,
+			username: user.sAMAccountName
+		};
+		done(null, sessionUser)
+	})
+
+	passport.deserializeUser(function (sessionUser, done) {
+		// The sessionUser object is different from the AD
+		// it's actually req.session.passport.user and comes from the session collection
+		if (typeof sessionUser.directReports === 'string') {
+			sessionUser.directReports = JSON.parse(sessionUser.directReports)
+		}
+		sessionUser.directReports = sessionUser.directReports || [];
+		done(null, sessionUser)
+	})
+
 	passport.use('obslocal', new LocalStrategy(function (username, password, done) {
 		ad.authenticate(username, password, function (err, isAuthenticated) {
 			if (err) {
