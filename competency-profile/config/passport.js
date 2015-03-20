@@ -6,6 +6,19 @@ var ActiveDirectory = require('activedirectory');
 var config = require('./passport.conf.js');
 var Q = require('q');
 
+/*
+***************************************************************************************************
+passport.conf.js above to be supplied by YOU should look like :
+	module.exports = {
+		url: 'ldap://ldap.obsglobal.com',
+	baseDN: 'dc=obsglobal,dc=com'
+		username: '<runtimeuser>@obsglobal.com',
+		password: '<runtimepassword>'
+	};
+	Where runtimeuser and runtimepassword are domain users for authenticating the lookup
+***************************************************************************************************
+*/
+
 var authConfig = {
 	url: 'ldap://ldap.obsglobal.com',
 	baseDN: 'dc=obsglobal,dc=com',
