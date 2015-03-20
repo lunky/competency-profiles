@@ -95,9 +95,9 @@ app.use(function (req, res, next) {
 	}
 	// reload
 	fs.readFile('./bundle.result.json', 'utf8', function (err, data) {
-		res.locals.bundles = JSON.parse(data);
+		res.locals.bundle = JSON.parse(data);
+		next();
 	});
-	next();
 });
 
 //TEMPLATE Rendering

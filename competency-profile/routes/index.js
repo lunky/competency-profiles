@@ -3,7 +3,6 @@
 
 var express = require('express');
 var router = express.Router();
-var bundles = require('../bundle.result.json');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var isAuthenticated = require('../config/auth');
@@ -11,9 +10,7 @@ var url = require('url');
 
 /* GET home page. */
 router.get('/', isAuthenticated, function (req, res) {
-	res.render('index', {
-		bundle: bundles
-	});
+	res.render('index');
 });
 
 /* GET home page. */
@@ -34,26 +31,36 @@ router.get('/login', function (req, res) {
 		req.session.redirectUrl = req.query.redirectUrl;
 	}
 	res.render('login', {
-		messages: req.flash('error'),
-		bundle: bundles
+		messages: req.flash('error')
 	});
 });
 
 router.post('/login', function (req, res, next) {
 	passport.authenticate('obslocal', function (err, user, info) {
 		var failureFlash = 'Invalid username or password.';
-		if (err) {
+		if (err || !user) {
 			req.flash('error', failureFlash);
-			return next(err);
-		}
-		if (!user) {
-			req.flash('error', failureFlash);
+			if (err) {
+				console.log(err);
+			}
+			/*
+			errors : http://www-01.ibm.com/support/docview.wss?uid=swg21290631
+			525​	user not found ​
+			52e​	invalid credentials ​
+			530​	not permitted to logon at this time​
+			531​	not permitted to logon at this workstation​
+			532​	password expired ​
+			533​	account disabled ​
+			701​	account expired ​
+			773​	user must reset password ​
+			775​	user account locked
+			*/
 			return res.redirect('/login');
 		}
 		req.logIn(user, function (err) {
 			if (err) {
 				req.flash('error', failureFlash);
-				return next(err);
+				return res.redirect('/login');
 			}
 			if (req.session.redirectUrl) {
 				var newUrl = url.parse(req.session.redirectUrl);
