@@ -77,7 +77,9 @@ var configDB = require('./config/database.js');
 var monkdb = monk(configDB.url);
 
 // Configure Passport to handle authentication
-require('./config/passport')(passport);
+//require('./config/passport')(passport);
+// uncomment this and comment the next line to enable local db (mongoose) auth
+require('./config/localDbPassport')(passport);
 
 // Make some things accessible to our router
 app.use(function (req, res, next) {
