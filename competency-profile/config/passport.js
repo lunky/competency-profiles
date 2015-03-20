@@ -117,48 +117,22 @@ module.exports = function (passport) {
 			if (isAuthenticated) {
 				// strip off domain or @obsglobal.com
 				var sAMAccountName = username.replace(/^obs\\/i, '');
-				//		sAMAccountName = 'bkatchnoski';
+				//				sAMAccountName = 'bkatchnoski';
 				qad.findUser(sAMAccountName, function (err, user) {
 					if (!user) {
 						err = 'User: ' + username + ' not found.';
 						return done(err, false);
 					} else {
-						var groupName = 'CPAdmin';
-						qad.isUserMemberOf(sAMAccountName, groupName, function (err, isMember) {
-							if (err) {
-								return done(err, false);
-							}
-							user.isAdmin = isMember;
-						});
-
-
 						user.username = user.sAMAccountName;
-						if (!user.directReports) {
-							user.directReports = [];
+						var groupName = 'CPAdmin';
+						Q.all([
+					addIsAdmin(groupName, user, qad),
+					addDirectReports(user, qad)
+				]).then(function (results) {
 							return done(null, user);
-						} else {
-							var query = '(&!(userAccountControl:1.2.840.113556.1.4.803:=2)(manager=' + user.dn.replace(/\\/g, '\\\\').replace(/\*/, '\\*') + '))';
-							dr = {
-								filter: query,
-								scope: 'sub',
-								attributes: ['sAMAccountName', 'thumbnailPhoto'],
-							};
-
-							qad.findUsers(
-								dr,
-								function (err2, users) {
-									if (err2) {
-										return done(err2, null);
-									}
-
-									var reports = users.map(function (el) {
-										return el.sAMAccountName;
-									});
-									user.directReports = reports;
-									user.directReportsUsers = users
-									return done(null, user);
-								});
-						}
+						}, function (err) {
+							return done(err, false);
+						});
 					}
 				});
 			} else {
