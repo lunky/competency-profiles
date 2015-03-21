@@ -1,15 +1,16 @@
 @import "mixins.less";
 @import "theme-default.less";
-
 /* 
   Allow angular.js to be loaded in body, hiding cloaked elements until 
   templates compile.  The !important is important given that there may be 
   other selectors that are more specific or come later and might alter display.  
  */
-[ng\:cloak], [ng-cloak], .ng-cloak {
+
+[ng\:cloak],
+[ng-cloak],
+.ng-cloak {
 	display: none !important;
 }
-
 /* ======= Base ======= */
 
 body {
@@ -22,36 +23,45 @@ body {
 	overflow-y: scroll;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 700;
 	color: @color;
 }
 
 .capitalize {
-	 text-transform: capitalize;
+	text-transform: capitalize;
 }
 
-html, body {
+html,
+body {
 	height: 100%;
 }
 
 .page-wrap {
 	min-height: 100%;
 	/* equal to footer height */
+
 	margin-bottom: -43px;
 }
 
-	.page-wrap:after {
-		content: "";
-		display: block;
-	}
+.page-wrap:after {
+	content: "";
+	display: block;
+}
 
-	.footer, .page-wrap:after {
-		height: 43px;
-	}
+.footer,
+.page-wrap:after {
+	height: 43px;
+}
 
-ul.no-bullet, li.no-bullet {
+ul.no-bullet,
+li.no-bullet {
 	list-style-type: none;
 }
 
@@ -79,16 +89,15 @@ input[type="checkbox"] {
 	margin-top: 0;
 }
 
-.btn, a.btn {
+.btn,
+a.btn {
 	.transition (all 0.4s ease-in-out);
 	font-family: 'Montserrat', arial, sans-serif;
 	padding: 8px 16px;
 	font-weight: bold;
-
 	.fa {
 		margin-right: 5px;
 	}
-
 	&:focus {
 		color: #fff;
 	}
@@ -98,11 +107,11 @@ input[type="checkbox"] {
 	border-color: lighten(@color-2, 15%);
 }
 
-	.panel-not-met > .panel-heading {
-		color: #fff;
-		background-color: @color-2;
-		border-color: #ebccd1;
-	}
+.panel-not-met > .panel-heading {
+	color: #fff;
+	background-color: @color-2;
+	border-color: #ebccd1;
+}
 
 .panel-met {
 	border-color: lighten(@color, 15%);
@@ -114,34 +123,30 @@ input[type="checkbox"] {
 		background-color: @color;
 		border-color: #ebccd1;
 	}
-
 	a {
 		.fa-pencil-square-o, .fa-undo {
 			color: @smoky-white;
 		}
-
 		.fa-close {
 			color: red;
 		}
 	}
-
-		a:hover {
-			.fa-pencil-square-o, .fa-undo {
-				color: darken(@smoky-white, 50%);
-			}
-
-			.fa-close {
-				color: darken(red, 15%);
-			}
+	a:hover {
+		.fa-pencil-square-o, .fa-undo {
+			color: darken(@smoky-white, 50%);
 		}
+		.fa-close {
+			color: darken(red, 15%);
+		}
+	}
 }
 
-a.btn-obs-primary, .btn-obs-primary {
+a.btn-obs-primary,
+.btn-obs-primary {
 	background: @btn-color;
 	border: 1px solid @btn-color;
 	color: #fff;
 	font-weight: 600;
-
 	&:hover {
 		background: darken(@btn-color, 5%);
 		border: 1px solid darken(@btn-color, 5%);
@@ -149,12 +154,12 @@ a.btn-obs-primary, .btn-obs-primary {
 	}
 }
 
-a.btn-obs-secondary, .btn-obs-secondary {
+a.btn-obs-secondary,
+.btn-obs-secondary {
 	background: @btn-color-2;
 	border: 1px solid @btn-color-2;
 	color: #fff;
 	font-weight: 600;
-
 	&:hover {
 		background: darken(@btn-color-2, 5%);
 		border: 1px solid darken(@btn-color-2, 5%);
@@ -174,13 +179,11 @@ a.btn-obs-secondary, .btn-obs-secondary {
 a.dotted-link {
 	border-bottom: 1px dotted @color;
 	color: @color;
-
 	&:hover {
 		text-decoration: none;
 		color: darken(@color, 20%);
 	}
 }
-
 /*
 iframe {
 
@@ -194,17 +197,15 @@ iframe {
     -webkit-overflow-scrolling:touch;
 }
 */
-
 /* ======= Header ======= */
+
 .header {
 	padding: 5px 0 10px 0;
 	background: #fff;
 	border-top: 10px solid @color-3;
-
-	.logo{
+	.logo {
 		margin-top: 5px;
 	}
-
 	.desc {
 		color: @color;
 		font-family: "Lato", arial, sans-serif;
@@ -212,7 +213,6 @@ iframe {
 		margin-top: 20px;
 		padding-left: 25px;
 	}
-
 	.menu-top {
 		list-style: none;
 		margin: 0;
@@ -220,12 +220,10 @@ iframe {
 		padding: 0;
 		text-align: right;
 		float: right;
-
 		li {
 			list-style: none;
 			float: left;
-
-			 a {
+			a {
 				display: inline-block;
 				color: @color;
 				padding: 0px 10px;
@@ -233,12 +231,11 @@ iframe {
 		}
 	}
 }
-
 /* ======= Nav    ======= */
+
 .main-nav {
 	background: @color;
 	margin-bottom: 20px;
-
 	button {
 		background: #27435a;
 		color: #fff !important;
@@ -251,19 +248,15 @@ iframe {
 		-webkit-background-clip: padding-box;
 		background-clip: padding-box;
 	}
-
-		button:focus {
-			outline: none;
-		}
-
-		button .icon-bar {
-			background-color: #fff;
-		}
-
+	button:focus {
+		outline: none;
+	}
+	button .icon-bar {
+		background-color: #fff;
+	}
 	.navbar-collapse {
 		padding: 0;
 	}
-
 	.nav {
 		.nav-item a {
 			color: #dce7f0;
@@ -272,21 +265,17 @@ iframe {
 			-ms-transition: all 0.4s ease-in-out;
 			-o-transition: all 0.4s ease-in-out;
 		}
-
 		.nav-item a:hover {
 			background: lighten(@color, 15%);
 			color: #fff;
 		}
-
 		.nav-item.active {
 			position: relative;
 		}
-
 		.nav-item.active > a {
 			background: lighten(@color, 10%);
 			color: #fff;
 		}
-
 		.nav-item.active > a:before {
 			content: "\f0d8";
 			position: absolute;
@@ -300,8 +289,8 @@ iframe {
 		}
 	}
 }
-
 /* ======= Sections======= */
+
 .sections-wrapper {
 	padding-top: 30px;
 	padding-bottom: 60px;
@@ -309,19 +298,16 @@ iframe {
 
 .section {
 	margin-bottom: 30px;
-
 	.section-inner {
 		border: 1px solid lighten(@color, 20%);
 		padding: 30px;
 	}
-
 	.heading {
 		margin-top: 0;
 		margin-bottom: 30px;
 		color: darken(@color, 15%);
 		font-size: 24px;
 	}
-
 	.content {
 		.more-link {
 			.fa {
@@ -331,30 +317,27 @@ iframe {
 		}
 	}
 }
-
 /* Score Section */
+
 .profile-score {
 	img {
 		margin: 0 auto;
+		max-width: 115px;
 	}
-
-	h2{
+	h2 {
 		color: @color-2;
 	}
 }
-
 /* Skills Section */
+
 .skills {
 	.intro {
 		margin-bottom: 30px;
 	}
-
 	.skillset {
-
 		.item {
 			margin-bottom: 30px;
 		}
-
 		.level-title {
 			font-size: 16px;
 			position: relative;
@@ -362,7 +345,6 @@ iframe {
 			margin-bottom: 10px;
 		}
 	}
-
 	.score {
 		font-size: 32px;
 		font-weight: bold;
@@ -372,24 +354,19 @@ iframe {
 		margin-top: 0px;
 	}
 }
-
 /* ======= Footer ======= */
 
 .footer {
 	background: @color;
 	color: #fff;
 	padding: 10px 0;
-
-
 	.copyright {
 		line-height: 1.6;
 		font-size: 14px;
 	}
-
 	a {
 		color: #fff;
 	}
-
 	.fa-heart {
 		color: @heart;
 	}

@@ -94,6 +94,12 @@ app.use(function (req, res, next) {
 		res.locals.userDisplayName = req.user.displayName;
 		res.locals.directReports = req.user.directReports;
 		res.locals.isAdmin = req.user.isAdmin;
+		if (req.user.thumbnailPhoto) {
+			var pic = new Buffer(req.user.thumbnailPhoto).toString('base64');
+			res.locals.thumbnailPhoto = 'data:image/jpeg;base64,' + pic;
+		} else {
+			res.locals.thumbnailPhoto = '/images/placeholder.png';
+		}
 	}
 	// reload
 	fs.readFile('./bundle.result.json', 'utf8', function (err, data) {

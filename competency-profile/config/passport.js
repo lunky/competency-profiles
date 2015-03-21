@@ -28,13 +28,24 @@ var authConfig = {
 };
 
 authConfig = extend(config, authConfig);
+authConfig.entryParser = customEntryParser;
 var qad = new ActiveDirectory(authConfig);
 var ad = new ActiveDirectory({
 	url: 'ldap://ldap.obsglobal.com',
 	baseDN: 'dc=obsglobal,dc=com'
 });
 
+
+
+function customEntryParser(item, raw, callback) {
+	if (item.thumbnailPhoto) {
+		item.thumbnailPhoto = raw.thumbnailPhoto;
+	}
+	callback(item);
+};
+
 module.exports = function (passport) {
+
 
 	function addDirectReports(user, qad) {
 		var deferred = Q.defer();
@@ -83,16 +94,19 @@ module.exports = function (passport) {
 	}
 
 	passport.serializeUser(function (user, done) {
+
 		var sessionUser = {
 			sAMAccountName: user.sAMAccountName,
 			userPrincipalName: user.userPrincipalName,
 			displayName: user.displayName,
 			directReports: JSON.stringify(user.directReports),
 			isAdmin: user.isAdmin,
-			username: user.sAMAccountName
+			username: user.sAMAccountName,
+			thumbnailPhoto: user.thumbnailPhoto
 		};
 		done(null, sessionUser)
 	})
+
 
 	passport.deserializeUser(function (sessionUser, done) {
 		// The sessionUser object is different from the AD
