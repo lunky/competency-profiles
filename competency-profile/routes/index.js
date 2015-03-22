@@ -69,7 +69,7 @@ router.post('/login', function (req, res, next) {
 				return res.redirect(newUrl.href);
 			}
 			if (user.directReports.length > 0) {
-				res.redirect('/#/rankings');
+				return res.redirect('/#/rankings');
 			}
 			return res.redirect('/');
 		});
