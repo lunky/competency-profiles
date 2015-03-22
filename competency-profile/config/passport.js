@@ -57,7 +57,7 @@ module.exports = function (passport) {
 			dr = {
 				filter: query,
 				scope: 'sub',
-				attributes: ['sAMAccountName', 'displayName'],
+				attributes: ['sAMAccountName', 'displayName', 'thumbnailPhoto'],
 			};
 
 			qad.findUsers(
@@ -69,7 +69,8 @@ module.exports = function (passport) {
 					var reports = users.map(function (el) {
 						return {
 							username: el.sAMAccountName,
-							displayName: el.displayName
+							displayName: el.displayName,
+							thumbnailPhoto: el.thumbnailPhoto != null ? new Buffer(el.thumbnailPhoto).toString('base64') : null
 						};
 					});
 					user.directReports = reports;
@@ -126,7 +127,7 @@ module.exports = function (passport) {
 			if (isAuthenticated) {
 				// strip off domain or @obsglobal.com
 				var sAMAccountName = username.replace(/^obs\\/i, '');
-				//				sAMAccountName = 'bkatchnoski';
+				//				sAMAccountName = 'alevine';
 				qad.findUser(sAMAccountName, function (err, user) {
 					if (!user) {
 						err = 'User: ' + username + ' not found.';

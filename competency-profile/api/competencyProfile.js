@@ -295,7 +295,8 @@ router.get('/rankings', isAuthenticated, function (req, res) {
 	Profiles.find({}, {
 		userid: 1,
 		displayName: 1,
-		level: 1
+		level: 1,
+		thumbnailPhoto: 1
 	}, function (err, profileList) {
 		if (err) {
 			res.status(500).send(err);
@@ -312,32 +313,44 @@ router.get('/rankings', isAuthenticated, function (req, res) {
 });
 
 function getFilteredProfiles(profileList, user) {
-	if (user.isAdmin) {
-		return profileList;
-	}
-
-	//Filter the profile list to only users who are direct reports
-	var filteredProfiles = profileList.filter(function (el) {
-		return userIsDirectReport(user.directReports, el.userid)
+	var profiles = {};
+	// make a hashtable
+	profileList.map(function (profile) {
+		profiles[profile.userid] = {
+			username: profile.userid,
+			displayName: profile.displayName,
+			thumbnailPhoto: profile.thumbnailPhoto,
+			userid: profile.userid,
+			level: profile.level
+		};
 	});
 
-	//Add all the users who haven't completed a profile
-	for (var i = 0; i < user.directReports.length; i++) {
-		//for direct report check if it exists in  filteredProfiles 
-		var addReport = filteredProfiles.some(function (el) {
-			return el.userid == user.directReports[i].username
-		});
-
-		//if no profile was found, add a 'No Profile Data' entry 
-		if (!addReport)
-			filteredProfiles.push({
-				userid: user.directReports[i].username,
-				displayName: user.directReports[i].displayName,
+	// merge in direct reports
+	var directReports = user.directReports.map(function (report) {
+		var profile = profiles[report.username]
+		if (!profiles[report.username]) {
+			profiles[report.username] = {
+				displayName: report.displayName,
 				level: 'No Profile Data'
-			});
+			};
+		}
+		profiles[report.username].userid = report.username;
+		profiles[report.username].thumbnailPhoto = report.thumbnailPhoto;
+		return profiles[report.username];
+	});
+
+	if (user.isAdmin) {
+		// return array from object properties
+		return Object.keys(profiles).map(function (key) {
+			return profiles[key]
+		});
 	}
 
-	return filteredProfiles;
+	var reports = user.directReports.map(function (report) {
+		return profiles[report.username];
+	});
+
+	return directReports;
 }
 
 
@@ -355,9 +368,13 @@ router.get('/:username', isAuthenticated, function (req, res) {
 	getCompetencyLevels().then(function (levels) {
 		objectivesAndProfile(username, req, res)
 			.then(function (profile) {
+				var directReport = req.user.directReports.filter(function (el) {
+					return el.username == username;
+				})
 				var fullProfile = {
 					'data': profile,
-					'summary': getStats(profile, levels)
+					'summary': getStats(profile, levels),
+					'personal': directReport[0]
 				};
 				res.setHeader('Cache-Control', 'no-cache');
 				res.json(fullProfile);

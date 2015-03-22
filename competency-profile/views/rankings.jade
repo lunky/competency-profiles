@@ -20,5 +20,12 @@ div.container.sections-wrapper
 								li.list-group-item
 									span.badge
 										|{{consultant.level}}
-									a(ng-if="consultant.level != 'No Profile Data'" href="/#/profileReport/{{consultant.userid}}") {{consultant.name}}
-									span(ng-if="consultant.level == 'No Profile Data'") {{consultant.name}}
+									div(ng-show="consultant.level!='No Profile Data'")
+										a(ng-show="consultant.thumbnailPhoto" href="/#/profileReport/{{consultant.userid}}")
+											img(ng-src="{{'data:image/jpeg;base64,' + consultant.thumbnailPhoto}}" class="img-responsive img-circle")
+										a(href="/#/profileReport/{{consultant.userid}}")
+											|{{consultant.name}}
+									div(ng-show="consultant.level == 'No Profile Data'")
+										img(ng-show="consultant.thumbnailPhoto" ng-src="{{'data:image/jpeg;base64,' + consultant.thumbnailPhoto}}" class="img-responsive img-circle")
+										span
+											|{{consultant.name}}

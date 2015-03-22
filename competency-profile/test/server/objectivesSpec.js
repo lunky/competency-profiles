@@ -1,9 +1,9 @@
+/*
 var should = require('chai').should(),
-    supertest = require('supertest');
-	var assert = require('assert');
-	var app = require('../../server');
-	var server = supertest.agent(app);
-
+	supertest = require('supertest');
+var assert = require('assert');
+var app = require('../../server');
+var server = supertest.agent(app);
 describe('IntegrationTest: objectives', function() {
 	beforeEach(function() { app.set('env', 'development'); });
 	before(function(done) { loginUser(done); });
@@ -52,3 +52,4 @@ function loginUser(done) {
 			return done();
 		}
 }
+*/

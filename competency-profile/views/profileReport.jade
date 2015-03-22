@@ -3,19 +3,22 @@ div.container.sections-wrapper
 		div.col-md-4.col-sm-12.col-xs-12
 			section.section
 				div.section-inner
-						div.row
-							div.col-xs-12
-								h2.heading Profile Report for&nbsp;
-									span.capitalize {{vm.username}}
+						div.content
+							div.row
+								aside(ng-show="vm.personal" class="aside section profile-score col-sm-6 col-md-12")
+									img(ng-hide="vm.personal.thumbnailPhoto" ng-src="/images/placeholder.png" class="img-responsive img-circle")
+									img(ng-show="vm.personal.thumbnailPhoto" ng-src="{{'data:image/jpeg;base64,' + vm.personal.thumbnailPhoto}}" class="img-responsive img-circle")
+									h2.text-center Profile Report for&nbsp:
+									span.capitalize {{vm.personal.displayName}}
 						div.content
 							div.row
 								div.col-xs-12
 									p
 										strong Current Level:
-										{{vm.profile.summary.level}}
+										|{{vm.profile.summary.level}}
 									p
 										strong Next Level:
-										{{vm.profile.summary.nextLevel}}
+										|{{vm.profile.summary.nextLevel}}
 									p
 										strong Current Score:
 										|{{vm.profile.summary.score}}
@@ -24,7 +27,7 @@ div.container.sections-wrapper
 										|{{vm.profile.summary.nextLevelScore}}
 									p
 										strong Points Required to Reach {{vm.profile.summary.nextLevel}} Level:
-										{{vm.profile.summary.nextLevelScore - vm.profile.summary.score}}
+										|{{vm.profile.summary.nextLevelScore - vm.profile.summary.score}}
 		div.col-xs-12.col-md-8
 			section.section
 				div.section-inner

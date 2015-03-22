@@ -21,7 +21,8 @@
 							return {
 								userid: user.userid,
 								name: user.displayName || user.userid,
-								level: user.level
+								level: user.level,
+								thumbnailPhoto: user.thumbnailPhoto
 							};
 						});
 					}

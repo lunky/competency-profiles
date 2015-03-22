@@ -33,7 +33,7 @@
 				.then(
 					function (response) {
 						vm.profile = response;
-
+						vm.personal = response.personal;
 						vm.gateFilter = {
 							isMet: false,
 							gateLevel: response.summary.nextLevel
