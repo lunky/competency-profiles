@@ -3,8 +3,11 @@ div.panel-heading
 		|Objective Met
 	a.pull-right(href="" data-ng-click="vm.scoreObjective(objective, false)" data-ng-if="objective.isMet")
 		i.fa.fa-undo
+	span.pull-right(href="" data-ng-click="objective.skipped=false" data-ng-show="!objective.isMet && objective.skipped" class="pointer")
+		i.fa.fa-undo
 	span(data-ng-if="!objective.isMet")
 		|Objective Not Met
+	span(data-ng-show="objective.skipped" data-ng-click='objective.skipped=false' class="pointer") &nbsp; (skipped)
 div.panel-body
 	strong 
 		|{{objective.description}}?
@@ -12,8 +15,9 @@ div.panel-body
 		div.col-xs-12.text-center
 			a.btn.btn-success(href="" data-ng-click="vm.scoreObjective(objective, true)")
 				|Meet Objective
-			a(href="" data-ng-click="objective.skipped = true")
-				|	or skip
+			|&nbsp;
+			a(href="" data-ng-click="objective.skipped = true" data-ng-hide="objective.skipped")
+				|or skip
 	div.row(data-ng-if="!objective.isMet")
 		div.col-xs-6
 			h3
