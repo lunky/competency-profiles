@@ -1,10 +1,37 @@
 #!/usr/bin/env node
-var debug = require('debug')('ExpressApp1');
-var app = require('../server');
 
-app.set('port', process.env.PORT || 3000);
+var debug = require('debug')('Competency Profiles'),
+	app = require('../server'),
+	path = require('path'),
+	fs = require('fs'),
+	http = require('http'),
+	https = require('https');
 
-var server = app.listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + server.address().port);
-    debug('Express server listening on port ' + server.address().port);
-});
+var keyPath = path.join(__dirname, '..', 'ssl', 'yourkey.pem');
+var certPath = path.join(__dirname, '..', 'ssl', 'yourcert.pem');
+
+// if we find a file in the above keyPath, launch SSL, otherwise launch
+
+fs.exists(keyPath, function (exists) {
+	if (exists) {
+		app.set('httpsport', process.env.HTTPSPORT || 443);
+
+		var hskey = fs.readFileSync(keyPath);
+		var hscert = fs.readFileSync(certPath);
+
+		var options = {
+			key: hskey,
+			cert: hscert
+		};
+		var httpsServer = https.createServer(options, app).listen(app.get('httpsport'), function () {
+			console.log('Express server listening on ssl port ' + httpsServer.address().port);
+			debug('Express server listening on ssl port ' + httpsServer.address().port);
+		});
+	} else {
+		app.set('port', process.env.PORT || 3000);
+		var httpServer = http.createServer(app).listen(app.get('port'), function () {
+			console.log('Express server listening on port ' + httpServer.address().port);
+			debug('Express server listening on port ' + httpServer.address().port);
+		});
+	}
+})
