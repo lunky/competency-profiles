@@ -4,14 +4,16 @@ var debug = require('debug')('Competency Profiles'),
 	app = require('../server'),
 	path = require('path'),
 	fs = require('fs'),
+	constants = require('constants'),
 	http = require('http'),
 	https = require('https');
+
 
 var keyPath = path.join(__dirname, '..', 'ssl', 'yourkey.pem');
 var certPath = path.join(__dirname, '..', 'ssl', 'yourcert.pem');
 
-// if we find a file in the above keyPath, launch SSL, otherwise launch
 
+// if we find a file in the above keyPath, launch SSL, otherwise launch
 fs.exists(keyPath, function (exists) {
 	if (exists) {
 		app.set('httpsport', process.env.HTTPSPORT || 443);
@@ -20,6 +22,9 @@ fs.exists(keyPath, function (exists) {
 		var hscert = fs.readFileSync(certPath);
 
 		var options = {
+			secureProtocol: 'SSLv23_method',
+			secureOptions: constants.SSL_OP_NO_SSLv3 | constants.SSL_OP_NO_SSLv2,
+			ciphers: 'ECDHE-RSA-AES128-SHA256:AES128-GCM-SHA256:RC4:HIGH:!MD5:!aNULL:!EDH:!SHA-1', // no sha-1
 			key: hskey,
 			cert: hscert
 		};
