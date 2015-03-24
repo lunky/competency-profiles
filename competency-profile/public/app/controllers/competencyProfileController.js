@@ -43,7 +43,7 @@
 				['Citizenship', vm.score.citizenshipAnswered]
 			];
 			var total = vm.pieData.reduce(function (prev, curr, index, arr) {
-				if (index == 1) {
+				if (index === 1) {
 					return curr[1];
 				}
 				return prev + curr[1];
