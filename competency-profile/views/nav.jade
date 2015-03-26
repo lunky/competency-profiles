@@ -2,12 +2,12 @@
 	nav.main-nav(role="navigation")
 		div.container(data-ng-controller="NavController as vm")
 			div.navbar-header
-				button.navbar-toggle(type="button" data-toggle="collapse" data-target="#navbar-collapse")
+				button.navbar-toggle(type="button" ng-click="vm.isCollapsed = !vm.isCollapsed")
 					span.sr-only Toggle navigation
 					span.icon-bar
 					span.icon-bar
 					span.icon-bar
-			div.navbar-collapse.collapse(id="navbar-collapse")
+			div.navbar-collapse.collapse(data-collapse="vm.isCollapsed")
 				ul.nav.navbar-nav
 					li.nav-item(ng-class="vm.getClass('')")
 						a(href="/") Home
