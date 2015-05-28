@@ -25,16 +25,15 @@ function getStats(objectives, levels) {
 	// 1) If
 	//                      the sum of all selected non-gate objectives is greater than intermediate score
 	//                      &
-	//                      the sum of all selected gated objectives is greater than base intermediate score
+	//                      the sum of all selected gated objectives is greater than intermediate gate score
 	//                      then consultant is intermediate
 	// 2) If
 	//                      consultant meets intermediate requirements
 	//                      &
 	//                      the sum of all selected non-gate objectives is greater than senior score
 	//                      &
-	//                      the sum of all selected gated objectives is greater than base senior score
+	//                      the sum of all selected gated objectives is greater than senior gate score
 	//                      then consultant is senior
-
 
 	var doc = {};
 	var stats = {
@@ -85,19 +84,39 @@ function getStats(objectives, levels) {
 	var nextLevelIndex = getNextLevel(currentLevelIndex);
 
 	var nextLevel = "Principle";
-	var nextLevelScore = 1;
+	var nextLevelScore = 0;
+	var nextLevelGateScore = 0;
+
+	//next level metadata
 	if (nextLevelIndex != "principle") {
 		nextLevel = levels[nextLevelIndex].description;
 		nextLevelScore = levels[nextLevelIndex].minimumScore;
+		nextLevelGateScore = levels[nextLevelIndex].minimumGateScore;
 	}
+	//current metadata
+	var currentScore = Math.round(doc.base + doc.intermediate + doc.senior);
+	var currentGateScore = nextLevel == "Senior" ? doc.senior : doc.intermediate;
 
+	//calculate score and gate percentage contribution
+	var totalPointsRequired = nextLevelScore + nextLevelGateScore;
+	var scorePercentageContribution = (nextLevelScore / totalPointsRequired) * 100;
+	var gatePercentageContribution = (nextLevelGateScore / totalPointsRequired) * 100;
+
+	//progress attributed to met score %age
+	var pointsNeededForNextLevel = Math.max((nextLevelScore - (currentScore - currentGateScore)), 0);
+	var calculatedPointsContribution = (1 - (pointsNeededForNextLevel / nextLevelScore)) * scorePercentageContribution;
+
+	//progress is attributed to met gate %age
+	var gatePointsNeededForNextLevel = Math.max((nextLevelGateScore - currentGateScore), 0);
+	var calculatedGateContribution = (1 - (gatePointsNeededForNextLevel / nextLevelGateScore)) * gatePercentageContribution;
+
+	var levelProgressValue = Math.round(calculatedPointsContribution + calculatedGateContribution);
+	var scoreThresholdPassed = (pointsNeededForNextLevel == 0) && (nextLevel != "Principle");
+	var gateThresholdPassed = gatePointsNeededForNextLevel == 0 && (nextLevel != "Principle");
 
 	var summary = {
-		base: Math.round(doc.base / doc.baseTotal * 100),
-		intermediate: Math.round(doc.intermediate / doc.intermediateTotal * 100),
-		senior: Math.round(doc.senior / doc.seniorTotal * 100),
-		score: Math.round(doc.base + doc.intermediate + doc.senior),
 
+		//competency metadata
 		communication: Math.round(doc.communication / doc.communicationTotal * 100),
 		communicationAnswered: doc.answeredTotal === 0 ? 0 : Math.round(doc.communication / doc.answeredTotal * 100),
 		leadership: Math.round(doc.leadership / doc.leadershipTotal * 100),
@@ -108,10 +127,20 @@ function getStats(objectives, levels) {
 		conflictAnswered: doc.answeredTotal === 0 ? 0 : Math.round(doc.conflict / doc.answeredTotal * 100),
 		citizenship: Math.round(doc.citizenship / doc.citizenshipTotal * 100),
 		citizenshipAnswered: doc.answeredTotal === 0 ? 0 : Math.round(doc.citizenship / doc.answeredTotal * 100),
+
+		//levels metadata
 		level: levels[currentLevelIndex].description,
-		levelScore: levels[currentLevelIndex].minimumScore,
 		nextLevel: nextLevel,
-		nextLevelScore: nextLevelScore
+
+		//score metadata
+		score: Math.round(doc.base + doc.intermediate + doc.senior),
+		gateScore: nextLevel == "Senior" ? doc.senior : doc.intermediate,
+		nextLevelScore: nextLevelScore,
+
+		//level progress metadata
+		levelProgressValue: levelProgressValue,
+		scoreThresholdPassed: scoreThresholdPassed,
+		gateThresholdPassed: gateThresholdPassed
 	};
 	return summary;
 }

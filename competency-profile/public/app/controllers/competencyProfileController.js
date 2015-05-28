@@ -18,6 +18,7 @@
 		vm.objectives = [];
 		vm.save = save;
 		vm.scoreObjective = scoreObjective;
+
 		vm.pieData = [['', '']]; // need 2d array
 		vm.pieChart = {};
 		vm.pieChart.type = 'PieChart';
@@ -42,6 +43,7 @@
 				['Conflict', vm.score.conflictAnswered],
 				['Citizenship', vm.score.citizenshipAnswered]
 			];
+
 			var total = vm.pieData.reduce(function (prev, curr, index, arr) {
 				if (index === 1) {
 					return curr[1];
@@ -67,15 +69,18 @@
 
 		function initialize() {
 			competencyProfileService.getObjectives().then(function (response) {
-				vm.objectives = response.data;
-				vm.score = response.summary;
-				bindScore();
-				$rootScope.$broadcast(appEvents.updateLevel, {
-					level: vm.score.level
+					vm.objectives = response.data;
+					vm.score = response.summary;
+					bindScore();
+					$rootScope.$broadcast(appEvents.updateLevel, {
+						level: vm.score.level
+					});
+
+
+				},
+				function (err) {
+					toaster.pop('error', 'An error occured getting objectives.', err);
 				});
-			}, function (err) {
-				toaster.pop('error', 'An error occured getting objectives.', err);
-			});
 		}
 
 		function save() {
