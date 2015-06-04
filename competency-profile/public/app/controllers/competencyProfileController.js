@@ -65,10 +65,17 @@
 			vm.save();
 		}
 
+		function initializeSkipped() {
+			vm.objectives.map(function (el) {
+				el.skipped = false;
+			});
+		}
+
 		function initialize() {
 			competencyProfileService.getObjectives().then(function (response) {
 				vm.objectives = response.data;
 				vm.score = response.summary;
+				initializeSkipped();
 				bindScore();
 				$rootScope.$broadcast(appEvents.updateLevel, {
 					level: vm.score.level

@@ -9,6 +9,7 @@
 
 	function NavController($location) {
 		var vm = this;
+		vm.isCollapsed = true;
 
 		vm.getClass = function (path) {
 			if ($location.path() === path) {
