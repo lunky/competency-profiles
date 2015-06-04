@@ -21,7 +21,7 @@
 		vm.showRequiredExamples = false;
 		vm.toggleExamples = toggleExamples;
 		vm.toggleRequiredExamples = toggleRequiredExamples;
-
+		vm.pointsNeededForNextLevel = 0;
 		initialize();
 
 		// go get this user and the user document
@@ -43,11 +43,16 @@
 							isMet: false,
 							gateLevel: '!' + response.summary.nextLevel
 						};
+
+						vm.pointsNeededForNextLevel = Math.max((response.summary.nextLevelScore - (response.summary.score - response.summary.gateScore)), 0);
 					},
 					function (err) {
 						toaster.pop('error', 'Error Retrieving Objectives', err);
 					}
 				);
+
+
+
 		}
 
 		function toggleExamples() {

@@ -1,16 +1,12 @@
-h2.heading Level Summary
+h2.heading Level Progress
 div.content
 	p.intro
 	div.skillset
 		div.row
-			h3.col-xs-6.col-md-12.level-title(title="Base") Base
+			h3.col-xs-6.col-md-12.level-title(title="vm.score.nextLevel") {{vm.score.nextLevel}}
 			div.col-xs-6.col-md-12
-				progressbar.progress-striped(value="vm.score.base") {{vm.score.base}}%
-		div.row
-			h3.col-xs-6.col-md-12.level-title(title="Intermediate") Intermediate
-			div.col-xs-6.col-md-12
-				progressbar.progress-striped(value="vm.score.intermediate") {{vm.score.intermediate}}%
-		div.row
-			h3.col-xs-6.col-md-12.level-title(title="Senior") Senior
-			div.col-xs-6.col-md-12
-				progressbar.progress-striped(value="vm.score.senior") {{vm.score.senior}}%
+				progressbar.progress-striped(value="vm.score.levelProgressValue") {{vm.score.levelProgressValue}}%
+			div.col-xs-6.col-md-12(data-ng-if="vm.score.scoreThresholdPassed")
+				|Score Threshold Passed
+			div.col-xs-6.col-md-12(data-ng-if="vm.score.gateThresholdPassed")
+				|Gate Threshold Passed

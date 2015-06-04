@@ -26,8 +26,9 @@ div.container.sections-wrapper
 										strong Score Required for Next Level:
 										|{{vm.profile.summary.nextLevelScore}}
 									p
-										strong Points Required to Reach {{vm.profile.summary.nextLevel}} Level:
-										|{{vm.profile.summary.nextLevelScore - vm.profile.summary.score}}
+										strong Remaining points needed to reach next level:
+										|{{vm.pointsNeededForNextLevel}}
+
 		div.col-xs-12.col-md-8
 			section.section
 				div.section-inner
