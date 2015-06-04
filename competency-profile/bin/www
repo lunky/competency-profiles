@@ -9,8 +9,9 @@ var debug = require('debug')('Competency Profiles'),
 	https = require('https');
 
 
-var keyPath = path.join(__dirname, '..', 'ssl', 'yourkey.pem');
-var certPath = path.join(__dirname, '..', 'ssl', 'yourcert.pem');
+var keyPath = path.join(__dirname, '..', 'ssl', 'star_obsglobal_com.key');
+var certPath = path.join(__dirname, '..', 'ssl', 'star_obsglobal_com.crt');
+var caPath = path.join(__dirname, '..', 'ssl', 'TrustedRoot.crt');
 
 
 // if we find a file in the above keyPath, launch SSL, otherwise launch
@@ -20,13 +21,15 @@ fs.exists(keyPath, function (exists) {
 
 		var hskey = fs.readFileSync(keyPath);
 		var hscert = fs.readFileSync(certPath);
+		var cacert = fs.readFileSync(caPath);
 
 		var options = {
 			secureProtocol: 'SSLv23_method',
 			secureOptions: constants.SSL_OP_NO_SSLv3 | constants.SSL_OP_NO_SSLv2,
 			ciphers: 'ECDHE-RSA-AES128-SHA256:AES128-GCM-SHA256:RC4:HIGH:!MD5:!aNULL:!EDH:!SHA-1', // no sha-1
 			key: hskey,
-			cert: hscert
+			cert: hscert,
+			ca: [cacert]
 		};
 		var httpsServer = https.createServer(options, app).listen(app.get('httpsport'), function () {
 			console.log('Express server listening on ssl port ' + httpsServer.address().port);
