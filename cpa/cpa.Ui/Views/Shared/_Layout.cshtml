@@ -1,0 +1,39 @@
+﻿@{
+    bool isAuthenticated = true;
+}<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="lt-ie9">
+<![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9">
+<![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+	<link rel="icon", href="favicon.ico" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+	<title>Online Competency Profile</title>
+	<meta charset='utf-8'/>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+	<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+	<link rel='stylesheet' , href='https://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' />
+	<link rel='stylesheet' , href='https://fonts.googleapis.com/css?family=Montserrat:400,700' />
+	@Styles.Render("~/Content/styles")
+	<!--[if lt IE 9]>
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js')
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js')
+	<![endif]-->
+</head>
+	<body data-ng-app='@(isAuthenticated ? "CompetencyProfiles":"")' data-ngCloak>
+		<div class="page-wrap">
+			 @Html.Partial("header")
+			 @Html.Partial("nav")
+			 @RenderBody()
+			<div data-toaster-container data-toaster-options="{'time-out': 3000, 'close-button':true, 'position-class': 'toast-bottom-right'}"></div>
+		</div>
+		@Html.Partial("footer")
+		@Scripts.Render("~/bundles/scripts")
+		@RenderSection("scripts", required: false)
+	</body>
+</html>

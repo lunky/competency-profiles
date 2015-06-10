@@ -1,0 +1,44 @@
+﻿@model dynamic
+@{
+	var hasDirectReports = true;
+	var isAdmin = true;
+	var isAuthenticated = true;
+}
+
+
+<nav role="navigation" class="main-nav">
+	@if (isAuthenticated)
+	{
+		<div data-ng-controller="NavController as vm" class="container">
+			<div class="navbar-header">
+				<button type="button" ng-click="vm.isCollapsed = !vm.isCollapsed" class="navbar-toggle">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div><div data-collapse="vm.isCollapsed" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li ng-class="vm.getClass('')" class="nav-item">
+						<a href="/">Home</a>
+					</li>
+					@if (isAdmin)
+					{
+						<li ng-class="vm.getClass('/competencyLevels')" class="nav-item">
+							<a href="/#/competencyLevels">Competency Levels Admin</a>
+						</li>
+						<li ng-class="vm.getClass('/objectiveAdmin')" class="nav-item">
+							<a href="/#/objectiveAdmin">Objectives Admin</a>
+						</li>
+					}
+					@if (hasDirectReports)
+					{
+						<li ng-class="vm.getClass('/rankings')" class="nav-item">
+							<a href="/#/rankings">Your Team</a>
+						</li>
+					}
+				</ul>
+			</div>
+		</div>
+	}
+</nav>
