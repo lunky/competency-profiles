@@ -103,7 +103,7 @@ function getStats(objectives, levels) {
 	var gatePercentageContribution = (nextLevelGateScore / totalPointsRequired) * 100;
 
 	//progress attributed to met score %age
-	var pointsNeededForNextLevel = Math.max((nextLevelScore - (currentScore - currentGateScore)), 0);
+	var pointsNeededForNextLevel = Math.max((nextLevelScore - currentScore), 0);
 	var calculatedPointsContribution = (1 - (pointsNeededForNextLevel / nextLevelScore)) * scorePercentageContribution;
 
 	//progress is attributed to met gate %age
