@@ -80,7 +80,7 @@
 				</div><div class="content">
 					<div class="row">
 						<div class="col-xs-12">
-							<div data-ng-repeat="objective in vm.objectives | orderBy: ['-skipped', vm.sort, 'objectiveId']" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'" class="panel">
+							<div data-ng-repeat="objective in vm.objectives | orderBy: [ vm.sort ? vm.sort: 'isMet','skipped', 'objectiveId']" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'" class="panel">
 								<div class="panel-heading">
 									<span data-ng-if="objective.isMet">Objective Met</span>
 									<a href="" data-ng-click="vm.scoreObjective(objective, false)" data-ng-if="objective.isMet" class="pull-right"><i class="fa fa-undo"></i></a>
