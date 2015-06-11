@@ -7,6 +7,7 @@ using cpa.Shared.dtos;
 
 namespace cpa.Ui
 {
+	[Authorize]
 	public class CompetencyProfileController : ApiController
 	{
 		private string userid = "obs\\qwilson";
