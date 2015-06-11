@@ -40,7 +40,7 @@ namespace cpa.Ui
 				"~/Content/font-awesome.min.css",
 					  "~/Content/bootstrap.css",
 					  "~/Content/toaster.css",
-					  "~/Content/style.css"));
+					  "~/Content/styles.css"));
 		}
 	}
 }
