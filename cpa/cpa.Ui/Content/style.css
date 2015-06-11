@@ -1,0 +1,85 @@
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color: #ffff01;
+}
+.sidebar-nav {
+  padding: 9px 0;
+}
+.navright {
+  text-align: right;
+}
+#status {
+  height: 35px;
+}
+#progress {
+  text-align: center;
+}
+.notImplemented {
+  cursor: not-allowed;
+}
+.objective {
+  position: relative;
+  padding: 1em 1.5em;
+  margin: 2em auto;
+  color: #fff;
+  background: #101010;
+  overflow: hidden;
+}
+.objectiveSelected {
+  position: relative;
+  padding: 1em 1.5em;
+  margin: 2em auto;
+  color: #fff;
+  background: #101010;
+  overflow: hidden;
+}
+#earMarked {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-width: 0 64px 64px 0;
+/* This trick side-steps a webkit bug */
+  border-style: solid;
+  border-color: #fff #fff #101010 #101010;
+/* A bit more verbose to work with .rounded too */
+  background: #ff694b;
+/* For when also applying a border-radius */
+  display: block;
+  width: 0;
+/* Only for Firefox 3.0 damage limitation */
+/* Optional: shadow */
+  -webkit-box-shadow: 0 2px 2px rgba(255,255,255,0.3), -2px 2px 2px rgba(255,255,255,0.2);
+  -moz-box-shadow: 0 2px 2px rgba(255,255,255,0.3), -2px 2px 2px rgba(255,255,255,0.2);
+  box-shadow: 0 2px 2px rgba(255,255,255,0.3), -2px 2px 2px rgba(255,255,255,0.2);
+}
+.earMarked-add,
+.earMarked-remove.earMarked-remove-active {
+  -webkit-transition: 0.25s linear all;
+/* Chrome */
+  transition: 0.25s linear all;
+  opacity: 0;
+}
+.earMarked-add.earMarked-add-active,
+.earMarked-remove {
+  opacity: 1;
+}
+.objective.blue {
+  background: #53a3b4;
+}
+.objectiveSelected.blue {
+  background: #53a3b4;
+}
+.objectiveSelected.blue:before {
+  border-color: #fff #fff transparent transparent;
+  background: transparent;
+}
+.loginform div {
+  max-width: 300px;
+}
+.heavyPad div {
+  padding: 15px;
+}
