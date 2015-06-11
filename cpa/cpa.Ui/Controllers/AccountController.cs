@@ -4,6 +4,7 @@ using cpa.Model;
 
 namespace cpa.Ui
 {
+	[AllowAnonymous]
 	public class AccountController : Controller
 	{
 		public ActionResult Login()
@@ -39,7 +40,6 @@ namespace cpa.Ui
 		public ActionResult LogOff()
 		{
 			FormsAuthentication.SignOut();
-
 			return RedirectToAction("Index", "Home");
 		}
 	}
