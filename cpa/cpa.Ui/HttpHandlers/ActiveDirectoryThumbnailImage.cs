@@ -8,7 +8,9 @@ namespace cpa.Ui.HttpHandlers
 	{
 		public void ProcessRequest(HttpContext context)
 		{
-			var username = context.User.Identity.Name;
+			var username = 
+				context.Request.Params["u"] ??
+				context.User.Identity.Name;
 
 			var adConnection = WebConfigurationManager.ConnectionStrings["ADConnectionString"].ConnectionString;
 			var adReference = new DirectoryEntry(adConnection);
