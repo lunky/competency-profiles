@@ -8,6 +8,7 @@ namespace cpa.Ui
 		public static void RegisterRoutes(RouteCollection routes)
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+			routes.IgnoreRoute("Thumbnail");
 			routes.MapMvcAttributeRoutes();
 			routes.MapRoute(
 				name: "Default",
