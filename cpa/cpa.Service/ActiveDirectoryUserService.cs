@@ -11,7 +11,12 @@ namespace cpa.Service
 			var adConnection = WebConfigurationManager.ConnectionStrings["ADConnectionString"].ConnectionString;
 			var adReference = new DirectoryEntry(adConnection);
 			var search = new DirectorySearcher(adReference) { Filter = string.Format("(sAMAccountName={0})", username) };
-			search.PropertiesToLoad.Add("thumbnailPhoto");
+
+			foreach (var property in propertyNames)
+			{
+				search.PropertiesToLoad.Add(property);
+			}
+
 			var result = search.FindOne();
 
 			return result == null
