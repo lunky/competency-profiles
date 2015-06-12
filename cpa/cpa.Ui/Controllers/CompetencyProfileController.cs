@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Web;
 using System.Web.Http;
 using AutoMapper;
 using cpa.Shared;
@@ -10,8 +11,12 @@ namespace cpa.Ui
 	[Authorize]
 	public class CompetencyProfileController : ApiController
 	{
-		private string userid = "obs\\qwilson";
-		private IProfileService _profileService;
+		private static string UserId
+		{
+			get { return HttpContext.Current.User.Identity.Name; }
+		}
+
+		private readonly IProfileService _profileService;
 
 		public CompetencyProfileController(IProfileService profileService)
 		{
@@ -22,19 +27,13 @@ namespace cpa.Ui
 		[HttpGet]
 		public CompetencyProfileModel Get()
 		{
-			ProfileDto profileDto = _profileService.GetProfile(userid);
+			var profileDto = _profileService.GetProfile(UserId);
 			var profile = Mapper.Map<ProfileModel>(profileDto);
 			return new CompetencyProfileModel
 			{
 				data = profile.MetObjectives,
 				summary = BuildSummary(profile.MetObjectives)
-			}
-				;
-		}
-
-		private ProfileSummaryModel BuildSummary(IEnumerable<ObjectiveModel> objectives)
-		{
-			return new ProfileSummaryModel();
+			};
 		}
 
 		[HttpPost]
@@ -45,7 +44,7 @@ namespace cpa.Ui
 			{
 				o.IsMet = true;
 			}
-			profileModel.UserId = userid;
+			profileModel.UserId = UserId;
 			var profileDto = Mapper.Map<ProfileDto>(profileModel);
 			var newProfileDto = _profileService.Save(profileDto);
 			var profile = Mapper.Map<ProfileModel>(newProfileDto);
@@ -54,6 +53,11 @@ namespace cpa.Ui
 				data = profile.MetObjectives,
 				summary = BuildSummary(profile.MetObjectives)
 			};
+		}
+
+		private ProfileSummaryModel BuildSummary(IEnumerable<ObjectiveModel> objectives)
+		{
+			return new ProfileSummaryModel();
 		}
 	}
 }
