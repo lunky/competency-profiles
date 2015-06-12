@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +51,7 @@
     <Compile Include="dtos\ObjectiveDto.cs" />
     <Compile Include="dtos\ProfileDto.cs" />
     <Compile Include="enums\GateLevel.cs" />
+    <Compile Include="IActiveDirectoryUserService.cs" />
     <Compile Include="IProfileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.AccessControl;
 using AutoMapper;
 using cpa.EntityFramework;
-using cpa.EntityFramework.Migrations;
 using cpa.Model;
 using cpa.Shared;
 using cpa.Shared.dtos;
-using cpa.Shared.enums;
 
 namespace cpa.Service
 {

@@ -1,6 +1,5 @@
-﻿using System.DirectoryServices;
-using System.Web;
-using System.Web.Configuration;
+﻿using System.Web;
+using cpa.Service;
 
 namespace cpa.Ui.HttpHandlers
 {
@@ -12,26 +11,20 @@ namespace cpa.Ui.HttpHandlers
 				context.Request.Params["u"] ??
 				context.User.Identity.Name;
 
-			var adConnection = WebConfigurationManager.ConnectionStrings["ADConnectionString"].ConnectionString;
-			var adReference = new DirectoryEntry(adConnection);
-			var search = new DirectorySearcher(adReference) { Filter = string.Format("(sAMAccountName={0})", username) };
-			search.PropertiesToLoad.Add("thumbnailPhoto");
-			var result = search.FindOne();
+			var activeDirectoryUserService = new ActiveDirectoryUserService();
+			var result = activeDirectoryUserService.GetProperties(username, "thumbnailPhoto");
+			var resultCollection = result["thumbnailPhoto"];
 
-			if (result == null) 
-				return;
+			if (resultCollection.Count <= 0) 
+				return; //TODO: Default thumbnail
 
-			var resultCollection = result.Properties["thumbnailPhoto"];
-			if (resultCollection.Count > 0)
-			{
-				var thumbnailPhoto = resultCollection[0] as byte[]
-				                     ?? new byte[] {};
+			var thumbnailPhoto = resultCollection[0] as byte[]
+			                     ?? new byte[] {};
 
-				context.Response.Clear();
-				context.Response.ContentType = "image/png";
-				context.Response.BinaryWrite(thumbnailPhoto);
-				context.Response.End();
-			}
+			context.Response.Clear();
+			context.Response.ContentType = "image/png";
+			context.Response.BinaryWrite(thumbnailPhoto);
+			context.Response.End();
 		}
 
 		public bool IsReusable { get; private set; }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using cpa.Shared.dtos;
 
 namespace cpa.Shared
