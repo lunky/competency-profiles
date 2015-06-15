@@ -158,7 +158,7 @@
 					}
 				});
 				['communication', 'leadership', 'interpersonal', 'conflict', 'citizenship'].forEach(function (competency) {
-					if (curr[competency] === 'Y') {
+					if (curr[competency] === true) {
 						prev[competency + 'Total'] += curr.competencyWeighting;
 						if (curr.isMet) {
 							prev[competency] += curr.competencyWeighting;
