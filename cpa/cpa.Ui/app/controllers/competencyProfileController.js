@@ -42,7 +42,7 @@
 				['Leadership', vm.score.leadershipAnswered],
 				['Interpersonal', vm.score.interpersonalAnswered],
 				['Conflict', vm.score.conflictAnswered],
-			get	['Citizenship', vm.score.citizenshipAnswered]
+				['Citizenship', vm.score.citizenshipAnswered]
 			];
 
 			var total = vm.pieData.reduce(function (prev, curr, index, arr) {
