@@ -1,7 +1,8 @@
-﻿namespace cpa.Model
+namespace cpa.Shared.dtos
 {
-	public class CompetencyLevel : EntityBase
+	public class CompetencyLevelDto
 	{
+		public int Id { get; set; }
 		public string GateLevelDescription { get; set; }
 		public string Description { get; set; }
 		public int MinimumScore { get; set; }

@@ -10,7 +10,7 @@ namespace cpa.Service
 {
 	public class ProfileService : IProfileService
 	{
-		private ICpaContext _context;
+		private readonly ICpaContext _context;
 
 		public ProfileService(ICpaContext context)
 		{
@@ -85,6 +85,13 @@ namespace cpa.Service
 			//	}
 			//}
 			return stats;
+		}
+
+		public List<CompetencyLevelDto> GetLevels()
+		{
+			var competencyLevels = _context.CompetencyLevels.ToList();
+			var competencyLevelsDto = Mapper.Map<List<CompetencyLevelDto>>(competencyLevels);
+			return competencyLevelsDto;
 		}
 
 		//public CompetencyLevel GetLevel()
