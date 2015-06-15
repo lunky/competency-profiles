@@ -1,5 +1,4 @@
-﻿using cpa.EntityFramework;
-using cpa.Shared.enums;
+﻿using cpa.Shared.enums;
 using Newtonsoft.Json;
 
 namespace cpa.Ui
@@ -13,7 +12,7 @@ namespace cpa.Ui
 		[JsonProperty(PropertyName = "leadership")]
 		public bool Leadership { get; set; }
 		[JsonProperty(PropertyName = "interpersonal")]
-		public bool Lnterpersonal { get; set; }
+		public bool Interpersonal { get; set; }
 		[JsonProperty(PropertyName = "conflict")]
 		public bool Conflict { get; set; }
 		[JsonProperty(PropertyName = "citizenship")]
@@ -21,7 +20,7 @@ namespace cpa.Ui
 		[JsonProperty(PropertyName = "score")]
 		public int Score { get; set; }
 		[JsonProperty(PropertyName = "gateLevel")]
-		public GateLevel GateLevel { get; set; }
+		public string GateLevel { get; set; }
 		[JsonProperty(PropertyName = "competencyWeighting")]
 		public int CompetencyWeighting { get; set; }
 		[JsonProperty(PropertyName = "description")]

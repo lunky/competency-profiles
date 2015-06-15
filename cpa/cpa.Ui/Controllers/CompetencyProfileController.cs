@@ -32,7 +32,6 @@ namespace cpa.Ui
 			return new CompetencyProfileModel
 			{
 				data = profile.MetObjectives,
-				summary = BuildSummary(profile.MetObjectives)
 			};
 		}
 
@@ -50,14 +49,8 @@ namespace cpa.Ui
 			var profile = Mapper.Map<ProfileModel>(newProfileDto);
 			return new CompetencyProfileModel
 			{
-				data = profile.MetObjectives,
-				summary = BuildSummary(profile.MetObjectives)
+				data = profile.MetObjectives
 			};
-		}
-
-		private ProfileSummaryModel BuildSummary(IEnumerable<ObjectiveModel> objectives)
-		{
-			return new ProfileSummaryModel();
 		}
 	}
 }
