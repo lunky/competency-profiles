@@ -1,8 +1,8 @@
 ﻿@model dynamic
 @{
-	var isAuthenticated = User.Identity.IsAuthenticated;
-	var hasDirectReports = true; //TODO:
-	var isAdmin = User.IsInRole("Admin"); //TODO:
+    var isAuthenticated = User.Identity.IsAuthenticated;
+    var hasDirectReports = User.IsInRole("DirectReports");
+    var isAdmin = User.IsInRole("CPAdmin"); 
 }
 
 
