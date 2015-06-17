@@ -94,6 +94,22 @@ namespace cpa.Service
 			return competencyLevelsDto;
 		}
 
+		public CompetencyLevelDto SaveLevel(CompetencyLevelDto competencyLevel)
+		{
+			var level = _context.CompetencyLevels.FirstOrDefault(l => l.Id == competencyLevel.Id)
+			            ?? new CompetencyLevel {Id = competencyLevel.Id};
+			if (level.Id == 0)
+			{
+				_context.CompetencyLevels.Add(level);
+			}
+			
+			level.MinimumScore = competencyLevel.MinimumScore;
+			level.MinimumGateScore = competencyLevel.MinimumGateScore;
+			_context.SaveChanges("TODO"); //TODO: There's no auditing yet anyway...
+
+			return GetLevels().FirstOrDefault(x => x.Id == competencyLevel.Id);
+		}
+
 		//public CompetencyLevel GetLevel()
 		//{
 		//	var levels = _context.CompetencyLevels.ToLookup(l => l.Description);

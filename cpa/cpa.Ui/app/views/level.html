@@ -1,0 +1,24 @@
+﻿<div class="panel panel-met">
+	<div class="panel-heading">
+		<div class="row">
+			<div class="col-xs-8">
+				<h3 class="panel-title">{{vm.level.description}}</h3>
+			</div>
+			<div class="col-xs-4"><a href="" data-ng-click="vm.toggleEdit(vm.level)" class="edit pull-right"><i data-ng-show="!vm.level.edit" class="fa fa-lg fa-pencil-square-o"></i><i data-ng-show="vm.level.edit" class="fa fa-lg fa-close"></i></a></div>
+		</div>
+	</div>
+	<div class="panel-body">
+		<p data-ng-show="!vm.level.edit"><strong>Minimum Score:</strong>&nbsp;{{vm.level.minimumScore}}</p>
+		<p data-ng-show="!vm.level.edit"><strong>Minimum Gate Score:</strong>&nbsp;{{vm.level.minimumGateScore}}</p>
+		<div data-ng-show="vm.level.edit" class="form">
+			<div class="form-group">
+				<label for="minScore{{$index+1}}">Minimum Score</label>
+				<input type="text" name="minScore{{$index+1}}" data-ng-model="vm.level.minimumScore" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="minGateScore{{$index+1}}">Minimum Gate Score</label>
+				<input type="text" name="minGateScore{{$index+1}}" data-ng-model="vm.level.minimumGateScore" class="form-control" />
+			</div><a data-ng-click="vm.save(vm.level)" class="btn btn-success">Save</a>
+		</div>
+	</div>
+</div>

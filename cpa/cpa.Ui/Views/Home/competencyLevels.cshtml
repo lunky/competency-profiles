@@ -1,0 +1,21 @@
+﻿@{
+	Layout = "";
+}
+<div class="container sections-wrapper">
+	<div class="row">
+		<div class="primary col-xs-12">
+			<section class="section admin">
+				<div class="section-inner">
+					<h2 class="heading">Competency Level Admin</h2>
+					<div class="content">
+						<div class="row">
+							<div class="col-md-4" data-ng-repeat="level in vm.competencyLevels | orderBy:'levelid'">
+								<div level-holder="level" data-save-clicked="vm.save(level)"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
