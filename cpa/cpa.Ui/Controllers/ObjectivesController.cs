@@ -8,17 +8,17 @@ namespace cpa.Ui
 	[Authorize]
 	public class ObjectivesController : ApiController
 	{
-		private readonly IProfileService _profileService;
+		private readonly IObjectiveService _objectiveService;
 
-		public ObjectivesController(IProfileService profileService)
+		public ObjectivesController(IObjectiveService objectiveService)
 		{
-			_profileService = profileService;
+			_objectiveService = objectiveService;
 		}
 
 		[HttpGet]
 		public List<ObjectiveModel> Get()
 		{
-			var objectiveModelDtos = _profileService.GetObjectives();
+			var objectiveModelDtos = _objectiveService.GetObjectives();
 			var objectiveModels = Mapper.Map<List<ObjectiveModel>>(objectiveModelDtos);
 			return objectiveModels;
 		}

@@ -20,6 +20,8 @@ namespace cpa.Ui
 
 			container.RegisterType<ICpaContext, CpaContext>(new HierarchicalLifetimeManager());
 			container.RegisterType<IProfileService, ProfileService>();
+			container.RegisterType<ICompetencyService, CompetencyService>();
+			container.RegisterType<IObjectiveService, ObjectiveService>();
 			container.RegisterType<IActiveDirectoryUserService, ActiveDirectoryUserService>();
 			GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
 		}

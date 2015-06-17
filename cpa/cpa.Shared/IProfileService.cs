@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using cpa.Shared.dtos;
 
 namespace cpa.Shared
@@ -7,8 +6,5 @@ namespace cpa.Shared
 	{
 		ProfileDto GetProfile(string userid);
 		ProfileDto Save(ProfileDto updatedProfile);
-		List<CompetencyLevelDto> GetLevels();
-		CompetencyLevelDto SaveLevel(CompetencyLevelDto competencyLevel);
-		List<ObjectiveDto> GetObjectives();
 	}
 }
