@@ -2,4 +2,88 @@
 	Layout = "";
 }
 
-<h2>ObjectiveAdmin</h2>
+<div class="container sections-wrapper">
+	<div class="row">
+		<div class="primary col-xs-12 col-md-9">
+			<section class="section">
+				<div class="section-inner">
+					<h2 class="heading">Objectives Admin</h2>
+					<div class="content">
+						<div class="row">
+							<div data-ng-repeat="objective in vm.objectives | orderBy:'objectiveId' | filter:vm.search:strict" class="col-xs-12">
+								<div objective-holder="objective" data-save-clicked="vm.save(objective)"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="secondary col-md-3 col-xs-12 pull-right">
+			<section class="section">
+				<div class="section-inner">
+					<h2 class="heading">Filter Objectives</h2>
+					<div class="content">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="form-group">
+									<label for="descriptionSearch">Description</label>
+									<input data-ng-model="vm.search.description" class="form-control" />
+								</div>
+								<div class="form-group">
+									<label for="supportingExampleSearch">Supporting Example</label>
+									<input data-ng-model="vm.search.supportingExample" class="form-control" />
+								</div>
+								<div class="form-group">
+									<label for="counterExampleSearch">Counter Example</label>
+									<input data-ng-model="vm.search.counterExample" class="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-md-8">
+								<div class="form-group">
+									<label for="searchGateLevel">Gate Level</label>
+									<select data-ng-model="vm.search.gateLevel" name="searchGateLevel" class="form-control">
+										<option value="" label=""></option>
+										<option value="base" label="Base"></option>
+										<option value="intermediate" label="Intermediate"></option>
+										<option value="senior" label="Senior"></option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<div class="form-group">
+									<label for="scoreSearch">Score</label>
+									<input multiline="true" type="text" data-ng-model="vm.search.score" class="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-md-3">
+								<div class="controls-row">
+									<label class="checkbox">
+										<input type="checkbox" data-ng-model="vm.search.communication" ng-true-value="'Y'" ng-false-value="''" />Communication
+									</label>
+									<label class="checkbox">
+										<input type="checkbox" data-ng-model="vm.search.leadership" ng-true-value="'Y'" ng-false-value="''" />Leadership
+									</label>
+									<label class="checkbox">
+										<input type="checkbox" data-ng-model="vm.search.interpersonal" ng-true-value="'Y'" ng-false-value="''" />Interpersonal
+									</label>
+									<label class="checkbox">
+										<input type="checkbox" data-ng-model="vm.search.conflict" ng-true-value="'Y'" ng-false-value="''" />Conflict
+									</label>
+									<label class="checkbox">
+										<input type="checkbox" data-ng-model="vm.search.citizenship" ng-true-value="'Y'" ng-false-value="''" />Citizenship
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
