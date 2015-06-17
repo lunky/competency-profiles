@@ -23,5 +23,11 @@ namespace cpa.Controllers
 		{
 			return View();
 		}
+
+		[Route("ObjectiveAdmin")]
+		public ActionResult ObjectiveAdmin()
+		{
+			return View();
+		}
 	}
 }
