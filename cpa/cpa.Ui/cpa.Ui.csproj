@@ -171,6 +171,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CompetencyLevelsController.cs" />
     <Compile Include="Controllers\CompetencyProfileController.cs" />
+    <Compile Include="Controllers\ObjectivesController.cs" />
     <Compile Include="Controllers\UserAccessController.cs" />
     <Compile Include="HttpHandlers\ActiveDirectoryThumbnailImage.cs" />
     <Compile Include="Models\CompetencyLevelModel.cs" />
