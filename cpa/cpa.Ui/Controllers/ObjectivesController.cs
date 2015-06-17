@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using AutoMapper;
 using cpa.Shared;
 
 namespace cpa.Ui
@@ -17,7 +18,9 @@ namespace cpa.Ui
 		[HttpGet]
 		public List<ObjectiveModel> Get()
 		{
-			return new List<ObjectiveModel>();
+			var objectiveModelDtos = _profileService.GetObjectives();
+			var objectiveModels = Mapper.Map<List<ObjectiveModel>>(objectiveModelDtos);
+			return objectiveModels;
 		}
 	}
 }

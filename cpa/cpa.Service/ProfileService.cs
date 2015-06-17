@@ -110,6 +110,13 @@ namespace cpa.Service
 			return GetLevels().FirstOrDefault(x => x.Id == competencyLevel.Id);
 		}
 
+		public List<ObjectiveDto> GetObjectives()
+		{
+			var objectives = _context.Objectives.ToList();
+			var objectiveDtos = Mapper.Map<List<ObjectiveDto>>(objectives);
+			return objectiveDtos;
+		}
+
 		//public CompetencyLevel GetLevel()
 		//{
 		//	var levels = _context.CompetencyLevels.ToLookup(l => l.Description);

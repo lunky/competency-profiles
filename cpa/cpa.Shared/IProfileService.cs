@@ -9,5 +9,6 @@ namespace cpa.Shared
 		ProfileDto Save(ProfileDto updatedProfile);
 		List<CompetencyLevelDto> GetLevels();
 		CompetencyLevelDto SaveLevel(CompetencyLevelDto competencyLevel);
+		List<ObjectiveDto> GetObjectives();
 	}
 }

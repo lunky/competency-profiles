@@ -7,7 +7,7 @@
 	function objectiveHolder() {
 		var directive = {
 			restrict: 'EA',
-			templateUrl: 'objective',
+			templateUrl: 'app/views/objective.html',
 			scope: {
 				objective: '=objectiveHolder',
 				saveClicked: '&'
