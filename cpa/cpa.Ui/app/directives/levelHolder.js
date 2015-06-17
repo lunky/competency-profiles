@@ -7,7 +7,7 @@
 	function levelHolder() {
 		var directive = {
 			restrict: 'EA',
-			templateUrl: 'level',
+			templateUrl: 'app/views/level.html',
 			scope: {
 				level: '=levelHolder',
 				saveClicked: '&'

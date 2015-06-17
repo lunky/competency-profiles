@@ -17,5 +17,11 @@ namespace cpa.Controllers
 		{
 			return View();
 		}
+
+		[Route("CompetencyLevels")]
+		public ActionResult CompetencyLevels()
+		{
+			return View();
+		}
 	}
 }

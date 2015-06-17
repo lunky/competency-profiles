@@ -34,7 +34,7 @@
 		svc.getCompetencyLevels = function () {
 			var request = $http({
 				method: 'get',
-				url: '/api/competencyLevel/'
+				url: '/api/competencyLevels/'
 			});
 			return (request.then(handleSuccess, handleError));
 		};
@@ -42,7 +42,7 @@
 		svc.getCompetencyLevelLookups = function () {
 			var request = $http({
 				method: 'get',
-				url: '/api/competencyLevel/lookup'
+				url: '/api/competencyLevels/lookup'
 			});
 			return (request.then(handleSuccess, handleError));
 		};
@@ -50,18 +50,16 @@
 		svc.getCompetencyLevel = function (id) {
 			var request = $http({
 				method: 'get',
-				url: '/api/competencyLevel/' + id
+				url: '/api/competencyLevels/' + id
 			});
 			return (request.then(handleSuccess, handleError));
 		};
 
 		svc.save = function (competencyLevel) {
 			var request = $http({
-				method: 'put',
-				url: '/api/competencyLevel/' + competencyLevel._id,
-				data: {
-					level: competencyLevel
-				}
+				method: 'post',
+				url: '/api/competencyLevels/',
+				data: competencyLevel
 			});
 			return (request.then(handleSuccess, handleError));
 		};

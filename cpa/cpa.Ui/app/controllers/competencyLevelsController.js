@@ -17,7 +17,7 @@
 
 		function initialize() {
 			competencyLevelsService.getCompetencyLevels().then(function (response) {
-				vm.competencyLevels = response.data;
+				vm.competencyLevels = response;
 			}, function (err) {
 				toaster.pop('error', 'Save Unsuccessful',
 					'An error has occured. Your competency level changes have not been updated');
