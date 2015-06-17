@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.DirectoryServices;
+using System.Web.Mvc;
 using System.Web.Security;
 using cpa.Model;
+using cpa.Service;
 
 namespace cpa.Ui
 {
@@ -28,7 +30,6 @@ namespace cpa.Ui
 				{
 					return Redirect(returnUrl);
 				}
-
 				return RedirectToAction("Index", "Home");
 			}
 
