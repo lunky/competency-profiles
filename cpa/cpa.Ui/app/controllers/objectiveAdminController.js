@@ -3,7 +3,8 @@
 
 	angular
 		.module('CompetencyProfilesControllers')
-		.controller('ObjectiveAdminController', ObjectiveAdminController);
+		.controller('ObjectiveAdminController', ObjectiveAdminController)
+		.filter('searchFilter', SearchFilter);
 
 	ObjectiveAdminController.$inject = ['competencyLevelsService', 'objectiveAdminService', 'toaster'];
 
@@ -87,6 +88,34 @@
 			}, function (err) {
 				toaster.pop('error', 'Save Unsuccessful',
 					'An error has occured. Your objective metadata changes have not been updated');
+			});
+		}
+	}
+
+	function SearchFilter($filter) {
+		return function (items, searchfilter) {
+			if (!searchfilter)
+				return items;
+
+			return items.filter(function (item) {
+				if (item.edit)
+					return true;
+
+				var matching = true;
+				for (var property in searchfilter) {
+					if (!searchfilter[property]) continue;
+
+					if (item.hasOwnProperty(property)) {
+						if (typeof (item[property]) === "string") {
+							matching = matching && item[property].toLowerCase().indexOf(searchfilter[property].toLowerCase()) >= 0;
+							if (!matching) return false;
+						} else {
+							matching = matching && item[property] == searchfilter[property];
+							if (!matching) return false;
+						}
+					} 
+				}
+				return true;
 			});
 		}
 	}

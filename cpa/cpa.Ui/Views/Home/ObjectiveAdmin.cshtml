@@ -10,7 +10,7 @@
 					<h2 class="heading">Objectives Admin</h2>
 					<div class="content">
 						<div class="row">
-							<div data-ng-repeat="objective in vm.objectives | orderBy:'objectiveId' | filter:vm.search:strict" class="col-xs-12">
+							<div data-ng-repeat="objective in vm.objectives | orderBy:'objectiveId' | searchFilter:vm.search" class="col-xs-12">
 								<div objective-holder="objective" data-save-clicked="vm.save(objective)"></div>
 							</div>
 						</div>
