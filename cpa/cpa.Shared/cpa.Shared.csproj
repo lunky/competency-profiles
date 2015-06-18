@@ -56,6 +56,8 @@
     <Compile Include="dtos\UserAccessDto.cs" />
     <Compile Include="enums\GateLevel.cs" />
     <Compile Include="IActiveDirectoryUserService.cs" />
+    <Compile Include="ICompetencyService.cs" />
+    <Compile Include="IObjectiveService.cs" />
     <Compile Include="IProfileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

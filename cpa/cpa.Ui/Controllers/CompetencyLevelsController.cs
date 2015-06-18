@@ -10,18 +10,18 @@ namespace cpa.Ui
 	[Authorize]
 	public class CompetencyLevelsController : ApiController
 	{
-		private readonly IProfileService _profileService;
+		private readonly ICompetencyService _competencyService;
 
-		public CompetencyLevelsController(IProfileService profileService)
+		public CompetencyLevelsController(ICompetencyService competencyService)
 		{
-			_profileService = profileService;
+			_competencyService = competencyService;
 		}
 
 		// GET api/<controller>
 		[HttpGet]
 		public List<CompetencyLevelModel> Get()
 		{
-			var competencyLevelDtos = _profileService.GetLevels();
+			var competencyLevelDtos = _competencyService.GetLevels();
 			var competencyLevels = Mapper.Map<List<CompetencyLevelModel>>(competencyLevelDtos);
 			return competencyLevels;
 		}
@@ -31,7 +31,7 @@ namespace cpa.Ui
 		{
 			Debug.WriteLine(competencyLevelModel);
 			var competencyLevelDto = Mapper.Map<CompetencyLevelDto>(competencyLevelModel);
-			var newCompetencyLevelDto = _profileService.SaveLevel(competencyLevelDto);
+			var newCompetencyLevelDto = _competencyService.SaveLevel(competencyLevelDto);
 			var competencyLevel = Mapper.Map<CompetencyLevelModel>(newCompetencyLevelDto);
 			return competencyLevel;
 		}
