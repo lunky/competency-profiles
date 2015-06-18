@@ -47,11 +47,9 @@
 
 		svc.save = function (objective) {
 			var request = $http({
-				method: 'put',
-				url: '/api/objectives/' + objective._id,
-				data: {
-					objective: objective
-				}
+				method: 'post',
+				url: '/api/objectives/' + objective.objectiveId,
+				data: objective
 			});
 			return (request.then(handleSuccess, handleError));
 		};
