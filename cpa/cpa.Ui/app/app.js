@@ -26,7 +26,7 @@
 					controllerAs: 'vm'
 				})
 				.when('/rankings', {
-					templateUrl: 'rankings',
+				    templateUrl: 'app/views/rankings.html',
 					controller: 'RankingsController',
 					controllerAs: 'vm'
 				})

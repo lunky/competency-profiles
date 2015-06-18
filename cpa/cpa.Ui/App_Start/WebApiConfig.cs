@@ -24,13 +24,7 @@ namespace cpa.Ui
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApiUserAccessRoutes",
-                routeTemplate: "api/UserAccess/{action}/{id}",
-                defaults: new { controller = "UserAccess", action = "Index", id = RouteParameter.Optional }
-            );
-
+            
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

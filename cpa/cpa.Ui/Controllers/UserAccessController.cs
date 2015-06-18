@@ -1,30 +1,34 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using AutoMapper;
 using cpa.Service;
+using cpa.Shared.dtos;
+using cpa.Ui.Models;
 
 namespace cpa.Ui.Controllers
 {
     public class UserAccessController : ApiController
     {
         [HttpGet]
-        public bool IsCareerMentor()
+        public UserAccessModel Get()
         {
-            const string searchParam = "directreports";
+            var searchParams = new[]
+            {
+                "directreports",
+                "memberOf"
+            };
+
             var activeDirectoryUserService = new ActiveDirectoryUserService();
-            var properties = activeDirectoryUserService.GetProperties(User.Identity.Name, searchParam);
+            var properties = activeDirectoryUserService.GetProperties(User.Identity.Name, searchParams);
 
-            return properties[searchParam].Count > 0;
-        }
+            var userAccessDto = new UserAccessDto
+            {
+                IsCareerMentor = properties[searchParams[0]].Count > 0,
+                IsCpAdmin = properties[searchParams[1]].Cast<string>().Any(x => x.Contains("CPAdmin"))
+            };
 
-        [HttpGet]
-        public bool IsCpAdmin()
-        {
-            const string searchParam = "memberOf";
-            var activeDirectoryUserService = new ActiveDirectoryUserService();
-            var properties = activeDirectoryUserService.GetProperties(User.Identity.Name, searchParam);
-
-            return properties[searchParam].Cast<string>().Any(x => x.Contains("CPAdmin"));
+            return Mapper.Map<UserAccessModel>(userAccessDto);
         }
     }
 }

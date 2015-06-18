@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using cpa.Model;
 using cpa.Shared.dtos;
+using cpa.Ui.Models;
 
 namespace cpa.Ui
 {
@@ -19,6 +20,8 @@ namespace cpa.Ui
 
 			Mapper.CreateMap<CompetencyLevel, CompetencyLevelDto>().ReverseMap();
 			Mapper.CreateMap<CompetencyLevelDto, CompetencyLevelModel>().ReverseMap();
+
+		    Mapper.CreateMap<UserAccessDto, UserAccessModel>();
 		}
 	}
 }

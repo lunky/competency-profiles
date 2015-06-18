@@ -11,7 +11,7 @@
         var vm = this;
         vm.isCollapsed = true;
 
-        vm.getClass = function(path) {
+        vm.getClass = function (path) {
             if ($location.path() === path) {
                 return 'active';
             } else {
@@ -19,20 +19,17 @@
             }
         };
 
-        vm.isCm = userAccessService.isCareerMentor()
-            .then(function(response) {
-                    vm.isCm = response;
-                },
-                function(err) {
-                    toaster.pop('error', 'An error occured calling IsCareerMentor.', err);
+        function getUserAccess() {
+            userAccessService.getUserAccess()
+            .then(function (response) {
+                vm.isCm = response.isCareerMentor;
+                vm.isCpAdmin = response.isCpAdmin;
+            },
+                function (err) {
+                    toaster.pop('error', 'An error occured calling UserAccess method.', err);
                 });
+        }
 
-        vm.isCpAdmin = userAccessService.isCpAdmin()
-            .then(function(response) {
-                vm.isCpAdmin = response;
-                },
-                function(err) {
-                    toaster.pop('error', 'An error occured calling IsCpAdmin.', err);
-                });
+        getUserAccess();
     }
 })(window.angular);
