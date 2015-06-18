@@ -24,21 +24,13 @@
             return ($q.reject(response.data.message));
         }
 
-        svc.isCareerMentor = function () {
+        svc.getUserAccess = function () {
             var request = $http({
                 method: 'get',
-                url: '/api/UserAccess/IsCareerMentor/'
+                url: '/api/UserAccess/'
             });
             return (request.then(handleSuccess, handleError));
         };
-
-        svc.isCpAdmin = function() {
-            var request = $http({
-                method: 'get',
-                url: '/api/UserAccess/IsCpAdmin/'
-            });
-            return (request.then(handleSuccess, handleError));
-        }
 
         return svc;
     }
