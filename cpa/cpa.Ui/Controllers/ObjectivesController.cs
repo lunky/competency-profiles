@@ -31,7 +31,7 @@ namespace cpa.Ui
 			Debug.WriteLine(objectiveModel);
 
 			var objectiveDto = Mapper.Map<ObjectiveDto>(objectiveModel);
-			var newObjectiveDto = _objectiveService.Save(objectiveDto);
+			var newObjectiveDto = _objectiveService.Save(objectiveDto, User.Identity.Name);
 			var newObjectiveModel = Mapper.Map<ObjectiveModel>(newObjectiveDto);
 			return newObjectiveModel;
 		}

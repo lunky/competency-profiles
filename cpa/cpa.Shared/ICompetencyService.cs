@@ -6,6 +6,6 @@ namespace cpa.Shared
 	public interface ICompetencyService
 	{
 		List<CompetencyLevelDto> GetLevels();
-		CompetencyLevelDto SaveLevel(CompetencyLevelDto competencyLevel);
+		CompetencyLevelDto SaveLevel(CompetencyLevelDto competencyLevel, string changedBy);
 	}
 }

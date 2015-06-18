@@ -24,7 +24,7 @@ namespace cpa.Service
 			return objectiveDtos;
 		}
 
-		public ObjectiveDto Save(ObjectiveDto objective)
+		public ObjectiveDto Save(ObjectiveDto objective, string changedBy)
 		{
 			var obj = _context.Objectives.FirstOrDefault(l => l.Id == objective.Id)
 						?? new Objective { Id = objective.Id };
@@ -45,7 +45,7 @@ namespace cpa.Service
 			obj.Score = objective.Score;
 			obj.SupportingExample = objective.SupportingExample;
 
-			_context.SaveChanges("TODO"); //TODO: There's no auditing yet anyway...
+			_context.SaveChanges(changedBy);
 
 			return GetObjectives().FirstOrDefault(x => x.Id == objective.Id);
 		}

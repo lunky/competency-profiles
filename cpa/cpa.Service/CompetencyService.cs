@@ -24,7 +24,7 @@ namespace cpa.Service
 			return competencyLevelsDto;
 		}
 
-		public CompetencyLevelDto SaveLevel(CompetencyLevelDto competencyLevel)
+		public CompetencyLevelDto SaveLevel(CompetencyLevelDto competencyLevel, string changedBy)
 		{
 			var level = _context.CompetencyLevels.FirstOrDefault(l => l.Id == competencyLevel.Id)
 			            ?? new CompetencyLevel { Id = competencyLevel.Id };
@@ -35,7 +35,7 @@ namespace cpa.Service
 
 			level.MinimumScore = competencyLevel.MinimumScore;
 			level.MinimumGateScore = competencyLevel.MinimumGateScore;
-			_context.SaveChanges("TODO"); //TODO: There's no auditing yet anyway...
+			_context.SaveChanges(changedBy);
 
 			return GetLevels().FirstOrDefault(x => x.Id == competencyLevel.Id);
 		}

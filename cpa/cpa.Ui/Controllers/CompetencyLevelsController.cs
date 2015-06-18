@@ -31,7 +31,7 @@ namespace cpa.Ui
 		{
 			Debug.WriteLine(competencyLevelModel);
 			var competencyLevelDto = Mapper.Map<CompetencyLevelDto>(competencyLevelModel);
-			var newCompetencyLevelDto = _competencyService.SaveLevel(competencyLevelDto);
+			var newCompetencyLevelDto = _competencyService.SaveLevel(competencyLevelDto, User.Identity.Name);
 			var competencyLevel = Mapper.Map<CompetencyLevelModel>(newCompetencyLevelDto);
 			return competencyLevel;
 		}
