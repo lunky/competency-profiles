@@ -53,6 +53,7 @@
     <Compile Include="dtos\CompetencyLevelDto.cs" />
     <Compile Include="dtos\ObjectiveDto.cs" />
     <Compile Include="dtos\ProfileDto.cs" />
+    <Compile Include="dtos\TeamMemberDto.cs" />
     <Compile Include="dtos\UserAccessDto.cs" />
     <Compile Include="enums\GateLevel.cs" />
     <Compile Include="IActiveDirectoryUserService.cs" />

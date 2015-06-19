@@ -20,8 +20,8 @@ namespace cpa.Ui.Controllers
             };
 
             var activeDirectoryUserService = new ActiveDirectoryUserService();
-            var properties = activeDirectoryUserService.GetProperties(User.Identity.Name, searchParams);
-
+            var properties = activeDirectoryUserService.GetProperties("alevine", searchParams);
+            
             var userAccessDto = new UserAccessDto
             {
                 IsCareerMentor = properties[searchParams[0]].Count > 0,
