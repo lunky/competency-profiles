@@ -17,12 +17,12 @@
 		function ($routeProvider, $locationProvider) {
 			$routeProvider
 				.when('/competencyLevels', {
-					templateUrl: 'competencyLevels',
+					templateUrl: '/app/views/competencyLevels.html',
 					controller: 'CompetencyLevelsController',
 					controllerAs: 'vm'
 				})
 				.when('/objectiveAdmin', {
-					templateUrl: 'objectiveAdmin',
+					templateUrl: '/app/views/objectiveAdmin.html',
 					controller: 'ObjectiveAdminController',
 					controllerAs: 'vm'
 				})
@@ -32,7 +32,7 @@
 					controllerAs: 'vm'
 				})
 				.when('/:oid?', {
-					templateUrl: 'competencyProfile',
+					templateUrl: '/app/views/competencyProfile.html',
 					controller: 'CompetencyProfileController',
 					controllerAs: 'vm'
 				})

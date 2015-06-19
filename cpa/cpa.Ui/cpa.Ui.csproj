@@ -265,7 +265,7 @@
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Content\toaster.scss" />
-    <Content Include="Views\Home\competencyProfile.cshtml" />
+    <Content Include="app\views\competencyProfile.html" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -1039,13 +1039,10 @@
     <Content Include="Views\Shared\nav.cshtml" />
     <Content Include="Views\Shared\footer.cshtml" />
     <Content Include="Scripts\version.json" />
-    <Content Include="Views\Shared\levelSummary.cshtml" />
-    <Content Include="Views\Shared\competencyDistribution.cshtml" />
-    <Content Include="Views\Shared\competencyDistributionAnswered.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\competencyLevels.cshtml" />
-    <Content Include="Views\Home\ObjectiveAdmin.cshtml" />
+    <Content Include="app\views\competencyLevels.html" />
+    <Content Include="app\views\ObjectiveAdmin.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cpa.EntityFramework\cpa.Persistence.EntityFramework.csproj">
