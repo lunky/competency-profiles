@@ -66,6 +66,10 @@
     <Compile Include="Migrations\201506191805550_RenameMetObjectives.Designer.cs">
       <DependentUpon>201506191805550_RenameMetObjectives.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506191818159_RenameExampleToEvidence.cs" />
+    <Compile Include="Migrations\201506191818159_RenameExampleToEvidence.Designer.cs">
+      <DependentUpon>201506191818159_RenameExampleToEvidence.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506191805550_RenameMetObjectives.resx">
       <DependentUpon>201506191805550_RenameMetObjectives.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506191818159_RenameExampleToEvidence.resx">
+      <DependentUpon>201506191818159_RenameExampleToEvidence.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -19,7 +19,7 @@ namespace cpa.Ui
 
 			Mapper.CreateMap<ProfileObjective, ObjectiveDto>()
 				.ForMember(d => d.Id, o => o.MapFrom(s => s.Objective.Id))
-				.ForMember(d => d.Example, o => o.MapFrom(s => s.Example))
+				.ForMember(d => d.Evidence, o => o.MapFrom(s => s.Evidence))
 				.ForMember(d => d.Communication, o => o.MapFrom(s => s.Objective.Communication))
 				.ForMember(d => d.Leadership, o => o.MapFrom(s => s.Objective.Leadership))
 				.ForMember(d => d.Interpersonal, o => o.MapFrom(s => s.Objective.Interpersonal))

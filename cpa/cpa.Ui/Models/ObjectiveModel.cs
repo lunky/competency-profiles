@@ -28,8 +28,8 @@ namespace cpa.Ui
 		public string SupportingExample { get; set; }
 		[JsonProperty(PropertyName = "counterExample")]
 		public string CounterExample { get; set; }
-		[JsonProperty(PropertyName = "example")]
-		public string Example { get; set; }
+		[JsonProperty(PropertyName = "evidence")]
+		public string Evidence { get; set; }
 		public bool IsMet { get; set; }
 	}
 }

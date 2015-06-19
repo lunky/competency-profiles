@@ -26,7 +26,7 @@ namespace cpa.Service
 			{
 				var metObjective = objectives.Single(o => o.Id == met.Objective.Id);
 				metObjective.IsMet = true;
-				metObjective.Example = met.Example;
+				metObjective.Evidence = met.Evidence;
 			}
 
 			var profileDto = Mapper.Map<ProfileDto>(profile);
@@ -51,7 +51,7 @@ namespace cpa.Service
 					on metObj.Id equals obj.Id
 				select new ProfileObjective
 				{
-					Example = metObj.Example,
+					Evidence = metObj.Evidence,
 					IsMet = metObj.IsMet,
 					Objective = obj
 				};

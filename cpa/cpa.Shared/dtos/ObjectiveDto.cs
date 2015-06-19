@@ -16,7 +16,7 @@ namespace cpa.Shared.dtos
 		public string Description { get; set; }
 		public string SupportingExample { get; set; }
 		public string CounterExample { get; set; }
-		public string Example { get; set; }
+		public string Evidence { get; set; }
 		public bool IsMet { get; set; }
 	}
 }

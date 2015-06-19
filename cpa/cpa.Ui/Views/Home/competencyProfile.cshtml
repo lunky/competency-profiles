@@ -92,17 +92,17 @@
 									<strong>
 										{{objective.description}}?
 									</strong>
-									<div data-ng-if="!objective.isMet && !objective.showExample" class="row voffset">
+									<div data-ng-if="!objective.isMet && !objective.showEvidence" class="row voffset">
 										<div class="col-xs-12 text-center">
-											<a href="" data-ng-click="objective.showExample = true" class="btn btn-success">Meet Objective</a>&nbsp;
+											<a href="" data-ng-click="objective.showEvidence = true" class="btn btn-success">Meet Objective</a>&nbsp;
 											<a href="" data-ng-click="objective.skipped = true" data-ng-hide="objective.skipped">or skip</a>
 											<a href="" data-ng-click="objective.skipped = false" data-ng-show="objective.skipped">unskip</a>
 										</div>
 									</div>
-									<div class="row" ng-if="objective.showExample">
-										<textarea class="col-xs-offset-1 col-xs-10" data-ng-model="objective.example"></textarea>
+									<div class="row" ng-if="objective.showEvidence">
+										<textarea class="col-xs-offset-1 col-xs-10" data-ng-model="objective.evidence"></textarea>
 										<div class="col-xs-12">
-											<a href="" data-ng-click="objective.showExample = false" class="pull-right">or cancel</a>&nbsp;
+											<a href="" data-ng-click="objective.showEvidence = false" class="pull-right">or cancel</a>&nbsp;
 											<a href="" data-ng-click="vm.scoreObjective(objective, true)" class="btn btn-success pull-right">Save Example</a>&nbsp;
 										</div>
 									</div>
@@ -111,7 +111,7 @@
 										<div class="col-xs-12 col-md-6"><h3> <small>Don't Meet if ...</small></h3>{{objective.counterExample}}</div>
 									</div>
 									<div data-ng-if="objective.isMet" class="row">
-										<p>Example: {{objective.example}}</p>
+										<p class="col-xs-offset-1">{{objective.evidence}}</p>
 									</div>
 								</div>
 							</div>

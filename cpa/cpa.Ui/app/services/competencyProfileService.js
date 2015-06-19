@@ -51,13 +51,13 @@
 		};
 
 		svc.save = function (objectives, level) {
-			var justTheKeysAndExample = objectives.filter(function(item) {
+			var justTheKeysAndEvidence = objectives.filter(function(item) {
 				return item.isMet;
 			}).map(function (objective) {
 				return {
 					_id: objective._id,
 					'objectiveId': objective.objectiveId,
-					'example': objective.example
+					'evidence': objective.evidence
 				};
 			});
 
@@ -65,7 +65,7 @@
 				method: 'post',
 				url: '/api/competencyProfile/',
 				data: {
-					objectives: justTheKeysAndExample,
+					objectives: justTheKeysAndEvidence,
 					level: level
 				}
 			});

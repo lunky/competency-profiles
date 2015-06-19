@@ -120,7 +120,7 @@
 		function scoreObjective(objective, score) {
 			objective.isMet = score;
 			objective.skipped = false;
-			objective.showExample = false;
+			objective.showEvidence = false;
 			vm.save();
 		}
 
