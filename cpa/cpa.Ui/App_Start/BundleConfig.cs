@@ -18,22 +18,12 @@ namespace cpa.Ui
 
 				"~/app/app.js",
 				"~/app/common.js",
-				"~/app/services/objectiveAdminService.js",
-				"~/app/services/competencyLevelsService.js",
-				"~/app/services/competencyProfileService.js",
-				"~/app/services/userAccessService.js",
+				"~/app/services/*.js",
 				
-                "~/app/directives/levelHolder.js",
-				"~/app/directives/objectiveHolder.js",
+                "~/app/directives/*.js",
 				
-                "~/app/controllers/navController.js",
-				"~/app/controllers/headerController.js",
-				"~/app/controllers/objectiveAdminController.js",
-				"~/app/controllers/competencyProfileController.js",
-				"~/app/controllers/mainController.js",
-				"~/app/controllers/competencyLevelsController.js",
-				"~/app/controllers/profileReportController.js",
-				"~/app/controllers/rankingsController.js"
+                "~/app/controllers/*.js"
+
 				));
 
 			bundles.Add(new StyleBundle("~/Content/styles").Include(

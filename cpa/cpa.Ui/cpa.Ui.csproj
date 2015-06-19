@@ -172,6 +172,7 @@
     <Compile Include="Controllers\CompetencyLevelsController.cs" />
     <Compile Include="Controllers\CompetencyProfileController.cs" />
     <Compile Include="Controllers\ObjectivesController.cs" />
+    <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="Controllers\UserAccessController.cs" />
     <Compile Include="HttpHandlers\ActiveDirectoryThumbnailImage.cs" />
     <Compile Include="Models\CompetencyLevelModel.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\TeamMemberModel.cs" />
     <Compile Include="Models\UserAccessModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -195,9 +197,10 @@
     <Content Include="app\controllers\navController.js" />
     <Content Include="app\controllers\objectiveAdminController.js" />
     <Content Include="app\controllers\profileReportController.js" />
-    <Content Include="app\controllers\rankingsController.js" />
+    <Content Include="app\controllers\teamMembersController.js" />
     <Content Include="app\directives\levelHolder.js" />
     <Content Include="app\directives\objectiveHolder.js" />
+    <Content Include="app\services\teamMembersService.js" />
     <Content Include="app\services\competencyLevelsService.js" />
     <Content Include="app\services\competencyProfileService.js" />
     <Content Include="app\services\objectiveAdminService.js" />
@@ -268,7 +271,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="app\views\rankings.html" />
+    <Content Include="app\views\teamMembers.html" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />

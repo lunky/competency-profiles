@@ -25,9 +25,9 @@
 					controller: 'ObjectiveAdminController',
 					controllerAs: 'vm'
 				})
-				.when('/rankings', {
-				    templateUrl: 'app/views/rankings.html',
-					controller: 'RankingsController',
+				.when('/teamMembers', {
+				    templateUrl: 'app/views/teamMembers.html',
+					controller: 'TeamMembersController',
 					controllerAs: 'vm'
 				})
 				.when('/:oid?', {

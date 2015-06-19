@@ -1,0 +1,38 @@
+
+<div class="container sections-wrapper">
+    <div class="row">
+        <div class="primary col-md-12 col-sm-12 col-xs-12">
+            <section class="section">
+                <div class="section-inner">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12">
+                            <h2 class="heading">Team Members</h2>
+                        </div>
+                        <div class="col-md-2 col-xs-12 col-md-offset-2">
+                            <select data-ng-model="vm.search.level" name="level" id="consultantLevel" class="form-control">
+                                <option value="" label="All Levels"></option>
+                                <option value="consultant" label="Consultant"></option>
+                                <option value="intermediate" label="Intermediate"></option>
+                                <option value="senior" label="Senior"></option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+                            <input id="consultantName" placeholder="Consultant Name" data-ng-model="vm.search.name" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul data-ng-repeat="consultant in vm.teamMembers | filter:vm.search:strict" class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge">{{consultant.Level}}</span>
+                                    <div ng-show="consultant.Level!='No Profile Data'"><a href="/#/profileReport/{{consultant.UserId}}"><img ng-src="{{'/Thumbnail?u=' + consultant.UserId }}" cl class="img-responsive img-circle" /></a><a href="/#/profileReport/{{consultant.Userid}}">{{consultant.DisplayName}}</a></div>
+                                    <div ng-show="consultant.Level == 'No Profile Data'"><img ng-src="{{'/Thumbnail?u=' + consultant.UserId }}" class="img-responsive img-circle" /><span>{{consultant.DisplayName}}</span></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
