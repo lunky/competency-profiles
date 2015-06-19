@@ -70,6 +70,14 @@
     <Compile Include="Migrations\201506191818159_RenameExampleToEvidence.Designer.cs">
       <DependentUpon>201506191818159_RenameExampleToEvidence.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506191845040_ProfileObjectiveRelationship.cs" />
+    <Compile Include="Migrations\201506191845040_ProfileObjectiveRelationship.Designer.cs">
+      <DependentUpon>201506191845040_ProfileObjectiveRelationship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506191913511_ForeignKey.cs" />
+    <Compile Include="Migrations\201506191913511_ForeignKey.Designer.cs">
+      <DependentUpon>201506191913511_ForeignKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +108,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506191818159_RenameExampleToEvidence.resx">
       <DependentUpon>201506191818159_RenameExampleToEvidence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506191845040_ProfileObjectiveRelationship.resx">
+      <DependentUpon>201506191845040_ProfileObjectiveRelationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506191913511_ForeignKey.resx">
+      <DependentUpon>201506191913511_ForeignKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

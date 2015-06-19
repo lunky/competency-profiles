@@ -8,5 +8,6 @@ namespace cpa.EntityFramework
 		IDbSet<Objective> Objectives { get; set; }
 		IDbSet<Profile> Profiles { get; set; }
 		IDbSet<CompetencyLevel> CompetencyLevels { get; set; }
+		IDbSet<ProfileObjective> ProfileObjectives { get; set; }
 	}
 }
