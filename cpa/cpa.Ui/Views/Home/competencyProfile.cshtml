@@ -87,20 +87,31 @@
 									<a href="" data-ng-click="vm.scoreObjective(objective, false)" data-ng-if="objective.isMet" class="pull-right"><i class="fa fa-undo"></i></a>
 									<span data-ng-if="!objective.isMet">Objective Not Met</span>
 									<span data-ng-show="objective.skipped" data-ng-click="objective.skipped=false" class="pointer">&nbsp; (skipped)</span>
-								</div><div class="panel-body">
+								</div>
+								<div class="panel-body">
 									<strong>
 										{{objective.description}}?
 									</strong>
-									<div data-ng-if="!objective.isMet" class="row voffset">
+									<div data-ng-if="!objective.isMet && !objective.showExample" class="row voffset">
 										<div class="col-xs-12 text-center">
-											<a href="" data-ng-click="vm.scoreObjective(objective, true)" class="btn btn-success">Meet Objective</a>&nbsp;
+											<a href="" data-ng-click="objective.showExample = true" class="btn btn-success">Meet Objective</a>&nbsp;
 											<a href="" data-ng-click="objective.skipped = true" data-ng-hide="objective.skipped">or skip</a>
 											<a href="" data-ng-click="objective.skipped = false" data-ng-show="objective.skipped">unskip</a>
+										</div>
+									</div>
+									<div class="row" ng-if="objective.showExample">
+										<textarea class="col-xs-offset-1 col-xs-10" data-ng-model="objective.example"></textarea>
+										<div class="col-xs-12">
+											<a href="" data-ng-click="objective.showExample = false" class="pull-right">or cancel</a>&nbsp;
+											<a href="" data-ng-click="vm.scoreObjective(objective, true)" class="btn btn-success pull-right">Save Example</a>&nbsp;
 										</div>
 									</div>
 									<div data-ng-if="!objective.isMet" class="row">
 										<div class="col-xs-12 col-md-6"><h3><small>Meet if ...</small></h3>{{objective.supportingExample}}</div>
 										<div class="col-xs-12 col-md-6"><h3> <small>Don't Meet if ...</small></h3>{{objective.counterExample}}</div>
+									</div>
+									<div data-ng-if="objective.isMet" class="row">
+										<p>Example: {{objective.example}}</p>
 									</div>
 								</div>
 							</div>

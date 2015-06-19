@@ -169,10 +169,10 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CompetencyLevelsController.cs" />
-    <Compile Include="Controllers\CompetencyProfileController.cs" />
-    <Compile Include="Controllers\ObjectivesController.cs" />
-    <Compile Include="Controllers\UserAccessController.cs" />
+    <Compile Include="Controllers\Api\CompetencyLevelsController.cs" />
+    <Compile Include="Controllers\Api\CompetencyProfileController.cs" />
+    <Compile Include="Controllers\Api\ObjectivesController.cs" />
+    <Compile Include="Controllers\Api\UserAccessController.cs" />
     <Compile Include="HttpHandlers\ActiveDirectoryThumbnailImage.cs" />
     <Compile Include="Models\CompetencyLevelModel.cs" />
     <Compile Include="Models\ProfileModel.cs" />
@@ -249,7 +249,6 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="app\controllers\competencyProfileController.js.orig" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular-touch.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />

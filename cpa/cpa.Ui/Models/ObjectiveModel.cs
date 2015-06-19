@@ -1,5 +1,4 @@
-﻿using cpa.Shared.enums;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace cpa.Ui
 {
@@ -29,6 +28,8 @@ namespace cpa.Ui
 		public string SupportingExample { get; set; }
 		[JsonProperty(PropertyName = "counterExample")]
 		public string CounterExample { get; set; }
+		[JsonProperty(PropertyName = "example")]
+		public string Example { get; set; }
 		public bool IsMet { get; set; }
 	}
 }

@@ -1,9 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using cpa.Shared.enums;
+﻿using cpa.Shared.enums;
 
 namespace cpa.Model
 {
-	public class Objective: EntityBase
+	public class Objective : EntityBase
 	{
 		public bool Communication { get; set; }
 		public bool Leadership { get; set; }
@@ -16,6 +15,5 @@ namespace cpa.Model
 		public string Description { get; set; }
 		public string SupportingExample { get; set; }
 		public string CounterExample { get; set; }
-		public virtual Collection<Profile> Profiles { get; set; }
 	}
 }

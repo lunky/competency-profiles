@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace cpa.Model
@@ -8,12 +7,13 @@ namespace cpa.Model
 	{
 		public Profile()
 		{
-			MetObjectives = new Collection<Objective>();
+			Objectives = new Collection<ProfileObjective>();
 		}
+
 		public string UserId { get; set; }
 		public string DisplayName { get; set; }
 		public string Level { get; set; }
 		
-		public virtual ICollection<Objective> MetObjectives { get; set; }
+		public virtual ICollection<ProfileObjective> Objectives { get; set; }
 	}
 }

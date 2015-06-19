@@ -58,6 +58,14 @@
     <Compile Include="Migrations\201506070448202_init.Designer.cs">
       <DependentUpon>201506070448202_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506182124597_AddExamplePropertyToMetObjective.cs" />
+    <Compile Include="Migrations\201506182124597_AddExamplePropertyToMetObjective.Designer.cs">
+      <DependentUpon>201506182124597_AddExamplePropertyToMetObjective.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506191805550_RenameMetObjectives.cs" />
+    <Compile Include="Migrations\201506191805550_RenameMetObjectives.Designer.cs">
+      <DependentUpon>201506191805550_RenameMetObjectives.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +87,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201506070448202_init.resx">
       <DependentUpon>201506070448202_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506182124597_AddExamplePropertyToMetObjective.resx">
+      <DependentUpon>201506182124597_AddExamplePropertyToMetObjective.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506191805550_RenameMetObjectives.resx">
+      <DependentUpon>201506191805550_RenameMetObjectives.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -43,6 +43,7 @@
     <Compile Include="CompetencyLevel.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="LoginModel.cs" />
+    <Compile Include="ProfileObjective.cs" />
     <Compile Include="Objective.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

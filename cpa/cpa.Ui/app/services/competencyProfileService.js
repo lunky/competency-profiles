@@ -51,19 +51,21 @@
 		};
 
 		svc.save = function (objectives, level) {
-			var justTheKeys = objectives.filter(function (item) {
+			var justTheKeysAndExample = objectives.filter(function(item) {
 				return item.isMet;
 			}).map(function (objective) {
 				return {
 					_id: objective._id,
-					'objectiveId': objective.objectiveId
+					'objectiveId': objective.objectiveId,
+					'example': objective.example
 				};
 			});
+
 			var request = $http({
 				method: 'post',
 				url: '/api/competencyProfile/',
 				data: {
-					objectives: justTheKeys,
+					objectives: justTheKeysAndExample,
 					level: level
 				}
 			});
