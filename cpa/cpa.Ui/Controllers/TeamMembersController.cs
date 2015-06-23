@@ -21,7 +21,7 @@ namespace cpa.Ui.Controllers
         public IEnumerable<TeamMemberModel> Get()
         {
             var activeDirectoryUserService = new ActiveDirectoryUserService();
-            var team = activeDirectoryUserService.GetTeamMembers("alevine");
+            var team = activeDirectoryUserService.GetTeamMembers(User.Identity.Name);
 
             var teamMemberDtos = team as IList<TeamMemberDto> ?? team.ToList();
             var teamMembersProfile =
