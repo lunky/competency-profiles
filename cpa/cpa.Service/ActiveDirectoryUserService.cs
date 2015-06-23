@@ -6,6 +6,7 @@ using System.DirectoryServices;
 using System.Linq;
 using System.Web.Configuration;
 using cpa.Shared;
+using cpa.Shared.dtos;
 
 namespace cpa.Service
 {
@@ -31,7 +32,7 @@ namespace cpa.Service
                 : result.Properties;
         }
 
-        public List<string> GetTeamMembers(string username)
+        public IEnumerable<TeamMemberDto> GetTeamMembers(string username)
         {
             var adConnection = WebConfigurationManager.ConnectionStrings["ADConnectionString"].ConnectionString;
             var adReference = new DirectoryEntry(adConnection);
@@ -61,17 +62,16 @@ namespace cpa.Service
             return escaped;
         }
 
-        private static IEnumerable<string> GetDirectReportsInternal(string userDn)
+        private static IEnumerable<TeamMemberDto> GetDirectReportsInternal(string userDn)
         {
-            var result = new Collection<string>();
+            var result = new List<TeamMemberDto>();
             using (var directoryEntry = new DirectoryEntry(DomainPath))
             {
                 using (var ds = new DirectorySearcher(directoryEntry))
                 {
                     ds.SearchScope = SearchScope.Subtree;
                     ds.PropertiesToLoad.Clear();
-                    ds.PropertiesToLoad.Add("userPrincipalName");
-                    ds.PropertiesToLoad.Add("distinguishedName");
+                    ds.PropertiesToLoad.Add("displayName");
                     ds.PropertiesToLoad.Add("samaccountname");
                     ds.PageSize = 10;
                     ds.ServerPageTimeLimit = TimeSpan.FromSeconds(2);
@@ -82,7 +82,11 @@ namespace cpa.Service
                         {
                             if (!sr.Path.Contains(@"CN=Disabled Users"))
                             {
-                                result.Add((string)sr.Properties["samaccountname"][0]);
+                                result.Add(new TeamMemberDto
+                                {
+                                    UserId = sr.Properties["samaccountname"][0].ToString(),
+                                    DisplayName = sr.Properties["displayName"][0].ToString()
+                                });
                             }
                         }
                     }
