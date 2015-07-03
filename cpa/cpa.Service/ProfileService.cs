@@ -11,13 +11,15 @@ namespace cpa.Service
 	public class ProfileService : IProfileService
 	{
 		private readonly ICpaContext _context;
+        private readonly IActiveDirectoryUserService _activeDirectoryUserService;
 
-		public ProfileService(ICpaContext context)
+		public ProfileService(ICpaContext context, IActiveDirectoryUserService activeDirectoryUserService)
 		{
-			_context = context;
+		    _context = context;
+		    _activeDirectoryUserService = activeDirectoryUserService;
 		}
 
-		public ProfileDto GetProfile(string userId)
+	    public ProfileDto GetProfile(string userId)
 		{
 			var profile = _context.Profiles.FirstOrDefault(p => p.UserId == userId) ?? new Model.Profile {UserId = userId};
 			var metObjectives = profile.Objectives;
@@ -30,8 +32,11 @@ namespace cpa.Service
 			}
 
 			var profileDto = Mapper.Map<ProfileDto>(profile);
+
+            var displayName = _activeDirectoryUserService.GetTeamMemberByUsername(userId).DisplayName;
 			
 			profileDto.MetObjectives = objectives;
+	        profileDto.DisplayName = displayName;
 			return profileDto;
 		}
 

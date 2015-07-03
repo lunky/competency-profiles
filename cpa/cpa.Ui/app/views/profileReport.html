@@ -1,0 +1,125 @@
+<div class="container sections-wrapper">
+    <div class="row">
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <section class="section">
+                <div class="section-inner">
+                    <div class="content">
+                        <div class="row">
+                            <aside class="aside section profile-score col-sm-6 col-md-12">
+                                <!--<img ng-hide="vm.personal.thumbnailPhoto" ng-src="/Content/images/placeholder.png" class="img-responsive img-circle"/>-->
+                                <img ng-src="/Thumbnail?u={{ vm.profile.userId }}" alt="{{vm.profile.displayName}}" class="img-responsive img-circle"/>
+                                <h2 class="text-center">Profile Report for&nbsp:</h2><span class="capitalize">{{vm.profile.displayName}}</span></aside>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p><strong>Current Level: </strong>{{vm.profile.summary.level}}
+                                </p>
+                                <p><strong>Next Level: </strong>{{vm.profile.summary.nextLevel}}
+                                </p>
+                                <p><strong>Current Score: </strong>{{vm.profile.summary.score}}
+                                </p>
+                                <p><strong>Score Required for Next Level: </strong>{{vm.profile.summary.nextLevelScore}}
+                                </p>
+                                <p><strong>Remaining points needed to reach next level: </strong>{{vm.pointsNeededForNextLevel}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-xs-12 col-md-8">
+            <section class="section">
+                <div class="section-inner">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <!-- Display Unmet Gates for the NEXT Level-->
+                            <h2 class="heading">Objectives required for the next level</h2>
+                        </div>
+                        <div class="col-xs-4">
+                            <a data-ng-click="vm.showRequiredExamples = !vm.showRequiredExamples;vm.toggleRequiredExamples()" class="btn btn-obs-primary pull-right">
+                                <span data-ng-hide="vm.showRequiredExamples">Show Examples</span><span data-ng-hide="!vm.showRequiredExamples">Hide Examples</span></a>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <accordion close-others="false">
+                                    <accordion-group data-ng-repeat="objective in vm.profile.data | orderBy: '-gateLevel' | filter:vm.gateFilter:strict" is-open="objective.open">
+                                        <accordion-heading>
+                                            <p>{{objective.description}}?</p>Gate Level: {{objective.gateLevel}}
+                                        </accordion-heading>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <h3>
+                                                    <small>Supporting Example</small>
+                                                </h3>{{objective.supportingExample}}
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <h3>
+                                                    <small>Counter Example</small>
+                                                </h3>{{objective.counterExample}}
+                                            </div>
+                                        </div>
+                                    </accordion-group>
+                                </accordion>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-4">
+            <section class="section">
+                <div class="section-inner">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <!-- Display Unmet Objectives (excluding those above) order by Score desc-->
+                            <h2 class="heading">Objectives that will contribute to the next level</h2>
+                        </div>
+                        <div class="col-xs-4">
+                            <a data-ng-click="vm.showExamples = !vm.showExamples;vm.toggleExamples()" class="btn btn-obs-primary pull-right">
+                                <span data-ng-hide="vm.showExamples">Show Examples</span><span data-ng-hide="!vm.showExamples">Hide Examples</span></a>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <accordion close-others="oneAtATime">
+                                    <accordion-group data-ng-repeat="objective in vm.profile.data | orderBy: '-score' | filter:vm.scoreFilter:strict" is-open="vm.showExamples">
+                                        <accordion-heading>
+                                            <p>{{objective.description}}?</p>Gate Level: {{objective.gateLevel}}
+                                        </accordion-heading><!--div.row//div.col-xs-12
+                                        //TODO: Display Score
+                                        //p Gate Level: {{objective.gateLevel}}-->
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <h3>
+                                                    <small>Supporting Example</small>
+                                                </h3>{{objective.supportingExample}}
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <h3>
+                                                    <small>Counter Example</small>
+                                                </h3>{{objective.counterExample}}
+                                            </div>
+                                        </div>
+                                    </accordion-group>
+                                </accordion>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div><!--TODO--><!-- Filter to only display isMet = False--><!-- Determine current Level--><!-- Order by Gate Level w/ next Gate Level @ top (e.g. if currently base, order so Intermediate is first)--><!-- Then order by Weighting descending--><!-- Indicate which Objective is a gate--><!--i.pull-right.glyphicon(data-ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}")//div.col-xs-12
+// |Restrict Objective Results to Level: {{vm.nextLevel}}
+// input(type="checkbox" data-ng-model="vm.search.gateLevel" data-ng-true-value="'{{vm.nextLevel}}'" data-ng-false-value="''")
+//div.col-xs-12
+// |Restrict Objective Results to UnMet
+// input(type="checkbox" data-ng-model="vm.search.isMet" data-ng-true-value="false" data-ng-false-value="true")-->

@@ -27,7 +27,7 @@
 					controllerAs: 'vm'
 				})
 				.when('/teamMembers', {
-				    templateUrl: 'app/views/teamMembers.html',
+				    templateUrl: '/app/views/teamMembers.html',
 					controller: 'TeamMembersController',
 					controllerAs: 'vm'
 				})
@@ -37,7 +37,7 @@
 					controllerAs: 'vm'
 				})
 				.when('/profileReport/:username', {
-					templateUrl: 'profileReport',
+				    templateUrl: '/app/views/profileReport.html',
 					controller: 'ProfileReportController',
 					controllerAs: 'vm'
 				});

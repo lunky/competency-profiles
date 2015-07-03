@@ -172,8 +172,9 @@
     <Compile Include="Controllers\Api\CompetencyLevelsController.cs" />
     <Compile Include="Controllers\Api\CompetencyProfileController.cs" />
     <Compile Include="Controllers\Api\ObjectivesController.cs" />
+    <Compile Include="Controllers\Api\ProfileReportController.cs" />
+    <Compile Include="Controllers\Api\TeamMembersController.cs" />
     <Compile Include="Controllers\Api\UserAccessController.cs" />
-    <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="HttpHandlers\ActiveDirectoryThumbnailImage.cs" />
     <Compile Include="Models\CompetencyLevelModel.cs" />
     <Compile Include="Models\ProfileModel.cs" />
@@ -200,6 +201,7 @@
     <Content Include="app\controllers\teamMembersController.js" />
     <Content Include="app\directives\levelHolder.js" />
     <Content Include="app\directives\objectiveHolder.js" />
+    <Content Include="app\services\profileSummaryService.js" />
     <Content Include="app\services\teamMembersService.js" />
     <Content Include="app\services\competencyLevelsService.js" />
     <Content Include="app\services\competencyProfileService.js" />
@@ -207,10 +209,18 @@
     <Content Include="app\views\level.html" />
     <Content Include="app\services\userAccessService.js" />
     <Content Include="app\views\objective.html" />
+    <Content Include="app\views\profileReport.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\images\checkmark.png" />
+    <Content Include="Content\images\consultant-codell-square-small.png" />
+    <Content Include="Content\images\consultant-codell-square.png" />
+    <Content Include="Content\images\consultant-codell.png" />
+    <Content Include="Content\images\OBSlogo.png" />
+    <Content Include="Content\images\OBSlogo_tiny.png" />
+    <Content Include="Content\images\placeholder.png" />
     <Content Include="Content\styles.css" />
     <Content Include="Content\toaster.css" />
     <Content Include="Content\toaster.min.css" />

@@ -29,6 +29,15 @@
 			});
 			return (request.then(handleSuccess, handleError));
 		};
+
+	    svc.getTeamMemberByUsername = function(username) {
+	        var request = $http({
+	            method: 'get',
+	            url: '/api/teamMembers/' + username
+	        });
+	        return (request.then(handleSuccess, handleError));
+	    };
+
 		return svc;
 	}
 })();

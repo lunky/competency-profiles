@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.DirectoryServices;
 using System.Linq;
 using System.Web.Configuration;
@@ -18,7 +16,7 @@ namespace cpa.Service
         {
             var adConnection = WebConfigurationManager.ConnectionStrings["ADConnectionString"].ConnectionString;
             var adReference = new DirectoryEntry(adConnection);
-            var search = new DirectorySearcher(adReference) { Filter = string.Format("(sAMAccountName={0})", username) };
+            var search = new DirectorySearcher(adReference) {Filter = string.Format("(sAMAccountName={0})", username)};
 
             foreach (var property in propertyNames)
             {
@@ -32,11 +30,31 @@ namespace cpa.Service
                 : result.Properties;
         }
 
-        public IEnumerable<TeamMemberDto> GetTeamMembers(string username)
+        private static DirectorySearcher DirectorySearcher(string username)
         {
             var adConnection = WebConfigurationManager.ConnectionStrings["ADConnectionString"].ConnectionString;
             var adReference = new DirectoryEntry(adConnection);
-            var search = new DirectorySearcher(adReference) { Filter = string.Format("(sAMAccountName={0})", username) };
+            var search = new DirectorySearcher(adReference) {Filter = string.Format("(sAMAccountName={0})", username)};
+            return search;
+        }
+
+        //AP: because database doesn't have display names data
+        public TeamMemberDto GetTeamMemberByUsername(string username)
+        {
+            var search = DirectorySearcher(username);
+            //AP: add new search properties if needed
+            search.PropertiesToLoad.Add("displayName");
+            var result = search.FindOne();
+            return new TeamMemberDto
+            {
+                DisplayName = result.Properties["displayName"][0].ToString(),
+                UserId = username
+            };
+        }
+
+        public IEnumerable<TeamMemberDto> GetTeamMembers(string username)
+        {
+            var search = DirectorySearcher(username);
 
             search.PropertiesToLoad.Add("*");
             var result = search.FindOne();
@@ -45,7 +63,6 @@ namespace cpa.Service
                 var dn = Escape(result.Properties["distinguishedname"][0].ToString());
                 var team = GetDirectReportsInternal(dn).ToList();
                 return team;
-
             }
             return null;
         }

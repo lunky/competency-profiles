@@ -1,4 +1,3 @@
-
 <div class="container sections-wrapper">
     <div class="row">
         <div class="primary col-md-12 col-sm-12 col-xs-12">
@@ -20,30 +19,25 @@
                             <input id="consultantName" placeholder="Consultant Name" data-ng-model="vm.search.displayName" class="form-control" />
                         </div>
                     </div>
-
-                    <ul data-ng-repeat="consultant in vm.teamMembers | filter:vm.search:strict" class="list-group">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div ng-show="consultant.level =='No Profile Data'">
-                                    <div class="col-xs-4 col-md-4">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul data-ng-repeat="consultant in vm.teamMembers | filter:vm.search:strict" class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge">{{consultant.level}}</span>
+                                    <div ng-show="consultant.level =='No Profile Data'"><!--AP:temp to open profiles without data-->
                                         <a href="/#/profileReport/{{consultant.userId}}">
                                             <img ng-src="/Thumbnail?u={{ consultant.userId }}" alt="{{consultant.displayName}}" class="img-circle img-responsive" />
-                                        </a>
+                                        </a><a href="/#/profileReport/{{consultant.userId}}">{{consultant.displayName}}</a>
                                     </div>
-                                    <div class="col-xs-4 col-md-4">
-                                        <h3>
-                                            <a href="/#/profileReport/{{consultant.userId}}">{{consultant.displayName}}</a>
-                                        </h3>
-                                    </div>
-                                    <div class="col-xs-4 col-md-4">
-                                        <span class="badge">{{consultant.level}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                                    <!--<div ng-show="consultant.level =='No Profile Data'">
+                                        <img ng-src="/Thumbnail?u={{ consultant.userId }}" alt="{{consultant.displayName}}" class="img-circle img-responsive" />
+                                        <span>{{consultant.displayName}}</span>
+                                    </div>-->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-
             </section>
         </div>
     </div>

@@ -44,7 +44,7 @@
 		svc.getObjectivesByUsername = function (username) {
 			var request = $http({
 				method: 'get',
-				url: '/api/competencyProfile/' + username
+				url: '/api/profileReport/' + username
 			});
 
 			return (request.then(handleSuccess, handleError));

@@ -5360,7 +5360,7 @@ h6 {
   color: #3f647e;
 }
 .capitalize {
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 html,
 body {

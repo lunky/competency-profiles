@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Http;
 using AutoMapper;
 using cpa.Service;
 using cpa.Shared.dtos;
 using cpa.Ui.Models;
 
-namespace cpa.Ui.Controllers
+namespace cpa.Ui.Controllers.Api
 {
     public class UserAccessController : ApiController
     {
@@ -20,7 +19,7 @@ namespace cpa.Ui.Controllers
             };
 
             var activeDirectoryUserService = new ActiveDirectoryUserService();
-            var properties = activeDirectoryUserService.GetProperties(User.Identity.Name, searchParams);
+            var properties = activeDirectoryUserService.GetProperties("alevine", searchParams);
             
             var userAccessDto = new UserAccessDto
             {
