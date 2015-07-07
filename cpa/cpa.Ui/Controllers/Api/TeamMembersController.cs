@@ -23,7 +23,7 @@ namespace cpa.Ui.Controllers.Api
         // GET api/<controller>
         public IEnumerable<TeamMemberModel> Get()
         {
-            var team = _activeDirectoryUserService.GetTeamMembers("alevine");
+            var team = _activeDirectoryUserService.GetTeamMembers(User.Identity.Name);
 
             //AP: if somehow a non-CM user manages to get to this point - return empty list of members
             if (team == null) return new List<TeamMemberModel>();

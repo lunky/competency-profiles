@@ -19,7 +19,7 @@ namespace cpa.Ui.Controllers.Api
             };
 
             var activeDirectoryUserService = new ActiveDirectoryUserService();
-            var properties = activeDirectoryUserService.GetProperties("alevine", searchParams);
+            var properties = activeDirectoryUserService.GetProperties(User.Identity.Name, searchParams);
             
             var userAccessDto = new UserAccessDto
             {
