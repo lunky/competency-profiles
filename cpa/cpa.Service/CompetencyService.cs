@@ -39,10 +39,5 @@ namespace cpa.Service
 
 			return GetLevels().FirstOrDefault(x => x.Id == competencyLevel.Id);
 		}
-
-	    public List<TeamMemberDto> GetTeamMembers()
-	    {
-	        return null;
-	    }
 	}
 }

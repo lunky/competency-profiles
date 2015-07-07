@@ -171,7 +171,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CompetencyLevelsController.cs" />
     <Compile Include="Controllers\Api\CompetencyProfileController.cs" />
-    <Compile Include="Controllers\Api\ObjectivesController.cs" />
+    <Compile Include="Controllers\Api\ObjectiveController.cs" />
+    <Compile Include="Controllers\Api\ObjectiveAdminController.cs" />
     <Compile Include="Controllers\Api\ProfileReportController.cs" />
     <Compile Include="Controllers\Api\TeamMembersController.cs" />
     <Compile Include="Controllers\Api\UserAccessController.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProfileObjectiveModel.cs" />
     <Compile Include="Models\TeamMemberModel.cs" />
     <Compile Include="Models\UserAccessModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

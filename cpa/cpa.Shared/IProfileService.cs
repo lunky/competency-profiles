@@ -6,5 +6,6 @@ namespace cpa.Shared
 	{
 		ProfileDto GetProfile(string userid);
 		ProfileDto Save(ProfileDto updatedProfile);
+	    bool SaveProfileObjective(ProfileObjectiveDto objective);
 	}
 }

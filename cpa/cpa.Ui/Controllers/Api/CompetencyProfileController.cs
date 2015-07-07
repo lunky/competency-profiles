@@ -5,6 +5,7 @@ using AutoMapper;
 using cpa.Service;
 using cpa.Shared;
 using cpa.Shared.dtos;
+using cpa.Ui.Models;
 
 namespace cpa.Ui.Controllers.Api
 {
@@ -43,21 +44,13 @@ namespace cpa.Ui.Controllers.Api
         }
 
         [HttpPost]
-        public CompetencyProfileModel Post([FromBody] ProfileModel profileModel)
+        public CompetencyProfileModel Post([FromBody] ProfileObjectiveModel profileObjective)
         {
-            Debug.WriteLine(profileModel);
-            foreach (var o in profileModel.MetObjectives)
-            {
-                o.IsMet = true;
-            }
-            profileModel.UserId = UserId;
-            var profileDto = Mapper.Map<ProfileDto>(profileModel);
-            var newProfileDto = _profileService.Save(profileDto);
-            var profile = Mapper.Map<ProfileModel>(newProfileDto);
-            return new CompetencyProfileModel
-            {
-                data = profile.MetObjectives
-            };
+            var profileDto = Mapper.Map<ProfileObjectiveDto>(profileObjective);
+            profileDto.UserId = UserId;
+
+            _profileService.SaveProfileObjective(profileDto);
+            return Get();
         }
     }
 }
