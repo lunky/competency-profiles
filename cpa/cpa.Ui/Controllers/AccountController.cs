@@ -33,7 +33,7 @@ namespace cpa.Ui
 				return RedirectToAction("Index", "Home");
 			}
 
-			ModelState.AddModelError(string.Empty, "The user name or password provided is incorrect.");
+            ModelState.AddModelError("FailedLogin", "The username or password provided is incorrect.");
 
 			return View(model);
 		}
