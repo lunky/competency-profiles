@@ -61,61 +61,63 @@
 			</div>
 		</aside>
 	</div><div class="primary col-md-8 col-sm-12 col-xs-12">
-		<section class="section">
-			<div class="section-inner">
-				<div class="row">
-					<div class="col-md-4 col-xs-12"><h2 class="heading">Objectives</h2></div>
-					<div class="col-md-4 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<select data-ng-model="vm.sort" name="sort" class="form-control">
-								<option value="" label="Default Sort">Default Sort</option>
-								<option value="-isMet" label="Prioritize met">Prioritize met</option>
-								<option value="isMet" label="Prioritize not met">Prioritize not met</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6 col-xs-12"><a href="" data-ng-click="vm.clearAll()" class="btn btn-default pull-right">Clear all answers</a></div>
-				</div><div class="content">
-					<div class="row">
-						<div class="col-xs-12">
-							<div data-ng-repeat="objective in vm.objectives | orderBy: [ vm.sort ? vm.sort: 'isMet','skipped', 'objectiveId']" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'" class="panel" >
-								<div class="panel-heading">
-									<span data-ng-if="objective.isMet">Objective Met</span>
-									<a href="" data-ng-click="vm.scoreObjective(objective, false)" data-ng-if="objective.isMet" class="pull-right"><i class="fa fa-undo"></i></a>
-									<span data-ng-if="!objective.isMet">Objective Not Met</span>
-									<span data-ng-show="objective.skipped" data-ng-click="objective.skipped=false" class="pointer">&nbsp; (skipped)</span>
-								</div>
-								<div class="panel-body">
-									<strong>
-										{{objective.description}}?
-									</strong>
-									<div data-ng-if="!objective.isMet && !objective.showEvidence" class="row ">
-										<div class="col-xs-12 text-center">
-											<a href="" data-ng-click="objective.showEvidence = true" class="btn btn-success">Meet Objective</a>&nbsp;
-											<a href="" data-ng-click="objective.skipped = true" data-ng-hide="objective.skipped">or skip</a>
-											<a href="" data-ng-click="objective.skipped = false" data-ng-show="objective.skipped">unskip</a>
-										</div>
-									</div>
-                                    <div class="row voffset" ng-if="objective.showEvidence">
-                                        <textarea class="col-xs-offset-1 col-xs-10 no-resize" data-ng-model="objective.evidence"></textarea>
-                                        <div class="col-xs-12 voffset">
-                                            <a href="" data-ng-click="objective.showEvidence = false" class="pull-right">or cancel</a>&nbsp;
-                                            <a href="" data-ng-click="vm.scoreObjective(objective, true)" class="btn btn-success pull-right">Save Example</a>&nbsp;
-                                        </div>
-                                    </div>
-									<div data-ng-if="!objective.isMet" class="row">
-										<div class="col-xs-12 col-md-6"><h3><small>Meet if ...</small></h3>{{objective.supportingExample}}</div>
-										<div class="col-xs-12 col-md-6"><h3><small>Don't Meet if ...</small></h3>{{objective.counterExample}}</div>
-									</div>
-									<div data-ng-if="objective.isMet" class="row">
-										<p class="col-xs-offset-1">{{objective.evidence}}</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+              <section class="section">
+                  <div class="section-inner">
+                      <div class="row">
+                          <div class="col-md-4 col-xs-12"><h2 class="heading">Objectives</h2></div>
+                          <div class="col-md-4 col-sm-6 col-xs-12">
+                              <div class="form-group">
+                                  <select data-ng-model="vm.sort" name="sort" class="form-control">
+                                      <option value="" label="Default Sort">Default Sort</option>
+                                      <option value="-isMet" label="Prioritize met">Prioritize met</option>
+                                      <option value="isMet" label="Prioritize not met">Prioritize not met</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="col-md-4 col-sm-6 col-xs-12"><a href="" data-ng-click="vm.clearAll()" class="btn btn-default pull-right">Clear all answers</a></div>
+                      </div><div class="content">
+                          <div class="row">
+                              <div class="col-xs-12">
+                                  <div data-ng-repeat="objective in vm.objectives | orderBy: [ vm.sort ? vm.sort: 'isMet','skipped', 'objectiveId']" data-ng-class="objective.isMet ? 'panel-met' : 'panel-not-met'" class="panel">
+                                      <div class="panel-heading">
+                                          <span data-ng-if="objective.isMet">Objective Met</span>
+                                          <a href="" data-ng-click="vm.scoreObjective(objective, false)" data-ng-if="objective.isMet" class="pull-right"><i class="fa fa-undo"></i></a>
+                                          <span data-ng-if="!objective.isMet">Objective Not Met</span>
+                                          <span data-ng-show="objective.skipped" data-ng-click="objective.skipped=false" class="pointer">&nbsp; (skipped)</span>
+                                      </div>
+                                      <div class="panel-body">
+                                          <div class="form-group">
+                                              <strong>
+                                                  {{objective.description}}?
+                                              </strong>
+                                          </div>
+                                          <div data-ng-if="!objective.isMet && !objective.showEvidence" class="form-group text-center">
+                                              <a href="" data-ng-click="objective.showEvidence = true" class="btn btn-success">Meet Objective</a>&nbsp;
+                                              <a href="" data-ng-click="objective.skipped = true" data-ng-hide="objective.skipped" class="btn btn-link">or skip</a>
+                                              <a href="" data-ng-click="objective.skipped = false" data-ng-show="objective.skipped" class="btn btn-link">unskip</a>
+                                          </div>
+                                          <div ng-if="objective.showEvidence">
+                                              <div class="form-group">
+                                                  <textarea class="form-control no-resize" data-ng-model="objective.evidence"></textarea>
+                                              </div>
+                                              <div class="form-group text-right">
+                                                  <a href="" data-ng-click="vm.scoreObjective(objective, true)" class="btn btn-success">Save Example</a>
+                                                  <a href="" data-ng-click="objective.showEvidence = false" class="btn btn-link">or cancel</a>&nbsp;
+                                              </div>
+                                          </div>
+                                          <div data-ng-if="!objective.isMet" class="row">
+                                              <div class="col-xs-12 col-sm-6"><h3><small>Meet if ...</small></h3>{{objective.supportingExample}}</div>
+                                              <div class="col-xs-12 col-sm-6"><h3><small>Don't Meet if ...</small></h3>{{objective.counterExample}}</div>
+                                          </div>
+                                          <div data-ng-if="objective.isMet" class="row">
+                                              <p class="col-xs-offset-1">{{objective.evidence}}</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </section>
 	</div>
 </div>
