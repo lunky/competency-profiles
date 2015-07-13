@@ -8,11 +8,11 @@ using cpa.Shared.dtos;
 namespace cpa.Ui
 {
 	[Authorize]
-	public class ObjectiveAdminController : ApiController
+	public class ObjectivesController : ApiController
 	{
 		private readonly IObjectiveService _objectiveService;
 
-		public ObjectiveAdminController(IObjectiveService objectiveService)
+		public ObjectivesController(IObjectiveService objectiveService)
 		{
 			_objectiveService = objectiveService;
 		}
