@@ -64,16 +64,16 @@ namespace cpa.Service
 
         public IEnumerable<TeamMemberDto> GetTeamMembers(string username)
         {
-            var search = DirectorySearcher("kdar");
+            var search = DirectorySearcher(username);
 
             search.PropertiesToLoad.Add("*");
             var result = search.FindOne();
-            //if (result.Properties["directreports"].Count > 0)
-            //{
+            if (result.Properties["directreports"].Count > 0)
+            {
                 var dn = Escape(result.Properties["distinguishedname"][0].ToString());
                 var team = GetDirectReportsInternal(dn).ToList();
                 return team;
-            //}
+            }
             return null;
         }
 
