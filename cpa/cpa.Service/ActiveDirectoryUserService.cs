@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.DirectoryServices;
+using System.DirectoryServices.AccountManagement;
 using System.Linq;
 using System.Web.Configuration;
 using cpa.Shared;
@@ -41,29 +42,38 @@ namespace cpa.Service
         //AP: because database doesn't have display names data
         public TeamMemberDto GetTeamMemberByUsername(string username)
         {
-            var search = DirectorySearcher(username);
-            //AP: add new search properties if needed
-            search.PropertiesToLoad.Add("displayName");
-            var result = search.FindOne();
+            PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
+            UserPrincipal user = UserPrincipal.FindByIdentity(ctx, username);
+
             return new TeamMemberDto
             {
-                DisplayName = result.Properties["displayName"][0].ToString(),
+                DisplayName = string.Format("{0} {1}", user.GivenName, user.Surname),
                 UserId = username
             };
+
+            //var search = DirectorySearcher(username);
+            //AP: add new search properties if needed
+            //search.PropertiesToLoad.Add("displayName");
+            //var result = search.FindOne();
+            //return new TeamMemberDto
+            //{
+            //    DisplayName = result.Properties["displayName"][0].ToString(),
+            //    UserId = username
+            //};
         }
 
         public IEnumerable<TeamMemberDto> GetTeamMembers(string username)
         {
-            var search = DirectorySearcher(username);
+            var search = DirectorySearcher("kdar");
 
             search.PropertiesToLoad.Add("*");
             var result = search.FindOne();
-            if (result.Properties["directreports"].Count > 0)
-            {
+            //if (result.Properties["directreports"].Count > 0)
+            //{
                 var dn = Escape(result.Properties["distinguishedname"][0].ToString());
                 var team = GetDirectReportsInternal(dn).ToList();
                 return team;
-            }
+            //}
             return null;
         }
 
@@ -109,6 +119,7 @@ namespace cpa.Service
                     }
                 }
             }
+            
             return result;
         }
     }
