@@ -14,6 +14,8 @@ namespace cpa.Ui.Controllers.Api
         private readonly CpaContext _cpaContext;
         private readonly IActiveDirectoryUserService _activeDirectoryUserService;
 
+        private readonly string NO_PROFILE = "No Profile Data";
+
         public TeamMembersController(CpaContext context, IActiveDirectoryUserService activeDirectoryUserService1)
         {
             _cpaContext = context;
@@ -36,22 +38,30 @@ namespace cpa.Ui.Controllers.Api
                  select new TeamMemberModel
                  {
                      UserId = t,
-                     Level = p.Level ?? "No profile Data",
+                     Level = p.Level ?? NO_PROFILE,
                      DisplayName = teamMemberDtos.First(m => m.UserId == p.UserId).DisplayName
                  }).ToList();
 
-            var teamMembersAd =
-                (from t in teamMemberDtos
-                 select new TeamMemberModel
-                 {
-                     UserId = t.UserId,
-                     Level = "No Profile Data",
-                     DisplayName = t.DisplayName
-                 }).ToList();
+            //var teamMembersAd =
+            //    (from t in teamMemberDtos
+            //     select new TeamMemberModel
+            //     {
+            //         UserId = t.UserId,
+            //         Level = "No Profile Data",
+            //         DisplayName = t.DisplayName
+            //     }).ToList();
 
-            teamMembersAd.Union(teamMembersProfile);
+            var teamMembersAd = teamMemberDtos
+                        .Where(a => !teamMembersProfile.Any(p => p.UserId == a.UserId))
+                        .Select(a => new TeamMemberModel
+                        {
+                            UserId = a.UserId,
+                            Level = NO_PROFILE,
+                            DisplayName = a.DisplayName
+                        })
+                        .ToList();
 
-            return teamMembersAd;
+            return teamMembersProfile.Union(teamMembersAd);
         }
     }
 }

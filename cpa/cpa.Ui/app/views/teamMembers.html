@@ -24,15 +24,11 @@
                             <ul data-ng-repeat="consultant in vm.teamMembers | filter:vm.search:strict" class="list-group">
                                 <li class="list-group-item">
                                     <span class="badge">{{consultant.level}}</span>
-                                    <div ng-show="consultant.level =='No Profile Data'"><!--AP:temp to open profiles without data-->
+                                    <div>
                                         <a href="/#/profileReport/{{consultant.userId}}">
                                             <img ng-src="/Thumbnail?u={{ consultant.userId }}" alt="{{consultant.displayName}}" class="img-circle img-responsive" />
                                         </a><a href="/#/profileReport/{{consultant.userId}}">{{consultant.displayName}}</a>
                                     </div>
-                                    <!--<div ng-show="consultant.level =='No Profile Data'">
-                                        <img ng-src="/Thumbnail?u={{ consultant.userId }}" alt="{{consultant.displayName}}" class="img-circle img-responsive" />
-                                        <span>{{consultant.displayName}}</span>
-                                    </div>-->
                                 </li>
                             </ul>
                         </div>
