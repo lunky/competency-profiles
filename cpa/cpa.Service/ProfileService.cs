@@ -87,9 +87,15 @@ namespace cpa.Service
         public bool SaveProfileObjective(ProfileObjectiveDto objective)
         {
             var userid = objective.UserId;
+
             var profile = _context.Profiles.FirstOrDefault(p => p.UserId == userid) ?? new Profile {UserId = userid};
             if (profile.Id == 0)
             {
+                var user = _activeDirectoryUserService.GetTeamMemberByUsername(userid);
+
+                profile.DisplayName = user.DisplayName;
+                profile.Level = user.Level ?? _context.CompetencyLevels.Single(c => c.MinimumScore == 0).Description;
+
                 _context.Profiles.Add(profile);
             }
 
