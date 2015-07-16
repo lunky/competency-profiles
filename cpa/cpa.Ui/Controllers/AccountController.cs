@@ -1,12 +1,11 @@
-﻿using System.DirectoryServices;
+﻿using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
 using cpa.Model;
-using cpa.Service;
 
 namespace cpa.Ui
 {
-	[AllowAnonymous]
+    [AllowAnonymous]
 	public class AccountController : Controller
 	{
 		public ActionResult Login()
@@ -43,5 +42,18 @@ namespace cpa.Ui
 			FormsAuthentication.SignOut();
 			return RedirectToAction("Index", "Home");
 		}
-	}
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            var exception = filterContext.Exception;
+
+            if (exception is ConfigurationException)
+            {
+                ModelState.AddModelError("FailedLogin", ((ConfigurationException)exception).BareMessage);
+                filterContext.Result = View("Login");
+            }
+
+            filterContext.ExceptionHandled = true;
+        }
+    }
 }
