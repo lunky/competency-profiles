@@ -21,6 +21,8 @@
         vm.objectives = [];
         vm.save = save;
         vm.scoreObjective = scoreObjective;
+        vm.toggleEvidenceVisibility = toggleEvidenceVisibility;
+        vm.showAllEvidence = false;
 
         vm.pieData = [["", ""]]; // need 2d array
         vm.pieChart = {};
@@ -132,6 +134,14 @@
             };
 
             vm.save();
+        }
+
+        function toggleEvidenceVisibility() {
+            vm.showAllEvidence = !vm.showAllEvidence;
+
+            angular.forEach(vm.objectives, function (objective) {
+                objective.evidenceVisible = vm.showAllEvidence;
+            });
         }
     }
 })();
