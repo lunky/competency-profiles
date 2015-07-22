@@ -1,65 +1,67 @@
 ﻿<div class="container sections-wrapper" data-ng-if="vm.score">
 	<div class="secondary col-md-4 col-sm-12 col-xs-12 pull-right">
-		<aside class="aside section profile-score col-sm-6 col-md-12">
-			<!--TODO Replace placeholder.png and alt with proper values-->
-			<img src="/Thumbnail" alt="Mr. Adminstrator" class="img-responsive img-circle" />
-			<h2 class="text-center">Calculated Level: {{vm.score.level}}</h2>
-		</aside>
-		<aside class="skills aside section col-md-12 col-sm-6">
-			<div class="section-inner">
-				<h2 class="heading">Level Progress</h2><div class="content">
-					<p class="intro"></p><div class="skillset">
-						<div class="row">
-							<h3 title="vm.score.nextLevel" class="col-xs-6 col-md-12 level-title">{{vm.score.nextLevel}}</h3>
-							<div class="col-xs-6 col-md-12"><progressbar value="vm.score.levelProgressValue" class="progress-striped">{{vm.score.levelProgressValue}}%</progressbar></div>
-							<div data-ng-if="vm.score.scoreThresholdPassed" class="col-xs-6 col-md-12">Score Threshold Passed</div>
-							<div data-ng-if="vm.score.gateThresholdPassed" class="col-xs-6 col-md-12">Gate Threshold Passed</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</aside>
-		<aside class="skills aside section col-md-12 col-sm-6">
-			<div class="section-inner">
-				<h2 class="heading">Competency Distribution</h2>
-				<div class="content">
-					<p class="intro"></p>
-					<div class="skillset">
-						<div class="row">
-							<h3 title="Communication" class="col-xs-6 col-md-12 level-title"><span>Communication</span></h3>
-							<div class="col-xs-6 col-md-12"><progressbar value="vm.score.communication" class="progress-striped">{{vm.score.communication}}%</progressbar></div>
-						</div>
-						<div class="row">
-							<h3 title="Leadership and Management" class="col-xs-6 col-md-12 level-title">
-								<span>Leadership</span><span class="hidden-sm hidden-xs"> and Management</span>
-							</h3>
-							<div class="col-xs-6 col-md-12"><progressbar value="vm.score.leadership" class="progress-striped">{{vm.score.leadership}}%</progressbar></div>
-						</div>
-						<div class="row">
-							<h3 title="Interpersonal and Adaptability" class="col-xs-6 col-md-12 level-title">
-								<span>Interpersonal</span>
-								<span class="hidden-sm hidden-xs"> and Adaptability</span>
-							</h3>
-							<div class="col-xs-6 col-md-12"><progressbar value="vm.score.interpersonal" class="progress-striped">{{vm.score.interpersonal}}%</progressbar></div>
-						</div>
-						<div class="row">
-							<h3 title="Conflict and Stress Management" class="col-xs-6 col-md-12 level-title">
-								<span>Conflict</span>
-								<span class="hidden-sm hidden-xs"> and Stress Management</span>
-							</h3><div class="col-xs-6 col-md-12">
-								<progressbar value="vm.score.conflict" class="progress-striped">{{vm.score.conflict}}%</progressbar>
-							</div>
-						</div><div class="row"><h3 title="Corporate Citizenship" class="col-xs-6 col-md-12 level-title"><span class="hidden-sm hidden-xs">Corporate</span><span> Citizenship</span></h3><div class="col-xs-6 col-md-12"><progressbar value="vm.score.citizenship" class="progress-striped">{{vm.score.citizenship}}%</progressbar></div></div>
-					</div>
-				</div>
-			</div>
-		</aside>
-		<aside class="skills aside section col-md-12 col-sm-6">
-			<div class="section-inner">
-				<h2 class="heading">Answered Competency Distribution</h2>
-				<div google-chart="google-chart" chart="vm.pieChart"></div>
-			</div>
-		</aside>
+        <div class="row">
+            <aside class="aside section profile-score col-sm-6 col-md-12">
+                <!--TODO Replace placeholder.png and alt with proper values-->
+                <img src="/Thumbnail" alt="Mr. Adminstrator" class="img-responsive img-circle" />
+                <h2 class="text-center">Calculated Level: {{vm.score.level}}</h2>
+            </aside>
+            <aside class="skills aside section col-md-12 col-sm-6">
+                <div class="section-inner">
+                    <h2 class="heading">Level Progress</h2><div class="content">
+                        <p class="intro"></p><div class="skillset">
+                            <div class="row">
+                                <h3 title="vm.score.nextLevel" class="col-xs-6 col-md-12 level-title">{{vm.score.nextLevel}}</h3>
+                                <div class="col-xs-6 col-md-12"><progressbar value="vm.score.levelProgressValue" class="progress-striped">{{vm.score.levelProgressValue}}%</progressbar></div>
+                                <div data-ng-if="vm.score.scoreThresholdPassed" class="col-xs-6 col-md-12">Score Threshold Passed</div>
+                                <div data-ng-if="vm.score.gateThresholdPassed" class="col-xs-6 col-md-12">Gate Threshold Passed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <aside class="skills aside section col-md-12 col-sm-6">
+                <div class="section-inner">
+                    <h2 class="heading">Competency Distribution</h2>
+                    <div class="content">
+                        <p class="intro"></p>
+                        <div class="skillset">
+                            <div class="row">
+                                <h3 title="Communication" class="col-xs-6 col-md-12 level-title"><span>Communication</span></h3>
+                                <div class="col-xs-6 col-md-12"><progressbar value="vm.score.communication" class="progress-striped">{{vm.score.communication}}%</progressbar></div>
+                            </div>
+                            <div class="row">
+                                <h3 title="Leadership and Management" class="col-xs-6 col-md-12 level-title">
+                                    <span>Leadership</span><span class="hidden-sm hidden-xs"> and Management</span>
+                                </h3>
+                                <div class="col-xs-6 col-md-12"><progressbar value="vm.score.leadership" class="progress-striped">{{vm.score.leadership}}%</progressbar></div>
+                            </div>
+                            <div class="row">
+                                <h3 title="Interpersonal and Adaptability" class="col-xs-6 col-md-12 level-title">
+                                    <span>Interpersonal</span>
+                                    <span class="hidden-sm hidden-xs"> and Adaptability</span>
+                                </h3>
+                                <div class="col-xs-6 col-md-12"><progressbar value="vm.score.interpersonal" class="progress-striped">{{vm.score.interpersonal}}%</progressbar></div>
+                            </div>
+                            <div class="row">
+                                <h3 title="Conflict and Stress Management" class="col-xs-6 col-md-12 level-title">
+                                    <span>Conflict</span>
+                                    <span class="hidden-sm hidden-xs"> and Stress Management</span>
+                                </h3><div class="col-xs-6 col-md-12">
+                                    <progressbar value="vm.score.conflict" class="progress-striped">{{vm.score.conflict}}%</progressbar>
+                                </div>
+                            </div><div class="row"><h3 title="Corporate Citizenship" class="col-xs-6 col-md-12 level-title"><span class="hidden-sm hidden-xs">Corporate</span><span> Citizenship</span></h3><div class="col-xs-6 col-md-12"><progressbar value="vm.score.citizenship" class="progress-striped">{{vm.score.citizenship}}%</progressbar></div></div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <aside class="skills aside section col-md-12 col-sm-6">
+                <div class="section-inner">
+                    <h2 class="heading">Answered Competency Distribution</h2>
+                    <div google-chart="google-chart" chart="vm.pieChart"></div>
+                </div>
+            </aside>
+        </div>
 	</div>
     <div class="primary col-md-8 col-sm-12 col-xs-12">
               <section class="section">

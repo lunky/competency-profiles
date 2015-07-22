@@ -1119,6 +1119,9 @@ img {
   max-width: 100%;
   height: auto;
 }
+[src*=Thumbnail].img-responsive {
+  margin: 0 auto;
+}
 .img-rounded {
   border-radius: 6px;
 }
@@ -5504,6 +5507,15 @@ iframe {
     -webkit-overflow-scrolling:touch;
 }
 */
+
+@media (min-width:767px){
+
+  /* Column clear fix */
+  .col-sm-6:nth-child(2n+1){
+    clear: left;
+  }
+}
+
 /* ======= Header ======= */
 .header {
   padding: 5px 0 10px 0;
