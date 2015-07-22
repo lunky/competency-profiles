@@ -195,7 +195,6 @@
     <Content Include="app\common.js" />
     <Content Include="app\controllers\competencyLevelsController.js" />
     <Content Include="app\controllers\competencyProfileController.js" />
-    <Content Include="app\controllers\headerController.js" />
     <Content Include="app\controllers\mainController.js" />
     <Content Include="app\controllers\navController.js" />
     <Content Include="app\controllers\objectiveAdminController.js" />

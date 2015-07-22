@@ -100,9 +100,6 @@
                         vm.score = profileSummaryService.getScore(vm.objectives, vm.levels);
                         initializeSkipped();
                         bindScore();
-                        $rootScope.$broadcast(appEvents.updateLevel, {
-                            level: vm.score.level
-                        });
                     },
                     function (err) {
                         //toaster.pop("error", "An error occured getting objectives.", err);
@@ -116,9 +113,6 @@
                 toaster.pop("success", "Save Successful", "Your competency profile has been updated");
                 vm.score = profileSummaryService.getScore(vm.objectives, vm.levels);
                 bindScore();
-                $rootScope.$broadcast(appEvents.updateLevel, {
-                    level: vm.score.level
-                });
             }, function(err) {
                 //toaster.pop("error", "An error occured saving", err);
                 vm.error = err;
