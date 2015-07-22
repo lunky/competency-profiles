@@ -224,6 +224,7 @@
     <Content Include="Content\images\consultant-codell.png" />
     <Content Include="Content\images\OBSlogo.png" />
     <Content Include="Content\images\OBSlogo_tiny.png" />
+    <Content Include="Content\images\person.png" />
     <Content Include="Content\images\placeholder.png" />
     <Content Include="Content\styles.css" />
     <Content Include="Content\toaster.css" />

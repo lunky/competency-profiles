@@ -38,6 +38,7 @@
         };
 
         vm.error = null;
+        vm.displayName = null;
 
         initialize();
 
@@ -87,7 +88,8 @@
 
             $q.all(promises)
                 .then(
-                    function(response) {
+                    function (response) {
+                        vm.displayName = response[0].displayName;
                         vm.objectives = response[0].data;
                         vm.levels = [];
                         angular.forEach(response[1], function(lvl) {

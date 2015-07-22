@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using System.Web.Hosting;
 using cpa.Service;
 
 namespace cpa.Ui.HttpHandlers
@@ -15,15 +16,20 @@ namespace cpa.Ui.HttpHandlers
 			var result = activeDirectoryUserService.GetProperties(username, "thumbnailPhoto");
 			var resultCollection = result["thumbnailPhoto"];
 
-			if (resultCollection.Count <= 0) 
-				return; //TODO: Default thumbnail
+            context.Response.Clear();
+            context.Response.ContentType = "image/png";
 
-			var thumbnailPhoto = resultCollection[0] as byte[]
-			                     ?? new byte[] {};
-
-			context.Response.Clear();
-			context.Response.ContentType = "image/png";
-			context.Response.BinaryWrite(thumbnailPhoto);
+            if (resultCollection.Count <= 0)
+            {
+                var file = HostingEnvironment.MapPath("~/Content/images/person.png");
+                context.Response.WriteFile(file);
+            }
+            else
+            {
+                var thumbnailPhoto = resultCollection[0] as byte[] ?? new byte[] { };    
+                context.Response.BinaryWrite(thumbnailPhoto);
+            }
+			
 			context.Response.End();
 		}
 
