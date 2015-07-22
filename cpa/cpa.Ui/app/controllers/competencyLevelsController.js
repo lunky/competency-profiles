@@ -13,14 +13,16 @@
 		vm.initialize = initialize;
 		vm.save = save;
 
+		vm.error = null;
+
 		initialize();
 
 		function initialize() {
 			competencyLevelsService.getCompetencyLevels().then(function (response) {
 				vm.competencyLevels = response;
 			}, function (err) {
-				toaster.pop('error', 'Save Unsuccessful',
-					'An error has occured. Your competency level changes have not been updated');
+			    //toaster.pop('error', 'Save Unsuccessful', 'An error has occured. Your competency level changes have not been updated');
+			    vm.error = err;
 			});
 		}
 
@@ -28,8 +30,8 @@
 			competencyLevelsService.save(level).then(function (response) {
 				toaster.pop('success', 'Save Successful', 'Your competency level changes have been saved.');
 			}, function (err) {
-				toaster.pop('error', 'Save Unsuccessful',
-					'An error has occured. Your competency level changes have not been updated');
+			    //toaster.pop('error', 'Save Unsuccessful', 'An error has occured. Your competency level changes have not been updated');
+			    vm.error = err;
 			});
 		}
 	}

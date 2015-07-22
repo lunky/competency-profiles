@@ -25,8 +25,11 @@
 			) {
 				return ($q.reject('An unknown error occurred.'));
 			}
-			// Otherwise, use expected error message.
-			return ($q.reject(response.data.message));
+		    // Otherwise, use expected error message.
+
+		    // Trying to get the specific exception message
+			var message = response.data.exceptionMessage || response.data.message;
+			return ($q.reject(message));
 		}
 
 		svc.getObjectives = function () {

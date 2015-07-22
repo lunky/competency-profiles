@@ -37,6 +37,8 @@
             }
         };
 
+        vm.error = null;
+
         initialize();
 
         function bindScore() {
@@ -87,7 +89,6 @@
                 .then(
                     function(response) {
                         vm.objectives = response[0].data;
-
                         vm.levels = [];
                         angular.forEach(response[1], function(lvl) {
                             var name = lvl.gateLevelDescription;
@@ -101,8 +102,9 @@
                             level: vm.score.level
                         });
                     },
-                    function(err) {
-                        toaster.pop("error", "An error occured getting objectives.", err);
+                    function (err) {
+                        //toaster.pop("error", "An error occured getting objectives.", err);
+                        vm.error = err;
                     });
         }
 
@@ -116,7 +118,8 @@
                     level: vm.score.level
                 });
             }, function(err) {
-                toaster.pop("error", "An error occured saving", err);
+                //toaster.pop("error", "An error occured saving", err);
+                vm.error = err;
             });
         }
 

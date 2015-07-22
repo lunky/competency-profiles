@@ -19,7 +19,10 @@
 				!response.data.message) {
 				return ($q.reject('An unknown error occurred.'));
 			}
-			return ($q.reject(response.data.message));
+
+		    // Trying to get the specific exception message
+			var message = response.data.exceptionMessage || response.data.message;
+			return ($q.reject(message));
 		}
 
 		svc.getTeamMembers = function () {

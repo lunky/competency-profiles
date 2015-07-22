@@ -11,6 +11,8 @@
         var vm = this;
         vm.teamMembers = [];
 
+        vm.error = null;
+
         initialize();
 
         function initialize() {
@@ -18,7 +20,8 @@
                 vm.teamMembers = response;
             },
 				function (err) {
-				    toaster.pop('error', 'Error loading Team members', err);
+				    //toaster.pop('error', 'Error loading Team members', err);
+				    vm.error = err;
 				}
 			);
         }

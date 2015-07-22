@@ -17,6 +17,8 @@
 		vm.initialize = initialize;
 		vm.save = save;
 
+		vm.error = null;
+
 		initialize();
 
 		vm.toggleEdit = function toggleEdit(objective) {
@@ -67,13 +69,15 @@
 			objectiveAdminService.getObjectives().then(function (response) {
 				vm.objectives = response;
 			}, function (err) {
-				toaster.pop('error', 'Error loading objectives', err);
+			    //toaster.pop('error', 'Error loading objectives', err);
+			    vm.error = err;
 			});
 
 			competencyLevelsService.getCompetencyLevelLookups().then(function (response) {
 				vm.gateLevels = response;
 			}, function (err) {
-				toaster.pop('error', 'Error loading levels', err);
+			    //toaster.pop('error', 'Error loading levels', err);
+			    vm.error = err;
 			});
 		}
 
@@ -86,8 +90,8 @@
 			objectiveAdminService.save(objective).then(function (response) {
 				toaster.pop('success', 'Save Successful', 'Your objective metadata was updated');
 			}, function (err) {
-				toaster.pop('error', 'Save Unsuccessful',
-					'An error has occured. Your objective metadata changes have not been updated');
+			    //toaster.pop('error', 'Save Unsuccessful', 'An error has occured. Your objective metadata changes have not been updated');
+			    vm.error = err;
 			});
 		}
 	}

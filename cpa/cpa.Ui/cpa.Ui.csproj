@@ -209,6 +209,7 @@
     <Content Include="app\services\competencyLevelsService.js" />
     <Content Include="app\services\competencyProfileService.js" />
     <Content Include="app\services\objectiveAdminService.js" />
+    <Content Include="app\views\error.html" />
     <Content Include="app\views\level.html" />
     <Content Include="app\services\userAccessService.js" />
     <Content Include="app\views\objective.html" />

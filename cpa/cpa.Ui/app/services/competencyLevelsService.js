@@ -27,8 +27,11 @@
 				!response.data.message) {
 				return ($q.reject('An unknown error occurred.'));
 			}
-			// Otherwise, use expected error message.
-			return ($q.reject(response.data.message));
+		    // Otherwise, use expected error message.
+
+		    // Trying to get the specific exception message
+			var message = response.data.exceptionMessage || response.data.message;
+			return ($q.reject(message));
 		}
 
 		svc.getCompetencyLevels = function () {
@@ -43,7 +46,7 @@
 			var request = $http({
 				method: 'get',
 				url: '/api/competencyLevels/lookup'
-			});
+			}); 
 			return (request.then(handleSuccess, handleError));
 		};
 
@@ -51,7 +54,7 @@
 			var request = $http({
 				method: 'get',
 				url: '/api/competencyLevels/' + id
-			});
+			}); 
 			return (request.then(handleSuccess, handleError));
 		};
 
@@ -60,7 +63,7 @@
 				method: 'post',
 				url: '/api/competencyLevels/',
 				data: competencyLevel
-			});
+			}); 
 			return (request.then(handleSuccess, handleError));
 		};
 		return svc;
