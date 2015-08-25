@@ -53,6 +53,13 @@
                                             <p>{{objective.description}}?</p>Gate Level: {{objective.gateLevel}}
                                         </accordion-heading>
                                         <div class="row">
+                                            <div class="col-xs-12">
+                                                <h3 class="remove-margin">
+                                                    <small>Score</small>
+                                                </h3>{{objective.score}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-xs-6">
                                                 <h3>
                                                     <small>Supporting Example</small>
@@ -91,12 +98,17 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <accordion close-others="oneAtATime">
-                                    <accordion-group data-ng-repeat="objective in vm.profile.data | orderBy: '-score' | filter:vm.scoreFilter:strict" is-open="vm.showExamples">
+                                    <accordion-group data-ng-repeat="objective in vm.profile.data | orderBy: 'gateLevel' | filter:vm.scoreFilter:strict" is-open="vm.showExamples">
                                         <accordion-heading>
                                             <p>{{objective.description}}?</p>Gate Level: {{objective.gateLevel}}
-                                        </accordion-heading><!--div.row//div.col-xs-12
-                                        //TODO: Display Score
-                                        //p Gate Level: {{objective.gateLevel}}-->
+                                        </accordion-heading>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <h3 class="remove-margin">
+                                                    <small>Score</small>
+                                                </h3>{{objective.score}}
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <h3>
